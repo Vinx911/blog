@@ -13,7 +13,7 @@ tags: Linux驱动
 */
 struct circ_buf {
 	char *buf;	// 指向分配缓冲区起始地址的指针
-	int head;		// 指向生产者向缓冲区放入数据的位置
+	int head;   // 指向生产者向缓冲区放入数据的位置
 	int tail;  	// 指向消费者从缓冲区取走数据的位置
 };
 
