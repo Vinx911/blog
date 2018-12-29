@@ -2,6 +2,7 @@
 title: Linux驱动开发杂记(0x14) - 环形缓冲区circ_buf
 date: 2018-12-07 09:37:30
 tags: Linux驱动
+categories: Linux驱动开发杂记
 ---
 
 ```c
