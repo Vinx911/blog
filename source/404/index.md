@@ -5,7 +5,6 @@ toc: false
 comments: false
 permalink: /404
 ---
-<!DOCTYPE HTML>
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html;charset=utf-8;"/>
@@ -15,11 +14,11 @@ permalink: /404
   <link rel="stylesheet" type="text/css" href="https://qzone.qq.com/gy/404/style/404style.css">
 </head>
 <body>
-  <script type="text/plain" src="http://www.qq.com/404/search_children.js"
-          charset="utf-8" homePageUrl="/"
+  <script type="text/javascript" src="//qzonestyle.gtimg.cn/qzone/hybrid/app/404/search_children.js" charset="utf-8"
+          charset="utf-8" homePageUrl="/blog/"
           homePageName="回到我的主页">
   </script>
-  <script src="https://qzone.qq.com/gy/404/data.js" charset="utf-8"></script>
-  <script src="https://qzone.qq.com/gy/404/page.js" charset="utf-8"></script>
+  <script src="http://qzone.qq.com/gy/404/data.js" charset="utf-8"></script>
+  <script src="http://qzone.qq.com/gy/404/page.js" charset="utf-8"></script>
 </body>
 </html>
