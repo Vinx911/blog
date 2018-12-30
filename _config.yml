@@ -13,7 +13,7 @@ timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://vinx911.github.io/blog
+url: https://vinshell.cc/blog
 root: /blog/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
