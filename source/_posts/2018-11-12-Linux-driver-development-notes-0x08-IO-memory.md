@@ -1,0 +1,87 @@
+---
+title: Linux驱动开发杂记(0x08) - I/O内存
+date: 2018-11-12 10:12:12
+tags: Linux驱动
+categories: Linux驱动开发杂记
+copyright: false
+---
+
+﻿　　尽管 I/O 端口在x86世界中非常流行，但是用来和设备通讯的主要机制是通过内存映射的寄存器和设备内存，两者都称为I/O 内存，因为寄存器和内存之间的区别对软件是透明的。
+　　I/O 内存仅仅是一个类似于RAM 的区域，处理器通过总线访问该区域，以实现对设备的访问。同样，读写这个区域是有边际效应。
+　　根据计算机体系和总线不同，I/O 内存可分为可以或者不可以通过页表来存取。若通过页表存取，内核必须先重新编排物理地址，使其对驱动程序可见，这就意味着在进行任何I/O操作之前，你必须调用ioremap；如果不需要页表，I/O内存区域就类似于I/O端口，你可以直接使用适当的I/O函数读写它们。
+　　由于边际效应的缘故，不管是否需要 ioremap，都不鼓励直接使用I/O内存指针，而应使用专门的I/O内存操作函数。这些I/O内存操作函数不仅在所有平台上是安全，而且对直接使用指针操作 I/O 内存的情况进行了优化。
+
+## 1 申请I/O 内存： 
+　　I/O 内存区在使用前必须先分配。分配内存区的函数接口在<linux/ioport.h>定义中：
+```c
+/* request_mem_region分配一个开始于start,len字节的I/O内存区。分配成功，返回一个非NULL指针；
+否则返回NULL。系统当前所有I/O内存分配信息都在/proc/iomem文件中列出，你分配失败时，可以看看该文件，
+看谁先占用了该内存区 */
+struct resource *request_mem_region(unsigned long start, unsigned long len, char *name);
+```
+ ## 2 映射：
+　　在访问I/O内存之前，分配I/O内存并不是唯一要求的步骤，你还必须保证内核可存取该I/O内存。访问I/O内存并不只是简单解引用指针，在许多体系中，I/O 内存无法以这种方式直接存取。因此，还必须通过ioremap 函数设置一个映射。
+```c
+/* ioremap用于将I/O内存区映射到虚拟地址。参数phys_addr为要映射的I/O内存起始地址，
+参数size为要映射的I/O内存的大小，返回值为被映射到的虚拟地址 */
+void *ioremap(unsigned long phys_addr, unsigned long size);
+```
+
+## 3 访问IO内存：
+　　经过 ioremap之后，设备驱动就可以存取任何I/O内存地址。注意，ioremap返回的地址不可以直接解引用；相反，应当使用内核提供的访问函数。访问I/O内存的正确方式是通过一系列专门用于实现此目的的函数：
+
+```c
+#include <asm/io.h>
+/* I/O内存读函数。参数addr应当是从ioremap获得的地址(可能包含一个整型偏移); 
+返回值是从给定I/O内存读取到的值 */
+unsigned int ioread8(void *addr);
+unsigned int ioread16(void *addr);
+unsigned int ioread32(void *addr);
+
+/* I/O内存写函数。参数addr同I/O内存读函数，参数value为要写的值 */
+void iowrite8(u8 value, void *addr);
+void iowrite16(u16 value, void *addr);
+void iowrite32(u32 value, void *addr);
+
+/* 以下这些函数读和写一系列值到一个给定的 I/O 内存地址,从给定的buf读或写count个值到给定的addr。
+参数count表示要读写的数据个数，而不是字节大小 */
+void ioread8_rep(void *addr, void *buf, unsigned long count);
+void ioread16_rep(void *addr, void *buf, unsigned long count);
+void ioread32_rep(void *addr, void *buf, unsigned long count);
+void iowrite8_rep(void *addr, const void *buf, unsigned long count);
+void iowrite16_rep(void *addr, const void *buf, unsigned long count);
+void iowrite32_rep(void *addr,，onst void *buf,，nsigned long count);
+
+/* 需要操作一块I/O 地址时，使用下列函数(这些函数的行为类似于它们的C库类似函数): */
+void memset_io(void *addr, u8 value, unsigned int count);
+void memcpy_fromio(void *dest, void *source, unsigned int count);
+void memcpy_toio(void *dest, void *source, unsigned int count);
+
+/* 旧的I/O内存读写函数，不推荐使用 */
+unsigned readb(address);
+unsigned readw(address);
+unsigned readl(address); 
+void writeb(unsigned value, address);
+void writew(unsigned value, address);
+void writel(unsigned value, address);
+```
+ 
+
+## 4 释放IO内存步骤：
+```c
+void iounmap(void * addr); /* iounmap用于释放不再需要的映射 */
+void release_mem_region(unsigned long start, unsigned long len); /* iounmap用于释放不再需要的映射 */
+```
+
+## 5 像IO内存一样使用端口
+
+　　一些硬件有一个有趣的特性: 有些版本使用 I/O 端口；而有些版本则使用 I/O 内存。不管是I/O 端口还是I/O 内存，处理器见到的设备寄存器都是相同的，只是访问方法不同。为了统一编程接口，使驱动程序易于编写，2.6 内核提供了一个ioport_map函数:
+```c
+/* ioport_map重新映射count个I/O端口，使它们看起来I/O内存。
+此后，驱动程序可以在ioport_map返回的地址上使用ioread8和同类函数。
+这样，就可以在编程时，消除了I/O 端口和I/O 内存的区别 */
+void *ioport_map(unsigned long port, unsigned int count);
+
+void ioport_unmap(void *addr);/* ioport_unmap用于释放不再需要的映射 */
+```
+注意，I/O 端口在重新映射前必须使用request_region分配分配所需的I/O 端口。

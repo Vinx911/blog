@@ -1,0 +1,86 @@
+---
+title: Linux驱动开发杂记(0x0B) - 内核计数
+date: 2018-11-12 15:09:57
+tags: Linux驱动
+categories: Linux驱动开发杂记
+copyright: false
+---
+
+﻿Linux内核和驱动开发时，由于各种结构体变量见相互引用，因此，当回收内存时，由于引用没有清理，很容易发生内存指向错误。因此，Linux使用引用计数方式来代替简单的malloc,free。不过由于Linux的内核是以C为开发语言，不是C++，无法使用继承和派生，因此只能使用结构体互相包含和containerof方式来使用引用计数框架，读起来还是比较晦涩的。
+**\linux-2.6.11\include\linux\kref.h**
+```c
+/*
+引用计数的实现结构体
+*/
+  
+ 
+#ifndef _KREF_H_
+#define _KREF_H_
+ 
+#ifdef __KERNEL__
+ 
+#include <linux/types.h>
+#include <asm/atomic.h>
+ 
+/* 引用计数的原理很简单，使用时加1，不用时减1，如果减为0
+ 则调用释放函数。
+*/
+struct kref {
+/* Linux 使用原子变量来计数，这样可以防止多CPU，多进程时的竞态现象发生 */
+    atomic_t refcount;
+};
+ 
+void kref_init(struct kref *kref);/* 初始化一个引用计数结构体 */
+void kref_get(struct kref *kref);/* 增加一个引用计数 */
+void kref_put(struct kref *kref, void (*release) (struct kref *kref));/* 减少一个引用计数 */
+ 
+#endif /* __KERNEL__ */
+#endif /* _KREF_H_ */
+```
+
+\linux-2.6.11\lib\kref.c
+```c
+#include <linux/kref.h>
+#include <linux/module.h>
+ 
+/**
+ * kref_init - initialize object.
+ * @kref: object in question.
+ */
+ /* 初始化一个引用计数，这里可以看到引用计数初始化为1 */
+void kref_init(struct kref *kref)
+{
+    atomic_set(&kref->refcount,1);
+}
+ 
+/**
+ * kref_get - increment refcount for object.
+ * @kref: object.
+ */
+ /* 增加一个引用计数，可以发现这里是原子操作 */
+void kref_get(struct kref *kref)
+{
+    WARN_ON(!atomic_read(&kref->refcount));
+    atomic_inc(&kref->refcount);
+}
+ 
+/**
+ * kref_put - decrement refcount for object.
+ * @kref: object.
+ * @release: pointer to the function that will clean up the object when the
+ *       last reference to the object is released.
+ *       This pointer is required, and it is not acceptable to pass kfree
+ *       in as this function.
+ *
+ * Decrement the refcount, and if 0, call release().
+ */
+;/* 减少一个引用计数 */
+void kref_put(struct kref *kref, void (*release) (struct kref *kref))
+{
+    WARN_ON(release == NULL);
+    WARN_ON(release == (void (*)(struct kref *))kfree);
+ 
+    if (atomic_dec_and_test(&kref->refcount))
+        release(kref);/* 如果引用计数为0，就调用释放函数 */
+}
+```
