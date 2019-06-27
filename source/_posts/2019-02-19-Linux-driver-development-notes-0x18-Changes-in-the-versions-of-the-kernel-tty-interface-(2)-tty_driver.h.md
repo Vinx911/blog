@@ -1,4 +1,12 @@
-﻿## 2.6.17 - 2.6.18
+---
+title: Linux驱动开发杂记(0x18) - 内核tty接口各版本的变化(二)之tty_driver.h
+date: 2019-02-19 09:59:02
+tags: Linux驱动
+categories: Linux驱动开发杂记
+copyright: true
+---
+# Linux驱动开发杂记(0x18) - 内核tty接口各版本的变化(二)之tty_driver.h
+## 2.6.17 - 2.6.18
 删除
 ```c
 struct tty_driver {

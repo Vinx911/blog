@@ -1,4 +1,12 @@
-﻿## 2.6.13 - 2.6.14
+---
+title: Linux驱动开发杂记(0x16) - 内核定时器接口各版本的变化
+date: 2019-02-18 15:39:03
+tags: Linux驱动
+categories: Linux驱动开发杂记
+copyright: true
+# Linux驱动开发杂记(0x16) - 内核定时器接口各版本的变化
+---
+## 2.6.13 - 2.6.14
 添加
 ```c
 #define DEFINE_TIMER(_name, _function, _expires, _data)

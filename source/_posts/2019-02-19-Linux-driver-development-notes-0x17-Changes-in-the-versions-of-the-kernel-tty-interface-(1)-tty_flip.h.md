@@ -1,4 +1,12 @@
-﻿## 2.6.15 - 2.6.16
+---
+title: Linux驱动开发杂记(0x17) - 内核tty接口各版本的变化(一)之tty_flip.h
+date: 2019-02-19 09:10:41
+tags: Linux驱动
+categories: Linux驱动开发杂记
+copyright: true
+---
+# Linux驱动开发杂记(0x17) - 内核tty接口各版本的变化(一)之tty_flip.h
+## 2.6.15 - 2.6.16
 添加
 ```c
 extern int tty_buffer_request_room(struct tty_struct *tty, size_t size);
