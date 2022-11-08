@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon.ico">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"vinshell.cc","root":"/blog/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="123456789101112131415161718192021222324252627&#x2F;* * This structure describes all the operations that can be * done on the physical hardware. *&#x2F;  struct uart_ops &amp;#123;    unsigned int (*tx_empty)(struc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux驱动开发杂记(0x12) - uart_ops结构体">
+<meta property="og:url" content="https://vinshell.cc/blog/Linux-driver-development-notes/0x12-uart_ops-structure.html">
+<meta property="og:site_name" content="唯客工作室">
+<meta property="og:description" content="123456789101112131415161718192021222324252627&#x2F;* * This structure describes all the operations that can be * done on the physical hardware. *&#x2F;  struct uart_ops &amp;#123;    unsigned int (*tx_empty)(struc">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-11-22T07:09:30.000Z">
+<meta property="article:modified_time" content="2022-11-08T08:19:11.638Z">
+<meta property="article:author" content="Vinx">
+<meta property="article:tag" content="Linux驱动">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://vinshell.cc/blog/Linux-driver-development-notes/0x12-uart_ops-structure.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux驱动开发杂记(0x12) - uart_ops结构体 | 唯客工作室</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a target="_blank" rel="noopener" href="https://github.com/Vinx911" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">唯客工作室</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">专注于计算机，嵌入式领域的技术</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vinshell.cc/blog/Linux-driver-development-notes/0x12-uart_ops-structure.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客工作室">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux驱动开发杂记(0x12) - uart_ops结构体
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-22 15:09:30" itemprop="dateCreated datePublished" datetime="2018-11-22T15:09:30+08:00">2018-11-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-08 16:19:11" itemprop="dateModified" datetime="2022-11-08T16:19:11+08:00">2022-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>﻿<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * This structure describes all the operations that can be</span></span><br><span class="line"><span class="comment"> * done on the physical hardware.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">uart_ops</span> &#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="title function_">int</span> <span class="params">(*tx_empty)</span><span class="params">(<span class="keyword">struct</span> uart_port *)</span>; <span class="comment">/* 串口的Tx FIFO缓存是否为空。如果为空，函数应返回TIOCSER_TEMT，否则返回0。如果端口不支持此操作，返回TIOCSER_TEMT。*/</span></span><br><span class="line">    <span class="type">void</span>         (*set_mctrl)(<span class="keyword">struct</span> uart_port *, <span class="type">unsigned</span> <span class="type">int</span> mctrl); <span class="comment">/* 设置串口modem控制 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="title function_">int</span> <span class="params">(*get_mctrl)</span><span class="params">(<span class="keyword">struct</span> uart_port *)</span>; <span class="comment">/* 获取串口modem控制 */</span></span><br><span class="line">    <span class="type">void</span>         (*stop_tx)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 禁止串口发送数据 */</span></span><br><span class="line">    <span class="type">void</span>         (*start_tx)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 使能串口发送数据 */</span></span><br><span class="line">    <span class="type">void</span>         (*send_xchar)(<span class="keyword">struct</span> uart_port *, <span class="type">char</span> ch);<span class="comment">/* 发送xChar */</span></span><br><span class="line">    <span class="type">void</span>         (*stop_rx)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 禁止串口接收数据 */</span></span><br><span class="line">    <span class="type">void</span>         (*enable_ms)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 使能modem的状态信号 */</span></span><br><span class="line">    <span class="type">void</span>         (*break_ctl)(<span class="keyword">struct</span> uart_port *, <span class="type">int</span> ctl); <span class="comment">/* 设置break信号 */</span></span><br><span class="line">    <span class="type">int</span>          (*startup)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 启动串口,应用程序打开串口设备文件时,该函数会被调用 */</span></span><br><span class="line">    <span class="type">void</span>         (*shutdown)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 关闭串口,应用程序关闭串口设备文件时,该函数会被调用 */</span></span><br><span class="line">    <span class="type">void</span>         (*set_termios)(<span class="keyword">struct</span> uart_port *, <span class="keyword">struct</span> ktermios *new, <span class="keyword">struct</span> ktermios *old); <span class="comment">/* 设置串口参数 */</span></span><br><span class="line">    <span class="type">void</span>         (*pm)(<span class="keyword">struct</span> uart_port *, <span class="type">unsigned</span> <span class="type">int</span> state,</span><br><span class="line">             <span class="type">unsigned</span> <span class="type">int</span> oldstate); <span class="comment">/* 串口电源管理 */</span></span><br><span class="line">    <span class="type">int</span>          (*set_wake)(<span class="keyword">struct</span> uart_port *, <span class="type">unsigned</span> <span class="type">int</span> state); <span class="comment">/*  */</span></span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>  *(*type)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 返回一描述串口类型的字符串 */</span></span><br><span class="line">    <span class="type">void</span>         (*release_port)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 释放串口已申请的IO端口/IO内存资源,必要时还需iounmap */</span></span><br><span class="line">    <span class="type">int</span>          (*request_port)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 申请必要的IO端口/IO内存资源,必要时还可以重新映射串口端口 */</span></span><br><span class="line">    <span class="type">void</span>         (*config_port)(<span class="keyword">struct</span> uart_port *, <span class="type">int</span>); <span class="comment">/* 执行串口所需的自动配置 */</span></span><br><span class="line">    <span class="type">int</span>          (*verify_port)(<span class="keyword">struct</span> uart_port *, <span class="keyword">struct</span> serial_struct *); <span class="comment">/* 核实新串口的信息 */</span></span><br><span class="line">    <span class="type">int</span>          (*ioctl)(<span class="keyword">struct</span> uart_port *, <span class="type">unsigned</span> <span class="type">int</span>, <span class="type">unsigned</span> <span class="type">long</span>); <span class="comment">/* IO控制 */</span></span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure></p>
+<h2 id="tx-empty-port"><a href="#tx-empty-port" class="headerlink" title="tx_empty(port)"></a>tx_empty(port)</h2><p>此函数检查发送fifo和移位通过“端口”中描述的端口是否为空。如果为空，函数应返回TIOCSER_TEMT，否则返回0。如果端口不支持此操作，返回TIOCSER_TEMT。</p>
+<ul>
+<li>锁：none</li>
+<li>中断：取决于调用者；</li>
+<li>此调用不休眠。</li>
+</ul>
+<h2 id="set-mctrl-port-mctrl"><a href="#set-mctrl-port-mctrl" class="headerlink" title="set_mctrl(port, mctrl)"></a>set_mctrl(port, mctrl)</h2><p>此函数设置串口modem控制模式。mctrl相关的位是：</p>
+<ul>
+<li>TIOCM_RTS       RTS signal.</li>
+<li>TIOCM_DTR      DTR signal.</li>
+<li>TIOCM_OUT1    OUT1 signal.</li>
+<li>TIOCM_OUT2    OUT2 signal.</li>
+<li>TIOCM_LOOP    设置端口为回环模式</li>
+</ul>
+<p>如果相应的位被置位，该信号应被驱动为有效；如果该位清空，该信号应被驱动为无效。</p>
+<ul>
+<li><p>锁定：采用port-&gt;lock</p>
+</li>
+<li><p>中断：本地禁用</p>
+</li>
+<li><p>此调用不休眠。</p>
+</li>
+</ul>
+<h2 id="get-mctrl-port"><a href="#get-mctrl-port" class="headerlink" title="get_mctrl(port)"></a>get_mctrl(port)</h2><p>返回modem控制输入的当前状态。不应返回输出状态，因为核心驱动追踪它们的状态。状态信息应包含：</p>
+<ul>
+<li>TIOCM_DCD      state of DCD signal</li>
+<li>TIOCM_CTS       state of CTS signal</li>
+<li>TIOCM_DSR      state of DSR signal</li>
+<li>TIOCM_RI          state of RI signal</li>
+</ul>
+<p>如果信号当前是有效地，位被设置。如果端口不支持CTS、DCD 或DSR，驱动程序应指明该信号是持续有效的。如果RI不可用，该信号不应表示为有效。</p>
+<ul>
+<li>锁定：采用port-&gt;lock</li>
+<li>中断：本地禁用</li>
+<li>此调用必须不休眠。</li>
+</ul>
+<h2 id="stop-tx-port"><a href="#stop-tx-port" class="headerlink" title="stop_tx(port)"></a>stop_tx(port)</h2><p>停止发送字符。这可能由于CTS线路变为非活动状态，或tty层表明由于XOFF字符我们要停止传输。<br>驱动程序应尽快停止传输字符。</p>
+<ul>
+<li>锁定：采用port-&gt;lock</li>
+<li>中断：本地禁用</li>
+<li>此调用不休眠。</li>
+</ul>
+<h2 id="start-tx-port"><a href="#start-tx-port" class="headerlink" title="start_tx(port)"></a>start_tx(port)</h2><p>开始传输字符。</p>
+<ul>
+<li>锁定：采用port-&gt;lock</li>
+<li>中断：本地禁用</li>
+<li>此调用不休眠。</li>
+</ul>
+<h2 id="stop-rx-port"><a href="#stop-rx-port" class="headerlink" title="stop_rx(port)"></a>stop_rx(port)</h2><p>停止接收字符。端口处于即将关闭进程中。</p>
+<ul>
+<li>锁定：采用port-&gt;lock</li>
+<li>中断：本地禁用</li>
+<li>此调用不休眠。</li>
+</ul>
+<h2 id="enable-ms-port"><a href="#enable-ms-port" class="headerlink" title="enable_ms(port)"></a>enable_ms(port)</h2><p>使能modem状态中断。<br>此方法可被多次调用，当调用shutdown方法时，modem状态中断禁用。</p>
+<ul>
+<li>锁定：采用port-&gt;lock</li>
+<li>中断：本地禁用</li>
+<li>此调用不休眠。</li>
+</ul>
+<h2 id="break-ctl-port-ctl"><a href="#break-ctl-port-ctl" class="headerlink" title="break_ctl(port,ctl)"></a>break_ctl(port,ctl)</h2><p>控制中断信号的传输。如果ctl非零，中断信号应被传输。当另一个调用作为零ctl时，此信号应终止。</p>
+<ul>
+<li>锁定：none</li>
+<li>中断：取决于调用者</li>
+<li>此调用不休眠。</li>
+</ul>
+<h2 id="startup-port"><a href="#startup-port" class="headerlink" title="startup(port)"></a>startup(port)</h2><p>抓取任意中断资源，并初始化任一底层驱动状态。使能接收端口。不应该启用RTS和DTR；可通过一个单独的调用set_mctrl来完成。<br>此方法只有在端口最初打开时被调用。</p>
+<ul>
+<li>锁定：采用port_sem</li>
+<li>中断：全局禁用。</li>
+</ul>
+<h2 id="shutdown-port"><a href="#shutdown-port" class="headerlink" title="shutdown(port)"></a>shutdown(port)</h2><p>禁用端口，禁用任何可能有效地中断条件，以及释放任何中断资源。不应该禁用RTS和DTR；可通过一个单独的调用set_mctrl来完成。<br>一旦调用完成，驱动程序不能访问port-&gt;info。<br>此方法只有当没有更多的用户端口时才被调用。</p>
+<ul>
+<li>锁定：采用port_sem</li>
+<li>中断：取决于调用者</li>
+</ul>
+<h2 id="flush-buffer-port"><a href="#flush-buffer-port" class="headerlink" title="flush_buffer(port)"></a>flush_buffer(port)</h2><p>刷新任何写缓冲区，重置所有的DMA状态，并停止正在进行的DMA传输。<br>每当port-&gt;info-&gt;xmit循环缓冲区清零时都被调用。</p>
+<ul>
+<li>锁定：采用port-&gt;lock</li>
+<li>中断：本地禁用</li>
+<li>此调用不能休眠。</li>
+</ul>
+<h2 id="set-termios-port-termios-oldtermios"><a href="#set-termios-port-termios-oldtermios" class="headerlink" title="set_termios(port,termios,oldtermios)"></a>set_termios(port,termios,oldtermios)</h2><p>改变端口参数，包括：字长、奇偶校验、停止位。更新read_status_mask而忽略状态掩码，表示我们有兴趣接收的事件类型。相应的termios-&gt;c_cflag位是：</p>
+<ul>
+<li><p>CSIZE    - word size</p>
+</li>
+<li><p>CSTOPB - 2 stop bits</p>
+</li>
+<li><p>PARENB - parity enable</p>
+</li>
+<li><p>PARODD- oddparity (when PARENB is in force)</p>
+</li>
+<li><p>CREAD  - enable reception of characters (if not set,still receive characters from the port, but throwthem away.</p>
+</li>
+<li><p>CRTSCTS       - if set, enable CTS status changereporting</p>
+</li>
+<li><p>CLOCAL - if not set, enable modem status change  reporting.</p>
+</li>
+</ul>
+<p>相应的termios-&gt;c_iflag位是：</p>
+<ul>
+<li>INPCK    - enable frame and parity error events to be passed to the TTY layer.</li>
+<li>BRKINT</li>
+<li>PARMRK       - both of these enable break events to be passedto the TTY layer.</li>
+<li>IGNPAR - ignore parity and framing errors</li>
+<li>IGNBRK - ignore break errors,  If IGNPAR is also set,ignore overrun errors as well.</li>
+</ul>
+<p>iflag位的相互作用如下（奇偶校验错误为例）：</p>
+<table>
+<thead>
+<tr>
+<th>Parity</th>
+<th>error</th>
+<th>INPCK</th>
+<th>IGNPAR</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>n&#x2F;a</td>
+<td>0</td>
+<td>n&#x2F;a</td>
+<td>character received, marked as TTY_NORMAL</td>
+</tr>
+<tr>
+<td>None</td>
+<td>1</td>
+<td>n&#x2F;a</td>
+<td>character received, marked as TTY_NORMAL</td>
+</tr>
+<tr>
+<td>Yes</td>
+<td>1</td>
+<td>0</td>
+<td>character received,marked as TTY_PARITY</td>
+</tr>
+<tr>
+<td>Yes</td>
+<td>1</td>
+<td>1</td>
+<td>character discarded</td>
+</tr>
+</tbody></table>
+<p>如果你的硬件支持硬件“软”流量控制，其他标志可以使用（例如，XON &#x2F; XOFF字符）。</p>
+<ul>
+<li>锁定：none</li>
+<li>中断：取决于调用者</li>
+<li>此调用不能休眠。</li>
+</ul>
+<h2 id="pm-port-state-oldstate"><a href="#pm-port-state-oldstate" class="headerlink" title="pm(port,state,oldstate)"></a>pm(port,state,oldstate)</h2><p>在指定的端口上执行任何电源管理有关的活动。状态表示新状态（定义为ACPI D0-D3），旧状态表示以前状态。从本质上讲，D0表示完全供电，D3指断电。</p>
+<p>此函数不应用于抓取任何资源。</p>
+<p>当端口最初打开，最终关闭，除非该端口也是系统控制台时，这才被调用。即使CONFIG_PM没被设置，也会发生。</p>
+<ul>
+<li>锁定：none</li>
+<li>中断：取决于调用者。</li>
+</ul>
+<h2 id="type-port"><a href="#type-port" class="headerlink" title="type(port)"></a>type(port)</h2><p>返回一个指向字符串常量、描述指定端口的指针，或返回NULL，在这种情况下，字符串“unknow”被替换。</p>
+<ul>
+<li>锁定：none</li>
+<li>中断：取决于调用者。</li>
+</ul>
+<h2 id="release-port-port"><a href="#release-port-port" class="headerlink" title="release_port(port)"></a>release_port(port)</h2><p>释放目前在该端口使用的任何内存和IO区域资源。</p>
+<ul>
+<li>锁定：none</li>
+<li>中断：取决于调用者。</li>
+</ul>
+<h2 id="request-port-port"><a href="#request-port-port" class="headerlink" title="request_port(port)"></a>request_port(port)</h2><p>请求端口所需任意内存和IO区域资源。如果有任何失败，当该函数返回时，没有注册资源，它应该返回-EBUSY失败。</p>
+<ul>
+<li>锁定：none</li>
+<li>中断：取决于调用者。</li>
+</ul>
+<h2 id="config-port-port-type"><a href="#config-port-port-type" class="headerlink" title="config_port(port,type)"></a>config_port(port,type)</h2><p>执行所需端口的自动配置步骤。<code>type</code>包括所需配置的位掩码。UART_CONFIG_TYPE表示端口需要探测和识别。如果未检测到端口的类型，port-&gt;type应设置为已建立的类型或PORT_UNKNOWN。</p>
+<p>UART_CONFIG_IRQ表示应采用标准内核自动探测技术探测的中断信号的自动配置。端口有中断的内部硬连接平台是内有必要的（例如，片上系统的实现）。</p>
+<ul>
+<li>锁定：none</li>
+<li>中断：取决于调用者。</li>
+</ul>
+<h2 id="verify-port-port-serinfo"><a href="#verify-port-port-serinfo" class="headerlink" title="verify_port(port,serinfo)"></a>verify_port(port,serinfo)</h2><p>验证包含在serinfo新的串口信息适于此端口类型。</p>
+<ul>
+<li>锁定：none</li>
+<li>中断：取决于调用者。</li>
+</ul>
+<h2 id="ioctl-port-cmd-arg"><a href="#ioctl-port-cmd-arg" class="headerlink" title="ioctl(port,cmd,arg)"></a>ioctl(port,cmd,arg)</h2><p>执行任何特定端口的IOCTLs。Ioctl命令使用标准编号系统定义，参见&lt;asm&#x2F;ioctl.h&gt;。</p>
+<ul>
+<li>锁定：none</li>
+<li>中断：取决于调用者。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+    </div>
+    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/blog/Linux-driver-development-notes/0x12-uart_ops-structure.html">Linux驱动开发杂记(0x12) - uart_ops结构体</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Vinx 的个人博客">Vinx</a></p>
+  <p><span>发布时间:</span>2018年11月22日 - 15:09</p>
+  <p><span>最后更新:</span>2022年11月08日 - 16:19</p>
+  <p><span>原始链接:</span><a href="/blog/Linux-driver-development-notes/0x12-uart_ops-structure.html" title="Linux驱动开发杂记(0x12) - uart_ops结构体">https://vinshell.cc/blog/Linux-driver-development-notes/0x12-uart_ops-structure.html</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://vinshell.cc/blog/Linux-driver-development-notes/0x12-uart_ops-structure.html"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fab fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+
+      
+    </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/Linux%E9%A9%B1%E5%8A%A8/" rel="tag"># Linux驱动</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/Linux-driver-development-notes/0x11-uart_port-structure.html" rel="prev" title="Linux驱动开发杂记(0x11) - uart_port结构体">
+      <i class="fa fa-chevron-left"></i> Linux驱动开发杂记(0x11) - uart_port结构体
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/blog/Linux-driver-development-notes/0x13-Serial-UART-Driver-API.html" rel="next" title="Linux驱动开发杂记(0x13) - 串口UART驱动API">
+      Linux驱动开发杂记(0x13) - 串口UART驱动API <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tx-empty-port"><span class="nav-text">tx_empty(port)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-mctrl-port-mctrl"><span class="nav-text">set_mctrl(port, mctrl)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get-mctrl-port"><span class="nav-text">get_mctrl(port)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stop-tx-port"><span class="nav-text">stop_tx(port)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#start-tx-port"><span class="nav-text">start_tx(port)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stop-rx-port"><span class="nav-text">stop_rx(port)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#enable-ms-port"><span class="nav-text">enable_ms(port)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#break-ctl-port-ctl"><span class="nav-text">break_ctl(port,ctl)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#startup-port"><span class="nav-text">startup(port)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shutdown-port"><span class="nav-text">shutdown(port)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flush-buffer-port"><span class="nav-text">flush_buffer(port)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-termios-port-termios-oldtermios"><span class="nav-text">set_termios(port,termios,oldtermios)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pm-port-state-oldstate"><span class="nav-text">pm(port,state,oldstate)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#type-port"><span class="nav-text">type(port)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#release-port-port"><span class="nav-text">release_port(port)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#request-port-port"><span class="nav-text">request_port(port)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#config-port-port-type"><span class="nav-text">config_port(port,type)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#verify-port-port-serinfo"><span class="nav-text">verify_port(port,serinfo)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ioctl-port-cmd-arg"><span class="nav-text">ioctl(port,cmd,arg)</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Vinx"
+      src="/blog/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Vinx</p>
+  <div class="site-description" itemprop="description">本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Vinx911" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Vinx911" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u011471873" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u011471873" rel="noopener" target="_blank"><i class="fa fa-crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:buddyhe911@163.com" title="E-Mail → mailto:buddyhe911@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vinx</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
