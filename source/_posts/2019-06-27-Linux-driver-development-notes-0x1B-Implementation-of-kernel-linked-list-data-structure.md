@@ -1,0 +1,520 @@
+---
+title: Linux驱动开发杂记(0x1B) - 内核链表数据结构的实现
+date: 2019-06-27 21:29:10
+tags: Linux驱动
+categories: Linux驱动开发杂记
+copyright: true
+---
+
+# Linux驱动开发杂记(0x1B) - 内核链表数据结构的实现
+
+## 1. Linux内核双链表
+
+链表的基础知识在这里就不在赘述了。Linux 内核提供了一种双链表的实现方式，实际上，通常它都组织成双循环链表。
+
+链表数据结构的定义很简单，在Linux 4.15.0 中，list_head结构体定义在`include/linux/types.h`文件中。
+
+```c
+struct list_head {
+	struct list_head *next, *prev;
+};
+```
+
+list_head结构体包含指向两个list_head结构的指针prev和next。由此可见，内核的链表具有双链表功能。list_head结构并没有数据域，在实际使用中，内核将这个结构体嵌入其他数据结构中来实现复杂的功能。
+
+## 2. 声明和初始化
+
+list_head的声明可以使用`struct list_head name`，或者也可以使用宏`LIST_HEAD`同时声明并初始化。
+
+```c
+#define LIST_HEAD_INIT(name) { &(name), &(name) }
+#define LIST_HEAD(name) \
+	struct list_head name = LIST_HEAD_INIT(name)
+```
+
+将宏`LIST_HEAD`展开为
+
+```c
+struct list_head name = { &(name), &(name) }
+```
+
+可以看出`LIST_HEAD` 宏创建了一个 `struct list_head` 实例，并将使用 `LIST_HEAD_INIT` 宏 初始化了实例。`LIST_HEAD_INIT` 宏初始化 `struct list_head` 链表头，将 `struct list_head` 的 prev 和 next 成员都指向它自己。这样，我们就有了一个空链表。
+
+除了用`LIST_HEAD()`宏在声明时初始化以外，还可以使用`INIT_LIST_HEAD`函数（宏）在运行时初始化链表头。
+
+```c
+static inline void INIT_LIST_HEAD(struct list_head *list)
+{
+	WRITE_ONCE(list->next, list);
+	list->prev = list;
+}
+```
+
+`INIT_LIST_HEAD`函数首先调用`WRITE_ONCE()` 将list->next 指向自己，然后将 list->prev 也指向自己。此处使用`WRITE_ONCE()` 以确保在多线程的情况下，数据可以被正确写入。
+
+## 3. 插入/删除/替换/移动/合并
+
+### 3.1 插入
+
+内核中对链表插入操作只要有在表头插入和在表尾插入
+
+```c
+static inline void list_add(struct list_head *new, struct list_head *head);
+static inline void list_add_tail(struct list_head *new, struct list_head *head);
+```
+
+虽因为内核链表是双向循环链表，且表头的next、prev分别指向链表中的第一个和最末一个节点，所以list_add和list_add_tail的区别并不大。内核中分别用一下代码实现。
+
+```c
+static inline void list_add(struct list_head *new, struct list_head *head)
+{
+	__list_add(new, head, head->next);
+}
+
+static inline void list_add_tail(struct list_head *new, struct list_head *head)
+{
+	__list_add(new, head->prev, head);
+}
+
+```
+
+`__list_add()` 函数将新的节点插入参数 prev 和 next 之间。可见，在表头插入是插入在head之后，而在表尾插入是插入在head->prev之后。
+
+```c
+static inline void __list_add(struct list_head *new,
+			      struct list_head *prev,
+			      struct list_head *next)
+{
+
+	next->prev = new;
+	new->next = next;
+	new->prev = prev;
+	WRITE_ONCE(prev->next, new);
+}
+```
+
+`__list_add()` 函数用于向 list 里添加一个新的节点。调用这个函数添加节点会检查该 节点是否可用，如果不可用直接返回；如果检查可用，就将新的节点插入参数 prev 和 next 之间。最后调用 `WRITE_ONCE()` 函数将 prev->next 进行修正。
+
+### 3.1 删除
+
+``` c
+static inline void list_del(struct list_head *entry)
+{
+	__list_del_entry(entry);
+	entry->next = LIST_POISON1;
+	entry->prev = LIST_POISON2;
+}
+
+static inline void list_del_init(struct list_head *entry)
+{
+	__list_del_entry(entry);
+	INIT_LIST_HEAD(entry);
+}
+```
+
+`list_del()` 函数用于将一个节点从链表中移除。函数通过传入节点的指针，然后调用` __list_del_entry()` 函数将节点从链表中移除。接着将节点的 next 指针指向 LIST_POISON1, 将 prev 指针指向了 LIST_POISON2。
+
+`list_del_init()` 函数用于将一个节点从链表中移除，并初始化这个节点。函数将节点 传入 `__list_del_entry()` 函数，移除将节点从链表中移除，然后调用 `INIT_LIST_HEAD()` 函数初始化这个节点。
+
+```c
+static inline void __list_del_entry(struct list_head *entry)
+{
+	if (!__list_del_entry_valid(entry))
+		return;
+
+	__list_del(entry->prev, entry->next);
+}
+```
+
+函数 `__list_del_entry() `用于将一个节点从链表中删除。函数通过传入这个节点的指针，然后 调用 `__list_del_entry_valid()` 函数检查这个节点是否有效。如果无效，则返回；如果有效 则调用` __list_del() `函数将这个节点删除。
+
+```c
+static inline void __list_del(struct list_head * prev, struct list_head * next)
+{
+	next->prev = prev;
+	WRITE_ONCE(prev->next, next);
+}
+```
+
+`__list_del()` 函数用于从链表中删除指定的节点。向函数中传入需要操作节点的 prev 和 next 指针。从上面的定义可以知道，`__list_del` 可以安全的删除一个节点。
+
+**关于 LIST_POISON1和 LIST_POISON2查询如下：**
+
+当不打开CONFIG_DEBUG_LIST这个宏，我们在调试出错代码的时候经常会返回指针的值，我们很多时候出错都是指针为NULL造成的，这时候我们如果发现是值是LIST_POISON1或LIST_POISON2的话，那我们马上可以将注意力转移到链表上来了，并且是因为误用了一个已经从链表中删除掉的节点。
+
+### 3.3 替换
+
+```C
+static inline void list_replace(struct list_head *old,
+				struct list_head *new)
+{
+	new->next = old->next;
+	new->next->prev = new;
+	new->prev = old->prev;
+	new->prev->next = new;
+}
+
+static inline void list_replace_init(struct list_head *old,
+					struct list_head *new)
+{
+	list_replace(old, new);
+	INIT_LIST_HEAD(old);
+}
+```
+
+`list_replace()` 函数通过传入新节点的指针和旧节点的指针，然后通过交换 两个节点的 prev 和 next 指针内容，以此达到节点替换的作用。
+
+`list_replace_init()` 函数首先调用 `list_replace()` 函数将 old 节点替换成 new 节点，然后调用 `INIT_LIST_HEAD()` 函数初始化 old 节点。
+
+### 3.3 移动
+
+移动是将原本属于一个链表的节点移动到另一个链表的操作，并根据插入到新链表的位置分为两类：
+
+```ｃ
+static inline void list_move(struct list_head *list, struct list_head *head)
+{
+	__list_del_entry(list);
+	list_add(list, head);
+}
+
+static inline void list_move_tail(struct list_head *list,
+				  struct list_head *head)
+{
+	__list_del_entry(list);
+	list_add_tail(list, head);
+}
+```
+
+函数首先调用 `__list_del_entry()` 将节点从当前链表中移除，然后调用 list_add() 函数将节点 加入到新链表。
+
+### 3.4 合并
+
+合并是将一个链表整体插入另一个链表的操作。根据插入到新链表的位置分为两类：
+
+```c
+static inline void __list_splice(const struct list_head *list,
+				 struct list_head *prev,
+				 struct list_head *next)
+{
+	struct list_head *first = list->next;
+	struct list_head *last = list->prev;
+
+	first->prev = prev;
+	prev->next = first;
+
+	last->next = next;
+	next->prev = last;
+}
+
+static inline void list_splice(const struct list_head *list,
+				struct list_head *head)
+{
+	if (!list_empty(list))
+		__list_splice(list, head, head->next);
+}
+
+static inline void list_splice_tail(struct list_head *list,
+				struct list_head *head)
+{
+	if (!list_empty(list))
+		__list_splice(list, head->prev, head);
+}
+```
+
+`list_splice()` 函数用于将链表 list 添加到 head 链表的头部。函数首先检查 list 链表是否为空，如果为空，则返回；反之调用 `__list_splice()` 将 list 添加到 head 的头部。`list_splice_tail()` 函数将 list 链表添加到 head 链表的末尾。
+
+`__list_splice()` 函数用于将节点插入到链表里。函数将 list 对应的链表插入到 prev 节点之后。函数首先获得 list 节点的 next 和 prev 节点，然后将节点 list 插入到 prev 节点之后，调整 next 节点。
+
+当链表合并后，原表头的next、prev仍然指向原来的节点，为了避免引起混乱，Linux提供了一个`list_splice_init()`和`list_splice_tail_init()`函数。
+
+```c
+static inline void list_splice_init(struct list_head *list,
+				    struct list_head *head)
+{
+	if (!list_empty(list)) {
+		__list_splice(list, head, head->next);
+		INIT_LIST_HEAD(list);
+	}
+}
+
+static inline void list_splice_tail_init(struct list_head *list,
+					 struct list_head *head)
+{
+	if (!list_empty(list)) {
+		__list_splice(list, head->prev, head);
+		INIT_LIST_HEAD(list);
+	}
+}
+```
+
+这两个函数在将list合并到head链表的基础上，调用`INIT_LIST_HEAD(list)`将list设置为空链。
+
+## 4. 是否为空链表
+
+```c
+static inline int list_empty(const struct list_head *head)
+{
+	return READ_ONCE(head->next) == head;
+}
+
+static inline int list_empty_careful(const struct list_head *head)
+{
+	struct list_head *next = head->next;
+	return (next == head) && (next == head->prev);
+}
+```
+
+基本的`list_empty()`仅以头指针的next是否指向自己来判断链表是否为空，Linux链表另行提供了一个`list_empty_careful()`函数，它同时判断头指针的next和prev，仅当两者都指向自己时才返回真。这主要是为了应付另一个cpu正在处理同一个链表而造成next、prev不一致的情况。但代码注释也承认，这一安全保障能力有限：除非其他cpu的链表操作只有`list_del_init()`，否则仍然不能保证安全，也就是说，还是需要加锁保护。
+
+## 5. 获取列表节点数据
+
+我们知道，Linux链表中仅保存了数据项结构中list_head成员变量的地址，那么我们如何通过这个list_head成员访问到作为它的所有者的节点数据呢？Linux为此提供了一个list_entry(ptr,type,member)宏，其中ptr是指向该数据中list_head成员的指针，也就是存储在链表中的地址值，type是数据项的类型，member则是数据项类型定义中list_head成员的变量名。
+
+以下是6种获取节点数据的方式
+
+```c
+#define list_entry(ptr, type, member) \
+	container_of(ptr, type, member)
+```
+
+`list_entry()` 函数通过 `struct list_head` 对应的指针获得包含这个指针的结构体指针。 ptr 参数指向 `struct list_head` 指针； type 参数表示包含 list_head 指针的结构类型； member 参数用于指明 list_head 指针在 type 结构中的名字。通过这个函数可以有 list_head 指针反推出包含该指针的结构。
+
+```c
+#define list_first_entry(ptr, type, member) \
+	list_entry((ptr)->next, type, member)
+```
+
+`list_first_entry()` 函数用于获得包含链表第一个成员的结构体指针。
+
+```c
+#define list_last_entry(ptr, type, member) \
+	list_entry((ptr)->prev, type, member)
+```
+
+`list_first_entry()` 函数用于获得包含链表第一个成员的结构体指针。
+
+```c
+#define list_first_entry_or_null(ptr, type, member) ({ \
+	struct list_head *head__ = (ptr); \
+	struct list_head *pos__ = READ_ONCE(head__->next); \
+	pos__ != head__ ? list_entry(pos__, type, member) : NULL; \
+})
+```
+
+`list_first_entry_or_null()` 函数用于获得包含链表第一个成员的结构体指针，如果链表的 第一个成员不存在则返回 NULL; 如果链表第一个成员存在，则返回包含第一个成员的结构指针。 ptr 参数指向链表头；参数 type 指明包含链表成员的结构体类型；member 指令链表在包含 结构中的名字。函数首先调用 READ_ONCE() 函数获得链表的第一个成员，然后判断链表的第一个 成员是否指向链表头，如果指向链表头表明链表是空链表，则返回 NULL；如果第一个成员不指向 链表的表头，则调用 list_entry() 函数获得包含结构的指针。
+
+```c
+#define list_next_entry(pos, member) \
+	list_entry((pos)->member.next, typeof(*(pos)), member)
+```
+
+`list_next_entry()` 函数用于获得下一个结构体指针，该结构体通过 list_head 双连接表 链接成一个双链表。参数 pos 指向结构体指针; 参数 member 指向 list_head 在结构体中的 名字。`list_next_netry()` 函数直接调用 list_entry() 函数获得链表节点对应的结构体， 这里使用 `pos->member.next` 指向了结构体对应的链表成员。
+
+```c
+#define list_prev_entry(pos, member) \
+	list_entry((pos)->member.prev, typeof(*(pos)), member)
+```
+
+`list_prev_entry()` 函数用于获得成员的前一个成员。所有的成员都是由内嵌的双链表 构成，通过 `list_prev_entry()` 函数可以获得当前节点的前一个成员。pos 参数指向当前 成员指针；member 参数指向成员中链表的名字。函数直接调用 list_entry() 函数，将 成员的 `pos->member.prev` 传入，以此获得前一个双链表的成员，然后反推前一个成员。
+
+```c
+#define list_prepare_entry(pos, head, member) \
+	((pos) ? : list_entry(head, typeof(*pos), member))
+```
+
+`list_prepare_entry()` 函数用于准备一个结构体的入口。结构体内嵌一个双链表，如果 pos 入口存在，那么返回这个入口；如果 pos 不存在，则返回双链表的第一个入口。参数 pos 指向 指定的入口；参数 head 指向双链表的表头；参数 member 指明双链表在入口中的名字。
+
+```
+#define list_safe_reset_next(pos, n, member)				\
+	n = list_next_entry(pos, member)
+```
+
+`list_safe_reset_next()` 函数用于安全的获得下一个入口。参数 pos 指向特定的入口；n 参数 指向下一个入口；member 指明双链表节点在入口结构中的名字。函数直接调用 `list_next_entry()` 函数获得下一个入口地址。
+
+## 6. 遍历
+
+### 6.1 遍历获取列表头
+
+```c
+#define list_for_each(pos, head) \
+	for (pos = (head)->next; pos != (head); pos = pos->next)
+```
+
+`list_for_each()` 函数用于遍历一个双链表。pos 参数是一个 `struct list_head` 指针，用于指向遍历到的节点；参数 head 指向链表的表头。函数从链表的第一个节点开始，直到 遍历完所有的节点。
+
+```c
+#define list_for_each_prev(pos, head) \
+	for (pos = (head)->prev; pos != (head); pos = pos->prev)
+```
+
+`list_for_each_prev()` 函数用于倒叙遍历双链表的所有节点。
+
+### 6.2 遍历获取节点数据结构
+
+```c
+#define list_for_each_entry(pos, head, member)				\
+	for (pos = list_first_entry(head, typeof(*pos), member);	\
+	     &pos->member != (head);					\
+	     pos = list_next_entry(pos, member))
+```
+
+`list_for_each_entry()` 函数用于遍历内嵌双链表的结构。pos 参数指向当前遍历到的结构指针； 参数 head 指向双链表的表头；member 参数指向双链表在结构中名字。函数使用 for 循环正序 遍历所有的成员，首先使用 list_first_entry() 函数获得第一个成员，然后使用 `list_next_entry()` 函数获得下一个成员。
+
+```c
+#define list_for_each_entry_reverse(pos, head, member)			\
+	for (pos = list_last_entry(head, typeof(*pos), member);		\
+	     &pos->member != (head); 					\
+	     pos = list_prev_entry(pos, member))
+```
+
+`list_for_each_entry_reverse()` 函数用于倒叙遍历内嵌双链表的结构体链表。
+
+### 6.3 从指定入口开始遍历
+
+```c
+#define list_for_each_entry_continue(pos, head, member) 		\
+	for (pos = list_next_entry(pos, member);			\
+	     &pos->member != (head);					\
+	     pos = list_next_entry(pos, member))
+```
+
+`list_for_each_entry_continue()` 函数用于从指定入口开始遍历双链表中的入口。该函数与 list_prepare_entry() 配合使用，list_prepare_entry() 函数用于指定入口的地址。 参数 pos 指定入口地址；head 参数用于指定双链表的表头；member 参数用于指定链表在入口结构 中的名字。函数使用 for 循环，调用 list_next_entry() 函数从 pos 入口开始遍历双链表， 并使用 list_next_entry() 函数获得下一个入口。
+
+```c
+#define list_for_each_entry_continue_reverse(pos, head, member)		\
+	for (pos = list_prev_entry(pos, member);			\
+	     &pos->member != (head);					\
+	     pos = list_prev_entry(pos, member))
+```
+
+`list_for_each_entry_continue_reverse()` 函数用于从指定入口开始，倒叙遍历所有入口。
+
+### 6.4 从指定入口开始，正序遍历所有的入口
+
+```c
+#define list_for_each_entry_from(pos, head, member) 			\
+	for (; &pos->member != (head);					\
+	     pos = list_next_entry(pos, member))
+```
+
+`list_for_each_entry_from()` 函数用于从指定入口开始，正序遍历所有的入口。每个入口都 内嵌一个双链表节点。pos 指向特定的入口；head 指向双链表表头；member 指明双链表节点 在入口节点的名字。函数使用 for 循环，从 pos 入口开始，调用 `list_next_entry()` 函数 获得下一个入口地址，正序遍历所有入口。
+
+```
+#define list_for_each_entry_from_reverse(pos, head, member)		\
+	for (; &pos->member != (head);					\
+	     pos = list_prev_entry(pos, member))
+```
+
+`list_for_each_entry_from_reverse()` 函数用于从指定入口，倒叙遍历所有入口。
+
+### 6.5  安全地遍历
+
+带 safe 类的接口和不带 safe 类的接口在遍历每个节点的时候，并没有差别。但如果在 遍历的时候需要删除当前节点，那么就需要使用带 safe 类的接口。
+
+```c
+#define list_for_each_safe(pos, n, head) \
+	for (pos = (head)->next, n = pos->next; pos != (head); \
+		pos = n, n = pos->next)
+		
+#define list_for_each_prev_safe(pos, n, head) \
+	for (pos = (head)->prev, n = pos->prev; \
+	     pos != (head); \
+	     pos = n, n = pos->prev)		
+	    
+#define list_for_each_entry_safe(pos, n, head, member)			\
+	for (pos = list_first_entry(head, typeof(*pos), member),	\
+		n = list_next_entry(pos, member);			\
+	     &pos->member != (head); 					\
+	     pos = n, n = list_next_entry(n, member))
+
+#define list_for_each_entry_safe_reverse(pos, n, head, member)		\
+	for (pos = list_last_entry(head, typeof(*pos), member),		\
+		n = list_prev_entry(pos, member);			\
+	     &pos->member != (head); 					\
+	     pos = n, n = list_prev_entry(n, member))
+
+#define list_for_each_entry_safe_continue(pos, n, head, member) 		\
+	for (pos = list_next_entry(pos, member), 				\
+		n = list_next_entry(pos, member);				\
+	     &pos->member != (head);						\
+	     pos = n, n = list_next_entry(n, member))
+
+#define list_for_each_entry_safe_from(pos, n, head, member) 			\
+	for (n = list_next_entry(pos, member);					\
+	     &pos->member != (head);						\
+	     pos = n, n = list_next_entry(n, member))
+```
+
+## 7. 其他函数
+
+```c
+static inline int list_is_last(const struct list_head *list,
+				const struct list_head *head);
+```
+
+list_is_last() 函数用于检查节点是否位于链表的末尾。
+
+```c
+static inline void list_rotate_left(struct list_head *head);
+```
+
+list_rotate_left() 函数用于将链表第一节点移动到链表的末尾。
+
+```c
+static inline int list_is_singular(const struct list_head *head);
+```
+
+list_is_singular() 函数判断链表是不是只含有一个节点。
+
+```c
+static inline void list_cut_position(struct list_head *list,
+		struct list_head *head, struct list_head *entry);
+```
+
+list_cut_position() 函数用于将一个链表切成两个链表。
+
+## 8. 扩展 - hlist
+
+hlist数据结构是用于HASH表应用的单指针表头双循环链表，hlist的表头仅有一个指向首节点的指针，而没有指向尾节点的指针，这样在可能是海量的HASH表中存储的表头就能减少一半的空间消耗。
+
+因为表头和节点的数据结构不同，插入操作如果发生在表头和首节点之间，以往的方法就行不通了：表头的first指针必须修改指向新插入的节点，却不能使用类似list_add()这样统一的描述。为此，hlist节点的prev不再是指向前一个节点的指针，而是指向前一个节点（可能是表头）中的next（对于表头则是first）指针（`struct list_head **pprev`），从而在表头插入的操作可以通过一致的"`*(node->pprev)`"访问和修改前驱节点的next（或first）指针。
+
+hlist实现方式与list_head类似，在这里就不再一一分析。
+
+```c
+
+// 声明和初始化
+#define HLIST_HEAD_INIT
+#define HLIST_HEAD(name)
+#define INIT_HLIST_HEAD(ptr)
+static inline void INIT_HLIST_NODE(struct hlist_node *h);
+// 插入
+static inline void hlist_add_head(struct hlist_node *n, struct hlist_head *h);
+static inline void hlist_add_before(struct hlist_node *n,
+					struct hlist_node *next);
+static inline void hlist_add_behind(struct hlist_node *n,
+				    struct hlist_node *prev);
+static inline void hlist_add_fake(struct hlist_node *n);
+// 删除
+static inline void hlist_del(struct hlist_node *n);
+static inline void hlist_del_init(struct hlist_node *n);
+// 移动
+static inline void hlist_move_list(struct hlist_head *old,
+				   struct hlist_head *new);
+//其他
+static inline int hlist_unhashed(const struct hlist_node *h);
+static inline int hlist_empty(const struct hlist_head *h);
+static inline bool hlist_fake(struct hlist_node *h);
+static inline bool
+hlist_is_singular_node(struct hlist_node *n, struct hlist_head *h);
+// 遍历
+#define hlist_entry(ptr, type, member)
+#define hlist_for_each(pos, head)
+#define hlist_for_each_safe(pos, n, head)
+#define hlist_entry_safe(ptr, type, member)
+#define hlist_for_each_entry(pos, head, member)
+#define hlist_for_each_entry_continue(pos, member)
+#define hlist_for_each_entry_from(pos, member)
+#define hlist_for_each_entry_safe(pos, n, head, member)
+```
+
