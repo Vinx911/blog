@@ -4,6 +4,7 @@ date: 2018-11-22 15:09:30
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: true
+permalink: Linux-driver-development-notes/0x12-uart_ops-structure.html
 ---
 
 ﻿```c
@@ -11,7 +12,7 @@ copyright: true
  * This structure describes all the operations that can be
  * done on the physical hardware.
  */
-struct uart_ops {
+  struct uart_ops {
     unsigned int (*tx_empty)(struct uart_port *); /* 串口的Tx FIFO缓存是否为空。如果为空，函数应返回TIOCSER_TEMT，否则返回0。如果端口不支持此操作，返回TIOCSER_TEMT。*/
     void         (*set_mctrl)(struct uart_port *, unsigned int mctrl); /* 设置串口modem控制 */
     unsigned int (*get_mctrl)(struct uart_port *); /* 获取串口modem控制 */
@@ -33,7 +34,7 @@ struct uart_ops {
     void         (*config_port)(struct uart_port *, int); /* 执行串口所需的自动配置 */
     int          (*verify_port)(struct uart_port *, struct serial_struct *); /* 核实新串口的信息 */
     int          (*ioctl)(struct uart_port *, unsigned int, unsigned long); /* IO控制 */
-};
+  };
 ```
 ## tx_empty(port)
 此函数检查发送fifo和移位通过“端口”中描述的端口是否为空。如果为空，函数应返回TIOCSER_TEMT，否则返回0。如果端口不支持此操作，返回TIOCSER_TEMT。

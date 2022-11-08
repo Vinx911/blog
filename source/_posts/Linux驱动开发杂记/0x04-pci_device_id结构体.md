@@ -4,6 +4,7 @@ date: 2018-11-08 17:05:18
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: true
+permalink: Linux-driver-development-notes/0x04-pci_device_id-structure.html
 ---
 
 ```c

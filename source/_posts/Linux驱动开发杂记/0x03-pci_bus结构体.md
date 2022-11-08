@@ -4,9 +4,10 @@ date: 2018-11-08 16:56:20
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: true
+permalink: Linux-driver-development-notes/0x03-pci_bus-structure.html
 ---
 
-﻿```c
+```c
 struct pci_bus {
 	/* 链表元素node：对于PCI根总线而言，其pci_bus结构通过node成员链接到本节一开始所述的根总线链表中，根总线链表
 	的表头由一个list_head类型的全局变量pci_root_buses所描述。而对于非根pci总线，其pci_bus结构通过node成员链接

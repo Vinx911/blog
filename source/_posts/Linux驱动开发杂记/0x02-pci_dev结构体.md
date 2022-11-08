@@ -4,6 +4,7 @@ date: 2018-11-08 16:32:43
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: true
+permalink: Linux-driver-development-notes/0x02-pci_dev-structure.html
 ---
 
 ﻿每种类的PCI设备都可以用结构类型pci_dev来描述。更为准确地说，应该是每一个PCI功能，即PCI逻辑设备都唯一地对应有一个pci_dev设备描述符。该数据结构的部分定义如下（include/linux/pci.h）：

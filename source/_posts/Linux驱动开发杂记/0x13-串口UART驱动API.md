@@ -4,6 +4,7 @@ date: 2018-11-22 15:13:17
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: true
+permalink: Linux-driver-development-notes/0x13-Serial-UART-Driver-API.html
 ---
 
 ﻿串口驱动API

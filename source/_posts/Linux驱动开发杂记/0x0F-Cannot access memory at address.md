@@ -4,6 +4,7 @@ date: 2018-11-17 00:54:15
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: true
+permalink: Linux-driver-development-notes/0x0F-Cannot-access-memory-at-address.html
 ---
 
 ﻿按照教程[Linux内核调试环境搭建(基于ubuntu12.04)](http://www.netfairy.net/?post=242) 配置kgdb双机调试时，出现一下错误：

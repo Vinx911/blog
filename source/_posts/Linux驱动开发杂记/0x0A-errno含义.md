@@ -4,9 +4,10 @@ date: 2018-11-12 14:38:20
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: false
+permalink: Linux-driver-development-notes/0x0A-errno.html
 ---
 
-﻿```c
+```c
 #define	EPERM		 1	/* Operation not permitted */           操作不允许
 #define	ENOENT		 2	/* No such file or directory */         文件或路径不存在
 #define	ESRCH		 3	/* No such process */                   进程不存在

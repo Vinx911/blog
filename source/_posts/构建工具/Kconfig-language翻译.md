@@ -4,6 +4,7 @@ date: 2021-05-26 18:58:22
 tags: 构建工具
 categories: 构建工具
 copyright: true
+permalink: build-tools/Kconfig-language-zh.html
 ---
 
 # Kconfig-language翻译

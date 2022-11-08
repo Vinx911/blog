@@ -4,6 +4,7 @@ date: 2019-01-04 11:48:10
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: true
+permalink: Linux-driver-development-notes/0x15-tasklet.html
 ---
 　　为了提高系统的响应能力和并发能力，Linux将中断处理分了上半部和下半部。当一个中断产生，调用该中断对应的处理程序(上半部)，然后告诉系统，对应的后半部可以执行了，中断处理程序立即返回，下半部会在合适的时机由操作系统调用。这样一来就大大的减少了中断处理所需要的时间。
 

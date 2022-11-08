@@ -4,6 +4,7 @@ date: 2018-11-22 15:06:46
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: true
+permalink: Linux-driver-development-notes/0x10-uart_driver-structure.html
 ---
 
 ﻿```c

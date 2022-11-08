@@ -4,6 +4,7 @@ date: 2018-11-16 08:52:35
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: false
+permalink: Linux-driver-development-notes/0x0E-vm_area_struct-structure.html
 ---
 
 

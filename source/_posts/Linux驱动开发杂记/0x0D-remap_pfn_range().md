@@ -4,6 +4,7 @@ date: 2018-11-15 16:23:43
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: false
+permalink: Linux-driver-development-notes/0x0D-remap_pfn_range.html
 ---
 
 ﻿驱动实现mmap主要是调用：

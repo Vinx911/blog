@@ -4,6 +4,7 @@ date: 2018-11-08 14:59:12
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: false
+permalink: Linux-driver-development-notes/0x01-Some-markup-macros-in-the-kernel-__init-etc.html
 ---
 
 ﻿> 以下内容摘自[内核初始化优化宏 ,初始化顺序， __init，__devexit等](https://blog.csdn.net/lanmanck/article/details/4718378), 本文仅作为笔记保存。
@@ -42,5 +43,4 @@ copyright: false
 + probe() 和remove() 函数应该使用__devinit 和__devexit 标记，且只能标记probe() 和remove()
 + 如果remove() 使用__devexit 标记，则在pci_driver 结构中要用__devexit_p(remove) 来引用remove() 函数。
 + 如果你不确定需不需要添加优化宏则不要添加。
-
 

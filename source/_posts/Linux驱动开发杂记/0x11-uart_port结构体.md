@@ -4,6 +4,7 @@ date: 2018-11-22 15:07:57
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: true
+permalink: Linux-driver-development-notes/0x11-uart_port-structure.html
 ---
 
 ﻿```c
@@ -32,7 +33,7 @@ struct uart_port {
     unsigned int        ignore_status_mask;/* 忽略的Rx error status */
     struct uart_info      *info;           /* pointer to parent info */
     struct uart_icount     icount;         /* 计数器 */
-
+    
     struct console        *cons;           /* console结构体 */
 #ifdef CONFIG_SERIAL_CORE_CONSOLE
     unsigned long         sysrq;           /* sysrq timeout */
