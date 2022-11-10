@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="mask-icon" href="/images/favicon.png" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -24,21 +24,21 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="操作系统精髓与设计原理(第8版) - 第二章 操作系统概述">
 <meta property="og:url" content="https://blog.vinkvin.com/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview.html">
-<meta property="og:site_name" content="唯客工作室">
+<meta property="og:site_name" content="唯客微博客">
 <meta property="og:description" content="操作系统精髓与设计原理(第8版) - 第二章 操作系统概述2.1 操作系统的目标与功能操作系统是控制应用程序执行的程序，是应用程序和计算机硬件间的接口。它有三个目标：  方便：操作系统使计算机更易于使用。 有效：操作系统允许以更有效的方式使用计算机系统资源。 扩展能力：在构造操作系统时，应允许在不妨碍服务的前提下，有效地开发、测试和引入新的系统功能。  2.1.1 作为用户&#x2F;计算机接口的">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://blog.vinkvin.com/blog/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561772040570.png">
-<meta property="og:image" content="https://blog.vinkvin.com/blog/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561773605514.png">
-<meta property="og:image" content="https://blog.vinkvin.com/blog/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561779123319.png">
-<meta property="og:image" content="https://blog.vinkvin.com/blog/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561786286033.png">
-<meta property="og:image" content="https://blog.vinkvin.com/blog/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561786125535.png">
-<meta property="og:image" content="https://blog.vinkvin.com/blog/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561786075798.png">
+<meta property="og:image" content="https://blog.vinkvin.com/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561772040570.png">
+<meta property="og:image" content="https://blog.vinkvin.com/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561773605514.png">
+<meta property="og:image" content="https://blog.vinkvin.com/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561779123319.png">
+<meta property="og:image" content="https://blog.vinkvin.com/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561786286033.png">
+<meta property="og:image" content="https://blog.vinkvin.com/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561786125535.png">
+<meta property="og:image" content="https://blog.vinkvin.com/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561786075798.png">
 <meta property="article:published_time" content="2019-06-30T08:05:20.000Z">
 <meta property="article:modified_time" content="2022-11-08T08:27:07.510Z">
 <meta property="article:author" content="Vinx">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://blog.vinkvin.com/blog/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561772040570.png">
+<meta name="twitter:image" content="https://blog.vinkvin.com/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561772040570.png">
 
 <link rel="canonical" href="https://blog.vinkvin.com/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview.html">
 
@@ -53,7 +53,7 @@
   };
 </script>
 
-  <title>操作系统精髓与设计原理(第8版) - 第二章 操作系统概述 | 唯客工作室</title>
+  <title>操作系统精髓与设计原理(第8版) - 第二章 操作系统概述 | 唯客微博客</title>
   
 
 
@@ -105,7 +105,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">唯客工作室</h1>
+      <h1 class="site-title">唯客微博客</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
       <p class="site-subtitle" itemprop="description">专注于计算机，嵌入式领域的技术</p>
@@ -184,7 +184,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客工作室">
+      <meta itemprop="name" content="唯客微博客">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -234,7 +234,7 @@
 <li><strong>有效</strong>：操作系统允许以更有效的方式使用计算机系统资源。</li>
 <li><strong>扩展能力</strong>：在构造操作系统时，应允许在不妨碍服务的前提下，有效地开发、测试和引入新的系统功能。</li>
 </ul>
-<h3 id="2-1-1-作为用户-x2F-计算机接口的操作系统"><a href="#2-1-1-作为用户-x2F-计算机接口的操作系统" class="headerlink" title="2.1.1 作为用户&#x2F;计算机接口的操作系统"></a>2.1.1 作为用户&#x2F;计算机接口的操作系统</h3><p><img src="/blog/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561772040570.png" alt="1561772040570"></p>
+<h3 id="2-1-1-作为用户-x2F-计算机接口的操作系统"><a href="#2-1-1-作为用户-x2F-计算机接口的操作系统" class="headerlink" title="2.1.1 作为用户&#x2F;计算机接口的操作系统"></a>2.1.1 作为用户&#x2F;计算机接口的操作系统</h3><p><img src="/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561772040570.png" alt="1561772040570"></p>
 <p>应用程序的用户，即终端用户，把计算机系统视为一组应用程序。为了简化开发任务，系统需要提供一些实用程序或库，实现创建程序、管理文件和控制IO设备时经常使用的功能。</p>
 <p>操作系统通常提供以下几个方面的服务：</p>
 <ul>
@@ -259,7 +259,7 @@
 <li><p><strong>应用程序编程接口（API）</strong>：允许应用程序访问系统的硬件资源和服务。</p>
 </li>
 </ul>
-<h3 id="2-1-2-作为资源管理器的操作系统"><a href="#2-1-2-作为资源管理器的操作系统" class="headerlink" title="2.1.2 作为资源管理器的操作系统"></a>2.1.2 作为资源管理器的操作系统</h3><p><img src="/blog/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561773605514.png" alt="1561773605514"></p>
+<h3 id="2-1-2-作为资源管理器的操作系统"><a href="#2-1-2-作为资源管理器的操作系统" class="headerlink" title="2.1.2 作为资源管理器的操作系统"></a>2.1.2 作为资源管理器的操作系统</h3><p><img src="/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561773605514.png" alt="1561773605514"></p>
 <p>操作系统控制处理器使用其他系统资源，并控制其他程序的执行机制。处理器要做任何一件这类事情时，都必须听孩子执行操作系统程序，而去执行其他程序。这时操作系统会释放对处理器的控制，让处理器去做其他一些有用的工作，然后用足够长的时间恢复控制权，让处理器准备好做下一件工作。</p>
 <p>操作系统的一部分在内存中，包括内核程序和当前长在使用的其他操作系统程序，内核程序包含操作系统中最常使用的功能。内存的其余部分包含用户程序和数据，它的分配由操作系统和处理器中的存储管理区硬件联合控制完成。操作系统决定在程序运行过程中何时使用IO设备，并控制文件的访问和使用。决定在运行一个特定的用户程序时，可以分配多少处理器时间。</p>
 <h3 id="2-1-3-操作系统的易扩展性"><a href="#2-1-3-操作系统的易扩展性" class="headerlink" title="2.1.3 操作系统的易扩展性"></a>2.1.3 操作系统的易扩展性</h3><p>操作系统应能不断发展，原因如下：</p>
@@ -297,7 +297,7 @@
 <li>程序所需要的相关数据（变量、工作空间、缓冲区等）</li>
 <li>程序的执行上下文</li>
 </ul>
-<p><img src="/blog/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561779123319.png" alt="1561779123319"></p>
+<p><img src="/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561779123319.png" alt="1561779123319"></p>
 <p>执行上下文又称为进程状态，是操作系统用来管理和控制进程所需的内部数据。上下文包括操作系统管理进程及处理器正确执行进程所需的所有信息，包括各种处理器寄存器的内容，包括进程优先级及进程是否在等待特定IO事件的完成。</p>
 <p>每个进程分配了一块存储区域，并且在操作系统建立和维护的进程表中进行了记录。进程表包含记录每个进程的表项，表项的内容包括指向包含进程的存储块地址的指针，还包括该进程的部分或全部执行上下文。</p>
 <p><strong>进程索引寄存器</strong>包含当前正在控制处理器的进程在进程表中的索引。<strong>程序计数器</strong>指向该进程中下一条待执行的指令。<strong>基址寄存器</strong>和<strong>界限寄存器</strong>定义该进程所占据的存储器区域，基址寄存器中保存在存储器区域的开始地址，界限寄存器中保存该区域的大小（以字节或字为单位）。</p>
@@ -365,7 +365,7 @@
 <li>虚拟机方式</li>
 </ul>
 <h2 id="2-7-微软Windows系统简介"><a href="#2-7-微软Windows系统简介" class="headerlink" title="2.7 微软Windows系统简介"></a>2.7 微软Windows系统简介</h2><p>windows分开了面向应用的软件和操作系统核心软件，后者包括在内核模式下运行的执行体、内核、设备驱动、和硬件抽象层。在内核模式下运行的软件可以访问系统数据和硬件，在用户模式下运行的其他软件则不能访问系统数据。</p>
-<p><img src="/blog/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561786286033.png" alt="1561786286033"></p>
+<p><img src="/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561786286033.png" alt="1561786286033"></p>
 <p>每个系统函数都正好有一个操作系统部件管理，操作系统的其他部分和所有应用程序通过相应的部件使用标准接口来访问这个函数。关键的系统函数只能通过相应的函数访问。</p>
 <p>Windows的内核模式组件包括以下几个类型：</p>
 <ul>
@@ -394,8 +394,8 @@
 <li>环境子系统</li>
 <li>用户应用程序</li>
 </ul>
-<h2 id="2-8-传统的Unix系统"><a href="#2-8-传统的Unix系统" class="headerlink" title="2.8 传统的Unix系统"></a>2.8 传统的Unix系统</h2><p><img src="/blog/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561786125535.png" alt="1561786125535"></p>
-<h2 id="2-9现代Unix系统"><a href="#2-9现代Unix系统" class="headerlink" title="2.9现代Unix系统"></a>2.9现代Unix系统</h2><p><img src="/blog/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561786075798.png" alt="1561786075798"></p>
+<h2 id="2-8-传统的Unix系统"><a href="#2-8-传统的Unix系统" class="headerlink" title="2.8 传统的Unix系统"></a>2.8 传统的Unix系统</h2><p><img src="/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561786125535.png" alt="1561786125535"></p>
+<h2 id="2-9现代Unix系统"><a href="#2-9现代Unix系统" class="headerlink" title="2.9现代Unix系统"></a>2.9现代Unix系统</h2><p><img src="/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview/images/1561786075798.png" alt="1561786075798"></p>
 <ul>
 <li>System V Release 4（SVR4）</li>
 <li>BSD</li>
