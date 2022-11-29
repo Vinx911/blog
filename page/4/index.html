@@ -23,27 +23,27 @@
   <meta name="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="唯客微博客">
-<meta property="og:url" content="https://blog.vinkvin.com/archives/page/3/index.html">
+<meta property="og:url" content="https://blog.vinkvin.com/page/4/index.html">
 <meta property="og:site_name" content="唯客微博客">
 <meta property="og:description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Vinx">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://blog.vinkvin.com/archives/page/3/">
+<link rel="canonical" href="https://blog.vinkvin.com/page/4/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : false,
+    isHome : true,
     isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | 唯客微博客</title>
+  <title>唯客微博客</title>
   
 
 
@@ -158,234 +158,104 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x01-Some-markup-macros-in-the-kernel-__init-etc.html">
 
-  
-  
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        
-        <span class="collection-header">还行! 目前共计 31 篇日志。 继续努力。</span>
-      </div>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Linux-driver-development-notes/0x01-Some-markup-macros-in-the-kernel-__init-etc.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x01) - 内核中的一些标记宏__init等</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-08 14:59:12" itemprop="dateCreated datePublished" datetime="2018-11-08T14:59:12+08:00">2018-11-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-08 16:21:32" itemprop="dateModified" datetime="2022-11-08T16:21:32+08:00">2022-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2018</span>
+          <p>﻿&gt; 以下内容摘自<a target="_blank" rel="noopener" href="https://blog.csdn.net/lanmanck/article/details/4718378">内核初始化优化宏 ,初始化顺序， __init，__devexit等</a>, 本文仅作为笔记保存。</p>
+<p>内核使用了大量不同的宏来标记具有不同作用的函数和数据结构。如宏__init 、__devinit 等。这些宏在include&#x2F;linux&#x2F;init.h 头文件中定义。编译器通过这些宏可以把代码优化放到合适的内存位置，以减少内存占用和提高内核效率。</p>
+<p>下面是一些常用的宏：</p>
+<h2 id="init"><a href="#init" class="headerlink" title="__init"></a>__init</h2><p>标记内核启动时使用的初始化代码，内核启动完成后不再需要。以此标记的代码位于.init.text 内存区域。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Linux-driver-development-notes/0x01-Some-markup-macros-in-the-kernel-__init-etc.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-11-12T15:09:57+08:00"
-              content="2018-11-12">
-          11-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Linux-driver-development-notes/0x0B-kref.html" itemprop="url">
-            <span itemprop="name">Linux驱动开发杂记(0x0B) - 内核计数</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-11-12T14:38:20+08:00"
-              content="2018-11-12">
-          11-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Linux-driver-development-notes/0x0A-errno.html" itemprop="url">
-            <span itemprop="name">Linux驱动开发杂记(0x0A) - errno含义</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-11-12T13:35:12+08:00"
-              content="2018-11-12">
-          11-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Linux-driver-development-notes/0x09-likely-and-unlikely.html" itemprop="url">
-            <span itemprop="name">Linux驱动开发杂记(0x09) - likely()与unlikely()</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-11-12T10:12:12+08:00"
-              content="2018-11-12">
-          11-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Linux-driver-development-notes/0x08-IO-memory.html" itemprop="url">
-            <span itemprop="name">Linux驱动开发杂记(0x08) - I/O内存</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-11-12T10:06:31+08:00"
-              content="2018-11-12">
-          11-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Linux-driver-development-notes/0x07-IO-port.html" itemprop="url">
-            <span itemprop="name">Linux驱动开发杂记(0x07) - I/O端口</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-11-09T16:59:27+08:00"
-              content="2018-11-09">
-          11-09
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Linux-driver-development-notes/0x06-Memory-allocation-in-the-kernel.html" itemprop="url">
-            <span itemprop="name">Linux驱动开发杂记(0x06) - 内核中的内存分配</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-11-08T17:10:12+08:00"
-              content="2018-11-08">
-          11-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Linux-driver-development-notes/0x05-Get-bus-slot-function-number-from-pci_dev.html" itemprop="url">
-            <span itemprop="name">Linux驱动开发杂记(0x05) - 从pci_dev中获取总线、插槽、功能号</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-11-08T17:05:18+08:00"
-              content="2018-11-08">
-          11-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Linux-driver-development-notes/0x04-pci_device_id-structure.html" itemprop="url">
-            <span itemprop="name">Linux驱动开发杂记(0x04) - pci_device_id结构体</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-11-08T16:56:20+08:00"
-              content="2018-11-08">
-          11-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Linux-driver-development-notes/0x03-pci_bus-structure.html" itemprop="url">
-            <span itemprop="name">Linux驱动开发杂记(0x03) - pci_bus结构体</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-11-08T16:32:43+08:00"
-              content="2018-11-08">
-          11-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Linux-driver-development-notes/0x02-pci_dev-structure.html" itemprop="url">
-            <span itemprop="name">Linux驱动开发杂记(0x02) - pci_dev结构体</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-
+    
+    
+    
+	
+	<div>
+        
     </div>
-  </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
   
   
   
+
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
   </nav>
 
 
