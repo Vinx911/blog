@@ -27,14 +27,14 @@
 <meta property="og:site_name" content="唯客微博客">
 <meta property="og:description" content="Icon加载资源图片显示黑色Painter： 12&#x2F;&#x2F;获取图片资源，R.drawable.xx或者R.mipmap.xxIcon(painter &#x3D; painterResource(id &#x3D; R.mipmap.head_icon), null)  效果如图：">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://blog.vinkvin.com/548a85e3dc764c498a948f83680ca471.png">
-<meta property="og:image" content="https://blog.vinkvin.com/b801a3f852ce44f49c2d1deb3be1383f.png">
+<meta property="og:image" content="https://blog.vinkvin.com/Jetpack-Compose/Icon-Load-the-resource-image-show-black/548a85e3dc764c498a948f83680ca471.png">
+<meta property="og:image" content="https://blog.vinkvin.com/Jetpack-Compose/Icon-Load-the-resource-image-show-black/b801a3f852ce44f49c2d1deb3be1383f.png">
 <meta property="article:published_time" content="2022-12-29T09:20:57.000Z">
 <meta property="article:modified_time" content="2022-12-29T10:25:21.559Z">
 <meta property="article:author" content="Vinx">
 <meta property="article:tag" content="Icon">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://blog.vinkvin.com/548a85e3dc764c498a948f83680ca471.png">
+<meta name="twitter:image" content="https://blog.vinkvin.com/Jetpack-Compose/Icon-Load-the-resource-image-show-black/548a85e3dc764c498a948f83680ca471.png">
 
 <link rel="canonical" href="https://blog.vinkvin.com/Jetpack-Compose/Icon-Load-the-resource-image-show-black.html">
 
@@ -222,12 +222,12 @@
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取图片资源，R.drawable.xx或者R.mipmap.xx</span></span><br><span class="line">Icon(painter = painterResource(id = R.mipmap.head_icon), <span class="literal">null</span>)</span><br></pre></td></tr></table></figure>
 
 <p>效果如图：</p>
-<p><img src="/./548a85e3dc764c498a948f83680ca471.png" alt="img"></p>
+<p><img src="/Jetpack-Compose/Icon-Load-the-resource-image-show-black/548a85e3dc764c498a948f83680ca471.png" alt="img"></p>
 <p>Icon加载资源图片显示黑色没有加载出图片？别慌，因为默认的tint模式是AmbientContentColor.current，我们需要去掉它默认的着色模式，所以需要将tint的属性设置为Color.Unspecified</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取图片资源，R.drawable.xx或者R.mipmap.xx</span></span><br><span class="line">Icon(painter = painterResource(id = R.mipmap.head_icon), <span class="literal">null</span>, tint = Color.Unspecified)</span><br></pre></td></tr></table></figure>
 
 <p>此时图片的显示效果就正常了</p>
-<p><img src="/./b801a3f852ce44f49c2d1deb3be1383f.png" alt="img"></p>
+<p><img src="/Jetpack-Compose/Icon-Load-the-resource-image-show-black/b801a3f852ce44f49c2d1deb3be1383f.png" alt="img"></p>
 
     </div>
 
