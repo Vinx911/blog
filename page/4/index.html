@@ -164,6 +164,530 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x08-IO-memory.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Linux-driver-development-notes/0x08-IO-memory.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x08) - I/O内存</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-12 10:12:12" itemprop="dateCreated datePublished" datetime="2018-11-12T10:12:12+08:00">2018-11-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-08 16:20:39" itemprop="dateModified" datetime="2022-11-08T16:20:39+08:00">2022-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>﻿　　尽管 I&#x2F;O 端口在x86世界中非常流行，但是用来和设备通讯的主要机制是通过内存映射的寄存器和设备内存，两者都称为I&#x2F;O 内存，因为寄存器和内存之间的区别对软件是透明的。<br>　　I&#x2F;O 内存仅仅是一个类似于RAM 的区域，处理器通过总线访问该区域，以实现对设备的访问。同样，读写这个区域是有边际效应。<br>　　根据计算机体系和总线不同，I&#x2F;O 内存可分为可以或者不可以通过页表来存取。若通过页表存取，内核必须先重新编排物理地址，使其对驱动程序可见，这就意味着在进行任何I&#x2F;O操作之前，你必须调用ioremap；如果不需要页表，I&#x2F;O内存区域就类似于I&#x2F;O端口，你可以直接使用适当的I&#x2F;O函数读写它们。<br>　　由于边际效应的缘故，不管是否需要 ioremap，都不鼓励直接使用I&#x2F;O内存指针，而应使用专门的I&#x2F;O内存操作函数。这些I&#x2F;O内存操作函数不仅在所有平台上是安全，而且对直接使用指针操作 I&#x2F;O 内存的情况进行了优化。</p>
+<h2 id="1-申请I-x2F-O-内存："><a href="#1-申请I-x2F-O-内存：" class="headerlink" title="1 申请I&#x2F;O 内存："></a>1 申请I&#x2F;O 内存：</h2><p>　　I&#x2F;O 内存区在使用前必须先分配。分配内存区的函数接口在&lt;linux&#x2F;ioport.h&gt;定义中：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* request_mem_region分配一个开始于start,len字节的I/O内存区。分配成功，返回一个非NULL指针；</span></span><br><span class="line"><span class="comment">否则返回NULL。系统当前所有I/O内存分配信息都在/proc/iomem文件中列出，你分配失败时，可以看看该文件，</span></span><br><span class="line"><span class="comment">看谁先占用了该内存区 */</span></span><br><span class="line"><span class="keyword">struct</span> resource *<span class="title function_">request_mem_region</span><span class="params">(<span class="type">unsigned</span> <span class="type">long</span> start, <span class="type">unsigned</span> <span class="type">long</span> len, <span class="type">char</span> *name)</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="2-映射："><a href="#2-映射：" class="headerlink" title="2 映射："></a>2 映射：</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Linux-driver-development-notes/0x08-IO-memory.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x07-IO-port.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Linux-driver-development-notes/0x07-IO-port.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x07) - I/O端口</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-12 10:06:31" itemprop="dateCreated datePublished" datetime="2018-11-12T10:06:31+08:00">2018-11-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-08 16:20:45" itemprop="dateModified" datetime="2022-11-08T16:20:45+08:00">2022-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>﻿## 1 申请I&#x2F;O 端⼝：<br>在驱动还没独占设备之前，不应对端⼝进⾏操作。内核提供了⼀个注册接⼝，以允许驱动声明其需要的端⼝：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* request_region告诉内核：要使⽤first开始的n个端⼝。参数name为设备名。</span></span><br><span class="line"><span class="comment">如果分配成功返回值是⾮NULL；否则无法使用需要的端口(/proc/ioports包含了系统当前所有端口的分配信息，</span></span><br><span class="line"><span class="comment">若request_region分配失败时，可以查看该文件，看谁先用了你要的端口) */</span></span><br><span class="line"><span class="keyword">struct</span> resource *<span class="title function_">request_region</span><span class="params">(<span class="type">unsigned</span> <span class="type">long</span> first, <span class="type">unsigned</span> <span class="type">long</span> n, <span class="type">const</span> <span class="type">char</span> *name)</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="2-访问IO端⼝："><a href="#2-访问IO端⼝：" class="headerlink" title="2 访问IO端⼝："></a>2 访问IO端⼝：</h2><p>在驱动成功请求到I&#x2F;O 端⼝后，就可以读写这些端⼝了。⼤部分硬件会将8位、16位和32位端⼝区分开，⽆法像访问内存那样混淆使⽤。驱动程序必须调⽤不同的函数来访问不同⼤⼩的端⼝。<br>Linux 内核头⽂件(体系依赖的头⽂件&lt;asm&#x2F;io.h&gt;) 定义了下列内联函数来存取I&#x2F;O端⼝:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* inb/outb:读/写字节端⼝(8位宽)。有些体系将port参数定义为unsigned long；</span></span><br><span class="line"><span class="comment">⽽有些平台则将它定义为unsigned short。inb的返回类型也是依赖体系的 */</span></span><br><span class="line"><span class="type">unsigned</span> <span class="title function_">inb</span><span class="params">(<span class="type">unsigned</span> port)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">outb</span><span class="params">(<span class="type">unsigned</span> <span class="type">char</span> byte, <span class="type">unsigned</span> port)</span>;</span><br><span class="line"><span class="comment">/* inw/outw:读/写字端⼝(16位宽） */</span></span><br><span class="line"><span class="type">unsigned</span> <span class="title function_">inw</span><span class="params">(<span class="type">unsigned</span> port)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">outw</span><span class="params">(<span class="type">unsigned</span> <span class="type">short</span> word, <span class="type">unsigned</span> port)</span>;</span><br><span class="line"><span class="comment">/* inl/outl:读/写32位端⼝。longword也是依赖体系的，有的体系为unsigned long；⽽有的为unsigned int */</span></span><br><span class="line"><span class="type">unsigned</span> <span class="title function_">inl</span><span class="params">(<span class="type">unsigned</span> port)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">outl</span><span class="params">(<span class="type">unsigned</span> longword, <span class="type">unsigned</span> port)</span>;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Linux-driver-development-notes/0x07-IO-port.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x06-Memory-allocation-in-the-kernel.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Linux-driver-development-notes/0x06-Memory-allocation-in-the-kernel.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x06) - 内核中的内存分配</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-09 16:59:27" itemprop="dateCreated datePublished" datetime="2018-11-09T16:59:27+08:00">2018-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-08 16:20:52" itemprop="dateModified" datetime="2022-11-08T16:20:52+08:00">2022-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>﻿一般我们会用到 kmalloc()、kzalloc()、vmalloc() 等，下面我们介绍一下这些函数的使用以及它们之间的区别。</p>
+<h2 id="kmalloc"><a href="#kmalloc" class="headerlink" title="kmalloc()"></a>kmalloc()</h2><p>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *<span class="title function_">kmalloc</span><span class="params">(<span class="type">size_t</span> size, <span class="type">gfp_t</span> flags)</span>；</span><br></pre></td></tr></table></figure>
+<p>kmalloc() 申请的内存位于物理内存映射区域，而且在物理上也是连续的，它们与真实的物理地址只有一个固定的偏移，因为存在较简单的转换关系，所以对申请的内存大小有限制，不能超过128KB。 　　<br>较常用的 flags（分配内存的方法）：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Linux-driver-development-notes/0x06-Memory-allocation-in-the-kernel.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x05-Get-bus-slot-function-number-from-pci_dev.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Linux-driver-development-notes/0x05-Get-bus-slot-function-number-from-pci_dev.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x05) - 从pci_dev中获取总线、插槽、功能号</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-08 17:10:12" itemprop="dateCreated datePublished" datetime="2018-11-08T17:10:12+08:00">2018-11-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-08 16:20:59" itemprop="dateModified" datetime="2022-11-08T16:20:59+08:00">2022-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * The PCI interface treats multi-function devices as independent</span></span><br><span class="line"><span class="comment"> * devices.  The slot/function address of each device is encoded</span></span><br><span class="line"><span class="comment"> * in a single byte as follows:</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *	7:3 = slot</span></span><br><span class="line"><span class="comment"> *	2:0 = function</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="meta">#<span class="keyword">define</span> PCI_DEVFN(slot, func)	((((slot) &amp; 0x1f) &lt;&lt; 3) | ((func) &amp; 0x07))</span></span><br><span class="line"> <span class="meta">#<span class="keyword">define</span> PCI_SLOT(devfn)		(((devfn) &gt;&gt; 3) &amp; 0x1f)</span></span><br><span class="line"> <span class="meta">#<span class="keyword">define</span> PCI_FUNC(devfn)		((devfn) &amp; 0x07)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pci_dev</span> *<span class="title">dev</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">BusNumber</span>    =</span> dev-&gt;bus-&gt;number;</span><br><span class="line">SlotNumber   = PCI_SLOT(dev-&gt;devfn);</span><br><span class="line">FuncNumber = PCI_FUNC(dev-&gt;devfn);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x04-pci_device_id-structure.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Linux-driver-development-notes/0x04-pci_device_id-structure.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x04) - pci_device_id结构体</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-08 17:05:18" itemprop="dateCreated datePublished" datetime="2018-11-08T17:05:18+08:00">2018-11-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-08 16:21:06" itemprop="dateModified" datetime="2022-11-08T16:21:06+08:00">2022-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pci_device_id</span> &#123;</span></span><br><span class="line">	__u32 vendor, device;		<span class="comment">/* 厂商和设备ID，Vendor and device ID or PCI_ANY_ID*/</span></span><br><span class="line">	__u32 subvendor, subdevice;	<span class="comment">/* 子系统和设备ID，Subsystem ID&#x27;s or PCI_ANY_ID */</span></span><br><span class="line">	__u32 <span class="class"><span class="keyword">class</span>, <span class="title">class_mask</span>;</span>	<span class="comment">/* 类、子类、prog-if三元组，(class,subclass,prog-if) triplet */</span></span><br><span class="line">	<span class="type">kernel_ulong_t</span> driver_data;	<span class="comment">/* 驱动私有数据，Data private to the driver */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>pci_device_id 用MODULE_DEVICE_TABLE宏导出到用户空间。</p>
+
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x03-pci_bus-structure.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Linux-driver-development-notes/0x03-pci_bus-structure.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x03) - pci_bus结构体</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-08 16:56:20" itemprop="dateCreated datePublished" datetime="2018-11-08T16:56:20+08:00">2018-11-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-08 16:21:13" itemprop="dateModified" datetime="2022-11-08T16:21:13+08:00">2022-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pci_bus</span> &#123;</span></span><br><span class="line">	<span class="comment">/* 链表元素node：对于PCI根总线而言，其pci_bus结构通过node成员链接到本节一开始所述的根总线链表中，根总线链表</span></span><br><span class="line"><span class="comment">	的表头由一个list_head类型的全局变量pci_root_buses所描述。而对于非根pci总线，其pci_bus结构通过node成员链接</span></span><br><span class="line"><span class="comment">	到其父总线的子总线链表children中*/</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">node</span>;</span></span><br><span class="line">	<span class="comment">/*parent指针：指向该pci总线的父总线，即pci桥所在的那条总线*/</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">pci_bus</span> *<span class="title">parent</span>;</span></span><br><span class="line">	<span class="comment">/*children指针：描述了这条PCI总线的子总线链表的表头。这条PCI总线的所有子总线都通过上述的node链表元素链接成一</span></span><br><span class="line"><span class="comment">	条子总线链表，而该链表的表头就由父总线的children指针所描述*/</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">children</span>;</span></span><br><span class="line">	<span class="comment">/* list of devices on this bus */</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">devices</span>;</span></span><br><span class="line">	<span class="comment">/* devices链表头：描述了这条PCI总线的逻辑设备链表的表头。除了链接在全局PCI设备链表中之外，每一个PCI逻辑设备也</span></span><br><span class="line"><span class="comment">	通过其 pci_dev结构中的bus_list成员链入其所在PCI总线的局部设备链表中，而这个局部的总线设备链表的表头就由</span></span><br><span class="line"><span class="comment">	pci_bus结构中的 devices成员所描述*/</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">pci_dev</span> *<span class="title">self</span>;</span></span><br><span class="line">	<span class="comment">/* 资源指针数组：指向应路由到这条pci总线的地址空间资源，通常是指向对应桥设备的pci_dev结构中的资源数组resource［10：7］*/</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">resource</span> *<span class="title">resource</span>[<span class="title">PCI_BUS_NUM_RESOURCES</span>];</span></span><br><span class="line">	<span class="comment">/* 指针ops：指向一个pci_ops结构，表示这条pci总线所使用的配置空间访问函数*/</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">pci_ops</span> *<span class="title">ops</span>;</span></span><br><span class="line">	<span class="comment">/* 无类型指针sysdata：指向系统特定的扩展数据*/</span></span><br><span class="line">	<span class="type">void</span> *sysdata;</span><br><span class="line">	<span class="comment">/* 指针procdir：指向该PCI总线在／proc文件系统中对应的目录项*/</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">proc_dir_entry</span> *<span class="title">procdir</span>;</span></span><br><span class="line">	<span class="comment">/* number：这条PCI总线的总线编号（bus number），取值范围0－255 */</span></span><br><span class="line">	 <span class="type">unsigned</span> <span class="type">char</span> number;</span><br><span class="line">	<span class="comment">/* primary：表示引出这条PCI总线的“桥设备的主总线”（也即桥设备所在的PCI总线）编号，取值范围0－255*/</span></span><br><span class="line">	<span class="type">unsigned</span> <span class="type">char</span> primary;<span class="comment">/* secondary：表示引出这条PCI总线的桥设备的次总线号，因此secondary成员总是等于number成员的值。取值范围0－255*/</span></span><br><span class="line">	<span class="type">unsigned</span> <span class="type">char</span> secondary;</span><br><span class="line">	<span class="comment">/* subordinate：这条PCI总线的下属PCI总线（Subordinate pci bus）的总线编号最大值，它应该等于引出这条PCI总线的桥设备的subordinate值*/</span></span><br><span class="line">	<span class="type">unsigned</span> <span class="type">char</span> subordinate;</span><br><span class="line">	<span class="comment">/* name［48］：这条PCI总线的名字字符串*/</span></span><br><span class="line">	<span class="type">char</span> name[<span class="number">48</span>];</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">short</span>  bridge_ctl;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">short</span>  pad2;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">device</span> *<span class="title">bridge</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">device</span> <span class="title">class_dev</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">bin_attribute</span> *<span class="title">legacy_io</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">bin_attribute</span> *<span class="title">legacy_mem</span>;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x02-pci_dev-structure.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -407,7 +931,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -420,7 +944,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

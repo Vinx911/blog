@@ -20,17 +20,20 @@
     var CONFIG = {"hostname":"blog.vinkvin.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="唯客微博客">
-<meta property="og:url" content="https://blog.vinkvin.com/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/index.html">
+  <meta name="description" content="Modifier 对齐（Alignment）1234567891011&#x2F;&#x2F; 用于Boxfun Modifier.align(alignment: Alignment)&#x2F;&#x2F; 用于Rowfun Modifier.align(alignment: Alignment.Vertical)fun Modifier.alignByBaseline() &#x2F;&#x2F; 基线对齐fun Modifier.alignBy(a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Modifier 对齐（Alignment）">
+<meta property="og:url" content="https://blog.vinkvin.com/Jetpack%20Compose/Modifier%20%E5%AF%B9%E9%BD%90%EF%BC%88Alignment%EF%BC%89.html">
 <meta property="og:site_name" content="唯客微博客">
-<meta property="og:description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+<meta property="og:description" content="Modifier 对齐（Alignment）1234567891011&#x2F;&#x2F; 用于Boxfun Modifier.align(alignment: Alignment)&#x2F;&#x2F; 用于Rowfun Modifier.align(alignment: Alignment.Vertical)fun Modifier.alignByBaseline() &#x2F;&#x2F; 基线对齐fun Modifier.alignBy(a">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-30T04:12:39.000Z">
+<meta property="article:modified_time" content="2022-12-30T06:51:37.610Z">
 <meta property="article:author" content="Vinx">
+<meta property="article:tag" content="Draggable">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://blog.vinkvin.com/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/">
+<link rel="canonical" href="https://blog.vinkvin.com/Jetpack%20Compose/Modifier%20%E5%AF%B9%E9%BD%90%EF%BC%88Alignment%EF%BC%89.html">
 
 
 <script id="page-configurations">
@@ -38,12 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>分类: Linux驱动开发杂记 | 唯客微博客</title>
+  <title>Modifier 对齐（Alignment） | 唯客微博客</title>
   
 
 
@@ -158,238 +161,129 @@
         <div class="content-wrap">
           
 
-          <div class="content category">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">Linux驱动开发杂记
-          <small>分类</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Jetpack%20Compose/Modifier%20%E5%AF%B9%E9%BD%90%EF%BC%88Alignment%EF%BC%89.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Modifier 对齐（Alignment）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-30 12:12:39 / 修改时间：14:51:37" itemprop="dateCreated datePublished" datetime="2022-12-30T12:12:39+08:00">2022-12-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2019</span>
-    </div>
+        <h1 id="Modifier-对齐（Alignment）"><a href="#Modifier-对齐（Alignment）" class="headerlink" title="Modifier 对齐（Alignment）"></a>Modifier 对齐（Alignment）</h1><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用于Box</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">align</span><span class="params">(alignment: <span class="type">Alignment</span>)</span></span></span><br><span class="line"><span class="comment">// 用于Row</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">align</span><span class="params">(alignment: <span class="type">Alignment</span>.<span class="type">Vertical</span>)</span></span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">alignByBaseline</span><span class="params">()</span></span> <span class="comment">// 基线对齐</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">alignBy</span><span class="params">(alignmentLine: <span class="type">HorizontalAlignmentLine</span>)</span></span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">alignBy</span><span class="params">(alignmentLineBlock: (<span class="type">Measured</span>) -&gt; <span class="type">Int</span>)</span></span></span><br><span class="line"><span class="comment">// 用于Column</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">align</span><span class="params">(alignment: <span class="type">Alignment</span>.<span class="type">Horizontal</span>)</span></span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">alignBy</span><span class="params">(alignmentLine: <span class="type">VerticalAlignmentLine</span>)</span></span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">alignBy</span><span class="params">(alignmentLineBlock: (<span class="type">Measured</span>) -&gt; <span class="type">Int</span>)</span></span></span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-06-27T21:29:10+08:00"
-              content="2019-06-27">
-          06-27
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Linux-driver-development-notes/0x1B-Implementation-of-kernel-linked-list-data-structure.html" itemprop="url">
-            <span itemprop="name">Linux驱动开发杂记(0x1B) - 内核链表数据结构的实现</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-06-27T13:40:18+08:00"
-              content="2019-06-27">
-          06-27
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Linux-driver-development-notes/0x1A-Atomic-operations-in-the-kernel.html" itemprop="url">
-            <span itemprop="name">Linux驱动开发杂记(0x1A) - 内核中的原子操作</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-06-27T12:00:32+08:00"
-              content="2019-06-27">
-          06-27
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Linux-driver-development-notes/0x19-Reference-counter-kref-in-the-kernel.html" itemprop="url">
-            <span itemprop="name">Linux驱动开发杂记(0x19) - 内核中的引用计数器kref</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-02-19T09:59:02+08:00"
-              content="2019-02-19">
-          02-19
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Linux-driver-development-notes/0x18-Changes-in-the-versions-of-the-kernel-tty-interface-(2)-tty_driver.h.html" itemprop="url">
-            <span itemprop="name">Linux驱动开发杂记(0x18) - 内核tty接口各版本的变化(二)之tty_driver.h</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-02-19T09:10:41+08:00"
-              content="2019-02-19">
-          02-19
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Linux-driver-development-notes/0x17-Changes-in-the-versions-of-the-kernel-tty-interface-(1)-tty_flip.h.html" itemprop="url">
-            <span itemprop="name">Linux驱动开发杂记(0x17) - 内核tty接口各版本的变化(一)之tty_flip.h</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-02-18T15:39:03+08:00"
-              content="2019-02-18">
-          02-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Linux-driver-development-notes/0x16-Changes-in-kernel-version-interface-versions.html" itemprop="url">
-            <span itemprop="name">Linux驱动开发杂记(0x16) - 内核定时器接口各版本的变化</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-01-04T11:48:10+08:00"
-              content="2019-01-04">
-          01-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Linux-driver-development-notes/0x15-tasklet.html" itemprop="url">
-            <span itemprop="name">Linux驱动开发杂记(0x15) - tasklet</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-    <div class="collection-year">
-      <span class="collection-header">2018</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-12-07T09:37:30+08:00"
-              content="2018-12-07">
-          12-07
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Linux-driver-development-notes/0x14-ring-buffer-circ-buf.html" itemprop="url">
-            <span itemprop="name">Linux驱动开发杂记(0x14) - 环形缓冲区circ_buf</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-11-22T15:13:17+08:00"
-              content="2018-11-22">
-          11-22
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Linux-driver-development-notes/0x13-Serial-UART-Driver-API.html" itemprop="url">
-            <span itemprop="name">Linux驱动开发杂记(0x13) - 串口UART驱动API</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-11-22T15:09:30+08:00"
-              content="2018-11-22">
-          11-22
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/Linux-driver-development-notes/0x12-uart_ops-structure.html" itemprop="url">
-            <span itemprop="name">Linux驱动开发杂记(0x12) - uart_ops结构体</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
+<ul>
+<li>Alignment.Start</li>
+<li>Alignment.End</li>
+<li>Alignment.CenterHorizontally</li>
+<li>Alignment.Top</li>
+<li>Alignment.Bottom</li>
+<li>Alignment.CenterVertically</li>
+<li>Alignment.TopCenter</li>
+<li>Alignment.TopStart</li>
+<li>Alignment.TopEnd</li>
+<li>Alignment.Center</li>
+<li>Alignment.CenterStart</li>
+<li>Alignment.CenterEnd</li>
+<li>Alignment.BottomCenter</li>
+<li>Alignment.BottomStart</li>
+<li>Alignment.BottomEnd</li>
+</ul>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+	
+	<div>
+        
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+    </div>
+    
+    <div>
+      
+        
+
+      
+    </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Draggable/" rel="tag"># Draggable</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Jetpack%20Compose/Modifier%20%E6%BB%91%E5%8A%A8%EF%BC%88Swipeable%EF%BC%89.html" rel="prev" title="滑动（Swipeable）">
+      <i class="fa fa-chevron-left"></i> 滑动（Swipeable）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Jetpack%20Compose/Modifier%20%E5%BC%80%E5%85%B3%EF%BC%88Toggleable%EF%BC%89.html" rel="next" title="Modifier 开关（Toggleable）">
+      Modifier 开关（Toggleable） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/page/2/">2</a><a class="page-number" href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/page/3/">3</a><a class="extend next" rel="next" href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
+  
+  
 
 
 
@@ -441,6 +335,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Modifier-%E5%AF%B9%E9%BD%90%EF%BC%88Alignment%EF%BC%89"><span class="nav-text">Modifier 对齐（Alignment）</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
