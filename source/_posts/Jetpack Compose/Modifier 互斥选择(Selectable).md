@@ -3,8 +3,7 @@ title: Modifier 互斥选择(Selectable)
 date: 2022-12-30 12:12:39
 tags: Selectable
 categories:  Jetpack Compose
-copyright: false
-
+copyright: true
 ---
 
 # Modifier 互斥选择(Selectable)

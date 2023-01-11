@@ -3,8 +3,7 @@ title: Modifier 拖动(Draggable)
 date: 2022-12-30 12:12:39
 tags: Draggable
 categories:  Jetpack Compose
-copyright: false
-
+copyright: true
 ---
 
 # Modifier 拖动(Draggable)

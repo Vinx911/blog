@@ -3,7 +3,7 @@ title: Modifier 滑动(Swipeable)
 date: 2022-12-30 12:12:39
 tags: Swipeable
 categories:  Jetpack Compose
-copyright: false
+copyright: true
 ---
 
 # Modifier 滑动(Swipeable)
