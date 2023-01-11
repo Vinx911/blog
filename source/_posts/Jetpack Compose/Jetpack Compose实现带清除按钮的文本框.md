@@ -1,3 +1,11 @@
+---
+title: Jetpack Compose实现带清除按钮的文本框
+date: 2023-01-11 10:24:54
+tags: TextField
+categories: Jetpack Compose
+copyright: false
+---
+
 # Jetpack Compose实现带清除按钮的文本框
 
 使用`trailingIcon`参数可在尾部添加一个自定义图标，并实现点击功能。
