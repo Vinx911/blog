@@ -1,13 +1,12 @@
 ---
-title: 滑动（Swipeable）
+title: Modifier 滑动(Swipeable)
 date: 2022-12-30 12:12:39
-tags: Draggable
+tags: Swipeable
 categories:  Jetpack Compose
 copyright: false
-
 ---
 
-# 滑动（Swipeable）
+# Modifier 滑动(Swipeable)
 
 `swipeable` 修饰符允许开发者通过锚点设置从而实现组件呈现吸附效果的动画，常用于开关等动画，也可用于下拉刷新等特殊效果的实现。
 

@@ -1,5 +1,5 @@
 ---
-title: Modifier 拖动（Draggable）
+title: Modifier 拖动(Draggable)
 date: 2022-12-30 12:12:39
 tags: Draggable
 categories:  Jetpack Compose
@@ -7,7 +7,7 @@ copyright: false
 
 ---
 
-# Modifier 拖动（Draggable）
+# Modifier 拖动(Draggable)
 
 `draggable` 修饰符允许开发者监听UI组件的拖动手势偏移量，通过偏移量从而可以定制UI动画效果。
 

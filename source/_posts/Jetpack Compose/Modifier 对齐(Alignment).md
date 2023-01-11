@@ -1,13 +1,13 @@
 ---
-title: Modifier 对齐（Alignment）
+title: Modifier 对齐(Alignment)
 date: 2022-12-30 12:12:39
-tags: Draggable
+tags: Alignment
 categories:  Jetpack Compose
 copyright: false
 
 ---
 
-# Modifier 对齐（Alignment）
+# Modifier 对齐(Alignment)
 
 ```kotlin
 // 用于Box

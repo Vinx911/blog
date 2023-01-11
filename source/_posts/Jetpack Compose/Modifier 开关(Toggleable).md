@@ -1,13 +1,13 @@
 ---
-title: Modifier 开关（Toggleable）
+title: Modifier 开关(Toggleable)
 date: 2022-12-30 12:12:39
-tags: Draggable
+tags: Toggleable
 categories:  Jetpack Compose
 copyright: false
 
 ---
 
-# Modifier 开关（Toggleable）
+# Modifier 开关(Toggleable)
 
 `toggleable` 修饰符非常适合用来做开关效果
 

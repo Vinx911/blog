@@ -1,13 +1,13 @@
 ---
-title: Modifier 互斥选择（Selectable）
+title: Modifier 互斥选择(Selectable)
 date: 2022-12-30 12:12:39
-tags: Draggable
+tags: Selectable
 categories:  Jetpack Compose
 copyright: false
 
 ---
 
-# Modifier 互斥选择（Selectable）
+# Modifier 互斥选择(Selectable)
 
 `selectableGroup` 使用此修饰符将Tabs 或 RadioButtons 等项目列表组合在一起。
 

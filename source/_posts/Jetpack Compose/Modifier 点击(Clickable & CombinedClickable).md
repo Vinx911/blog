@@ -1,12 +1,12 @@
 ---
-title: Modifier 点击（Clickable & CombinedClickable）
+title: Modifier 点击(Clickable & CombinedClickable)
 date: 2022-12-30 11:43:52
 tags: Clickable
 categories:  Jetpack Compose
 copyright: false
 ---
 
-# Modifier 点击（Clickable & CombinedClickable）
+# Modifier 点击(Clickable & CombinedClickable)
 
 ## 1. Clickable 点击
 
