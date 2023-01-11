@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.vinkvin.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Jetpack Compose组件-文本(Text)基础文本(BasicText)12345678910111213141516171819202122232425262728@Composablefun BasicText(    &#x2F;&#x2F; 要显示的文本    text: AnnotatedString,    &#x2F;&#x2F; 修饰符    modifier: Modifier &#x3D; Modifier,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jetpack Compose组件-文本(Text)">
+<meta property="og:url" content="https://blog.vinkvin.com/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E6%96%87%E6%9C%AC(Text).html">
+<meta property="og:site_name" content="唯客微博客">
+<meta property="og:description" content="Jetpack Compose组件-文本(Text)基础文本(BasicText)12345678910111213141516171819202122232425262728@Composablefun BasicText(    &#x2F;&#x2F; 要显示的文本    text: AnnotatedString,    &#x2F;&#x2F; 修饰符    modifier: Modifier &#x3D; Modifier,">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-11T02:24:54.000Z">
+<meta property="article:modified_time" content="2023-01-11T02:39:10.390Z">
+<meta property="article:author" content="Vinx">
+<meta property="article:tag" content="Text">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://blog.vinkvin.com/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E6%96%87%E6%9C%AC(Text).html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Jetpack Compose组件-文本(Text) | 唯客微博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a target="_blank" rel="noopener" href="https://github.com/Vinx911" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">唯客微博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">专注于计算机，嵌入式领域的技术</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E6%96%87%E6%9C%AC(Text).html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Jetpack Compose组件-文本(Text)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-01-11 10:24:54 / 修改时间：10:39:10" itemprop="dateCreated datePublished" datetime="2023-01-11T10:24:54+08:00">2023-01-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Jetpack-Compose组件-文本-Text"><a href="#Jetpack-Compose组件-文本-Text" class="headerlink" title="Jetpack Compose组件-文本(Text)"></a>Jetpack Compose组件-文本(Text)</h1><h2 id="基础文本-BasicText"><a href="#基础文本-BasicText" class="headerlink" title="基础文本(BasicText)"></a>基础文本(BasicText)</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">BasicText</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 要显示的文本</span></span></span></span><br><span class="line"><span class="params"><span class="function">    text: <span class="type">AnnotatedString</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 修饰符</span></span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 文本的样式配置，如颜色、字体、行高等</span></span></span></span><br><span class="line"><span class="params"><span class="function">    style: <span class="type">TextStyle</span> = TextStyle.Default,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 计算新文本布局时执行的回调</span></span></span></span><br><span class="line"><span class="params"><span class="function">    onTextLayout: (<span class="type">TextLayoutResult</span>) -&gt; <span class="type">Unit</span> = &#123;&#125;,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 溢出</span></span></span></span><br><span class="line"><span class="params"><span class="function">    overflow: <span class="type">TextOverflow</span> = TextOverflow.Clip,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 软换行</span></span></span></span><br><span class="line"><span class="params"><span class="function">    softWrap: <span class="type">Boolean</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 最大行数</span></span></span></span><br><span class="line"><span class="params"><span class="function">    maxLines: <span class="type">Int</span> = <span class="built_in">Int</span>.MAX_VALUE,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 最小行数, 1.4新增</span></span></span></span><br><span class="line"><span class="params"><span class="function">    minLines: <span class="type">Int</span> = <span class="number">1</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 可替换文本特定范围的可组合项</span></span></span></span><br><span class="line"><span class="params"><span class="function">    inlineContent: <span class="type">Map</span>&lt;<span class="type">String</span>, InlineTextContent&gt; = mapOf()</span></span></span><br><span class="line">): <span class="built_in">Unit</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">BasicText</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 要显示的文本</span></span></span></span><br><span class="line"><span class="params"><span class="function">    text: <span class="type">String</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 其他参数同上 ...................</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="文本-Text"><a href="#文本-Text" class="headerlink" title="文本(Text)"></a>文本(Text)</h2><p>Text是基于BasicText遵循 Material Design 准则的文本，</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">Text</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 要显示的文本</span></span></span></span><br><span class="line"><span class="params"><span class="function">    text: <span class="type">AnnotatedString</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 修饰符</span></span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 文本颜色</span></span></span></span><br><span class="line"><span class="params"><span class="function">    color: <span class="type">Color</span> = Color.Unspecified,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 字体大小</span></span></span></span><br><span class="line"><span class="params"><span class="function">    fontSize: <span class="type">TextUnit</span> = TextUnit.Unspecified,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 字体样式</span></span></span></span><br><span class="line"><span class="params"><span class="function">    fontStyle: <span class="type">FontStyle</span>? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 字体粗细</span></span></span></span><br><span class="line"><span class="params"><span class="function">    fontWeight: <span class="type">FontWeight</span>? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 字体</span></span></span></span><br><span class="line"><span class="params"><span class="function">    fontFamily: <span class="type">FontFamily</span>? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 文字之间的空白</span></span></span></span><br><span class="line"><span class="params"><span class="function">    letterSpacing: <span class="type">TextUnit</span> = TextUnit.Unspecified,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 文本上绘制的删除线/下划线</span></span></span></span><br><span class="line"><span class="params"><span class="function">    textDecoration: <span class="type">TextDecoration</span>? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 文本对齐</span></span></span></span><br><span class="line"><span class="params"><span class="function">    textAlign: <span class="type">TextAlign</span>? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 行高</span></span></span></span><br><span class="line"><span class="params"><span class="function">    lineHeight: <span class="type">TextUnit</span> = TextUnit.Unspecified,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 溢出</span></span></span></span><br><span class="line"><span class="params"><span class="function">    overflow: <span class="type">TextOverflow</span> = TextOverflow.Clip,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 软换行</span></span></span></span><br><span class="line"><span class="params"><span class="function">    softWrap: <span class="type">Boolean</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 最大行数</span></span></span></span><br><span class="line"><span class="params"><span class="function">    maxLines: <span class="type">Int</span> = <span class="built_in">Int</span>.MAX_VALUE,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 最小行数, 1.4新增</span></span></span></span><br><span class="line"><span class="params"><span class="function">    minLines: <span class="type">Int</span> = <span class="number">1</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    inlineContent: <span class="type">Map</span>&lt;<span class="type">String</span>, InlineTextContent&gt; = mapOf()</span></span>,</span><br><span class="line">    <span class="comment">// 计算新文本布局时执行的回调</span></span><br><span class="line">    onTextLayout: (TextLayoutResult) -&gt; <span class="built_in">Unit</span> = &#123;&#125;,</span><br><span class="line">    <span class="comment">// 文本的样式配置，如颜色、字体、行高等</span></span><br><span class="line">    style: TextStyle = LocalTextStyle.current</span><br><span class="line">): <span class="built_in">Unit</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">Text</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 要显示的文本</span></span></span></span><br><span class="line"><span class="params"><span class="function">    text: <span class="type">String</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 其他参数同上 ...................</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="可点击文本-ClickableText"><a href="#可点击文本-ClickableText" class="headerlink" title="可点击文本(ClickableText)"></a>可点击文本(ClickableText)</h2><p><code>onClick</code>回调的<code>offset</code>参数为被点击文字的位置，可通过<code>offset</code>获取对应的AnnotatedString，然后执行下一步操作。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">ClickableText</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 要显示的文本</span></span></span></span><br><span class="line"><span class="params"><span class="function">    text: <span class="type">AnnotatedString</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 修饰符</span></span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 文本的样式配置，如颜色、字体、行高等</span></span></span></span><br><span class="line"><span class="params"><span class="function">    style: <span class="type">TextStyle</span> = TextStyle.Default,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 软换行</span></span></span></span><br><span class="line"><span class="params"><span class="function">    softWrap: <span class="type">Boolean</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 溢出</span></span></span></span><br><span class="line"><span class="params"><span class="function">    overflow: <span class="type">TextOverflow</span> = TextOverflow.Clip,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 最大行数</span></span></span></span><br><span class="line"><span class="params"><span class="function">    maxLines: <span class="type">Int</span> = <span class="built_in">Int</span>.MAX_VALUE,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 计算新文本布局时执行的回调</span></span></span></span><br><span class="line"><span class="params"><span class="function">    onTextLayout: (<span class="type">TextLayoutResult</span>) -&gt; <span class="type">Unit</span> = &#123;&#125;,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 点击回调</span></span></span></span><br><span class="line"><span class="params"><span class="function">    onClick: (<span class="type">Int</span>) -&gt; <span class="type">Unit</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="可选择文本-SelectionContainer"><a href="#可选择文本-SelectionContainer" class="headerlink" title="可选择文本(SelectionContainer)"></a>可选择文本(SelectionContainer)</h2><p>使用<code>SelectionContainer</code>包裹文本，可使文本可选中。如想排除部分文本，使用<code>DisableSelection</code>包裹。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">SelectionContainer &#123;</span><br><span class="line">    Column &#123;</span><br><span class="line">        Text(<span class="string">&quot;This text is selectable&quot;</span>)</span><br><span class="line">        Text(<span class="string">&quot;This one too&quot;</span>)</span><br><span class="line">        Text(<span class="string">&quot;This one as well&quot;</span>)</span><br><span class="line">        DisableSelection &#123;</span><br><span class="line">            Text(<span class="string">&quot;But not this one&quot;</span>)</span><br><span class="line">            Text(<span class="string">&quot;Neither this one&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        Text(<span class="string">&quot;But again, you can select this one&quot;</span>)</span><br><span class="line">        Text(<span class="string">&quot;And this one too&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+    </div>
+    
+    <div>
+      
+        
+
+      
+    </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Text/" rel="tag"># Text</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%B8%83%E5%B1%80(Box.Column.Row).html" rel="prev" title="Jetpack Compose组件-布局(Box.Column.Row)">
+      <i class="fa fa-chevron-left"></i> Jetpack Compose组件-布局(Box.Column.Row)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E6%96%87%E6%9C%AC%E5%9F%9F(TextField).html" rel="next" title="Jetpack Compose组件-文本域(TextField)">
+      Jetpack Compose组件-文本域(TextField) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Jetpack-Compose%E7%BB%84%E4%BB%B6-%E6%96%87%E6%9C%AC-Text"><span class="nav-text">Jetpack Compose组件-文本(Text)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%96%87%E6%9C%AC-BasicText"><span class="nav-text">基础文本(BasicText)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%9C%AC-Text"><span class="nav-text">文本(Text)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E7%82%B9%E5%87%BB%E6%96%87%E6%9C%AC-ClickableText"><span class="nav-text">可点击文本(ClickableText)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E9%80%89%E6%8B%A9%E6%96%87%E6%9C%AC-SelectionContainer"><span class="nav-text">可选择文本(SelectionContainer)</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Vinx"
+      src="/images/vinx.jpg">
+  <p class="site-author-name" itemprop="name">Vinx</p>
+  <div class="site-description" itemprop="description">本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Vinx911" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Vinx911" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u011471873" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u011471873" rel="noopener" target="_blank"><i class="fa fa-crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:buddyhe911@163.com" title="E-Mail → mailto:buddyhe911@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vinx</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
