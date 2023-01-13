@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.vinkvin.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Jetpack Compose组件-图形(Canvas)图形(Canvas)Canvas需要指定大小尺寸，使用Modifier.size指定精确大小或者使用Modifier.fillMaxSize指定相对于父项的大小。 123456@Composablefun Canvas(modifier: Modifier, onDraw: DrawScope.() -&gt; Unit): Unit@Exp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jetpack Compose组件-图形(Canvas)">
+<meta property="og:url" content="https://blog.vinkvin.com/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%9B%BE%E5%BD%A2(Canvas).html">
+<meta property="og:site_name" content="唯客微博客">
+<meta property="og:description" content="Jetpack Compose组件-图形(Canvas)图形(Canvas)Canvas需要指定大小尺寸，使用Modifier.size指定精确大小或者使用Modifier.fillMaxSize指定相对于父项的大小。 123456@Composablefun Canvas(modifier: Modifier, onDraw: DrawScope.() -&gt; Unit): Unit@Exp">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-12T04:52:25.000Z">
+<meta property="article:modified_time" content="2023-01-12T08:55:43.052Z">
+<meta property="article:author" content="Vinx">
+<meta property="article:tag" content="Canvas">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://blog.vinkvin.com/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%9B%BE%E5%BD%A2(Canvas).html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Jetpack Compose组件-图形(Canvas) | 唯客微博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a target="_blank" rel="noopener" href="https://github.com/Vinx911" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">唯客微博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">专注于计算机，嵌入式领域的技术</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%9B%BE%E5%BD%A2(Canvas).html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Jetpack Compose组件-图形(Canvas)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-01-12 12:52:25 / 修改时间：16:55:43" itemprop="dateCreated datePublished" datetime="2023-01-12T12:52:25+08:00">2023-01-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Jetpack-Compose组件-图形-Canvas"><a href="#Jetpack-Compose组件-图形-Canvas" class="headerlink" title="Jetpack Compose组件-图形(Canvas)"></a>Jetpack Compose组件-图形(Canvas)</h1><h2 id="图形-Canvas"><a href="#图形-Canvas" class="headerlink" title="图形(Canvas)"></a>图形(Canvas)</h2><p><code>Canvas</code>需要指定大小尺寸，使用<code>Modifier.size</code>指定精确大小或者使用<code>Modifier.fillMaxSize</code>指定相对于父项的大小。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">Canvas</span><span class="params">(modifier: <span class="type">Modifier</span>, onDraw: <span class="type">DrawScope</span>.() -&gt; <span class="type">Unit</span>)</span></span>: <span class="built_in">Unit</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@ExperimentalFoundationApi</span></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">Canvas</span><span class="params">(modifier: <span class="type">Modifier</span>, contentDescription: <span class="type">String</span>, onDraw: <span class="type">DrawScope</span>.() -&gt; <span class="type">Unit</span>)</span></span>: <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Canvas(modifier = Modifier.size(<span class="number">100.</span>dp)) &#123;</span><br><span class="line">    drawRect(Color.Magenta)</span><br><span class="line">    inset(<span class="number">10.0f</span>) &#123;</span><br><span class="line">        drawLine(</span><br><span class="line">            color = Color.Red,</span><br><span class="line">            start = Offset.Zero,</span><br><span class="line">            end = Offset(size.width, size.height),</span><br><span class="line">            strokeWidth = <span class="number">5.0f</span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="DrawScope"><a href="#DrawScope" class="headerlink" title="DrawScope"></a>DrawScope</h2><h3 id="画点-drawPoints"><a href="#画点-drawPoints" class="headerlink" title="画点(drawPoints)"></a>画点(drawPoints)</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">drawPoints</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 点列表</span></span></span></span><br><span class="line"><span class="params"><span class="function">    points: <span class="type">List</span>&lt;<span class="type">Offset</span>&gt;,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 点模式，Points(画点), Lines(每两个点画一条线，奇数个点忽略最后一个), Polygon(将点的整个序列画成一条直线)</span></span></span></span><br><span class="line"><span class="params"><span class="function">    pointMode: <span class="type">PointMode</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 颜色/画刷</span></span></span></span><br><span class="line"><span class="params"><span class="function">    color: <span class="type">Color</span>, <span class="comment">// brush: Brush,</span></span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 笔划宽度</span></span></span></span><br><span class="line"><span class="params"><span class="function">    strokeWidth: <span class="type">Float</span> = Stroke.HairlineWidth,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 线段末端的处理, Butt(没有延伸), Round(半圆延伸), Square(半方形延伸)</span></span></span></span><br><span class="line"><span class="params"><span class="function">    cap: <span class="type">StrokeCap</span> = StrokeCap.Butt,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 可选效果或模式</span></span></span></span><br><span class="line"><span class="params"><span class="function">    pathEffect: <span class="type">PathEffect</span>? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 透明度</span></span></span></span><br><span class="line"><span class="params"><span class="function">    alpha: <span class="type">Float</span> = <span class="number">1.0</span>f,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 颜色过滤</span></span></span></span><br><span class="line"><span class="params"><span class="function">    colorFilter: <span class="type">ColorFilter</span>? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 路径的混合算法</span></span></span></span><br><span class="line"><span class="params"><span class="function">    blendMode: <span class="type">BlendMode</span> = DefaultBlendMode</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="画线-drawLine"><a href="#画线-drawLine" class="headerlink" title="画线(drawLine)"></a>画线(drawLine)</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">drawLine</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 颜色/画刷</span></span></span></span><br><span class="line"><span class="params"><span class="function">    color: <span class="type">Color</span>, <span class="comment">// brush: Brush,</span></span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 起始点</span></span></span></span><br><span class="line"><span class="params"><span class="function">    start: <span class="type">Offset</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 结束点</span></span></span></span><br><span class="line"><span class="params"><span class="function">    end: <span class="type">Offset</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 笔划宽度</span></span></span></span><br><span class="line"><span class="params"><span class="function">    strokeWidth: <span class="type">Float</span> = Stroke.HairlineWidth,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 线段末端的处理, Butt(没有延伸), Round(半圆延伸), Square(半方形延伸)</span></span></span></span><br><span class="line"><span class="params"><span class="function">    cap: <span class="type">StrokeCap</span> = Stroke.DefaultCap,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 可选效果或模式，Android 10 以下dashPathEffect不起作用</span></span></span></span><br><span class="line"><span class="params"><span class="function">    pathEffect: <span class="type">PathEffect</span>? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 透明度</span></span></span></span><br><span class="line"><span class="params"><span class="function">    alpha: <span class="type">Float</span> = <span class="number">1.0</span>f,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 颜色过滤</span></span></span></span><br><span class="line"><span class="params"><span class="function">    colorFilter: <span class="type">ColorFilter</span>? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 路径的混合算法</span></span></span></span><br><span class="line"><span class="params"><span class="function">    blendMode: <span class="type">BlendMode</span> = DefaultBlendMode</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="画路径-drawPath"><a href="#画路径-drawPath" class="headerlink" title="画路径(drawPath)"></a>画路径(drawPath)</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">drawPath</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 路径</span></span></span></span><br><span class="line"><span class="params"><span class="function">    path: <span class="type">Path</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 颜色/画刷</span></span></span></span><br><span class="line"><span class="params"><span class="function">    color: <span class="type">Color</span>, <span class="comment">// brush: Brush,</span></span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 透明度</span></span></span></span><br><span class="line"><span class="params"><span class="function">    alpha: <span class="type">Float</span> = <span class="number">1.0</span>f,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 路径是否被描边或填充</span></span></span></span><br><span class="line"><span class="params"><span class="function">    style: <span class="type">DrawStyle</span> = Fill,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 颜色过滤</span></span></span></span><br><span class="line"><span class="params"><span class="function">    colorFilter: <span class="type">ColorFilter</span>? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 路径的混合算法</span></span></span></span><br><span class="line"><span class="params"><span class="function">    blendMode: <span class="type">BlendMode</span> = DefaultBlendMode</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="绘制矩形-drawRect"><a href="#绘制矩形-drawRect" class="headerlink" title="绘制矩形(drawRect)"></a>绘制矩形(drawRect)</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">drawRect</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 颜色/画刷</span></span></span></span><br><span class="line"><span class="params"><span class="function">    color: <span class="type">Color</span>, <span class="comment">// brush: Brush,</span></span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 左上角坐标</span></span></span></span><br><span class="line"><span class="params"><span class="function">    topLeft: <span class="type">Offset</span> = Offset.Zero,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 尺寸</span></span></span></span><br><span class="line"><span class="params"><span class="function">    size: <span class="type">Size</span> = this.size.offsetSize(topLeft)</span></span>,</span><br><span class="line">    <span class="comment">// 透明度</span></span><br><span class="line">    alpha: <span class="built_in">Float</span> = <span class="number">1.0f</span>,</span><br><span class="line">    <span class="comment">// 路径是否被描边或填充</span></span><br><span class="line">    style: DrawStyle = Fill,</span><br><span class="line">    <span class="comment">// 颜色过滤</span></span><br><span class="line">    colorFilter: ColorFilter? = <span class="literal">null</span>,</span><br><span class="line">    <span class="comment">// 路径的混合算法</span></span><br><span class="line">    blendMode: BlendMode = DefaultBlendMode</span><br><span class="line">): <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="绘制圆角矩形-drawRoundRect"><a href="#绘制圆角矩形-drawRoundRect" class="headerlink" title="绘制圆角矩形(drawRoundRect)"></a>绘制圆角矩形(drawRoundRect)</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">drawRoundRect</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 颜色/画刷</span></span></span></span><br><span class="line"><span class="params"><span class="function">    color: <span class="type">Color</span>, <span class="comment">// brush: Brush,</span></span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 左上角坐标</span></span></span></span><br><span class="line"><span class="params"><span class="function">    topLeft: <span class="type">Offset</span> = Offset.Zero,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 尺寸</span></span></span></span><br><span class="line"><span class="params"><span class="function">    size: <span class="type">Size</span> = this.size.offsetSize(topLeft)</span></span>,</span><br><span class="line">    <span class="comment">// 圆角半径</span></span><br><span class="line">    cornerRadius: CornerRadius = CornerRadius.Zero,</span><br><span class="line">    <span class="comment">// 透明度</span></span><br><span class="line">    alpha: <span class="built_in">Float</span> = <span class="number">1.0f</span>,</span><br><span class="line">    <span class="comment">// 路径是否被描边或填充</span></span><br><span class="line">    style: DrawStyle = Fill,</span><br><span class="line">    <span class="comment">// 颜色过滤</span></span><br><span class="line">    colorFilter: ColorFilter? = <span class="literal">null</span>,</span><br><span class="line">    <span class="comment">// 路径的混合算法</span></span><br><span class="line">    blendMode: BlendMode = DefaultBlendMode</span><br><span class="line">): <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="画圆-drawCircle"><a href="#画圆-drawCircle" class="headerlink" title="画圆(drawCircle)"></a>画圆(drawCircle)</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">drawCircle</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 颜色/画刷</span></span></span></span><br><span class="line"><span class="params"><span class="function">    color: <span class="type">Color</span>, <span class="comment">// brush: Brush,</span></span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 半径</span></span></span></span><br><span class="line"><span class="params"><span class="function">    radius: <span class="type">Float</span> = size.minDimension / <span class="number">2.0</span>f,、</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 中心点</span></span></span></span><br><span class="line"><span class="params"><span class="function">    center: <span class="type">Offset</span> = this.center,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 透明度</span></span></span></span><br><span class="line"><span class="params"><span class="function">    alpha: <span class="type">Float</span> = <span class="number">1.0</span>f,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 路径是否被描边或填充</span></span></span></span><br><span class="line"><span class="params"><span class="function">    style: <span class="type">DrawStyle</span> = Fill,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 颜色过滤</span></span></span></span><br><span class="line"><span class="params"><span class="function">    colorFilter: <span class="type">ColorFilter</span>? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 路径的混合算法</span></span></span></span><br><span class="line"><span class="params"><span class="function">    blendMode: <span class="type">BlendMode</span> = DefaultBlendMode</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="画椭圆-drawOval"><a href="#画椭圆-drawOval" class="headerlink" title="画椭圆(drawOval)"></a>画椭圆(drawOval)</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">drawOval</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 颜色/画刷</span></span></span></span><br><span class="line"><span class="params"><span class="function">    color: <span class="type">Color</span>, <span class="comment">// brush: Brush,</span></span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 左上角坐标</span></span></span></span><br><span class="line"><span class="params"><span class="function">    topLeft: <span class="type">Offset</span> = Offset.Zero,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 尺寸</span></span></span></span><br><span class="line"><span class="params"><span class="function">    size: <span class="type">Size</span> = this.size.offsetSize(topLeft)</span></span>,</span><br><span class="line">    <span class="comment">// 透明度</span></span><br><span class="line">    alpha: <span class="built_in">Float</span> = <span class="number">1.0f</span>,</span><br><span class="line">    <span class="comment">// 路径是否被描边或填充</span></span><br><span class="line">    style: DrawStyle = Fill,</span><br><span class="line">    <span class="comment">// 颜色过滤</span></span><br><span class="line">    colorFilter: ColorFilter? = <span class="literal">null</span>,</span><br><span class="line">    <span class="comment">// 路径的混合算法</span></span><br><span class="line">    blendMode: BlendMode = DefaultBlendMode</span><br><span class="line">): <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="画弧线-drawArc"><a href="#画弧线-drawArc" class="headerlink" title="画弧线(drawArc)"></a>画弧线(drawArc)</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">drawArc</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 颜色/画刷</span></span></span></span><br><span class="line"><span class="params"><span class="function">    color: <span class="type">Color</span>, <span class="comment">// brush: Brush,</span></span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 起始角度</span></span></span></span><br><span class="line"><span class="params"><span class="function">    startAngle: <span class="type">Float</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 顺时针方向，弧线角度大小</span></span></span></span><br><span class="line"><span class="params"><span class="function">    sweepAngle: <span class="type">Float</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// true包含中心点为扇形</span></span></span></span><br><span class="line"><span class="params"><span class="function">    useCenter: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 左上角坐标</span></span></span></span><br><span class="line"><span class="params"><span class="function">    topLeft: <span class="type">Offset</span> = Offset.Zero,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 尺寸</span></span></span></span><br><span class="line"><span class="params"><span class="function">    size: <span class="type">Size</span> = this.size.offsetSize(topLeft)</span></span>,</span><br><span class="line">    <span class="comment">// 透明度</span></span><br><span class="line">    alpha: <span class="built_in">Float</span> = <span class="number">1.0f</span>,</span><br><span class="line">    <span class="comment">// 路径是否被描边或填充</span></span><br><span class="line">    style: DrawStyle = Fill,</span><br><span class="line">    <span class="comment">// 颜色过滤</span></span><br><span class="line">    colorFilter: ColorFilter? = <span class="literal">null</span>,</span><br><span class="line">    <span class="comment">// 路径的混合算法</span></span><br><span class="line">    blendMode: BlendMode = DefaultBlendMode</span><br><span class="line">): <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="画图像-drawImage"><a href="#画图像-drawImage" class="headerlink" title="画图像(drawImage)"></a>画图像(drawImage)</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">drawImage</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 图像</span></span></span></span><br><span class="line"><span class="params"><span class="function">    image: <span class="type">ImageBitmap</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 左上角坐标</span></span></span></span><br><span class="line"><span class="params"><span class="function">    topLeft: <span class="type">Offset</span> = Offset.Zero,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 透明度</span></span></span></span><br><span class="line"><span class="params"><span class="function">    alpha: <span class="type">Float</span> = <span class="number">1.0</span>f,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 路径是否被描边或填充</span></span></span></span><br><span class="line"><span class="params"><span class="function">    style: <span class="type">DrawStyle</span> = Fill,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 颜色过滤</span></span></span></span><br><span class="line"><span class="params"><span class="function">    colorFilter: <span class="type">ColorFilter</span>? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 路径的混合算法</span></span></span></span><br><span class="line"><span class="params"><span class="function">    blendMode: <span class="type">BlendMode</span> = DefaultBlendMode</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">open</span> <span class="function"><span class="keyword">fun</span> <span class="title">drawImage</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 图像</span></span></span></span><br><span class="line"><span class="params"><span class="function">    image: <span class="type">ImageBitmap</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 源图像位置偏移</span></span></span></span><br><span class="line"><span class="params"><span class="function">    srcOffset: <span class="type">IntOffset</span> = IntOffset.Zero,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 源图像大小</span></span></span></span><br><span class="line"><span class="params"><span class="function">    srcSize: <span class="type">IntSize</span> = IntSize(image.width, image.height)</span></span>,</span><br><span class="line">    <span class="comment">// 目标位置偏移</span></span><br><span class="line">    dstOffset: IntOffset = IntOffset.Zero,</span><br><span class="line">    <span class="comment">// 目标大小</span></span><br><span class="line">    dstSize: IntSize = srcSize,</span><br><span class="line">    <span class="comment">// 透明度</span></span><br><span class="line">    alpha: <span class="built_in">Float</span> = <span class="number">1.0f</span>,</span><br><span class="line">    <span class="comment">// 路径是否被描边或填充</span></span><br><span class="line">    style: DrawStyle = Fill,</span><br><span class="line">    <span class="comment">// 颜色过滤</span></span><br><span class="line">    colorFilter: ColorFilter? = <span class="literal">null</span>,</span><br><span class="line">    <span class="comment">// 路径的混合算法</span></span><br><span class="line">    blendMode: BlendMode = DefaultBlendMode,</span><br><span class="line">    <span class="comment">// 缩放并绘制到目标时采样算法</span></span><br><span class="line">    filterQuality: FilterQuality = DefaultFilterQuality</span><br><span class="line">): <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="画文本-drawText"><a href="#画文本-drawText" class="headerlink" title="画文本(drawText)"></a>画文本(drawText)</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ExperimentalTextApi</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> DrawScope.<span class="title">drawText</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 测量和放置文本</span></span></span></span><br><span class="line"><span class="params"><span class="function">    textMeasurer: <span class="type">TextMeasurer</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 要绘制的文本</span></span></span></span><br><span class="line"><span class="params"><span class="function">    text: <span class="type">AnnotatedString</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 左上角坐标</span></span></span></span><br><span class="line"><span class="params"><span class="function">    topLeft: <span class="type">Offset</span> = Offset.Zero,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 文本样式</span></span></span></span><br><span class="line"><span class="params"><span class="function">    style: <span class="type">TextStyle</span> = TextStyle.Default,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 溢出</span></span></span></span><br><span class="line"><span class="params"><span class="function">    overflow: <span class="type">TextOverflow</span> = TextOverflow.Clip,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 软换行</span></span></span></span><br><span class="line"><span class="params"><span class="function">    softWrap: <span class="type">Boolean</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 最大行数</span></span></span></span><br><span class="line"><span class="params"><span class="function">    maxLines: <span class="type">Int</span> = <span class="built_in">Int</span>.MAX_VALUE,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 占位符</span></span></span></span><br><span class="line"><span class="params"><span class="function">    placeholders: <span class="type">List</span>&lt;<span class="type">AnnotatedString</span>.<span class="type">Range</span>&lt;<span class="type">Placeholder</span>&gt;&gt; = emptyList()</span></span>,</span><br><span class="line">    <span class="comment">// 尺寸</span></span><br><span class="line">    size: Size = Size.Unspecified</span><br><span class="line">): <span class="built_in">Unit</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@ExperimentalTextApi</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> DrawScope.<span class="title">drawText</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 测量和放置文本</span></span></span></span><br><span class="line"><span class="params"><span class="function">    textMeasurer: <span class="type">TextMeasurer</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 要绘制的文本</span></span></span></span><br><span class="line"><span class="params"><span class="function">    text: <span class="type">String</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 左上角坐标</span></span></span></span><br><span class="line"><span class="params"><span class="function">    topLeft: <span class="type">Offset</span> = Offset.Zero,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 文本样式</span></span></span></span><br><span class="line"><span class="params"><span class="function">    style: <span class="type">TextStyle</span> = TextStyle.Default,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 溢出</span></span></span></span><br><span class="line"><span class="params"><span class="function">    overflow: <span class="type">TextOverflow</span> = TextOverflow.Clip,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 软换行</span></span></span></span><br><span class="line"><span class="params"><span class="function">    softWrap: <span class="type">Boolean</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 最大行数</span></span></span></span><br><span class="line"><span class="params"><span class="function">    maxLines: <span class="type">Int</span> = <span class="built_in">Int</span>.MAX_VALUE,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 尺寸</span></span></span></span><br><span class="line"><span class="params"><span class="function">    size: <span class="type">Size</span> = Size.Unspecified</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@ExperimentalTextApi</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> DrawScope.<span class="title">drawText</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 要绘制的文本布局</span></span></span></span><br><span class="line"><span class="params"><span class="function">    textLayoutResult: <span class="type">TextLayoutResult</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 颜色/画刷</span></span></span></span><br><span class="line"><span class="params"><span class="function">    color: <span class="type">Color</span>, <span class="comment">// brush: Brush,</span></span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 左上角坐标</span></span></span></span><br><span class="line"><span class="params"><span class="function">    topLeft: <span class="type">Offset</span> = Offset.Zero,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 透明度</span></span></span></span><br><span class="line"><span class="params"><span class="function">    alpha: <span class="type">Float</span> = <span class="built_in">Float</span>.NaN,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 文本的阴影效果</span></span></span></span><br><span class="line"><span class="params"><span class="function">    shadow: <span class="type">Shadow</span>? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 下划线或删除线</span></span></span></span><br><span class="line"><span class="params"><span class="function">    textDecoration: <span class="type">TextDecoration</span>? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 文本是否被描边或填充</span></span></span></span><br><span class="line"><span class="params"><span class="function">    drawStyle: <span class="type">DrawStyle</span>? = <span class="literal">null</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="画轮廓-drawOutline"><a href="#画轮廓-drawOutline" class="headerlink" title="画轮廓(drawOutline)"></a>画轮廓(drawOutline)</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> DrawScope.<span class="title">drawOutline</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 要绘制的轮廓</span></span></span></span><br><span class="line"><span class="params"><span class="function">    outline: <span class="type">Outline</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 颜色/画刷</span></span></span></span><br><span class="line"><span class="params"><span class="function">    color: <span class="type">Color</span>, <span class="comment">// brush: Brush,</span></span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 透明度</span></span></span></span><br><span class="line"><span class="params"><span class="function">    alpha: <span class="type">Float</span> = <span class="number">1.0</span>f,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 轮廓是描边还是填充</span></span></span></span><br><span class="line"><span class="params"><span class="function">    style: <span class="type">DrawStyle</span> = Fill,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 颜色过滤</span></span></span></span><br><span class="line"><span class="params"><span class="function">    colorFilter: <span class="type">ColorFilter</span>? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 路径的混合算法</span></span></span></span><br><span class="line"><span class="params"><span class="function">    blendMode: <span class="type">BlendMode</span> = DefaultBlendMode</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 中心点</span><br><span class="line">open val center: Offset</span><br><span class="line">// 绘制上下文</span><br><span class="line">val drawContext: DrawContext</span><br><span class="line">// 布局方向</span><br><span class="line">val layoutDirection: LayoutDirection</span><br><span class="line">// 尺寸</span><br><span class="line">open val size: Size</span><br></pre></td></tr></table></figure>
+
+<h3 id="drawIntoCanvas-在Canvas中绘制"><a href="#drawIntoCanvas-在Canvas中绘制" class="headerlink" title="drawIntoCanvas(在Canvas中绘制)"></a>drawIntoCanvas(在Canvas中绘制)</h3><p>提供直接使用底层<code>Canvas</code>. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> DrawScope.<span class="title">drawIntoCanvas</span><span class="params">(block: (<span class="type">Canvas</span>) -&gt; <span class="type">Unit</span>)</span></span>: <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="clipPath-剪辑路径"><a href="#clipPath-剪辑路径" class="headerlink" title="clipPath(剪辑路径)"></a>clipPath(剪辑路径)</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> DrawScope.<span class="title">clipPath</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 路径</span></span></span></span><br><span class="line"><span class="params"><span class="function">    path: <span class="type">Path</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// Difference: 从现有区域中减去新区域, Intersect: 将新区域与现有区域相交</span></span></span></span><br><span class="line"><span class="params"><span class="function">    clipOp: <span class="type">ClipOp</span> = ClipOp.Intersect,</span></span></span><br><span class="line"><span class="params"><span class="function">    block: <span class="type">DrawScope</span>.() -&gt; <span class="type">Unit</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="clipRect-剪辑矩形"><a href="#clipRect-剪辑矩形" class="headerlink" title="clipRect(剪辑矩形)"></a>clipRect(剪辑矩形)</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> DrawScope.<span class="title">clipRect</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 左侧</span></span></span></span><br><span class="line"><span class="params"><span class="function">    left: <span class="type">Float</span> = <span class="number">0.0</span>f,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 上方</span></span></span></span><br><span class="line"><span class="params"><span class="function">    top: <span class="type">Float</span> = <span class="number">0.0</span>f,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 右侧</span></span></span></span><br><span class="line"><span class="params"><span class="function">    right: <span class="type">Float</span> = size.width,    </span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 下方</span></span></span></span><br><span class="line"><span class="params"><span class="function">    bottom: <span class="type">Float</span> = size.height,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// Difference: 从现有区域中减去新区域, Intersect: 将新区域与现有区域相交</span></span></span></span><br><span class="line"><span class="params"><span class="function">    clipOp: <span class="type">ClipOp</span> = ClipOp.Intersect,</span></span></span><br><span class="line"><span class="params"><span class="function">    block: <span class="type">DrawScope</span>.() -&gt; <span class="type">Unit</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="rotate-旋转"><a href="#rotate-旋转" class="headerlink" title="rotate(旋转)"></a>rotate(旋转)</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 按照角度旋转</span></span><br><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> DrawScope.<span class="title">rotate</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 顺时针旋转角度</span></span></span></span><br><span class="line"><span class="params"><span class="function">    degrees: <span class="type">Float</span>, </span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 枢轴点的坐标，默认为坐标空间的中心</span></span></span></span><br><span class="line"><span class="params"><span class="function">    pivot: <span class="type">Offset</span> = center, </span></span></span><br><span class="line"><span class="params"><span class="function">    block: <span class="type">DrawScope</span>.() -&gt; <span class="type">Unit</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br><span class="line"><span class="comment">// 按照弧度旋转</span></span><br><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> DrawScope.<span class="title">rotateRad</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 顺时针旋转弧度</span></span></span></span><br><span class="line"><span class="params"><span class="function">    radians: <span class="type">Float</span>, </span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 枢轴点的坐标，默认为坐标空间的中心</span></span></span></span><br><span class="line"><span class="params"><span class="function">    pivot: <span class="type">Offset</span> = center, </span></span></span><br><span class="line"><span class="params"><span class="function">    block: <span class="type">DrawScope</span>.() -&gt; <span class="type">Unit</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="scale-缩放"><a href="#scale-缩放" class="headerlink" title="scale(缩放)"></a>scale(缩放)</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> DrawScope.<span class="title">scale</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// X方向缩放比例</span></span></span></span><br><span class="line"><span class="params"><span class="function">    scaleX: <span class="type">Float</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// Y方向缩放比例</span></span></span></span><br><span class="line"><span class="params"><span class="function">    scaleY: <span class="type">Float</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 缩放中心点</span></span></span></span><br><span class="line"><span class="params"><span class="function">    pivot: <span class="type">Offset</span> = center,</span></span></span><br><span class="line"><span class="params"><span class="function">    block: <span class="type">DrawScope</span>.() -&gt; <span class="type">Unit</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> DrawScope.<span class="title">scale</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// X/Y方向缩放比例</span></span></span></span><br><span class="line"><span class="params"><span class="function">    scale: <span class="type">Float</span>, </span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 缩放中心点</span></span></span></span><br><span class="line"><span class="params"><span class="function">    pivot: <span class="type">Offset</span> = center, </span></span></span><br><span class="line"><span class="params"><span class="function">    block: <span class="type">DrawScope</span>.() -&gt; <span class="type">Unit</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="inset-调整边界"><a href="#inset-调整边界" class="headerlink" title="inset(调整边界)"></a>inset(调整边界)</h3><p>可以使用 <em>DrawScope</em>.<em>inset</em>() 函数来调整当前作用域的默认参数，以更改绘图边界并相应地转换绘图</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> DrawScope.<span class="title">inset</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 插入左边界的像素数</span></span></span></span><br><span class="line"><span class="params"><span class="function">    left: <span class="type">Float</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 插入上边界的像素数</span></span></span></span><br><span class="line"><span class="params"><span class="function">    top: <span class="type">Float</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 插入右边界的像素数</span></span></span></span><br><span class="line"><span class="params"><span class="function">    right: <span class="type">Float</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 插入下边界的像素数</span></span></span></span><br><span class="line"><span class="params"><span class="function">    bottom: <span class="type">Float</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    block: <span class="type">DrawScope</span>.() -&gt; <span class="type">Unit</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> DrawScope.<span class="title">inset</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 插入左、上、右和下边界的像素数</span></span></span></span><br><span class="line"><span class="params"><span class="function">    inset: <span class="type">Float</span>, </span></span></span><br><span class="line"><span class="params"><span class="function">    block: <span class="type">DrawScope</span>.() -&gt; <span class="type">Unit</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> DrawScope.<span class="title">inset</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 插入水平方向的像素数</span></span></span></span><br><span class="line"><span class="params"><span class="function">    horizontal: <span class="type">Float</span> = <span class="number">0.0</span>f,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 插入垂直方向的像素数</span></span></span></span><br><span class="line"><span class="params"><span class="function">    vertical: <span class="type">Float</span> = <span class="number">0.0</span>f,</span></span></span><br><span class="line"><span class="params"><span class="function">    block: <span class="type">DrawScope</span>.() -&gt; <span class="type">Unit</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="translate-平移坐标"><a href="#translate-平移坐标" class="headerlink" title="translate(平移坐标)"></a>translate(平移坐标)</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> DrawScope.<span class="title">translate</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    left: <span class="type">Float</span> = <span class="number">0.0</span>f, </span></span></span><br><span class="line"><span class="params"><span class="function">    top: <span class="type">Float</span> = <span class="number">0.0</span>f, </span></span></span><br><span class="line"><span class="params"><span class="function">    block: <span class="type">DrawScope</span>.() -&gt; <span class="type">Unit</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="withTransform-组合转换"><a href="#withTransform-组合转换" class="headerlink" title="withTransform(组合转换)"></a>withTransform(组合转换)</h4><p>如果同时想要有平移跟旋转的效果，可以使用withTransform。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> DrawScope.<span class="title">withTransform</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    transformBlock: <span class="type">DrawTransform</span>.() -&gt; <span class="type">Unit</span>, </span></span></span><br><span class="line"><span class="params"><span class="function">    drawBlock: <span class="type">DrawScope</span>.() -&gt; <span class="type">Unit</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Canvas(modifier = Modifier.fillMaxSize())&#123;</span><br><span class="line">    <span class="keyword">val</span> canvasSize = size</span><br><span class="line">    <span class="keyword">val</span> canvasWidth = size.width</span><br><span class="line">    <span class="keyword">val</span> canvasHeight = size.height</span><br><span class="line"></span><br><span class="line">    withTransform(&#123;</span><br><span class="line">        translate(left = canvasWidth/<span class="number">5F</span>)</span><br><span class="line">        rotate(degrees=<span class="number">45F</span>)</span><br><span class="line">    &#125;) &#123;</span><br><span class="line">        drawRect(</span><br><span class="line">            color = Color.Gray,</span><br><span class="line">            topLeft = Offset(x = canvasWidth / <span class="number">3F</span>, y = canvasHeight / <span class="number">3F</span>),</span><br><span class="line">            size = canvasSize / <span class="number">3F</span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+    </div>
+    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%9B%BE%E5%BD%A2(Canvas).html">Jetpack Compose组件-图形(Canvas)</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Vinx 的个人博客">Vinx</a></p>
+  <p><span>发布时间:</span>2023年01月12日 - 12:52</p>
+  <p><span>最后更新:</span>2023年01月12日 - 16:55</p>
+  <p><span>原始链接:</span><a href="/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%9B%BE%E5%BD%A2(Canvas).html" title="Jetpack Compose组件-图形(Canvas)">https://blog.vinkvin.com/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%9B%BE%E5%BD%A2(Canvas).html</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://blog.vinkvin.com/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%9B%BE%E5%BD%A2(Canvas).html"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fab fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+
+      
+    </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Canvas/" rel="tag"># Canvas</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%9B%BE%E7%89%87(Image).html" rel="prev" title="Jetpack Compose组件-图片(Image)">
+      <i class="fa fa-chevron-left"></i> Jetpack Compose组件-图片(Image)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Jetpack%20Compose/Jetpack%20Compose%20%E7%A6%81%E7%94%A8%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F.html" rel="next" title="Jetpack Compose 禁用硬件加速">
+      Jetpack Compose 禁用硬件加速 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Jetpack-Compose%E7%BB%84%E4%BB%B6-%E5%9B%BE%E5%BD%A2-Canvas"><span class="nav-text">Jetpack Compose组件-图形(Canvas)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%BD%A2-Canvas"><span class="nav-text">图形(Canvas)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DrawScope"><span class="nav-text">DrawScope</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%BB%E7%82%B9-drawPoints"><span class="nav-text">画点(drawPoints)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%BB%E7%BA%BF-drawLine"><span class="nav-text">画线(drawLine)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%BB%E8%B7%AF%E5%BE%84-drawPath"><span class="nav-text">画路径(drawPath)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E7%9F%A9%E5%BD%A2-drawRect"><span class="nav-text">绘制矩形(drawRect)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%9C%86%E8%A7%92%E7%9F%A9%E5%BD%A2-drawRoundRect"><span class="nav-text">绘制圆角矩形(drawRoundRect)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%BB%E5%9C%86-drawCircle"><span class="nav-text">画圆(drawCircle)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%BB%E6%A4%AD%E5%9C%86-drawOval"><span class="nav-text">画椭圆(drawOval)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%BB%E5%BC%A7%E7%BA%BF-drawArc"><span class="nav-text">画弧线(drawArc)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%BB%E5%9B%BE%E5%83%8F-drawImage"><span class="nav-text">画图像(drawImage)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%BB%E6%96%87%E6%9C%AC-drawText"><span class="nav-text">画文本(drawText)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%BB%E8%BD%AE%E5%BB%93-drawOutline"><span class="nav-text">画轮廓(drawOutline)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7"><span class="nav-text">属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#drawIntoCanvas-%E5%9C%A8Canvas%E4%B8%AD%E7%BB%98%E5%88%B6"><span class="nav-text">drawIntoCanvas(在Canvas中绘制)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clipPath-%E5%89%AA%E8%BE%91%E8%B7%AF%E5%BE%84"><span class="nav-text">clipPath(剪辑路径)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clipRect-%E5%89%AA%E8%BE%91%E7%9F%A9%E5%BD%A2"><span class="nav-text">clipRect(剪辑矩形)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rotate-%E6%97%8B%E8%BD%AC"><span class="nav-text">rotate(旋转)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scale-%E7%BC%A9%E6%94%BE"><span class="nav-text">scale(缩放)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inset-%E8%B0%83%E6%95%B4%E8%BE%B9%E7%95%8C"><span class="nav-text">inset(调整边界)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#translate-%E5%B9%B3%E7%A7%BB%E5%9D%90%E6%A0%87"><span class="nav-text">translate(平移坐标)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#withTransform-%E7%BB%84%E5%90%88%E8%BD%AC%E6%8D%A2"><span class="nav-text">withTransform(组合转换)</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Vinx"
+      src="/images/vinx.jpg">
+  <p class="site-author-name" itemprop="name">Vinx</p>
+  <div class="site-description" itemprop="description">本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Vinx911" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Vinx911" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u011471873" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u011471873" rel="noopener" target="_blank"><i class="fa fa-crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:buddyhe911@163.com" title="E-Mail → mailto:buddyhe911@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vinx</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
