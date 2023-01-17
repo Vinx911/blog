@@ -164,6 +164,873 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/linux-practical-tips/Ubuntu-switching-software-versions.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-practical-tips/Ubuntu-switching-software-versions.html" class="post-title-link" itemprop="url">Ubuntu切换软件版本 - 以g++为例</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-11-29 09:58:22 / 修改时间：10:00:08" itemprop="dateCreated datePublished" datetime="2022-11-29T09:58:22+08:00">2022-11-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url" rel="index"><span itemprop="name">Linux实用技巧</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Ubuntu切换软件版本-以g-为例"><a href="#Ubuntu切换软件版本-以g-为例" class="headerlink" title="Ubuntu切换软件版本 - 以g++为例"></a>Ubuntu切换软件版本 - 以g++为例</h1><h2 id="1-将各个版本添加到列表中"><a href="#1-将各个版本添加到列表中" class="headerlink" title="1. 将各个版本添加到列表中"></a>1. 将各个版本添加到列表中</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 11</span><br><span class="line">sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 12</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-列出已经配置版本"><a href="#2-列出已经配置版本" class="headerlink" title="2. 列出已经配置版本"></a>2. 列出已经配置版本</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --list g++</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/linux-practical-tips/Ubuntu-switching-software-versions.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/build-tools/Kconfig-language-zh.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/build-tools/Kconfig-language-zh.html" class="post-title-link" itemprop="url">Kconfig-language翻译</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-26 18:58:22" itemprop="dateCreated datePublished" datetime="2021-05-26T18:58:22+08:00">2021-05-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-08 16:24:59" itemprop="dateModified" datetime="2022-11-08T16:24:59+08:00">2022-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">构建工具</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Kconfig-language翻译"><a href="#Kconfig-language翻译" class="headerlink" title="Kconfig-language翻译"></a>Kconfig-language翻译</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h2><p>配置数据库是按树结构组织的配置选项的集合：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">+- Code maturity level options</span><br><span class="line">|  +- Prompt for development and/or incomplete code/drivers</span><br><span class="line">+- General setup</span><br><span class="line">|  +- Networking support</span><br><span class="line">|  +- System V IPC</span><br><span class="line">|  +- BSD Process Accounting</span><br><span class="line">|  +- Sysctl support</span><br><span class="line">+- Loadable module support</span><br><span class="line">|  +- Enable loadable module support</span><br><span class="line">|     +- Set version information on all module symbols</span><br><span class="line">|     +- Kernel module loader</span><br><span class="line">+- ...</span><br></pre></td></tr></table></figure>
+
+<p>每个条目都有自己的依赖性。 这些依赖关系用于确定条目的可见性。 任何子条目只有在其父条目也可见的情况下才可见。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/build-tools/Kconfig-language-zh.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-1-Computer-System-Overview.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-1-Computer-System-Overview.html" class="post-title-link" itemprop="url">操作系统精髓与设计原理(第8版) - 第一章 计算机系统概述</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-30 22:24:05" itemprop="dateCreated datePublished" datetime="2019-06-30T22:24:05+08:00">2019-06-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-08 16:26:49" itemprop="dateModified" datetime="2022-11-08T16:26:49+08:00">2022-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%B2%BE%E9%AB%93%E4%B8%8E%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86-%E7%AC%AC8%E7%89%88/" itemprop="url" rel="index"><span itemprop="name">操作系统精髓与设计原理(第8版)</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="操作系统精髓与设计原理-第8版-第一章-计算机系统概述"><a href="#操作系统精髓与设计原理-第8版-第一章-计算机系统概述" class="headerlink" title="操作系统精髓与设计原理(第8版) - 第一章 计算机系统概述"></a>操作系统精髓与设计原理(第8版) - 第一章 计算机系统概述</h1><h2 id="1-1-基本构成"><a href="#1-1-基本构成" class="headerlink" title="1.1 基本构成"></a>1.1 基本构成</h2><p>计算机由处理器、存储器和输入&#x2F;输出部件组成，每类部件都有一个或多个模块。主要是4个结构化部件：</p>
+<p><strong>处理器</strong>：控制计算机的操作，执行数据处理功能。</p>
+<p><strong>内存</strong>：存储数据和程序。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-1-Computer-System-Overview.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview.html" class="post-title-link" itemprop="url">操作系统精髓与设计原理(第8版) - 第二章 操作系统概述</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-30 16:05:20" itemprop="dateCreated datePublished" datetime="2019-06-30T16:05:20+08:00">2019-06-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-08 16:27:07" itemprop="dateModified" datetime="2022-11-08T16:27:07+08:00">2022-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%B2%BE%E9%AB%93%E4%B8%8E%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86-%E7%AC%AC8%E7%89%88/" itemprop="url" rel="index"><span itemprop="name">操作系统精髓与设计原理(第8版)</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="操作系统精髓与设计原理-第8版-第二章-操作系统概述"><a href="#操作系统精髓与设计原理-第8版-第二章-操作系统概述" class="headerlink" title="操作系统精髓与设计原理(第8版) - 第二章 操作系统概述"></a>操作系统精髓与设计原理(第8版) - 第二章 操作系统概述</h1><h2 id="2-1-操作系统的目标与功能"><a href="#2-1-操作系统的目标与功能" class="headerlink" title="2.1 操作系统的目标与功能"></a>2.1 操作系统的目标与功能</h2><p>操作系统是控制应用程序执行的程序，是应用程序和计算机硬件间的接口。它有三个目标：</p>
+<ul>
+<li><strong>方便</strong>：操作系统使计算机更易于使用。</li>
+<li><strong>有效</strong>：操作系统允许以更有效的方式使用计算机系统资源。</li>
+<li><strong>扩展能力</strong>：在构造操作系统时，应允许在不妨碍服务的前提下，有效地开发、测试和引入新的系统功能。</li>
+</ul>
+<h3 id="2-1-1-作为用户-x2F-计算机接口的操作系统"><a href="#2-1-1-作为用户-x2F-计算机接口的操作系统" class="headerlink" title="2.1.1 作为用户&#x2F;计算机接口的操作系统"></a>2.1.1 作为用户&#x2F;计算机接口的操作系统</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x1B-Implementation-of-kernel-linked-list-data-structure.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Linux-driver-development-notes/0x1B-Implementation-of-kernel-linked-list-data-structure.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x1B) - 内核链表数据结构的实现</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-27 21:29:10" itemprop="dateCreated datePublished" datetime="2019-06-27T21:29:10+08:00">2019-06-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-08 16:22:17" itemprop="dateModified" datetime="2022-11-08T16:22:17+08:00">2022-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Linux驱动开发杂记-0x1B-内核链表数据结构的实现"><a href="#Linux驱动开发杂记-0x1B-内核链表数据结构的实现" class="headerlink" title="Linux驱动开发杂记(0x1B) - 内核链表数据结构的实现"></a>Linux驱动开发杂记(0x1B) - 内核链表数据结构的实现</h1><h2 id="1-Linux内核双链表"><a href="#1-Linux内核双链表" class="headerlink" title="1. Linux内核双链表"></a>1. Linux内核双链表</h2><p>链表的基础知识在这里就不在赘述了。Linux 内核提供了一种双链表的实现方式，实际上，通常它都组织成双循环链表。</p>
+<p>链表数据结构的定义很简单，在Linux 4.15.0 中，list_head结构体定义在<code>include/linux/types.h</code>文件中。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> &#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> *<span class="title">next</span>, *<span class="title">prev</span>;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Linux-driver-development-notes/0x1B-Implementation-of-kernel-linked-list-data-structure.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x1A-Atomic-operations-in-the-kernel.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Linux-driver-development-notes/0x1A-Atomic-operations-in-the-kernel.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x1A) - 内核中的原子操作</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-27 13:40:18" itemprop="dateCreated datePublished" datetime="2019-06-27T13:40:18+08:00">2019-06-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-08 16:22:05" itemprop="dateModified" datetime="2022-11-08T16:22:05+08:00">2022-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Linux驱动开发杂记-0x1A-内核中的原子操作"><a href="#Linux驱动开发杂记-0x1A-内核中的原子操作" class="headerlink" title="Linux驱动开发杂记(0x1A) - 内核中的原子操作"></a>Linux驱动开发杂记(0x1A) - 内核中的原子操作</h1><p>具体的接口API函数整理如下：</p>
+<table>
+<thead>
+<tr>
+<th>接口函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>atomic_inc</td>
+<td>原子变量的值加一</td>
+</tr>
+<tr>
+<td>atomic_inc_return</td>
+<td>同上，只不过将变量v的最新值返回</td>
+</tr>
+<tr>
+<td>atomic_inc_and_test</td>
+<td>递增v指向的原子变量，并测试是否为0。若为0，返回真，否则返回假</td>
+</tr>
+<tr>
+<td>atomic_dec</td>
+<td>原子变量的值减去一</td>
+</tr>
+<tr>
+<td>atomic_dec_return</td>
+<td>同上，只不过将变量v的最新值返回</td>
+</tr>
+<tr>
+<td>atomic_dec_and_test</td>
+<td>递减v指向的原子变量，并测试是否为0。若为0，返回真，否则返回假</td>
+</tr>
+<tr>
+<td>atomic_add</td>
+<td>给一个原子变量v增加i</td>
+</tr>
+<tr>
+<td>atomic_sub</td>
+<td>给一个原子变量v减去i</td>
+</tr>
+<tr>
+<td>atomic_sub_and_test</td>
+<td>给一个原子变量v减去i，并判断变量v的最新值是否等于0</td>
+</tr>
+<tr>
+<td>atomic_add_negative</td>
+<td>将v指向的原子变量加上i，并测试结果是否为负。若为负，返回真，否则返回假</td>
+</tr>
+<tr>
+<td>atomic_read</td>
+<td>读取v指向的原子变量的值</td>
+</tr>
+<tr>
+<td>atomic_set</td>
+<td>设置v指向的原子变量的值为i</td>
+</tr>
+</tbody></table>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 原子变量的值加一</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">atomic_inc</span><span class="params">(<span class="type">atomic_t</span> *v)</span></span><br><span class="line">&#123;</span><br><span class="line">	atomic_add_return(<span class="number">1</span>, v);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 同上，只不过将变量v的最新值返回</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> atomic_inc_return(v)		atomic_add_return(1, (v))</span></span><br><span class="line"><span class="comment">// 递增v指向的原子变量，并测试是否为0。若为0，返回真，否则返回假</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> atomic_inc_and_test(v)		(atomic_inc_return(v) == 0)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 原子变量的值减去一</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">atomic_dec</span><span class="params">(<span class="type">atomic_t</span> *v)</span></span><br><span class="line">&#123;</span><br><span class="line">	atomic_sub_return(<span class="number">1</span>, v);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 同上，只不过将变量v的最新值返回</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> atomic_dec_return(v)		atomic_sub_return(1, (v))</span></span><br><span class="line"><span class="comment">// 递减v指向的原子变量，并测试是否为0。若为0，返回真，否则返回假</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> atomic_dec_and_test(v)		(atomic_dec_return(v) == 0)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 给一个原子变量v增加i</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">atomic_add</span><span class="params">(<span class="type">int</span> i, <span class="type">atomic_t</span> *v)</span></span><br><span class="line">&#123;</span><br><span class="line">	atomic_add_return(i, v);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 给一个原子变量v减去i</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">atomic_sub</span><span class="params">(<span class="type">int</span> i, <span class="type">atomic_t</span> *v)</span></span><br><span class="line">&#123;</span><br><span class="line">	atomic_sub_return(i, v);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 给一个原子变量v减去i，并判断变量v的最新值是否等于0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> atomic_sub_and_test(i, v)	(atomic_sub_return((i), (v)) == 0)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 将v指向的原子变量加上i，并测试结果是否为负。若为负，返回真，否则返回假</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">int</span> <span class="title function_">atomic_add_negative</span><span class="params">(<span class="type">int</span> i, <span class="type">atomic_t</span> *v)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> atomic_add_return(i, v) &lt; <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取v指向的原子变量的值</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> atomic_read(v)	READ_ONCE((v)-&gt;counter)</span></span><br><span class="line"><span class="comment">// 设置v指向的原子变量的值为i</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> atomic_set(v, i) WRITE_ONCE(((v)-&gt;counter), (i))</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x19-Reference-counter-kref-in-the-kernel.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Linux-driver-development-notes/0x19-Reference-counter-kref-in-the-kernel.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x19) - 内核中的引用计数器kref</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-27 12:00:32" itemprop="dateCreated datePublished" datetime="2019-06-27T12:00:32+08:00">2019-06-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-08 16:22:37" itemprop="dateModified" datetime="2022-11-08T16:22:37+08:00">2022-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Linux驱动开发杂记-0x19-内核中的引用计数器kref"><a href="#Linux驱动开发杂记-0x19-内核中的引用计数器kref" class="headerlink" title="Linux驱动开发杂记(0x19) - 内核中的引用计数器kref"></a>Linux驱动开发杂记(0x19) - 内核中的引用计数器kref</h1><p>kref是一个引用计数器，它被嵌套进其它的结构中，记录所嵌套结构的引用计数，并在计数清零时调用相应的清理函数。kref的头文件在include&#x2F;linux&#x2F;kref.h。</p>
+<p>以下代码摘自Linux 4.15.0</p>
+<h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a>1. 定义</h2><p>下面是kref的结构定义</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Linux-driver-development-notes/0x19-Reference-counter-kref-in-the-kernel.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x18-Changes-in-the-versions-of-the-kernel-tty-interface-(2)-tty_driver.h.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Linux-driver-development-notes/0x18-Changes-in-the-versions-of-the-kernel-tty-interface-(2)-tty_driver.h.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x18) - 内核tty接口各版本的变化(二)之tty_driver.h</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-02-19 09:59:02" itemprop="dateCreated datePublished" datetime="2019-02-19T09:59:02+08:00">2019-02-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-08 16:17:47" itemprop="dateModified" datetime="2022-11-08T16:17:47+08:00">2022-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Linux驱动开发杂记-0x18-内核tty接口各版本的变化-二-之tty-driver-h"><a href="#Linux驱动开发杂记-0x18-内核tty接口各版本的变化-二-之tty-driver-h" class="headerlink" title="Linux驱动开发杂记(0x18) - 内核tty接口各版本的变化(二)之tty_driver.h"></a>Linux驱动开发杂记(0x18) - 内核tty接口各版本的变化(二)之tty_driver.h</h1><h2 id="2-6-17-2-6-18"><a href="#2-6-17-2-6-18" class="headerlink" title="2.6.17 - 2.6.18"></a>2.6.17 - 2.6.18</h2><p>删除</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tty_driver</span> &#123;</span></span><br><span class="line">	<span class="type">const</span> <span class="type">char</span>      *devfs_name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-6-19-2-6-20"><a href="#2-6-19-2-6-20" class="headerlink" title="2.6.19 - 2.6.20"></a>2.6.19 - 2.6.20</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Linux-driver-development-notes/0x18-Changes-in-the-versions-of-the-kernel-tty-interface-(2)-tty_driver.h.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x17-Changes-in-the-versions-of-the-kernel-tty-interface-(1)-tty_flip.h.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Linux-driver-development-notes/0x17-Changes-in-the-versions-of-the-kernel-tty-interface-(1)-tty_flip.h.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x17) - 内核tty接口各版本的变化(一)之tty_flip.h</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-02-19 09:10:41" itemprop="dateCreated datePublished" datetime="2019-02-19T09:10:41+08:00">2019-02-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-08 16:17:56" itemprop="dateModified" datetime="2022-11-08T16:17:56+08:00">2022-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Linux驱动开发杂记-0x17-内核tty接口各版本的变化-一-之tty-flip-h"><a href="#Linux驱动开发杂记-0x17-内核tty接口各版本的变化-一-之tty-flip-h" class="headerlink" title="Linux驱动开发杂记(0x17) - 内核tty接口各版本的变化(一)之tty_flip.h"></a>Linux驱动开发杂记(0x17) - 内核tty接口各版本的变化(一)之tty_flip.h</h1><h2 id="2-6-15-2-6-16"><a href="#2-6-15-2-6-16" class="headerlink" title="2.6.15 - 2.6.16"></a>2.6.15 - 2.6.16</h2><p>添加</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">int</span> <span class="title function_">tty_buffer_request_room</span><span class="params">(<span class="keyword">struct</span> tty_struct *tty, <span class="type">size_t</span> size)</span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> <span class="title function_">tty_insert_flip_string</span><span class="params">(<span class="keyword">struct</span> tty_struct *tty, <span class="type">unsigned</span> <span class="type">char</span> *chars, <span class="type">size_t</span> size)</span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> <span class="title function_">tty_insert_flip_string_flags</span><span class="params">(<span class="keyword">struct</span> tty_struct *tty, <span class="type">unsigned</span> <span class="type">char</span> *chars, <span class="type">char</span> *flags, <span class="type">size_t</span> size)</span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> <span class="title function_">tty_prepare_flip_string</span><span class="params">(<span class="keyword">struct</span> tty_struct *tty, <span class="type">unsigned</span> <span class="type">char</span> **chars, <span class="type">size_t</span> size)</span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> <span class="title function_">tty_prepare_flip_string_flags</span><span class="params">(<span class="keyword">struct</span> tty_struct *tty, <span class="type">unsigned</span> <span class="type">char</span> **chars, <span class="type">char</span> **flags, <span class="type">size_t</span> size)</span>;</span><br></pre></td></tr></table></figure>
+<p>修改</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Linux-driver-development-notes/0x17-Changes-in-the-versions-of-the-kernel-tty-interface-(1)-tty_flip.h.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x16-Changes-in-kernel-version-interface-versions.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -251,818 +1118,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x15-tasklet.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Linux-driver-development-notes/0x15-tasklet.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x15) - tasklet</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-01-04 11:48:10" itemprop="dateCreated datePublished" datetime="2019-01-04T11:48:10+08:00">2019-01-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-08 16:18:41" itemprop="dateModified" datetime="2022-11-08T16:18:41+08:00">2022-11-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>　　为了提高系统的响应能力和并发能力，Linux将中断处理分了上半部和下半部。当一个中断产生，调用该中断对应的处理程序(上半部)，然后告诉系统，对应的后半部可以执行了，中断处理程序立即返回，下半部会在合适的时机由操作系统调用。这样一来就大大的减少了中断处理所需要的时间。</p>
-<p>tasklet是中断处理下半部分最常用的一种方法，驱动程序一般先申请中断，在中断处理函数内完成中断上半部分的工作后调用tasklet。</p>
-<h2 id="一、tasklet的特点"><a href="#一、tasklet的特点" class="headerlink" title="一、tasklet的特点"></a>一、tasklet的特点</h2><ol>
-<li>tasklet只可以在一个CPU上同步地执行，不同的tasklet可以在不同地CPU上同步地执行。</li>
-<li>tasklet的实现是建立在两个软件中断的基础之上的，即HI_SOFTIRQ和TASKLET_SOFTIRQ，本质上没有什么区别，只不过HI_SOFTIRQ的优先级更高一些</li>
-<li>由于tasklet是在软中断上实现的，所以像软中断一样不能睡眠、不能阻塞，处理函数内不能含有导致睡眠的动作，如减少信号量、从用户空间拷贝数据或手工分配内存等。</li>
-<li>一个 tasklet 能够被禁止并且之后被重新使能; 它不会执行直到它被使能的次数与被禁止的次数相同.</li>
-<li>tasklet的串行化使tasklet函数不必是可重入的，因此简化了设备驱动程序开发者的工作。</li>
-<li>每个cpu拥有一个tasklet_vec链表，具体是哪个cpu的tasklet_vec链表，是根据当前线程是运行在哪个cpu来决定的。</li>
-</ol>
-<h2 id="二、tasklet结构体"><a href="#二、tasklet结构体" class="headerlink" title="二、tasklet结构体"></a>二、tasklet结构体</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Linux-driver-development-notes/0x15-tasklet.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x14-ring-buffer-circ-buf.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Linux-driver-development-notes/0x14-ring-buffer-circ-buf.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x14) - 环形缓冲区circ_buf</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-12-07 09:37:30" itemprop="dateCreated datePublished" datetime="2018-12-07T09:37:30+08:00">2018-12-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-08 16:18:57" itemprop="dateModified" datetime="2022-11-08T16:18:57+08:00">2022-11-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 在内核&lt;linux/circ_buf.h&gt;中定义了关于环形缓冲区的相关变量。</span></span><br><span class="line"><span class="comment"> * 其中缓冲区的大小size必须定义成2的n次方，这样可以将取余运算转换成位与运算，</span></span><br><span class="line"><span class="comment"> * 提高计算机的处理速度。例如：x % size = x &amp; (size - 1)。实际可用的空间为size-1，</span></span><br><span class="line"><span class="comment"> * 这样可以避免缓冲区为满时和为空时都满足head = tail。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">circ_buf</span> &#123;</span></span><br><span class="line">	<span class="type">char</span> *buf;	<span class="comment">// 指向分配缓冲区起始地址的指针</span></span><br><span class="line">	<span class="type">int</span> head;   <span class="comment">// 指向生产者向缓冲区放入数据的位置</span></span><br><span class="line">	<span class="type">int</span> tail;  	<span class="comment">// 指向消费者从缓冲区取走数据的位置</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Return count in buffer.  */</span></span><br><span class="line"><span class="comment">/* 计算缓冲区中有效数据的大小； */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CIRC_CNT(head,tail,size) (((head) - (tail)) &amp; ((size)-1))</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Return space available, 0..size-1.  We always leave one free char</span></span><br><span class="line"><span class="comment">   as a completely full buffer has head == tail, which is the same as</span></span><br><span class="line"><span class="comment">   empty.  */</span></span><br><span class="line"><span class="comment">/* 计算缓冲区剩余空闲空间的大小； */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CIRC_SPACE(head,tail,size) CIRC_CNT((tail),((head)+1),(size))</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Return count up to the end of the buffer.  Carefully avoid</span></span><br><span class="line"><span class="comment">   accessing head and tail more than once, so they can change</span></span><br><span class="line"><span class="comment">   underneath us without returning inconsistent results.  */</span></span><br><span class="line"><span class="comment">/* 计算tail到缓冲区尾部的数据大小，即一次性可以读取的数据大小；*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CIRC_CNT_TO_END(head,tail,size) \</span></span><br><span class="line"><span class="meta">	(&#123;int end = (size) - (tail); \</span></span><br><span class="line"><span class="meta">	  int n = ((head) + end) &amp; ((size)-1); \</span></span><br><span class="line"><span class="meta">	  n &lt; end ? n : end;&#125;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Return space available up to the end of the buffer.  */</span></span><br><span class="line"><span class="comment">/* 计算head到缓冲区尾部的剩余空间，即一次性可以写入的数据大小； */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CIRC_SPACE_TO_END(head,tail,size) \</span></span><br><span class="line"><span class="meta">	(&#123;int end = (size) - 1 - (head); \</span></span><br><span class="line"><span class="meta">	  int n = (end + (tail)) &amp; ((size)-1); \</span></span><br><span class="line"><span class="meta">	  n &lt;= end ? n : end+1;&#125;)</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x13-Serial-UART-Driver-API.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Linux-driver-development-notes/0x13-Serial-UART-Driver-API.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x13) - 串口UART驱动API</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-11-22 15:13:17" itemprop="dateCreated datePublished" datetime="2018-11-22T15:13:17+08:00">2018-11-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-08 16:19:04" itemprop="dateModified" datetime="2022-11-08T16:19:04+08:00">2022-11-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>﻿串口驱动API</p>
-<h2 id="1、uart-register-driver"><a href="#1、uart-register-driver" class="headerlink" title="1、uart_register_driver"></a>1、uart_register_driver</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 功能：    uart_register_driver用于将串口驱动uart_driver注册到内核(串口核心层)中，通常在模块初始化函数调用该函数。</span></span><br><span class="line"><span class="comment"> * 参数 drv：要注册的uart_driver</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> * 返回值：  成功，返回0；否则返回错误码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">uart_register_driver</span><span class="params">(<span class="keyword">struct</span> uart_driver *drv)</span></span><br></pre></td></tr></table></figure>
-<h2 id="2、uart-unregister-driver"><a href="#2、uart-unregister-driver" class="headerlink" title="2、uart_unregister_driver"></a>2、uart_unregister_driver</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 功能：    uart_unregister_driver用于注销我们已注册的uart_driver，通常在模块卸载函数调用该函数</span></span><br><span class="line"><span class="comment"> * 参数 drv：要注销的uart_driver</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> * 返回值：  成功，返回0；否则返回错误码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">uart_unregister_driver</span><span class="params">(<span class="keyword">struct</span> uart_driver *drv)</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Linux-driver-development-notes/0x13-Serial-UART-Driver-API.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x12-uart_ops-structure.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Linux-driver-development-notes/0x12-uart_ops-structure.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x12) - uart_ops结构体</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-11-22 15:09:30" itemprop="dateCreated datePublished" datetime="2018-11-22T15:09:30+08:00">2018-11-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-08 16:19:11" itemprop="dateModified" datetime="2022-11-08T16:19:11+08:00">2022-11-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>﻿</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * This structure describes all the operations that can be</span></span><br><span class="line"><span class="comment"> * done on the physical hardware.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">uart_ops</span> &#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="title function_">int</span> <span class="params">(*tx_empty)</span><span class="params">(<span class="keyword">struct</span> uart_port *)</span>; <span class="comment">/* 串口的Tx FIFO缓存是否为空。如果为空，函数应返回TIOCSER_TEMT，否则返回0。如果端口不支持此操作，返回TIOCSER_TEMT。*/</span></span><br><span class="line">    <span class="type">void</span>         (*set_mctrl)(<span class="keyword">struct</span> uart_port *, <span class="type">unsigned</span> <span class="type">int</span> mctrl); <span class="comment">/* 设置串口modem控制 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="title function_">int</span> <span class="params">(*get_mctrl)</span><span class="params">(<span class="keyword">struct</span> uart_port *)</span>; <span class="comment">/* 获取串口modem控制 */</span></span><br><span class="line">    <span class="type">void</span>         (*stop_tx)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 禁止串口发送数据 */</span></span><br><span class="line">    <span class="type">void</span>         (*start_tx)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 使能串口发送数据 */</span></span><br><span class="line">    <span class="type">void</span>         (*send_xchar)(<span class="keyword">struct</span> uart_port *, <span class="type">char</span> ch);<span class="comment">/* 发送xChar */</span></span><br><span class="line">    <span class="type">void</span>         (*stop_rx)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 禁止串口接收数据 */</span></span><br><span class="line">    <span class="type">void</span>         (*enable_ms)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 使能modem的状态信号 */</span></span><br><span class="line">    <span class="type">void</span>         (*break_ctl)(<span class="keyword">struct</span> uart_port *, <span class="type">int</span> ctl); <span class="comment">/* 设置break信号 */</span></span><br><span class="line">    <span class="type">int</span>          (*startup)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 启动串口,应用程序打开串口设备文件时,该函数会被调用 */</span></span><br><span class="line">    <span class="type">void</span>         (*shutdown)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 关闭串口,应用程序关闭串口设备文件时,该函数会被调用 */</span></span><br><span class="line">    <span class="type">void</span>         (*set_termios)(<span class="keyword">struct</span> uart_port *, <span class="keyword">struct</span> ktermios *new, <span class="keyword">struct</span> ktermios *old); <span class="comment">/* 设置串口参数 */</span></span><br><span class="line">    <span class="type">void</span>         (*pm)(<span class="keyword">struct</span> uart_port *, <span class="type">unsigned</span> <span class="type">int</span> state,</span><br><span class="line">             <span class="type">unsigned</span> <span class="type">int</span> oldstate); <span class="comment">/* 串口电源管理 */</span></span><br><span class="line">    <span class="type">int</span>          (*set_wake)(<span class="keyword">struct</span> uart_port *, <span class="type">unsigned</span> <span class="type">int</span> state); <span class="comment">/*  */</span></span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>  *(*type)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 返回一描述串口类型的字符串 */</span></span><br><span class="line">    <span class="type">void</span>         (*release_port)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 释放串口已申请的IO端口/IO内存资源,必要时还需iounmap */</span></span><br><span class="line">    <span class="type">int</span>          (*request_port)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 申请必要的IO端口/IO内存资源,必要时还可以重新映射串口端口 */</span></span><br><span class="line">    <span class="type">void</span>         (*config_port)(<span class="keyword">struct</span> uart_port *, <span class="type">int</span>); <span class="comment">/* 执行串口所需的自动配置 */</span></span><br><span class="line">    <span class="type">int</span>          (*verify_port)(<span class="keyword">struct</span> uart_port *, <span class="keyword">struct</span> serial_struct *); <span class="comment">/* 核实新串口的信息 */</span></span><br><span class="line">    <span class="type">int</span>          (*ioctl)(<span class="keyword">struct</span> uart_port *, <span class="type">unsigned</span> <span class="type">int</span>, <span class="type">unsigned</span> <span class="type">long</span>); <span class="comment">/* IO控制 */</span></span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure><p></p>
-<h2 id="tx-empty-port"><a href="#tx-empty-port" class="headerlink" title="tx_empty(port)"></a>tx_empty(port)</h2><p>此函数检查发送fifo和移位通过“端口”中描述的端口是否为空。如果为空，函数应返回TIOCSER_TEMT，否则返回0。如果端口不支持此操作，返回TIOCSER_TEMT。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Linux-driver-development-notes/0x12-uart_ops-structure.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x11-uart_port-structure.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Linux-driver-development-notes/0x11-uart_port-structure.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x11) - uart_port结构体</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-11-22 15:07:57" itemprop="dateCreated datePublished" datetime="2018-11-22T15:07:57+08:00">2018-11-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-08 16:19:18" itemprop="dateModified" datetime="2022-11-08T16:19:18+08:00">2022-11-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>﻿<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">uart_port</span> &#123;</span></span><br><span class="line">    <span class="type">spinlock_t</span>             lock;           <span class="comment">/* 串口端口锁 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>           iobase;         <span class="comment">/* IO端口基地址 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> __iomem *membase;        <span class="comment">/* IO内存基地址,经映射(如ioremap)后的IO内存虚拟基地址 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>           irq;            <span class="comment">/* 中断号 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>           uartclk;        <span class="comment">/* 串口时钟 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>           fifosize;       <span class="comment">/* 串口FIFO缓冲大小 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span>          x_char;         <span class="comment">/* xon/xoff字符 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span>          regshift;       <span class="comment">/* 寄存器位移 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span>          iotype;         <span class="comment">/* IO访问方式 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span>          unused1;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPIO_PORT        (0)               <span class="comment">/* IO端口 */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPIO_HUB6        (1)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPIO_MEM         (2)               <span class="comment">/* IO内存 */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPIO_MEM32       (3)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPIO_AU          (4)               <span class="comment">/* Au1x00 type IO */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPIO_TSI         (5)               <span class="comment">/* Tsi108/109 type IO */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPIO_DWAPB       (6)               <span class="comment">/* DesignWare APB UART */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPIO_RM9000      (7)               <span class="comment">/* RM9000 type IO */</span></span></span><br><span class="line"></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>        read_status_mask;  <span class="comment">/* 关心的Rx error status */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>        ignore_status_mask;<span class="comment">/* 忽略的Rx error status */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">uart_info</span>      *<span class="title">info</span>;</span>           <span class="comment">/* pointer to parent info */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">uart_icount</span>     <span class="title">icount</span>;</span>         <span class="comment">/* 计数器 */</span></span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">console</span>        *<span class="title">cons</span>;</span>           <span class="comment">/* console结构体 */</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> CONFIG_SERIAL_CORE_CONSOLE</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">long</span>         sysrq;           <span class="comment">/* sysrq timeout */</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    <span class="type">upf_t</span>                 flags;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_FOURPORT         ((__force upf_t) (1 &lt;&lt; 1))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_SAK              ((__force upf_t) (1 &lt;&lt; 2))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_SPD_MASK         ((__force upf_t) (0x1030))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_SPD_HI           ((__force upf_t) (0x0010))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_SPD_VHI          ((__force upf_t) (0x0020))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_SPD_CUST         ((__force upf_t) (0x0030))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_SPD_SHI          ((__force upf_t) (0x1000))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_SPD_WARP         ((__force upf_t) (0x1010))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_SKIP_TEST        ((__force upf_t) (1 &lt;&lt; 6))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_AUTO_IRQ         ((__force upf_t) (1 &lt;&lt; 7))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_HARDPPS_CD       ((__force upf_t) (1 &lt;&lt; 11))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_LOW_LATENCY      ((__force upf_t) (1 &lt;&lt; 13))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_BUGGY_UART       ((__force upf_t) (1 &lt;&lt; 14))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_MAGIC_MULTIPLIER ((__force upf_t) (1 &lt;&lt; 16))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_CONS_FLOW        ((__force upf_t) (1 &lt;&lt; 23))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_SHARE_IRQ        ((__force upf_t) (1 &lt;&lt; 24))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_BOOT_AUTOCONF    ((__force upf_t) (1 &lt;&lt; 28))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_FIXED_PORT       ((__force upf_t) (1 &lt;&lt; 29))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_DEAD             ((__force upf_t) (1 &lt;&lt; 30))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_IOREMAP          ((__force upf_t) (1 &lt;&lt; 31))</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_CHANGE_MASK      ((__force upf_t) (0x17fff))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_USR_MASK         ((__force upf_t) (UPF_SPD_MASK|UPF_LOW_LATENCY))</span></span><br><span class="line"></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>             mctrl;        <span class="comment">/* 当前的moden设置 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>             timeout;      <span class="comment">/* character-based timeout */</span>        </span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>             type;         <span class="comment">/* 端口类型 */</span></span><br><span class="line">    <span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">uart_ops</span>   *<span class="title">ops</span>;</span>          <span class="comment">/* 串口端口操作函数集 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>             custom_divisor;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>             line;         <span class="comment">/* 端口索引 uart_driver.dev_name加上line组成串口的设备节点的名字 */</span></span><br><span class="line">    <span class="type">resource_size_t</span>          mapbase;      <span class="comment">/* IO内存物理基地址，可用于ioremap */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">device</span>           *<span class="title">dev</span>;</span>          <span class="comment">/* 父设备 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span>            hub6;         <span class="comment">/* this should be in the 8250 driver */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span>            suspended;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span>            unused[<span class="number">2</span>];</span><br><span class="line">    <span class="type">void</span>                    *private_data; <span class="comment">/* 端口私有数据,一般为platform数据指针 */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x10-uart_driver-structure.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Linux-driver-development-notes/0x10-uart_driver-structure.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x10) - uart_driver结构体</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-11-22 15:06:46" itemprop="dateCreated datePublished" datetime="2018-11-22T15:06:46+08:00">2018-11-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-08 16:19:24" itemprop="dateModified" datetime="2022-11-08T16:19:24+08:00">2022-11-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>﻿<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">uart_driver</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">module</span>     *<span class="title">owner</span>;</span>           <span class="comment">/* 拥有该uart_driver的模块,一般为THIS_MODULE */</span></span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>        *driver_name;     <span class="comment">/* 串口驱动名，串口设备文件名以驱动名为基础 */</span></span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>        *dev_name;        <span class="comment">/* 串口设备名 */</span></span><br><span class="line">    <span class="type">int</span>                major;           <span class="comment">/* 主设备号 */</span></span><br><span class="line">    <span class="type">int</span>                minor;           <span class="comment">/* 次设备号 */</span></span><br><span class="line">    <span class="type">int</span>                nr;              <span class="comment">/* 该uart_driver支持的串口个数(最大) */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">console</span>    *<span class="title">cons</span>;</span>            <span class="comment">/* 其对应的console.若该uart_driver支持serial console,否则为NULL */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * these are private; the low level driver should not</span></span><br><span class="line"><span class="comment">     * touch these; they should be initialised to NULL</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">uart_state</span> *<span class="title">state</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tty_driver</span> *<span class="title">tty_driver</span>;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x0F-Cannot-access-memory-at-address.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Linux-driver-development-notes/0x0F-Cannot-access-memory-at-address.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x0F) - Cannot access memory at address</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-11-17 00:54:15" itemprop="dateCreated datePublished" datetime="2018-11-17T00:54:15+08:00">2018-11-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-08 16:19:37" itemprop="dateModified" datetime="2022-11-08T16:19:37+08:00">2022-11-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>﻿按照教程<a target="_blank" rel="noopener" href="http://www.netfairy.net/?post=242">Linux内核调试环境搭建(基于ubuntu12.04)</a> 配置kgdb双机调试时，出现一下错误：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(gdb) set serial baud 115200</span><br><span class="line">(gdb) target remote /dev/ttyS0</span><br><span class="line">Remote debugging using /dev/ttyS0</span><br><span class="line">0xffffffffb753b940 in ?? ()</span><br><span class="line">(gdb) b start_kernel</span><br><span class="line">Breakpoint 1 at 0xffffffff82819ad0: file init/main.c, line 515.</span><br><span class="line">(gdb) c</span><br><span class="line">Continuing.</span><br><span class="line">Warning:</span><br><span class="line">Cannot insert breakpoint 1.</span><br><span class="line">Cannot access memory at address 0xffffffff82819ad0</span><br></pre></td></tr></table></figure>
-
-<p>解决方法是：在grub.cfg中添加<code>rodata=off nokaslr</code></p>
-<p>也就是在</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">linux /boot/vmlinuz-2.6.32.61 root=UUID=f8c18f80-7723-470b-98a852566006 ro</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Linux-driver-development-notes/0x0F-Cannot-access-memory-at-address.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x0E-vm_area_struct-structure.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Linux-driver-development-notes/0x0E-vm_area_struct-structure.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x0E) - vm_area_struct结构体</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-11-16 08:52:35" itemprop="dateCreated datePublished" datetime="2018-11-16T08:52:35+08:00">2018-11-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-08 16:19:50" itemprop="dateModified" datetime="2022-11-08T16:19:50+08:00">2022-11-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>﻿ 内存映射信息放在vma参数中，注意，这里的vma的数据类型是struct vm_area_struct，它表示的是一块连续的虚拟地址空间区域，在函数变量声明的地方，我们还看到有一个类似的结构体struct vm_struct，这个数据结构也是表示一块连续的虚拟地址空间区域。</p>
-<p>那么，这两者的区别是什么呢？在Linux中，struct vm_area_struct表示的虚拟地址是给进程使用的，而struct vm_struct表示的虚拟地址是给内核使用的，它们对应的物理页面都可以是不连续的。struct vm_area_struct表示的地址空间范围是0<del>3G，而struct vm_struct表示的地址空间范围是(3G + 896M + 8M) ~ 4G。struct vm_struct表示的地址空间范围为什么不是3G</del>4G呢？原来，3G ~ (3G + 896M)范围的地址是用来映射连续的物理页面的，这个范围的虚拟地址和对应的实际物理地址有着简单的对应关系，即对应0~896M的物理地址空间，而(3G + 896M) ~ (3G + 896M + 8M)是安全保护区域（例如，所有指向这8M地址空间的指针都是非法的），因此struct vm_struct使用(3G + 896M + 8M) ~ 4G地址空间来映射非连续的物理页面。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * This struct defines a memory VMM memory area. There is one of these</span></span><br><span class="line"><span class="comment"> * per VM-area/task.  A VM area is any part of the process virtual memory</span></span><br><span class="line"><span class="comment"> * space that has a special rule for the page-fault handlers (ie a shared</span></span><br><span class="line"><span class="comment"> * library, the executable area etc).</span></span><br><span class="line"><span class="comment"> * 此结构定义了内存VMM内存区域。 每个VM区域/任务中有一个。 VM区域是进程虚拟内存空间的任何部分，</span></span><br><span class="line"><span class="comment"> * 它具有页面错误处理程序的特殊规则（即共享库，可执行区域等）。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">vm_area_struct</span> &#123;</span></span><br><span class="line">	<span class="comment">/* The first cache line has the info for VMA tree walking.</span></span><br><span class="line"><span class="comment">	   第一个缓存行具有VMA树移动的信息 */</span></span><br><span class="line">	</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">long</span> vm_start;		<span class="comment">/* Our start address within vm_mm. 我们的起始地址在vm_mm内*/</span></span><br><span class="line">	<span class="type">unsigned</span> <span class="type">long</span> vm_end;		<span class="comment">/* The first byte after our end address within vm_mm. 我们的结束地址在vm_mm之后的第一个字节*/</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* linked list of VM areas per task, sorted by address </span></span><br><span class="line"><span class="comment">	   每个任务的VM区域的链接列表，按地址排序  */</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">vm_area_struct</span> *<span class="title">vm_next</span>, *<span class="title">vm_prev</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">rb_node</span> <span class="title">vm_rb</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Largest free memory gap in bytes to the left of this VMA.</span></span><br><span class="line"><span class="comment">	 * Either between this VMA and vma-&gt;vm_prev, or between one of the</span></span><br><span class="line"><span class="comment">	 * VMAs below us in the VMA rbtree and its -&gt;vm_prev. This helps</span></span><br><span class="line"><span class="comment">	 * get_unmapped_area find a free area of the right size.</span></span><br><span class="line"><span class="comment">	 * 此VMA左侧最大的可用内存间隙（以字节为单位）。在此VMA和vma-&gt; vm_prev之间，</span></span><br><span class="line"><span class="comment">	 * 或者在VMA rbtree中我们下面的一个VMA与其-&gt;vm_prev之间。</span></span><br><span class="line"><span class="comment">	 * 这有助于get_unmapped_area找到合适大小的空闲区域。</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="type">unsigned</span> <span class="type">long</span> rb_subtree_gap;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Second cache line starts here. </span></span><br><span class="line"><span class="comment">	   第二个缓存行从这里开始 */</span></span><br><span class="line"></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">mm_struct</span> *<span class="title">vm_mm</span>;</span>	<span class="comment">/* The address space we belong to. 我们所属的address space*/</span></span><br><span class="line">	<span class="type">pgprot_t</span> vm_page_prot;		<span class="comment">/* Access permissions of this VMA. 此VMA的访问权限 */</span></span><br><span class="line">	<span class="type">unsigned</span> <span class="type">long</span> vm_flags;		<span class="comment">/* Flags, see mm.h. */</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * For areas with an address space and backing store,</span></span><br><span class="line"><span class="comment">	 * linkage into the address_space-&gt;i_mmap interval tree.</span></span><br><span class="line"><span class="comment">	 * 对于具有地址空间（address apace）和后备存储(backing store)的区域，</span></span><br><span class="line"><span class="comment">	 * 链接到address_space-&gt;i_mmap间隔树，或者链接到address_space-&gt; i_mmap_nonlinear列表中的vma。</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">		<span class="class"><span class="keyword">struct</span> <span class="title">rb_node</span> <span class="title">rb</span>;</span></span><br><span class="line">		<span class="type">unsigned</span> <span class="type">long</span> rb_subtree_last;</span><br><span class="line">	&#125; shared;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * A file&#x27;s MAP_PRIVATE vma can be in both i_mmap tree and anon_vma</span></span><br><span class="line"><span class="comment">	 * list, after a COW of one of the file pages.	A MAP_SHARED vma</span></span><br><span class="line"><span class="comment">	 * can only be in the i_mmap tree.  An anonymous MAP_PRIVATE, stack</span></span><br><span class="line"><span class="comment">	 * or brk vma (with NULL file) can only be in an anon_vma list.</span></span><br><span class="line"><span class="comment">	 * 在其中一个文件页面的COW之后，文件的MAP_PRIVATE vma可以在i_mmap树和anon_vma列表中。</span></span><br><span class="line"><span class="comment">	 * MAP_SHARED vma只能位于i_mmap树中。</span></span><br><span class="line"><span class="comment">	 * 匿名MAP_PRIVATE，堆栈或brk vma（带有NULL文件）只能位于anon_vma列表中。</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">anon_vma_chain</span>;</span> <span class="comment">/* Serialized by mmap_sem &amp;</span></span><br><span class="line"><span class="comment">					  * page_table_lock 由mmap_sem和* page_table_lock序列化*/</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">anon_vma</span> *<span class="title">anon_vma</span>;</span>	<span class="comment">/* Serialized by page_table_lock 由page_table_lock序列化*/</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Function pointers to deal with this struct. </span></span><br><span class="line"><span class="comment">	   用于处理此结构体的函数指针 */</span></span><br><span class="line">	<span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">vm_operations_struct</span> *<span class="title">vm_ops</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Information about our backing store: </span></span><br><span class="line"><span class="comment">	   后备存储（backing store）的信息:*/</span></span><br><span class="line">	<span class="type">unsigned</span> <span class="type">long</span> vm_pgoff;		<span class="comment">/* Offset (within vm_file) in PAGE_SIZE units 以PAGE_SIZE为单位的偏移量（在vm_file中）*/</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">file</span> * <span class="title">vm_file</span>;</span>		<span class="comment">/* File we map to (can be NULL). 我们映射到文件（可以为NULL）*/</span></span><br><span class="line">	<span class="type">void</span> * vm_private_data;		<span class="comment">/* was vm_pte (shared mem) 是vm_pte（共享内存） */</span></span><br><span class="line"></span><br><span class="line">	<span class="type">atomic_long_t</span> swap_readahead_info;</span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> CONFIG_MMU</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">vm_region</span> *<span class="title">vm_region</span>;</span>	<span class="comment">/* NOMMU mapping region NOMMU映射区域  */</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> CONFIG_NUMA</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">mempolicy</span> *<span class="title">vm_policy</span>;</span>	<span class="comment">/* NUMA policy for the VMA 针对VMA的NUMA政策 */</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">vm_userfaultfd_ctx</span> <span class="title">vm_userfaultfd_ctx</span>;</span></span><br><span class="line">&#125; __randomize_layout;</span><br></pre></td></tr></table></figure>
-
-<p>linux内核使用vm_area_struct结构来表示一个独立的虚拟内存区域，由于每个不同质的虚拟内存区域功能和内部机制都不同，因此一个进程使用多个vm_area_struct结构来分别表示不同类型的虚拟内存区域。各个vm_area_struct结构使用链表或者树形结构链接，方便进程快速访问，如下图所示：<br><img src="/0x0E-vm_area_struct%E7%BB%93%E6%9E%84%E4%BD%93/200501434261629.png" alt="在这里插入图片描述"></p>
-<p>vm_area_struct结构中包含区域起始和终止地址以及其他相关信息，同时也包含一个vm_ops指针，其内部可引出所有针对这个区域可以使用的系统调用函数。这样，进程对某一虚拟内存区域的任何操作需要用要的信息，都可以从vm_area_struct中获得。mmap函数就是要创建一个新的vm_area_struct结构，并将其与文件的物理磁盘地址相连。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Linux-driver-development-notes/0x0E-vm_area_struct-structure.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x0D-remap_pfn_range.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Linux-driver-development-notes/0x0D-remap_pfn_range.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x0D) - remap_pfn_range()</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-11-15 16:23:43" itemprop="dateCreated datePublished" datetime="2018-11-15T16:23:43+08:00">2018-11-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-08 16:19:57" itemprop="dateModified" datetime="2022-11-08T16:19:57+08:00">2022-11-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>﻿驱动实现mmap主要是调用：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">remap_pfn_range</span><span class="params">(<span class="keyword">struct</span> vm_area_struct *, <span class="type">unsigned</span> <span class="type">long</span> addr,</span></span><br><span class="line"><span class="params">            <span class="type">unsigned</span> <span class="type">long</span> pfn, <span class="type">unsigned</span> <span class="type">long</span> size, <span class="type">pgprot_t</span>)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>函数来映射,声明在include&#x2F;linux&#x2F;mm.h。<br>第一个参数：虚拟地址描述结构体(声明在include&#x2F;linux&#x2F;mm_types.h,起始mm.h中已经包含了它)，一般是系统传递下来。<br>第二个参数：虚拟起始地址<br>第三个参数：物理地址<br>第四个参数：映射空间大小，单位字节<br>第五个参数：给新 VMA 要求的”protection”. 驱动直接使用 vma-&gt;vm_page_prot</p>
-<p>返回值，成功返回0，否则返回-1；</p>
-<p>用法例子：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Linux-driver-development-notes/0x0D-remap_pfn_range.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1130,7 +1189,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-count">71</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1143,7 +1202,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
