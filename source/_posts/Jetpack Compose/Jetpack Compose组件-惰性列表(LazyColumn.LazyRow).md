@@ -28,9 +28,9 @@ fun LazyColumn(
     contentPadding: PaddingValues = PaddingValues(0.dp),
     // 反转滚动和布局方向
     reverseLayout: Boolean = false,
-    // 垂直对齐
+    // 垂直排列
     verticalArrangement: Arrangement.Vertical = if (!reverseLayout) Arrangement.Top else Arrangement.Bottom,
-    // 水平对齐
+    // 水平排列
     horizontalAlignment: Alignment.Horizontal = Alignment.Start,
     // 甩动偏好
     flingBehavior: FlingBehavior = ScrollableDefaults.flingBehavior(),
@@ -57,9 +57,9 @@ fun LazyRow(
     contentPadding: PaddingValues = PaddingValues(0.dp),
     // 反转滚动和布局方向
     reverseLayout: Boolean = false,
-    // 水平对齐
+    // 水平排列
     horizontalArrangement: Arrangement.Horizontal = if (!reverseLayout) Arrangement.Start else Arrangement.End,
-    // 垂直对齐
+    // 垂直排列
     verticalAlignment: Alignment.Vertical = Alignment.Top,
     // 甩动偏好
     flingBehavior: FlingBehavior = ScrollableDefaults.flingBehavior(),
@@ -84,9 +84,9 @@ fun LazyVerticalGrid(
     contentPadding: PaddingValues = PaddingValues(0.dp),
     // 反转滚动和布局方向
     reverseLayout: Boolean = false,
-    // 垂直对齐
+    // 垂直排列
     verticalArrangement: Arrangement.Vertical = if (!reverseLayout) Arrangement.Top else Arrangement.Bottom,
-    // 水平对齐
+    // 水平排列
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
     // 甩动偏好
     flingBehavior: FlingBehavior = ScrollableDefaults.flingBehavior(),
@@ -111,9 +111,9 @@ fun LazyHorizontalGrid(
     contentPadding: PaddingValues = PaddingValues(0.dp),
     // 反转滚动和布局方向
     reverseLayout: Boolean = false,
-    // 水平对齐
+    // 水平排列
     horizontalArrangement: Arrangement.Horizontal = if (!reverseLayout) Arrangement.Start else Arrangement.End,
-    // 垂直对齐
+    // 垂直排列
     verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     // 甩动偏好
     flingBehavior: FlingBehavior = ScrollableDefaults.flingBehavior(),
@@ -137,9 +137,9 @@ fun LazyVerticalStaggeredGrid(
     state: LazyStaggeredGridState = rememberLazyStaggeredGridState(),
     // 内容padding
     contentPadding: PaddingValues = PaddingValues(0.dp),
-    // 垂直对齐
+    // 垂直排列
     verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(0.dp),
-    // 水平对齐
+    // 水平排列
     horizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(0.dp),
     // 甩动偏好
     flingBehavior: FlingBehavior = ScrollableDefaults.flingBehavior(),
@@ -163,9 +163,9 @@ fun LazyHorizontalStaggeredGrid(
     state: LazyStaggeredGridState = rememberLazyStaggeredGridState(),
     // 内容padding
     contentPadding: PaddingValues = PaddingValues(0.dp),
-    // 垂直对齐
+    // 垂直排列
     verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(0.dp),
-    // 水平对齐
+    // 水平排列
     horizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(0.dp),
     // 甩动偏好
     flingBehavior: FlingBehavior = ScrollableDefaults.flingBehavior(),
