@@ -164,6 +164,90 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x02-pci_dev-structure.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Linux-driver-development-notes/0x02-pci_dev-structure.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x02) - pci_dev结构体</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-08 16:32:43" itemprop="dateCreated datePublished" datetime="2018-11-08T16:32:43+08:00">2018-11-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-08 16:16:04" itemprop="dateModified" datetime="2022-11-08T16:16:04+08:00">2022-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>﻿每种类的PCI设备都可以用结构类型pci_dev来描述。更为准确地说，应该是每一个PCI功能，即PCI逻辑设备都唯一地对应有一个pci_dev设备描述符。该数据结构的部分定义如下（include&#x2F;linux&#x2F;pci.h）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pci_dev</span> &#123;</span></span><br><span class="line"><span class="comment">/* 总线设备链表元素bus_list：每一个pci_dev结构除了链接到全局设备链表中外，还会通过这个成员连接到</span></span><br><span class="line"><span class="comment">其所属PCI总线的设备链表中。每一条PCI总线都维护一条它自己的设备链表视图，以便描述所有连接在该</span></span><br><span class="line"><span class="comment">PCI总线上的设备，其表头由PCI总线的pci_bus结构中的 devices成员所描述t*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">bus_list</span>;</span></span><br><span class="line"><span class="comment">/* 总线指针bus：指向这个PCI设备所在的PCI总线的pci_bus结构。因此，对于桥设备而言，bus指针将指向</span></span><br><span class="line"><span class="comment">桥设备的主总线（primary bus），也即指向桥设备所在的PCI总线*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pci_bus</span> *<span class="title">bus</span>;</span></span><br><span class="line"><span class="comment">/* 指针subordinate：指向这个PCI设备所桥接的下级总线。这个指针成员仅对桥设备才有意义，而对于一般</span></span><br><span class="line"><span class="comment">的非桥PCI设备而言，该指针成员总是为NULL*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pci_bus</span> *<span class="title">subordinate</span>;</span></span><br><span class="line"><span class="comment">/* 无类型指针sysdata：指向一片特定于系统的扩展数据*/</span></span><br><span class="line"><span class="type">void</span> *sysdata;</span><br><span class="line"><span class="comment">/* 指针procent：指向该PCI设备在／proc文件系统中对应的目录项*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">proc_dir_entry</span> *<span class="title">procent</span>;</span></span><br><span class="line"><span class="comment">/* devfn：这个PCI设备的设备功能号，也成为PCI逻辑设备号（0－255）。其中bit[7:3]是物理设备号（取值</span></span><br><span class="line"><span class="comment">范围0－31），bit[2:0]是功能号（取值范围0－7）。 */</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> devfn;</span><br><span class="line"><span class="comment">/* vendor：这是一个16无符号整数，表示PCI设备的厂商ID*/</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">short</span> vendor;</span><br><span class="line"><span class="comment">/*device：这是一个16无符号整数，表示PCI设备的设备ID */</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">short</span> device;</span><br><span class="line"><span class="comment">/* subsystem_vendor：这是一个16无符号整数，表示PCI设备的子系统厂商ID*/</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">short</span> subsystem_vendor;</span><br><span class="line"><span class="comment">/* subsystem_device：这是一个16无符号整数，表示PCI设备的子系统设备ID。*/</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">short</span> subsystem_device;</span><br><span class="line"><span class="comment">/* class：32位的无符号整数，表示该PCI设备的类别，其中，bit［7：0］为编程接口，bit［15：8］为子类</span></span><br><span class="line"><span class="comment">别代码，bit ［23：16］为基类别代码，bit［31：24］无意义。显然，class成员的低3字节刚好对应与PCI配</span></span><br><span class="line"><span class="comment">置空间中的类代码*/</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> <span class="class"><span class="keyword">class</span>;</span></span><br><span class="line"><span class="comment">/* hdr_type：8位符号整数，表示PCI配置空间头部的类型。其中，bit［7］＝1表示这是一个多功能设备，</span></span><br><span class="line"><span class="comment">bit［7］＝0表示这是一个单功能设备。Bit［6：0］则表示PCI配置空间头部的布局类型，值00h表示这是一</span></span><br><span class="line"><span class="comment">个一般PCI设备的配置空间头部，值01h表示这是一个PCI-to-PCI桥的配置空间头部，值02h表示CardBus桥</span></span><br><span class="line"><span class="comment">的配置空间头部*/</span></span><br><span class="line">u8 hdr_type;</span><br><span class="line"><span class="comment">/* rom_base_reg：8位无符号整数，表示PCI配置空间中的ROM基地址寄存器在PCI配置空间中的位置。</span></span><br><span class="line"><span class="comment">ROM基地址寄存器在不同类型的PCI配置空间头部的位置是不一样的，对于type 0的配置空间布局，ROM基</span></span><br><span class="line"><span class="comment">地址寄存器的起始位置是30h，而对于PCI-to-PCI桥所用的type 1配置空间布局，ROM基地址寄存器的起始</span></span><br><span class="line"><span class="comment">位置是38h*/</span></span><br><span class="line">u8 rom_base_reg;</span><br><span class="line"><span class="comment">/* 指针driver：指向这个PCI设备所对应的驱动程序定义的pci_driver结构。每一个pci设备驱动程序都必须定</span></span><br><span class="line"><span class="comment">义它自己的pci_driver结构来描述它自己。*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pci_driver</span> *<span class="title">driver</span>;</span></span><br><span class="line"><span class="comment">/*dma_mask：用于DMA的总线地址掩码，一般来说，这个成员的值是0xffffffff。数据类型dma_addr_t定义在</span></span><br><span class="line"><span class="comment">include/asm/types.h中，在x86平台上，dma_addr_t类型就是u32类型*/</span></span><br><span class="line">u64 dma_mask;</span><br><span class="line"><span class="comment">/* 当前操作状态 */</span></span><br><span class="line"><span class="type">pci_power_t</span>  current_state;</span><br><span class="line"><span class="comment">/* 通用的设备接口*/</span></span><br><span class="line"> <span class="class"><span class="keyword">struct</span> <span class="title">device</span> <span class="title">dev</span>;</span></span><br><span class="line"><span class="comment">/* 无符号的整数irq：表示这个PCI设备通过哪根IRQ输入线产生中断，一般为0－15之间的某个值 */</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> irq;</span><br><span class="line"><span class="comment">/*表示该设备可能用到的资源，包括：I/O断口区域、设备内存地址区域以及扩展ROM地址区域。*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">resource</span> <span class="title">resource</span>[<span class="title">DEVICE_COUNT_RESOURCE</span>];</span></span><br><span class="line"><span class="comment">/* 配置空间的大小 */</span></span><br><span class="line"><span class="type">int</span> cfg_size;</span><br><span class="line"><span class="comment">/* 透明 PCI 桥 */</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> transparent:<span class="number">1</span>;</span><br><span class="line"><span class="comment">/* 多功能设备*/</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> multifunction:<span class="number">1</span>;</span><br><span class="line"><span class="comment">/* 设备是主设备*/</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> is_busmaster:<span class="number">1</span>;</span><br><span class="line"><span class="comment">/* 设备不使用msi*/</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> no_msi:<span class="number">1</span>;</span><br><span class="line"><span class="comment">/* 配置空间访问形式用块的形式 */</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> block_ucfg_access:<span class="number">1</span>;</span><br><span class="line"><span class="comment">/* 在挂起时保存配置空间*/</span></span><br><span class="line">u32 saved_config_space[<span class="number">16</span>];</span><br><span class="line"><span class="comment">/* sysfs ROM入口的属性描述*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">bin_attribute</span> *<span class="title">rom_attr</span>;</span></span><br><span class="line"><span class="comment">/* 能显示rom 属性*/</span></span><br><span class="line"><span class="type">int</span> rom_attr_enabled;</span><br><span class="line"><span class="comment">/* 资源的sysfs文件*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">bin_attribute</span> *<span class="title">res_attr</span>[<span class="title">DEVICE_COUNT_RESOURCE</span>];</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x01-Some-markup-macros-in-the-kernel-__init-etc.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -323,7 +407,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
