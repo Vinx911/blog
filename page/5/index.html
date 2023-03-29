@@ -445,6 +445,108 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Android%E6%9D%82%E8%AE%B0/Android%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86%E5%8F%8AProGuard%E6%89%8B%E5%86%8C.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Android%E6%9D%82%E8%AE%B0/Android%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86%E5%8F%8AProGuard%E6%89%8B%E5%86%8C.html" class="post-title-link" itemprop="url">Android代码混淆及ProGuard手册</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-04 18:58:06" itemprop="dateCreated datePublished" datetime="2022-11-04T18:58:06+08:00">2022-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-29 14:53:22" itemprop="dateModified" datetime="2023-03-29T14:53:22+08:00">2023-03-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Android杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>为什么把这三个内容放到一起说？因为在 Android Gradle 中配置方法基本是在一起的。</p>
+<p>官方说明如下：</p>
+<blockquote>
+<p>为了尽可能减小应用的大小，您应在发布 build 中启用缩减功能来移除不使用的代码和资源。启用缩减功能后，您还会受益于两项功能，一项是混淆处理功能，该功能会缩短应用的类和成员的名称；另一项是优化功能，该功能会采用更积极的策略来进一步减小应用的大小。本页介绍 R8 如何为项目执行这些编译时任务，以及您如何对这些任务进行自定义。</p>
+<p>当您使用 <a href="https://link.juejin.cn/?target=https://developer.android.google.cn/studio/releases/gradle-plugin%233-4-0">Android Gradle 插件 3.4.0</a> 或更高版本构建项目时，该插件不再使用 ProGuard 执行编译时代码优化，而是与 R8 编译器协同工作，处理以下编译时任务：</p>
+<ul>
+<li><strong>代码缩减（即摇树优化）</strong>：从应用及其库依赖项中检测并安全地移除不使用的类、字段、方法和属性（这使其成为了一个对于规避 <a href="https://link.juejin.cn/?target=https://developer.android.google.cn/studio/build/multidex">64k 引用限制</a>非常有用的工具）。例如，如果您仅使用某个库依赖项的少数几个 API，那么缩减功能可以识别应用不使用的库代码并仅从应用中移除这部分代码。如需了解详情，请转到介绍如何<a href="https://link.juejin.cn/?target=https://developer.android.google.cn/studio/build/shrink-code%23shrink-code">缩减代码</a>的部分。</li>
+<li><strong>资源缩减</strong>：从封装应用中移除不使用的资源，包括应用库依赖项中不使用的资源。此功能可与代码缩减功能结合使用，这样一来，移除不使用的代码后，也可以安全地移除不再引用的所有资源。如需了解详情，请转到介绍如何<a href="https://link.juejin.cn/?target=https://developer.android.google.cn/studio/build/shrink-code%23shrink-resources">缩减资源</a>的部分。</li>
+<li><strong>混淆</strong>：缩短类和成员的名称，从而减小 DEX 文件的大小。如需了解详情，请转到介绍如何<a href="https://link.juejin.cn/?target=https://developer.android.google.cn/studio/build/shrink-code%23obfuscate">对代码进行混淆处理</a>的部分。</li>
+<li><strong>优化</strong>：检查并重写代码，以进一步减小应用的 DEX 文件的大小。例如，如果 R8 检测到从未采用过给定 if&#x2F;else 语句的 <code>else &#123;&#125;</code> 分支，则会移除 <code>else &#123;&#125;</code> 分支的代码。如需了解详情，请转到介绍<a href="https://link.juejin.cn/?target=https://developer.android.google.cn/studio/build/shrink-code%23optimization">代码优化</a>的部分。</li>
+</ul>
+<p>默认情况下，在构建应用的发布版本时，R8 会自动执行上述编译时任务。不过，您也可以停用某些任务或通过 ProGuard 规则文件自定义 R8 的行为。事实上，<strong>R8 支持所有现有 ProGuard 规则文件</strong>，因此您在更新 Android Gradle 插件以使用 R8 时，无需更改现有规则。</p>
+</blockquote>
+<h2 id="开启混淆功能"><a href="#开启混淆功能" class="headerlink" title="开启混淆功能"></a>开启混淆功能</h2><p>上面没有提到的一个代码混淆的重要作用：我们知道 apk 文件是相对容易被反编译的，未加混淆的 apk，反编译后基本裸奔。而混淆的 apk 即使被反编译，类名与变量名都会处理成无意义的字符，很大程度上降低了源码的可读性。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Android%E6%9D%82%E8%AE%B0/Android%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86%E5%8F%8AProGuard%E6%89%8B%E5%86%8C.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Android%E6%9D%82%E8%AE%B0/Android%20Studio%E6%B7%B7%E6%B7%86%E6%A8%A1%E6%9D%BF.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -527,7 +629,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Android%E6%9D%82%E8%AE%B0/Android%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86%E5%8F%8AProGuard%E6%89%8B%E5%86%8C.html">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux%E5%91%BD%E4%BB%A4/Linux%20Sed%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/vinx.jpg">
@@ -541,7 +643,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/Android%E6%9D%82%E8%AE%B0/Android%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86%E5%8F%8AProGuard%E6%89%8B%E5%86%8C.html" class="post-title-link" itemprop="url">Android代码混淆及ProGuard手册</a>
+            <a href="/Linux%E5%91%BD%E4%BB%A4/Linux%20Sed%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3.html" class="post-title-link" itemprop="url">Linux Sed命令详解</a>
         </h2>
 
         <div class="post-meta">
@@ -558,7 +660,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-29 14:53:22" itemprop="dateModified" datetime="2023-03-29T14:53:22+08:00">2023-03-29</time>
+                <time title="修改时间：2023-03-29 15:04:10" itemprop="dateModified" datetime="2023-03-29T15:04:10+08:00">2023-03-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -566,7 +668,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Android杂记</span></a>
+                  <a href="/categories/Linux%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux命令</span></a>
                 </span>
             </span>
 
@@ -581,23 +683,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>为什么把这三个内容放到一起说？因为在 Android Gradle 中配置方法基本是在一起的。</p>
-<p>官方说明如下：</p>
-<blockquote>
-<p>为了尽可能减小应用的大小，您应在发布 build 中启用缩减功能来移除不使用的代码和资源。启用缩减功能后，您还会受益于两项功能，一项是混淆处理功能，该功能会缩短应用的类和成员的名称；另一项是优化功能，该功能会采用更积极的策略来进一步减小应用的大小。本页介绍 R8 如何为项目执行这些编译时任务，以及您如何对这些任务进行自定义。</p>
-<p>当您使用 <a href="https://link.juejin.cn/?target=https://developer.android.google.cn/studio/releases/gradle-plugin%233-4-0">Android Gradle 插件 3.4.0</a> 或更高版本构建项目时，该插件不再使用 ProGuard 执行编译时代码优化，而是与 R8 编译器协同工作，处理以下编译时任务：</p>
-<ul>
-<li><strong>代码缩减（即摇树优化）</strong>：从应用及其库依赖项中检测并安全地移除不使用的类、字段、方法和属性（这使其成为了一个对于规避 <a href="https://link.juejin.cn/?target=https://developer.android.google.cn/studio/build/multidex">64k 引用限制</a>非常有用的工具）。例如，如果您仅使用某个库依赖项的少数几个 API，那么缩减功能可以识别应用不使用的库代码并仅从应用中移除这部分代码。如需了解详情，请转到介绍如何<a href="https://link.juejin.cn/?target=https://developer.android.google.cn/studio/build/shrink-code%23shrink-code">缩减代码</a>的部分。</li>
-<li><strong>资源缩减</strong>：从封装应用中移除不使用的资源，包括应用库依赖项中不使用的资源。此功能可与代码缩减功能结合使用，这样一来，移除不使用的代码后，也可以安全地移除不再引用的所有资源。如需了解详情，请转到介绍如何<a href="https://link.juejin.cn/?target=https://developer.android.google.cn/studio/build/shrink-code%23shrink-resources">缩减资源</a>的部分。</li>
-<li><strong>混淆</strong>：缩短类和成员的名称，从而减小 DEX 文件的大小。如需了解详情，请转到介绍如何<a href="https://link.juejin.cn/?target=https://developer.android.google.cn/studio/build/shrink-code%23obfuscate">对代码进行混淆处理</a>的部分。</li>
-<li><strong>优化</strong>：检查并重写代码，以进一步减小应用的 DEX 文件的大小。例如，如果 R8 检测到从未采用过给定 if&#x2F;else 语句的 <code>else &#123;&#125;</code> 分支，则会移除 <code>else &#123;&#125;</code> 分支的代码。如需了解详情，请转到介绍<a href="https://link.juejin.cn/?target=https://developer.android.google.cn/studio/build/shrink-code%23optimization">代码优化</a>的部分。</li>
-</ul>
-<p>默认情况下，在构建应用的发布版本时，R8 会自动执行上述编译时任务。不过，您也可以停用某些任务或通过 ProGuard 规则文件自定义 R8 的行为。事实上，<strong>R8 支持所有现有 ProGuard 规则文件</strong>，因此您在更新 Android Gradle 插件以使用 R8 时，无需更改现有规则。</p>
-</blockquote>
-<h2 id="开启混淆功能"><a href="#开启混淆功能" class="headerlink" title="开启混淆功能"></a>开启混淆功能</h2><p>上面没有提到的一个代码混淆的重要作用：我们知道 apk 文件是相对容易被反编译的，未加混淆的 apk，反编译后基本裸奔。而混淆的 apk 即使被反编译，类名与变量名都会处理成无意义的字符，很大程度上降低了源码的可读性。</p>
+          <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><code>sed</code>是<code>stream editor</code>的简称，也就是流编辑器。它一次处理一行内容，处理时，把当前处理的行存储在临时缓冲区中，称为<code>&quot;pattern space&quot;</code>，接着用<code>sed</code>命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有 改变，除非你使用重定向存储输出。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><h4 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h4><p><code>sed [option] &#39;command&#39; input_file</code></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/Android%E6%9D%82%E8%AE%B0/Android%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86%E5%8F%8AProGuard%E6%89%8B%E5%86%8C.html#more" rel="contents">
+              <a class="btn" href="/Linux%E5%91%BD%E4%BB%A4/Linux%20Sed%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -721,188 +811,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B.html" class="post-title-link" itemprop="url">TypeScript学习笔记 - 基础类型</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-11-04 18:58:06" itemprop="dateCreated datePublished" datetime="2022-11-04T18:58:06+08:00">2022-11-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-29 15:06:05" itemprop="dateModified" datetime="2023-03-29T15:06:05+08:00">2023-03-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">TypeScript学习笔记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="布尔值-boolean"><a href="#布尔值-boolean" class="headerlink" title="布尔值(boolean)"></a>布尔值(boolean)</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">isDone</span>: <span class="built_in">boolean</span> = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="数字-number"><a href="#数字-number" class="headerlink" title="数字(number)"></a>数字(number)</h2><p>‌‌‌　　所有数字都是浮点数。 这些浮点数的类型是 <code>number</code>。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">decLiteral</span>: <span class="built_in">number</span> = <span class="number">6</span>; </span><br><span class="line"><span class="keyword">let</span> <span class="attr">hexLiteral</span>: <span class="built_in">number</span> = <span class="number">0xf00d</span>; </span><br><span class="line"><span class="keyword">let</span> <span class="attr">binaryLiteral</span>: <span class="built_in">number</span> = <span class="number">0b1010</span>; </span><br><span class="line"><span class="keyword">let</span> <span class="attr">octalLiteral</span>: <span class="built_in">number</span> = <span class="number">0o744</span>;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux%E5%91%BD%E4%BB%A4/Linux%20Sed%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Linux%E5%91%BD%E4%BB%A4/Linux%20Sed%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3.html" class="post-title-link" itemprop="url">Linux Sed命令详解</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-11-04 18:58:06" itemprop="dateCreated datePublished" datetime="2022-11-04T18:58:06+08:00">2022-11-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-29 15:04:10" itemprop="dateModified" datetime="2023-03-29T15:04:10+08:00">2023-03-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux命令</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><code>sed</code>是<code>stream editor</code>的简称，也就是流编辑器。它一次处理一行内容，处理时，把当前处理的行存储在临时缓冲区中，称为<code>&quot;pattern space&quot;</code>，接着用<code>sed</code>命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有 改变，除非你使用重定向存储输出。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><h4 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h4><p><code>sed [option] &#39;command&#39; input_file</code></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Linux%E5%91%BD%E4%BB%A4/Linux%20Sed%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -995,7 +903,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E6%8E%A5%E5%8F%A3.html">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/vinx.jpg">
@@ -1009,7 +917,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E6%8E%A5%E5%8F%A3.html" class="post-title-link" itemprop="url">TypeScript学习笔记 - 接口</a>
+            <a href="/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B.html" class="post-title-link" itemprop="url">TypeScript学习笔记 - 基础类型</a>
         </h2>
 
         <div class="post-meta">
@@ -1026,7 +934,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-29 15:06:06" itemprop="dateModified" datetime="2023-03-29T15:06:06+08:00">2023-03-29</time>
+                <time title="修改时间：2023-03-29 15:06:05" itemprop="dateModified" datetime="2023-03-29T15:06:05+08:00">2023-03-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1049,13 +957,107 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <hr>
-<h2 id="number-headings-auto-first-level-1-max-6-1-1-contents-top"><a href="#number-headings-auto-first-level-1-max-6-1-1-contents-top" class="headerlink" title="number headings: auto, first-level 1, max 6, 1.1 contents ^top"></a>number headings: auto, first-level 1, max 6, 1.1 contents ^top</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">LabelledValue</span> &#123; </span><br><span class="line">	<span class="attr">label</span>: <span class="built_in">string</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h2 id="布尔值-boolean"><a href="#布尔值-boolean" class="headerlink" title="布尔值(boolean)"></a>布尔值(boolean)</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">isDone</span>: <span class="built_in">boolean</span> = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
 
-<h1 id="1-可选属性"><a href="#1-可选属性" class="headerlink" title="1 可选属性"></a>1 可选属性</h1><p>接口里的属性不全都是必需的。 有些是只在某些条件下存在，或者根本不存在。<br>带有可选属性的接口与普通的接口定义差不多，只是在可选属性名字定义的后面加一个<code>?</code>符号。</p>
+<h2 id="数字-number"><a href="#数字-number" class="headerlink" title="数字(number)"></a>数字(number)</h2><p>‌‌‌　　所有数字都是浮点数。 这些浮点数的类型是 <code>number</code>。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">decLiteral</span>: <span class="built_in">number</span> = <span class="number">6</span>; </span><br><span class="line"><span class="keyword">let</span> <span class="attr">hexLiteral</span>: <span class="built_in">number</span> = <span class="number">0xf00d</span>; </span><br><span class="line"><span class="keyword">let</span> <span class="attr">binaryLiteral</span>: <span class="built_in">number</span> = <span class="number">0b1010</span>; </span><br><span class="line"><span class="keyword">let</span> <span class="attr">octalLiteral</span>: <span class="built_in">number</span> = <span class="number">0o744</span>;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E6%8E%A5%E5%8F%A3.html#more" rel="contents">
+              <a class="btn" href="/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E9%A2%9D%E5%A4%96%E7%9A%84%E5%B1%9E%E6%80%A7%E6%A3%80%E6%B5%8B.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E9%A2%9D%E5%A4%96%E7%9A%84%E5%B1%9E%E6%80%A7%E6%A3%80%E6%B5%8B.html" class="post-title-link" itemprop="url">TypeScript学习笔记 - 额外的属性检测</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-04 18:58:06" itemprop="dateCreated datePublished" datetime="2022-11-04T18:58:06+08:00">2022-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-29 15:06:07" itemprop="dateModified" datetime="2023-03-29T15:06:07+08:00">2023-03-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">TypeScript学习笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>先来看个例子：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Config</span> &#123;</span><br><span class="line">    width?: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span>  <span class="title class_">CalculateAreas</span> （<span class="attr">config</span>: <span class="title class_">Config</span>）: &#123; <span class="attr">area</span>: <span class="built_in">number</span>&#125; &#123;</span><br><span class="line">    <span class="keyword">let</span> square = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">if</span> (config.<span class="property">width</span>) &#123;</span><br><span class="line">        square = config.<span class="property">width</span> * config.<span class="property">width</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> square;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> mySquare = <span class="title class_">CalculateAreas</span>(&#123; <span class="attr">widdth</span>: <span class="number">5</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>我们传入的参数是<code>widdth</code>，并不是<code>width</code>。</p>
+<p>此时TypeScript会认为这段代码可能存在问题。对象字面量当被赋值给变量或作为参数传递的时候，会被特殊对待而且经过“额外属性检查”。</p>
+<p>如果一个对象字面量存在任何“目标类型”不包含的属性时，你会得到一个错误。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E9%A2%9D%E5%A4%96%E7%9A%84%E5%B1%9E%E6%80%A7%E6%A3%80%E6%B5%8B.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

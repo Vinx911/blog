@@ -164,7 +164,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E9%A2%9D%E5%A4%96%E7%9A%84%E5%B1%9E%E6%80%A7%E6%A3%80%E6%B5%8B.html">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E6%8E%A5%E5%8F%A3.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/vinx.jpg">
@@ -178,7 +178,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E9%A2%9D%E5%A4%96%E7%9A%84%E5%B1%9E%E6%80%A7%E6%A3%80%E6%B5%8B.html" class="post-title-link" itemprop="url">TypeScript学习笔记 - 额外的属性检测</a>
+            <a href="/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E6%8E%A5%E5%8F%A3.html" class="post-title-link" itemprop="url">TypeScript学习笔记 - 接口</a>
         </h2>
 
         <div class="post-meta">
@@ -195,7 +195,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-29 15:06:07" itemprop="dateModified" datetime="2023-03-29T15:06:07+08:00">2023-03-29</time>
+                <time title="修改时间：2023-03-29 15:06:06" itemprop="dateModified" datetime="2023-03-29T15:06:06+08:00">2023-03-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -218,15 +218,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>先来看个例子：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Config</span> &#123;</span><br><span class="line">    width?: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span>  <span class="title class_">CalculateAreas</span> （<span class="attr">config</span>: <span class="title class_">Config</span>）: &#123; <span class="attr">area</span>: <span class="built_in">number</span>&#125; &#123;</span><br><span class="line">    <span class="keyword">let</span> square = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">if</span> (config.<span class="property">width</span>) &#123;</span><br><span class="line">        square = config.<span class="property">width</span> * config.<span class="property">width</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> square;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> mySquare = <span class="title class_">CalculateAreas</span>(&#123; <span class="attr">widdth</span>: <span class="number">5</span> &#125;);</span><br></pre></td></tr></table></figure>
+          <hr>
+<h2 id="number-headings-auto-first-level-1-max-6-1-1-contents-top"><a href="#number-headings-auto-first-level-1-max-6-1-1-contents-top" class="headerlink" title="number headings: auto, first-level 1, max 6, 1.1 contents ^top"></a>number headings: auto, first-level 1, max 6, 1.1 contents ^top</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">LabelledValue</span> &#123; </span><br><span class="line">	<span class="attr">label</span>: <span class="built_in">string</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>我们传入的参数是<code>widdth</code>，并不是<code>width</code>。</p>
-<p>此时TypeScript会认为这段代码可能存在问题。对象字面量当被赋值给变量或作为参数传递的时候，会被特殊对待而且经过“额外属性检查”。</p>
-<p>如果一个对象字面量存在任何“目标类型”不包含的属性时，你会得到一个错误。</p>
+<h1 id="1-可选属性"><a href="#1-可选属性" class="headerlink" title="1 可选属性"></a>1 可选属性</h1><p>接口里的属性不全都是必需的。 有些是只在某些条件下存在，或者根本不存在。<br>带有可选属性的接口与普通的接口定义差不多，只是在可选属性名字定义的后面加一个<code>?</code>符号。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E9%A2%9D%E5%A4%96%E7%9A%84%E5%B1%9E%E6%80%A7%E6%A3%80%E6%B5%8B.html#more" rel="contents">
+              <a class="btn" href="/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E6%8E%A5%E5%8F%A3.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
