@@ -164,6 +164,92 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%B0%8F%E6%A0%87%E7%AD%BE(Chip).html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%B0%8F%E6%A0%87%E7%AD%BE(Chip).html" class="post-title-link" itemprop="url">Jetpack Compose组件-小标签(Chip)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-01-13 08:43:57 / 修改时间：08:58:08" itemprop="dateCreated datePublished" datetime="2023-01-13T08:43:57+08:00">2023-01-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Jetpack-Compose组件-小标签-Chip"><a href="#Jetpack-Compose组件-小标签-Chip" class="headerlink" title="Jetpack Compose组件-小标签(Chip)"></a>Jetpack Compose组件-小标签(Chip)</h1><h2 id="小标签-Chip"><a href="#小标签-Chip" class="headerlink" title="小标签(Chip)"></a>小标签(Chip)</h2><p>Chip(小标签)类似于淘宝的历史搜索标签。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ExperimentalMaterialApi</span></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">Chip</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 点击回调</span></span></span></span><br><span class="line"><span class="params"><span class="function">    onClick: () -&gt; <span class="type">Unit</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 修饰符</span></span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 小标签使能</span></span></span></span><br><span class="line"><span class="params"><span class="function">    enabled: <span class="type">Boolean</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 点击状态源</span></span></span></span><br><span class="line"><span class="params"><span class="function">    interactionSource: <span class="type">MutableInteractionSource</span> = remember &#123; MutableInteractionSource()</span></span> &#125;,</span><br><span class="line">    <span class="comment">// 小标签形状</span></span><br><span class="line">    shape: Shape = MaterialTheme.shapes.small.copy(CornerSize(percent = <span class="number">50</span>)),</span><br><span class="line">    <span class="comment">// 小标签边框</span></span><br><span class="line">    border: BorderStroke? = <span class="literal">null</span>,</span><br><span class="line">    <span class="comment">// 小标签的各种颜色</span></span><br><span class="line">    colors: ChipColors = ChipDefaults.chipColors(),</span><br><span class="line">    <span class="comment">// 小标签左侧图标</span></span><br><span class="line">    leadingIcon: (<span class="meta">@Composable</span> () -&gt; <span class="built_in">Unit</span>)? = <span class="literal">null</span>,</span><br><span class="line">    content: <span class="meta">@Composable</span> RowScope.() -&gt; <span class="built_in">Unit</span></span><br><span class="line">): <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Chip(</span><br><span class="line">    onClick = &#123; <span class="comment">/* Do something! */</span> &#125;,</span><br><span class="line">    border = ChipDefaults.outlinedBorder,</span><br><span class="line">    colors = ChipDefaults.outlinedChipColors(),</span><br><span class="line">    leadingIcon = &#123;</span><br><span class="line">        Icon(</span><br><span class="line">            Icons.Filled.Settings,</span><br><span class="line">            contentDescription = <span class="string">&quot;Localized description&quot;</span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">) &#123;</span><br><span class="line">    Text(<span class="string">&quot;Change settings&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%B0%8F%E6%A0%87%E7%AD%BE(Chip).html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Jetpack%20Compose/Jetpack%20Compose%20%E7%A6%81%E7%94%A8%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -928,84 +1014,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Jetpack%20Compose/Jetpack%20Compose%E5%AE%9E%E7%8E%B0%E5%B8%A6%E6%B8%85%E9%99%A4%E6%8C%89%E9%92%AE%E7%9A%84%E6%96%87%E6%9C%AC%E6%A1%86.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Jetpack%20Compose/Jetpack%20Compose%E5%AE%9E%E7%8E%B0%E5%B8%A6%E6%B8%85%E9%99%A4%E6%8C%89%E9%92%AE%E7%9A%84%E6%96%87%E6%9C%AC%E6%A1%86.html" class="post-title-link" itemprop="url">Jetpack Compose实现带清除按钮的文本框</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-01-11 10:24:54 / 修改时间：15:43:46" itemprop="dateCreated datePublished" datetime="2023-01-11T10:24:54+08:00">2023-01-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Jetpack-Compose实现带清除按钮的文本框"><a href="#Jetpack-Compose实现带清除按钮的文本框" class="headerlink" title="Jetpack Compose实现带清除按钮的文本框"></a>Jetpack Compose实现带清除按钮的文本框</h1><p>使用<code>trailingIcon</code>参数可在尾部添加一个自定义图标，并实现点击功能。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">TextFieldWithClean</span><span class="params">()</span></span> &#123;</span><br><span class="line">    Column &#123;</span><br><span class="line">        <span class="keyword">var</span> text <span class="keyword">by</span> remember &#123; mutableStateOf(<span class="string">&quot;&quot;</span>) &#125;</span><br><span class="line">        <span class="keyword">val</span> isVisible <span class="keyword">by</span> remember &#123; derivedStateOf &#123; text.isNotBlank() &#125; &#125;</span><br><span class="line"></span><br><span class="line">        OutlinedTextField(</span><br><span class="line">            value = text,</span><br><span class="line">            label = &#123; Text(<span class="string">&quot;User Name&quot;</span>) &#125;,</span><br><span class="line">            onValueChange = &#123; text = it &#125;,</span><br><span class="line">            trailingIcon = &#123;</span><br><span class="line">                <span class="keyword">if</span> (isVisible) &#123;</span><br><span class="line">                    IconButton(onClick = &#123; text = <span class="string">&quot;&quot;</span> &#125;) &#123;</span><br><span class="line">                        Icon(</span><br><span class="line">                            imageVector = Icons.Default.Clear, </span><br><span class="line">                            contentDescription = <span class="string">&quot;Clear&quot;</span></span><br><span class="line">                        )</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1077,20 +1085,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-count">84</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-count">50</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
