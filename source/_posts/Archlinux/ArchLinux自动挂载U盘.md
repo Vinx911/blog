@@ -1,3 +1,11 @@
+---
+title: ArchLinux自动挂载U盘
+date: 2023-03-23 10:34:47
+tags: Archlinux,U盘
+categories: Archlinux
+copyright: true
+---
+
 # ArchLinux自动挂载U盘
 
 在Arch Linux中，您可以通过以下步骤来自动挂载USB设备：
