@@ -164,6 +164,207 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Jetpack%20Compose/Modifier%20%E5%AF%B9%E9%BD%90(Alignment).html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Jetpack%20Compose/Modifier%20%E5%AF%B9%E9%BD%90(Alignment).html" class="post-title-link" itemprop="url">Modifier 对齐(Alignment)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-12-30 12:12:39" itemprop="dateCreated datePublished" datetime="2022-12-30T12:12:39+08:00">2022-12-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-01-11 15:45:39" itemprop="dateModified" datetime="2023-01-11T15:45:39+08:00">2023-01-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Modifier-对齐-Alignment"><a href="#Modifier-对齐-Alignment" class="headerlink" title="Modifier 对齐(Alignment)"></a>Modifier 对齐(Alignment)</h1><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用于Box</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">align</span><span class="params">(alignment: <span class="type">Alignment</span>)</span></span></span><br><span class="line"><span class="comment">// 用于Row</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">align</span><span class="params">(alignment: <span class="type">Alignment</span>.<span class="type">Vertical</span>)</span></span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">alignByBaseline</span><span class="params">()</span></span> <span class="comment">// 基线对齐</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">alignBy</span><span class="params">(alignmentLine: <span class="type">HorizontalAlignmentLine</span>)</span></span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">alignBy</span><span class="params">(alignmentLineBlock: (<span class="type">Measured</span>) -&gt; <span class="type">Int</span>)</span></span></span><br><span class="line"><span class="comment">// 用于Column</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">align</span><span class="params">(alignment: <span class="type">Alignment</span>.<span class="type">Horizontal</span>)</span></span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">alignBy</span><span class="params">(alignmentLine: <span class="type">VerticalAlignmentLine</span>)</span></span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">alignBy</span><span class="params">(alignmentLineBlock: (<span class="type">Measured</span>) -&gt; <span class="type">Int</span>)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Alignment.Start</li>
+<li>Alignment.End</li>
+<li>Alignment.CenterHorizontally</li>
+<li>Alignment.Top</li>
+<li>Alignment.Bottom</li>
+<li>Alignment.CenterVertically</li>
+<li>Alignment.TopCenter</li>
+<li>Alignment.TopStart</li>
+<li>Alignment.TopEnd</li>
+<li>Alignment.Center</li>
+<li>Alignment.CenterStart</li>
+<li>Alignment.CenterEnd</li>
+<li>Alignment.BottomCenter</li>
+<li>Alignment.BottomStart</li>
+<li>Alignment.BottomEnd</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Jetpack%20Compose/Modifier%20%E5%BC%80%E5%85%B3(Toggleable).html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Jetpack%20Compose/Modifier%20%E5%BC%80%E5%85%B3(Toggleable).html" class="post-title-link" itemprop="url">Modifier 开关(Toggleable)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-12-30 12:12:39" itemprop="dateCreated datePublished" datetime="2022-12-30T12:12:39+08:00">2022-12-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-01-11 15:45:48" itemprop="dateModified" datetime="2023-01-11T15:45:48+08:00">2023-01-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Modifier-开关-Toggleable"><a href="#Modifier-开关-Toggleable" class="headerlink" title="Modifier 开关(Toggleable)"></a>Modifier 开关(Toggleable)</h1><p><code>toggleable</code> 修饰符非常适合用来做开关效果</p>
+<p><code>triStateToggleable</code> 修饰符为三态开关（启用、停用和不确定）</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">toggleable</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    value: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    enabled: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    role: <span class="type">Role</span>?,</span></span></span><br><span class="line"><span class="params"><span class="function">    onValueChange: (<span class="type">Boolean</span>) -&gt; <span class="type">Unit</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">toggleable</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    value: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    interactionSource: <span class="type">MutableInteractionSource</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    indication: <span class="type">Indication</span>?,</span></span></span><br><span class="line"><span class="params"><span class="function">    enabled: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    role: <span class="type">Role</span>?,</span></span></span><br><span class="line"><span class="params"><span class="function">    onValueChange: (<span class="type">Boolean</span>) -&gt; <span class="type">Unit</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">triStateToggleable</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    state: <span class="type">ToggleableState</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    enabled: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    role: <span class="type">Role</span>?,</span></span></span><br><span class="line"><span class="params"><span class="function">    onClick: () -&gt; <span class="type">Unit</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">triStateToggleable</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    state: <span class="type">ToggleableState</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    interactionSource: <span class="type">MutableInteractionSource</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    indication: <span class="type">Indication</span>?,</span></span></span><br><span class="line"><span class="params"><span class="function">    enabled: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    role: <span class="type">Role</span>?,</span></span></span><br><span class="line"><span class="params"><span class="function">    onClick: () -&gt; <span class="type">Unit</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>value: Toggleable 是打开还是关闭</li>
+<li>enabled: 启用Toggleable </li>
+<li>interactionSource: 按下时发出此状态</li>
+<li>indication: 按下修改后的元素时显示的指示。默认情况下，<code>LocalIndication</code>将使用指示。传递<code>null</code>以显示无指示，</li>
+<li>role: 用户界面元素的类型。</li>
+<li>onValueChange: 单击 toggleable 时调用的回调</li>
+<li>onClick: 在用户单击可切换时调用</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Jetpack%20Compose/Modifier%20%E5%BC%80%E5%85%B3(Toggleable).html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Jetpack%20Compose/Modifier%20%E6%8B%96%E5%8A%A8(Draggable).html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -920,190 +1121,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Jetpack%E6%9E%B6%E6%9E%84%E7%BB%84%E4%BB%B6/Jetpack%E6%9E%B6%E6%9E%84%E7%BB%84%E4%BB%B6%E4%B9%8BRoom.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Jetpack%E6%9E%B6%E6%9E%84%E7%BB%84%E4%BB%B6/Jetpack%E6%9E%B6%E6%9E%84%E7%BB%84%E4%BB%B6%E4%B9%8BRoom.html" class="post-title-link" itemprop="url">Jetpack架构组件之Room</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-11-04 18:58:06" itemprop="dateCreated datePublished" datetime="2022-11-04T18:58:06+08:00">2022-11-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-29 15:03:31" itemprop="dateModified" datetime="2023-03-29T15:03:31+08:00">2023-03-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Jetpack%E6%9E%B6%E6%9E%84%E7%BB%84%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">Jetpack架构组件</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Entity-实体"><a href="#Entity-实体" class="headerlink" title="Entity(实体)"></a>Entity(实体)</h2><p>‌‌‌　　一个 Entity 对应于数据库中的一张表。Entity 类是 Sqlite 表结构对 Java&#x2F;kotlin 的映射，在 Java 中可以看作一个 Model 类。</p>
-<h3 id="Entity-注解实体类"><a href="#Entity-注解实体类" class="headerlink" title="Entity(注解实体类)"></a>Entity(注解实体类)</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">‌‌‌　　<span class="meta">@Entity(tableName = <span class="string">&quot;word_table&quot;</span>)</span></span><br><span class="line">‌‌‌　　<span class="keyword">class</span> <span class="title class_">Word</span>(<span class="meta">@PrimaryKey</span> <span class="meta">@ColumnInfo(name = <span class="string">&quot;word&quot;</span>)</span> <span class="keyword">val</span> word: String)</span><br></pre></td></tr></table></figure>
-
-<p>‌‌‌　　每个实体必须至少有 1 个使用 PrimaryKey 注释的字段。您还可以使用 primaryKeys 属性来定义主键。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Jetpack%E6%9E%B6%E6%9E%84%E7%BB%84%E4%BB%B6/Jetpack%E6%9E%B6%E6%9E%84%E7%BB%84%E4%BB%B6%E4%B9%8BRoom.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E.html" class="post-title-link" itemprop="url">TypeScript学习笔记 - 变量声明</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-11-04 18:58:06" itemprop="dateCreated datePublished" datetime="2022-11-04T18:58:06+08:00">2022-11-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-29 15:06:10" itemprop="dateModified" datetime="2023-03-29T15:06:10+08:00">2023-03-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">TypeScript学习笔记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="var-声明"><a href="#var-声明" class="headerlink" title="var 声明"></a><code>var</code> 声明</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="let-声明"><a href="#let-声明" class="headerlink" title="let 声明"></a><code>let</code> 声明</h2><p>优点：块作用域、重定义及屏蔽、块级作用域变量的获取</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20-%20%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1175,20 +1192,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-count">87</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-count">52</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

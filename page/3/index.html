@@ -164,6 +164,178 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%88%86%E5%89%B2%E7%BA%BF(Divider).html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%88%86%E5%89%B2%E7%BA%BF(Divider).html" class="post-title-link" itemprop="url">Jetpack Compose组件-分割线(Divider)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-01-13 09:20:19 / 修改时间：09:21:53" itemprop="dateCreated datePublished" datetime="2023-01-13T09:20:19+08:00">2023-01-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Jetpack-Compose组件-分割线-Divider"><a href="#Jetpack-Compose组件-分割线-Divider" class="headerlink" title="Jetpack Compose组件-分割线(Divider)"></a>Jetpack Compose组件-分割线(Divider)</h1><h2 id="分割线-Divider"><a href="#分割线-Divider" class="headerlink" title="分割线(Divider)"></a>分割线(Divider)</h2><p><code>Divider</code>是将列表和布局中的内容分组的细线。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">Divider</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 修饰符</span></span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 分割线颜色</span></span></span></span><br><span class="line"><span class="params"><span class="function">    color: <span class="type">Color</span> = MaterialTheme.colors.onSurface.copy(alpha = DividerAlpha)</span></span>,</span><br><span class="line">    <span class="comment">// 分割线粗细</span></span><br><span class="line">    thickness: Dp = <span class="number">1.</span>dp,</span><br><span class="line">    <span class="comment">// 分割线起始偏移</span></span><br><span class="line">    startIndent: Dp = <span class="number">0.</span>dp</span><br><span class="line">): <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Column &#123;</span><br><span class="line">    Text(<span class="string">&quot;Foo&quot;</span>)</span><br><span class="line">    Divider(startIndent = <span class="number">8.</span>dp, thickness = <span class="number">1.</span>dp, color = Color.Black)</span><br><span class="line">    Text(<span class="string">&quot;Bar&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%88%86%E5%89%B2%E7%BA%BF(Divider).html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%BE%BD%E7%AB%A0(Badge).html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%BE%BD%E7%AB%A0(Badge).html" class="post-title-link" itemprop="url">Jetpack Compose组件-徽章(Badge)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-01-13 09:12:31 / 修改时间：09:17:05" itemprop="dateCreated datePublished" datetime="2023-01-13T09:12:31+08:00">2023-01-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Jetpack-Compose组件-徽章-Badge"><a href="#Jetpack-Compose组件-徽章-Badge" class="headerlink" title="Jetpack Compose组件-徽章(Badge)"></a>Jetpack Compose组件-徽章(Badge)</h1><h2 id="徽章-Badge"><a href="#徽章-Badge" class="headerlink" title="徽章(Badge)"></a>徽章(Badge)</h2><p>Badge 是一个可以包含动态信息的组件，例如是否存在新通知或许多未处理请求。徽章可以是纯图标或包含短文本。一般不单独使用，使用BadgeBox 将Badge放置在组件的右上角。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">Badge</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 修饰符</span></span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 背景颜色</span></span></span></span><br><span class="line"><span class="params"><span class="function">    backgroundColor: <span class="type">Color</span> = MaterialTheme.colors.error,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 内容颜色</span></span></span></span><br><span class="line"><span class="params"><span class="function">    contentColor: <span class="type">Color</span> = contentColorFor(backgroundColor)</span></span>,</span><br><span class="line">    content: (<span class="meta">@Composable</span> RowScope.() -&gt; <span class="built_in">Unit</span>)? = <span class="literal">null</span></span><br><span class="line">): <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count <span class="keyword">by</span> remember &#123; mutableStateOf(<span class="number">0</span>) &#125;</span><br><span class="line">Card(onClick = &#123; count++ &#125;) &#123;</span><br><span class="line">    Text(<span class="string">&quot;Clickable card content with count: <span class="variable">$count</span>&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%BE%BD%E7%AB%A0(Badge).html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%8D%A1%E7%89%87(Card).html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -840,181 +1012,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%A4%8D%E9%80%89%E6%8C%89%E9%92%AE(Checkbox).html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%A4%8D%E9%80%89%E6%8C%89%E9%92%AE(Checkbox).html" class="post-title-link" itemprop="url">Jetpack Compose组件-复选按钮(Checkbox)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-01-11 16:54:39 / 修改时间：16:59:13" itemprop="dateCreated datePublished" datetime="2023-01-11T16:54:39+08:00">2023-01-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Jetpack-Compose组件-复选按钮-Checkbox"><a href="#Jetpack-Compose组件-复选按钮-Checkbox" class="headerlink" title="Jetpack Compose组件-复选按钮(Checkbox)"></a>Jetpack Compose组件-复选按钮(Checkbox)</h1><h2 id="复选按钮-Checkbox"><a href="#复选按钮-Checkbox" class="headerlink" title="复选按钮(Checkbox)"></a>复选按钮(Checkbox)</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">Checkbox</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">     <span class="comment">// 是否选中</span></span></span></span><br><span class="line"><span class="params"><span class="function">    checked: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 选中状态改变回调</span></span></span></span><br><span class="line"><span class="params"><span class="function">    onCheckedChange: (<span class="type">Boolean</span>) -&gt; <span class="type">Unit</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 修饰符</span></span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 复选按钮使能</span></span></span></span><br><span class="line"><span class="params"><span class="function">    enabled: <span class="type">Boolean</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 复选按钮的状态源</span></span></span></span><br><span class="line"><span class="params"><span class="function">    interactionSource: <span class="type">MutableInteractionSource</span> = remember &#123; MutableInteractionSource()</span></span> &#125;,</span><br><span class="line">    <span class="comment">// 复选按钮的各种颜色</span></span><br><span class="line">    colors: CheckboxColors = CheckboxDefaults.colors()</span><br><span class="line">): <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> checkedState = remember &#123; mutableStateOf(<span class="literal">true</span>) &#125;</span><br><span class="line">Checkbox(</span><br><span class="line">    checked = checkedState.value,</span><br><span class="line">    onCheckedChange = &#123; checkedState.value = it &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="三态复选按钮-TriStateCheckbox"><a href="#三态复选按钮-TriStateCheckbox" class="headerlink" title="三态复选按钮(TriStateCheckbox)"></a>三态复选按钮(TriStateCheckbox)</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E5%A4%8D%E9%80%89%E6%8C%89%E9%92%AE(Checkbox).html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E6%8C%89%E9%92%AE(Button).html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E6%8C%89%E9%92%AE(Button).html" class="post-title-link" itemprop="url">Jetpack Compose组件-按钮(Button)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-01-11 16:47:27 / 修改时间：16:47:28" itemprop="dateCreated datePublished" datetime="2023-01-11T16:47:27+08:00">2023-01-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Jetpack-Compose组件-按钮-Button"><a href="#Jetpack-Compose组件-按钮-Button" class="headerlink" title="Jetpack Compose组件-按钮(Button)"></a>Jetpack Compose组件-按钮(Button)</h1><h2 id="按钮-Button"><a href="#按钮-Button" class="headerlink" title="按钮(Button)"></a>按钮(Button)</h2><p><strong>Compose</strong> 的 <code>Button</code> 是基于 <strong>Material Design</strong> 理念设计的</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">Button</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 点击回调</span></span></span></span><br><span class="line"><span class="params"><span class="function">    onClick: () -&gt; <span class="type">Unit</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 修饰符</span></span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 按钮使能</span></span></span></span><br><span class="line"><span class="params"><span class="function">    enabled: <span class="type">Boolean</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 按钮的状态源</span></span></span></span><br><span class="line"><span class="params"><span class="function">    interactionSource: <span class="type">MutableInteractionSource</span> = remember &#123; MutableInteractionSource()</span></span> &#125;,</span><br><span class="line">    <span class="comment">// 按钮的高度(阴影)</span></span><br><span class="line">    elevation: ButtonElevation? = ButtonDefaults.elevation(),</span><br><span class="line">    <span class="comment">// 按钮的形状</span></span><br><span class="line">    shape: Shape = MaterialTheme.shapes.small,</span><br><span class="line">    <span class="comment">// 按钮的边框</span></span><br><span class="line">    border: BorderStroke? = <span class="literal">null</span>,</span><br><span class="line">    <span class="comment">// 按钮的各种颜色</span></span><br><span class="line">    colors: ButtonColors = ButtonDefaults.buttonColors(),    </span><br><span class="line">    <span class="comment">// 按钮内容边距</span></span><br><span class="line">    contentPadding: PaddingValues = ButtonDefaults.ContentPadding,</span><br><span class="line">    content: <span class="meta">@Composable</span> RowScope.() -&gt; <span class="built_in">Unit</span></span><br><span class="line">): <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Jetpack%20Compose/Jetpack%20Compose%E7%BB%84%E4%BB%B6-%E6%8C%89%E9%92%AE(Button).html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1086,20 +1083,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-count">87</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-count">52</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

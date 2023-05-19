@@ -164,6 +164,170 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x11-uart_port-structure.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Linux-driver-development-notes/0x11-uart_port-structure.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x11) - uart_port结构体</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-22 15:07:57" itemprop="dateCreated datePublished" datetime="2018-11-22T15:07:57+08:00">2018-11-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-08 16:19:18" itemprop="dateModified" datetime="2022-11-08T16:19:18+08:00">2022-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>﻿<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">uart_port</span> &#123;</span></span><br><span class="line">    <span class="type">spinlock_t</span>             lock;           <span class="comment">/* 串口端口锁 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>           iobase;         <span class="comment">/* IO端口基地址 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> __iomem *membase;        <span class="comment">/* IO内存基地址,经映射(如ioremap)后的IO内存虚拟基地址 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>           irq;            <span class="comment">/* 中断号 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>           uartclk;        <span class="comment">/* 串口时钟 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>           fifosize;       <span class="comment">/* 串口FIFO缓冲大小 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span>          x_char;         <span class="comment">/* xon/xoff字符 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span>          regshift;       <span class="comment">/* 寄存器位移 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span>          iotype;         <span class="comment">/* IO访问方式 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span>          unused1;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPIO_PORT        (0)               <span class="comment">/* IO端口 */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPIO_HUB6        (1)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPIO_MEM         (2)               <span class="comment">/* IO内存 */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPIO_MEM32       (3)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPIO_AU          (4)               <span class="comment">/* Au1x00 type IO */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPIO_TSI         (5)               <span class="comment">/* Tsi108/109 type IO */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPIO_DWAPB       (6)               <span class="comment">/* DesignWare APB UART */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPIO_RM9000      (7)               <span class="comment">/* RM9000 type IO */</span></span></span><br><span class="line"></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>        read_status_mask;  <span class="comment">/* 关心的Rx error status */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>        ignore_status_mask;<span class="comment">/* 忽略的Rx error status */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">uart_info</span>      *<span class="title">info</span>;</span>           <span class="comment">/* pointer to parent info */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">uart_icount</span>     <span class="title">icount</span>;</span>         <span class="comment">/* 计数器 */</span></span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">console</span>        *<span class="title">cons</span>;</span>           <span class="comment">/* console结构体 */</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> CONFIG_SERIAL_CORE_CONSOLE</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">long</span>         sysrq;           <span class="comment">/* sysrq timeout */</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    <span class="type">upf_t</span>                 flags;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_FOURPORT         ((__force upf_t) (1 &lt;&lt; 1))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_SAK              ((__force upf_t) (1 &lt;&lt; 2))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_SPD_MASK         ((__force upf_t) (0x1030))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_SPD_HI           ((__force upf_t) (0x0010))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_SPD_VHI          ((__force upf_t) (0x0020))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_SPD_CUST         ((__force upf_t) (0x0030))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_SPD_SHI          ((__force upf_t) (0x1000))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_SPD_WARP         ((__force upf_t) (0x1010))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_SKIP_TEST        ((__force upf_t) (1 &lt;&lt; 6))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_AUTO_IRQ         ((__force upf_t) (1 &lt;&lt; 7))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_HARDPPS_CD       ((__force upf_t) (1 &lt;&lt; 11))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_LOW_LATENCY      ((__force upf_t) (1 &lt;&lt; 13))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_BUGGY_UART       ((__force upf_t) (1 &lt;&lt; 14))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_MAGIC_MULTIPLIER ((__force upf_t) (1 &lt;&lt; 16))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_CONS_FLOW        ((__force upf_t) (1 &lt;&lt; 23))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_SHARE_IRQ        ((__force upf_t) (1 &lt;&lt; 24))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_BOOT_AUTOCONF    ((__force upf_t) (1 &lt;&lt; 28))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_FIXED_PORT       ((__force upf_t) (1 &lt;&lt; 29))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_DEAD             ((__force upf_t) (1 &lt;&lt; 30))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_IOREMAP          ((__force upf_t) (1 &lt;&lt; 31))</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_CHANGE_MASK      ((__force upf_t) (0x17fff))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UPF_USR_MASK         ((__force upf_t) (UPF_SPD_MASK|UPF_LOW_LATENCY))</span></span><br><span class="line"></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>             mctrl;        <span class="comment">/* 当前的moden设置 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>             timeout;      <span class="comment">/* character-based timeout */</span>        </span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>             type;         <span class="comment">/* 端口类型 */</span></span><br><span class="line">    <span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">uart_ops</span>   *<span class="title">ops</span>;</span>          <span class="comment">/* 串口端口操作函数集 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>             custom_divisor;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>             line;         <span class="comment">/* 端口索引 uart_driver.dev_name加上line组成串口的设备节点的名字 */</span></span><br><span class="line">    <span class="type">resource_size_t</span>          mapbase;      <span class="comment">/* IO内存物理基地址，可用于ioremap */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">device</span>           *<span class="title">dev</span>;</span>          <span class="comment">/* 父设备 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span>            hub6;         <span class="comment">/* this should be in the 8250 driver */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span>            suspended;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span>            unused[<span class="number">2</span>];</span><br><span class="line">    <span class="type">void</span>                    *private_data; <span class="comment">/* 端口私有数据,一般为platform数据指针 */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x10-uart_driver-structure.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Linux-driver-development-notes/0x10-uart_driver-structure.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x10) - uart_driver结构体</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-22 15:06:46" itemprop="dateCreated datePublished" datetime="2018-11-22T15:06:46+08:00">2018-11-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-08 16:19:24" itemprop="dateModified" datetime="2022-11-08T16:19:24+08:00">2022-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>﻿<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">uart_driver</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">module</span>     *<span class="title">owner</span>;</span>           <span class="comment">/* 拥有该uart_driver的模块,一般为THIS_MODULE */</span></span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>        *driver_name;     <span class="comment">/* 串口驱动名，串口设备文件名以驱动名为基础 */</span></span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>        *dev_name;        <span class="comment">/* 串口设备名 */</span></span><br><span class="line">    <span class="type">int</span>                major;           <span class="comment">/* 主设备号 */</span></span><br><span class="line">    <span class="type">int</span>                minor;           <span class="comment">/* 次设备号 */</span></span><br><span class="line">    <span class="type">int</span>                nr;              <span class="comment">/* 该uart_driver支持的串口个数(最大) */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">console</span>    *<span class="title">cons</span>;</span>            <span class="comment">/* 其对应的console.若该uart_driver支持serial console,否则为NULL */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * these are private; the low level driver should not</span></span><br><span class="line"><span class="comment">     * touch these; they should be initialised to NULL</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">uart_state</span> *<span class="title">state</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tty_driver</span> *<span class="title">tty_driver</span>;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x0F-Cannot-access-memory-at-address.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -874,190 +1038,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x07-IO-port.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Linux-driver-development-notes/0x07-IO-port.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x07) - I/O端口</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-11-12 10:06:31" itemprop="dateCreated datePublished" datetime="2018-11-12T10:06:31+08:00">2018-11-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-08 16:20:45" itemprop="dateModified" datetime="2022-11-08T16:20:45+08:00">2022-11-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>﻿## 1 申请I&#x2F;O 端⼝：<br>在驱动还没独占设备之前，不应对端⼝进⾏操作。内核提供了⼀个注册接⼝，以允许驱动声明其需要的端⼝：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* request_region告诉内核：要使⽤first开始的n个端⼝。参数name为设备名。</span></span><br><span class="line"><span class="comment">如果分配成功返回值是⾮NULL；否则无法使用需要的端口(/proc/ioports包含了系统当前所有端口的分配信息，</span></span><br><span class="line"><span class="comment">若request_region分配失败时，可以查看该文件，看谁先用了你要的端口) */</span></span><br><span class="line"><span class="keyword">struct</span> resource *<span class="title function_">request_region</span><span class="params">(<span class="type">unsigned</span> <span class="type">long</span> first, <span class="type">unsigned</span> <span class="type">long</span> n, <span class="type">const</span> <span class="type">char</span> *name)</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="2-访问IO端⼝："><a href="#2-访问IO端⼝：" class="headerlink" title="2 访问IO端⼝："></a>2 访问IO端⼝：</h2><p>在驱动成功请求到I&#x2F;O 端⼝后，就可以读写这些端⼝了。⼤部分硬件会将8位、16位和32位端⼝区分开，⽆法像访问内存那样混淆使⽤。驱动程序必须调⽤不同的函数来访问不同⼤⼩的端⼝。<br>Linux 内核头⽂件(体系依赖的头⽂件&lt;asm&#x2F;io.h&gt;) 定义了下列内联函数来存取I&#x2F;O端⼝:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* inb/outb:读/写字节端⼝(8位宽)。有些体系将port参数定义为unsigned long；</span></span><br><span class="line"><span class="comment">⽽有些平台则将它定义为unsigned short。inb的返回类型也是依赖体系的 */</span></span><br><span class="line"><span class="type">unsigned</span> <span class="title function_">inb</span><span class="params">(<span class="type">unsigned</span> port)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">outb</span><span class="params">(<span class="type">unsigned</span> <span class="type">char</span> byte, <span class="type">unsigned</span> port)</span>;</span><br><span class="line"><span class="comment">/* inw/outw:读/写字端⼝(16位宽） */</span></span><br><span class="line"><span class="type">unsigned</span> <span class="title function_">inw</span><span class="params">(<span class="type">unsigned</span> port)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">outw</span><span class="params">(<span class="type">unsigned</span> <span class="type">short</span> word, <span class="type">unsigned</span> port)</span>;</span><br><span class="line"><span class="comment">/* inl/outl:读/写32位端⼝。longword也是依赖体系的，有的体系为unsigned long；⽽有的为unsigned int */</span></span><br><span class="line"><span class="type">unsigned</span> <span class="title function_">inl</span><span class="params">(<span class="type">unsigned</span> port)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">outl</span><span class="params">(<span class="type">unsigned</span> longword, <span class="type">unsigned</span> port)</span>;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Linux-driver-development-notes/0x07-IO-port.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux-driver-development-notes/0x06-Memory-allocation-in-the-kernel.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Linux-driver-development-notes/0x06-Memory-allocation-in-the-kernel.html" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x06) - 内核中的内存分配</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-11-09 16:59:27" itemprop="dateCreated datePublished" datetime="2018-11-09T16:59:27+08:00">2018-11-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-08 16:20:52" itemprop="dateModified" datetime="2022-11-08T16:20:52+08:00">2022-11-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>﻿一般我们会用到 kmalloc()、kzalloc()、vmalloc() 等，下面我们介绍一下这些函数的使用以及它们之间的区别。</p>
-<h2 id="kmalloc"><a href="#kmalloc" class="headerlink" title="kmalloc()"></a>kmalloc()</h2><p>函数原型：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *<span class="title function_">kmalloc</span><span class="params">(<span class="type">size_t</span> size, <span class="type">gfp_t</span> flags)</span>；</span><br></pre></td></tr></table></figure>
-<p>kmalloc() 申请的内存位于物理内存映射区域，而且在物理上也是连续的，它们与真实的物理地址只有一个固定的偏移，因为存在较简单的转换关系，所以对申请的内存大小有限制，不能超过128KB。 　　<br>较常用的 flags（分配内存的方法）：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Linux-driver-development-notes/0x06-Memory-allocation-in-the-kernel.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1129,20 +1109,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-count">87</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-count">52</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
