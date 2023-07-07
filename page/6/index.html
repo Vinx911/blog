@@ -164,6 +164,365 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/linux-practical-tips/Ubuntu-switching-software-versions.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-practical-tips/Ubuntu-switching-software-versions.html" class="post-title-link" itemprop="url">Ubuntu切换软件版本 - 以g++为例</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-11-29 09:58:22 / 修改时间：10:00:08" itemprop="dateCreated datePublished" datetime="2022-11-29T09:58:22+08:00">2022-11-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url" rel="index"><span itemprop="name">Linux实用技巧</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Ubuntu切换软件版本-以g-为例"><a href="#Ubuntu切换软件版本-以g-为例" class="headerlink" title="Ubuntu切换软件版本 - 以g++为例"></a>Ubuntu切换软件版本 - 以g++为例</h1><h2 id="1-将各个版本添加到列表中"><a href="#1-将各个版本添加到列表中" class="headerlink" title="1. 将各个版本添加到列表中"></a>1. 将各个版本添加到列表中</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 11</span><br><span class="line">sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 12</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-列出已经配置版本"><a href="#2-列出已经配置版本" class="headerlink" title="2. 列出已经配置版本"></a>2. 列出已经配置版本</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --list g++</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/linux-practical-tips/Ubuntu-switching-software-versions.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Android%E6%9D%82%E8%AE%B0/Android%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86%E5%8F%8AProGuard%E6%89%8B%E5%86%8C.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Android%E6%9D%82%E8%AE%B0/Android%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86%E5%8F%8AProGuard%E6%89%8B%E5%86%8C.html" class="post-title-link" itemprop="url">Android代码混淆及ProGuard手册</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-04 18:58:06" itemprop="dateCreated datePublished" datetime="2022-11-04T18:58:06+08:00">2022-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-29 14:53:22" itemprop="dateModified" datetime="2023-03-29T14:53:22+08:00">2023-03-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Android杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>为什么把这三个内容放到一起说？因为在 Android Gradle 中配置方法基本是在一起的。</p>
+<p>官方说明如下：</p>
+<blockquote>
+<p>为了尽可能减小应用的大小，您应在发布 build 中启用缩减功能来移除不使用的代码和资源。启用缩减功能后，您还会受益于两项功能，一项是混淆处理功能，该功能会缩短应用的类和成员的名称；另一项是优化功能，该功能会采用更积极的策略来进一步减小应用的大小。本页介绍 R8 如何为项目执行这些编译时任务，以及您如何对这些任务进行自定义。</p>
+<p>当您使用 <a href="https://link.juejin.cn/?target=https://developer.android.google.cn/studio/releases/gradle-plugin%233-4-0">Android Gradle 插件 3.4.0</a> 或更高版本构建项目时，该插件不再使用 ProGuard 执行编译时代码优化，而是与 R8 编译器协同工作，处理以下编译时任务：</p>
+<ul>
+<li><strong>代码缩减（即摇树优化）</strong>：从应用及其库依赖项中检测并安全地移除不使用的类、字段、方法和属性（这使其成为了一个对于规避 <a href="https://link.juejin.cn/?target=https://developer.android.google.cn/studio/build/multidex">64k 引用限制</a>非常有用的工具）。例如，如果您仅使用某个库依赖项的少数几个 API，那么缩减功能可以识别应用不使用的库代码并仅从应用中移除这部分代码。如需了解详情，请转到介绍如何<a href="https://link.juejin.cn/?target=https://developer.android.google.cn/studio/build/shrink-code%23shrink-code">缩减代码</a>的部分。</li>
+<li><strong>资源缩减</strong>：从封装应用中移除不使用的资源，包括应用库依赖项中不使用的资源。此功能可与代码缩减功能结合使用，这样一来，移除不使用的代码后，也可以安全地移除不再引用的所有资源。如需了解详情，请转到介绍如何<a href="https://link.juejin.cn/?target=https://developer.android.google.cn/studio/build/shrink-code%23shrink-resources">缩减资源</a>的部分。</li>
+<li><strong>混淆</strong>：缩短类和成员的名称，从而减小 DEX 文件的大小。如需了解详情，请转到介绍如何<a href="https://link.juejin.cn/?target=https://developer.android.google.cn/studio/build/shrink-code%23obfuscate">对代码进行混淆处理</a>的部分。</li>
+<li><strong>优化</strong>：检查并重写代码，以进一步减小应用的 DEX 文件的大小。例如，如果 R8 检测到从未采用过给定 if&#x2F;else 语句的 <code>else &#123;&#125;</code> 分支，则会移除 <code>else &#123;&#125;</code> 分支的代码。如需了解详情，请转到介绍<a href="https://link.juejin.cn/?target=https://developer.android.google.cn/studio/build/shrink-code%23optimization">代码优化</a>的部分。</li>
+</ul>
+<p>默认情况下，在构建应用的发布版本时，R8 会自动执行上述编译时任务。不过，您也可以停用某些任务或通过 ProGuard 规则文件自定义 R8 的行为。事实上，<strong>R8 支持所有现有 ProGuard 规则文件</strong>，因此您在更新 Android Gradle 插件以使用 R8 时，无需更改现有规则。</p>
+</blockquote>
+<h2 id="开启混淆功能"><a href="#开启混淆功能" class="headerlink" title="开启混淆功能"></a>开启混淆功能</h2><p>上面没有提到的一个代码混淆的重要作用：我们知道 apk 文件是相对容易被反编译的，未加混淆的 apk，反编译后基本裸奔。而混淆的 apk 即使被反编译，类名与变量名都会处理成无意义的字符，很大程度上降低了源码的可读性。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Android%E6%9D%82%E8%AE%B0/Android%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86%E5%8F%8AProGuard%E6%89%8B%E5%86%8C.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Android%E6%9D%82%E8%AE%B0/Android%20Studio%E6%B7%B7%E6%B7%86%E6%A8%A1%E6%9D%BF.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Android%E6%9D%82%E8%AE%B0/Android%20Studio%E6%B7%B7%E6%B7%86%E6%A8%A1%E6%9D%BF.html" class="post-title-link" itemprop="url">Android Studio混淆模板</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-04 18:58:06" itemprop="dateCreated datePublished" datetime="2022-11-04T18:58:06+08:00">2022-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-29 14:53:20" itemprop="dateModified" datetime="2023-03-29T14:53:20+08:00">2023-03-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Android杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#############################################</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 对于一些基本指令的添加</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#############################################</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 关闭压缩</span></span><br><span class="line"><span class="comment">#-dontshrink </span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 关闭优化</span></span><br><span class="line"><span class="comment">#-dontoptimize  </span></span><br><span class="line"><span class="comment"># 代码混淆压缩比，在0~7之间，默认为5，一般不做修改</span></span><br><span class="line"><span class="attr">-optimizationpasses</span> <span class="string">5</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 关闭混淆</span></span><br><span class="line"><span class="comment">#-dontobfuscate </span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"># 混合时不使用大小写混合，混合后的类名为小写</span></span><br><span class="line"><span class="attr">-dontusemixedcaseclassnames</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"># 指定不去忽略非公共库的类</span></span><br><span class="line"><span class="attr">-dontskipnonpubliclibraryclasses</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"># 这句话能够使我们的项目混淆后产生映射文件</span></span><br><span class="line"><span class="comment"># 包含有类名-&gt;混淆后类名的映射关系</span></span><br><span class="line"><span class="attr">-verbose</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"># 指定不去忽略非公共库的类成员</span></span><br><span class="line"><span class="attr">-dontskipnonpubliclibraryclassmembers</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"># 不做预校验，preverify是proguard的四个步骤之一，Android不需要preverify，去掉这一步能够加快混淆速度。</span></span><br><span class="line"><span class="attr">-dontpreverify</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"># 保留Annotation不混淆</span></span><br><span class="line"><span class="attr">-keepattributes</span> <span class="string">*Annotation*,InnerClasses</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"># 避免混淆泛型</span></span><br><span class="line"><span class="attr">-keepattributes</span> <span class="string">Signature</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"># 抛出异常时保留代码行号</span></span><br><span class="line"><span class="attr">-keepattributes</span> <span class="string">SourceFile,LineNumberTable</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"># 指定混淆是采用的算法，后面的参数是一个过滤器</span></span><br><span class="line"><span class="comment"># 这个过滤器是谷歌推荐的算法，一般不做更改</span></span><br><span class="line"><span class="attr">-optimizations</span> <span class="string">!code/simplification/cast,!field/*,!class/merging/*</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment">#############################################</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Android开发中一些需要保留的公共部分</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#############################################</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 保留我们使用的四大组件，自定义的Application等等这些类不被混淆</span></span><br><span class="line"><span class="comment"># 因为这些子类都有可能被外部调用</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends android.app.Activity</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends android.app.Fragment</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends android.app.Application</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends android.app.Service</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends android.content.BroadcastReceiver</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends android.content.ContentProvider</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends android.app.backup.BackupAgentHelper</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends android.preference.Preference</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends androidx.fragment.app.Fragment</span></span><br><span class="line"><span class="comment"># 这个应该是Google play相关的</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class com.android.vending.licensing.ILicensingService</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># support</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">class android.support.** &#123;*;&#125;</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends android.support.**</span></span><br><span class="line"><span class="attr">-dontwarn</span> <span class="string">android.support.**</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">interface android.support.** &#123; *; &#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># androidx</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">class androidx.** &#123;*;&#125;</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">interface androidx.** &#123;*;&#125;</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends androidx.**</span></span><br><span class="line"><span class="attr">-dontwarn</span> <span class="string">androidx.**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 自定义控件</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends android.view.View&#123;</span></span><br><span class="line">    <span class="attr">***</span> <span class="string">get*();</span></span><br><span class="line">    <span class="attr">void</span> <span class="string">set*(***);</span></span><br><span class="line">    <span class="attr">public</span> <span class="string">&lt;init&gt;(android.content.Context);</span></span><br><span class="line">    <span class="attr">public</span> <span class="string">&lt;init&gt;(android.content.Context, android.util.AttributeSet);</span></span><br><span class="line">    <span class="attr">public</span> <span class="string">&lt;init&gt;(android.content.Context, android.util.AttributeSet, int);</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 保留R下面的资源</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">class **.R$* &#123;*;&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 这个主要是在layout 中写的onclick方法android:onclick=&quot;onClick&quot;，不进行混淆</span></span><br><span class="line"><span class="attr">-keepclassmembers</span> <span class="string">class * extends android.app.Activity &#123;</span></span><br><span class="line">    <span class="attr">public</span> <span class="string">void *(android.view.View);</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 对于带有回调函数的onXXEvent、**On*Listener的，不能被混淆</span></span><br><span class="line"><span class="attr">-keepclassmembers</span> <span class="string">class * &#123;</span></span><br><span class="line">    <span class="attr">void</span> <span class="string">*(**On*Event);</span></span><br><span class="line">    <span class="attr">void</span> <span class="string">*(**On*Listener);</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 保持枚举enum类不被混淆</span></span><br><span class="line"><span class="attr">-keepclassmembers</span> <span class="string">enum * &#123;</span></span><br><span class="line">    <span class="attr">public</span> <span class="string">static **[] values();</span></span><br><span class="line">    <span class="attr">public</span> <span class="string">static ** valueOf(java.lang.String);</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 保持 native 方法不被混淆</span></span><br><span class="line"><span class="attr">-keepclasseswithmembernames</span> <span class="string">class * &#123;</span></span><br><span class="line">    <span class="attr">native</span> <span class="string">&lt;methods&gt;;</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 保留Parcelable序列化类不被混淆</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">class * implements android.os.Parcelable &#123;</span></span><br><span class="line">    <span class="attr">public</span> <span class="string">static final android.os.Parcelable$Creator *;</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 保持注解继承类不混淆</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">class * extends java.lang.annotation.Annotation &#123;*;&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 保持Serializable实现类不被混淆</span></span><br><span class="line"><span class="attr">-keepnames</span> <span class="string">class * implements java.io.Serializable</span></span><br><span class="line"><span class="comment"># 保持Serializable不被混淆并且enum 类也不被混淆</span></span><br><span class="line"><span class="attr">-keepclassmembers</span> <span class="string">class * implements java.io.Serializable &#123;</span></span><br><span class="line">    <span class="attr">static</span> <span class="string">final long serialVersionUID;</span></span><br><span class="line">    <span class="attr">private</span> <span class="string">static final java.io.ObjectStreamField[] serialPersistentFields;</span></span><br><span class="line"><span class="comment">    !static !transient &lt;fields&gt;;</span></span><br><span class="line"><span class="comment">    !private &lt;fields&gt;;</span></span><br><span class="line"><span class="comment">    !private &lt;methods&gt;;</span></span><br><span class="line">    <span class="attr">private</span> <span class="string">void writeObject(java.io.ObjectOutputStream);</span></span><br><span class="line">    <span class="attr">private</span> <span class="string">void readObject(java.io.ObjectInputStream);</span></span><br><span class="line">    <span class="attr">java.lang.Object</span> <span class="string">writeReplace();</span></span><br><span class="line">    <span class="attr">java.lang.Object</span> <span class="string">readResolve();</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># ViewBinding &amp; DataBinding</span></span><br><span class="line"><span class="attr">-keepclassmembers</span> <span class="string">class * implements androidx.viewbinding.ViewBinding &#123;</span></span><br><span class="line">  <span class="attr">public</span> <span class="string">static * inflate(android.view.LayoutInflater);</span></span><br><span class="line">  <span class="attr">public</span> <span class="string">static * inflate(android.view.LayoutInflater, android.view.ViewGroup, boolean);</span></span><br><span class="line">  <span class="attr">public</span> <span class="string">static * bind(android.view.View);</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Linux%E5%91%BD%E4%BB%A4/Linux%20Sed%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Linux%E5%91%BD%E4%BB%A4/Linux%20Sed%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3.html" class="post-title-link" itemprop="url">Linux Sed命令详解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-04 18:58:06" itemprop="dateCreated datePublished" datetime="2022-11-04T18:58:06+08:00">2022-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-29 15:04:10" itemprop="dateModified" datetime="2023-03-29T15:04:10+08:00">2023-03-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux命令</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><code>sed</code>是<code>stream editor</code>的简称，也就是流编辑器。它一次处理一行内容，处理时，把当前处理的行存储在临时缓冲区中，称为<code>&quot;pattern space&quot;</code>，接着用<code>sed</code>命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有 改变，除非你使用重定向存储输出。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><h4 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h4><p><code>sed [option] &#39;command&#39; input_file</code></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Linux%E5%91%BD%E4%BB%A4/Linux%20Sed%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Jetpack%E6%9E%B6%E6%9E%84%E7%BB%84%E4%BB%B6/Jetpack%E6%9E%B6%E6%9E%84%E7%BB%84%E4%BB%B6%E4%B9%8BRoom.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -714,429 +1073,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Android%E6%9D%82%E8%AE%B0/Android%20%E6%8E%A7%E4%BB%B6%E7%BC%A9%E5%86%99.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Android%E6%9D%82%E8%AE%B0/Android%20%E6%8E%A7%E4%BB%B6%E7%BC%A9%E5%86%99.html" class="post-title-link" itemprop="url">Android 控件缩写</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-11-03 14:58:06" itemprop="dateCreated datePublished" datetime="2022-11-03T14:58:06+08:00">2022-11-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-29 14:53:14" itemprop="dateModified" datetime="2023-03-29T14:53:14+08:00">2023-03-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Android杂记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <table>
-<thead>
-<tr>
-<th align="center">控件</th>
-<th align="center">缩写</th>
-<th align="center">控件</th>
-<th align="center">缩写</th>
-<th align="center">控件</th>
-<th align="center">缩写</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">TextView</td>
-<td align="center">txt</td>
-<td align="center">CheckBox</td>
-<td align="center">chk</td>
-<td align="center">Switch</td>
-<td align="center">sbtn</td>
-</tr>
-<tr>
-<td align="center">EditText</td>
-<td align="center">edt</td>
-<td align="center">RadioGroup</td>
-<td align="center">rgrp</td>
-<td align="center">ToggleButton</td>
-<td align="center">tbtn</td>
-</tr>
-<tr>
-<td align="center">Button</td>
-<td align="center">btn</td>
-<td align="center">RadioButton</td>
-<td align="center">rbtn</td>
-<td align="center">ImageView</td>
-<td align="center">img</td>
-</tr>
-<tr>
-<td align="center">ViewPager</td>
-<td align="center">vp</td>
-<td align="center">RecyclerView</td>
-<td align="center">rv</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/build-tools/Kconfig-language-zh.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/build-tools/Kconfig-language-zh.html" class="post-title-link" itemprop="url">Kconfig-language翻译</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-26 18:58:22" itemprop="dateCreated datePublished" datetime="2021-05-26T18:58:22+08:00">2021-05-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-08 16:24:59" itemprop="dateModified" datetime="2022-11-08T16:24:59+08:00">2022-11-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">构建工具</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Kconfig-language翻译"><a href="#Kconfig-language翻译" class="headerlink" title="Kconfig-language翻译"></a>Kconfig-language翻译</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h2><p>配置数据库是按树结构组织的配置选项的集合：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">+- Code maturity level options</span><br><span class="line">|  +- Prompt for development and/or incomplete code/drivers</span><br><span class="line">+- General setup</span><br><span class="line">|  +- Networking support</span><br><span class="line">|  +- System V IPC</span><br><span class="line">|  +- BSD Process Accounting</span><br><span class="line">|  +- Sysctl support</span><br><span class="line">+- Loadable module support</span><br><span class="line">|  +- Enable loadable module support</span><br><span class="line">|     +- Set version information on all module symbols</span><br><span class="line">|     +- Kernel module loader</span><br><span class="line">+- ...</span><br></pre></td></tr></table></figure>
-
-<p>每个条目都有自己的依赖性。 这些依赖关系用于确定条目的可见性。 任何子条目只有在其父条目也可见的情况下才可见。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/build-tools/Kconfig-language-zh.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-1-Computer-System-Overview.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-1-Computer-System-Overview.html" class="post-title-link" itemprop="url">操作系统精髓与设计原理(第8版) - 第一章 计算机系统概述</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-06-30 22:24:05" itemprop="dateCreated datePublished" datetime="2019-06-30T22:24:05+08:00">2019-06-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-08 16:26:49" itemprop="dateModified" datetime="2022-11-08T16:26:49+08:00">2022-11-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%B2%BE%E9%AB%93%E4%B8%8E%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86-%E7%AC%AC8%E7%89%88/" itemprop="url" rel="index"><span itemprop="name">操作系统精髓与设计原理(第8版)</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="操作系统精髓与设计原理-第8版-第一章-计算机系统概述"><a href="#操作系统精髓与设计原理-第8版-第一章-计算机系统概述" class="headerlink" title="操作系统精髓与设计原理(第8版) - 第一章 计算机系统概述"></a>操作系统精髓与设计原理(第8版) - 第一章 计算机系统概述</h1><h2 id="1-1-基本构成"><a href="#1-1-基本构成" class="headerlink" title="1.1 基本构成"></a>1.1 基本构成</h2><p>计算机由处理器、存储器和输入&#x2F;输出部件组成，每类部件都有一个或多个模块。主要是4个结构化部件：</p>
-<p><strong>处理器</strong>：控制计算机的操作，执行数据处理功能。</p>
-<p><strong>内存</strong>：存储数据和程序。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-1-Computer-System-Overview.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview.html" class="post-title-link" itemprop="url">操作系统精髓与设计原理(第8版) - 第二章 操作系统概述</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-06-30 16:05:20" itemprop="dateCreated datePublished" datetime="2019-06-30T16:05:20+08:00">2019-06-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-08 16:27:07" itemprop="dateModified" datetime="2022-11-08T16:27:07+08:00">2022-11-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%B2%BE%E9%AB%93%E4%B8%8E%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86-%E7%AC%AC8%E7%89%88/" itemprop="url" rel="index"><span itemprop="name">操作系统精髓与设计原理(第8版)</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="操作系统精髓与设计原理-第8版-第二章-操作系统概述"><a href="#操作系统精髓与设计原理-第8版-第二章-操作系统概述" class="headerlink" title="操作系统精髓与设计原理(第8版) - 第二章 操作系统概述"></a>操作系统精髓与设计原理(第8版) - 第二章 操作系统概述</h1><h2 id="2-1-操作系统的目标与功能"><a href="#2-1-操作系统的目标与功能" class="headerlink" title="2.1 操作系统的目标与功能"></a>2.1 操作系统的目标与功能</h2><p>操作系统是控制应用程序执行的程序，是应用程序和计算机硬件间的接口。它有三个目标：</p>
-<ul>
-<li><strong>方便</strong>：操作系统使计算机更易于使用。</li>
-<li><strong>有效</strong>：操作系统允许以更有效的方式使用计算机系统资源。</li>
-<li><strong>扩展能力</strong>：在构造操作系统时，应允许在不妨碍服务的前提下，有效地开发、测试和引入新的系统功能。</li>
-</ul>
-<h3 id="2-1-1-作为用户-x2F-计算机接口的操作系统"><a href="#2-1-1-作为用户-x2F-计算机接口的操作系统" class="headerlink" title="2.1.1 作为用户&#x2F;计算机接口的操作系统"></a>2.1.1 作为用户&#x2F;计算机接口的操作系统</h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Operating-Systems-Internals-and-Design-Principles-8th-Edition/Chapter-2-Operating-System-Overview.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1204,20 +1144,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-count">91</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-count">53</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

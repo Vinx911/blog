@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.vinkvin.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="运算放大器常用电路 1. 反相放大电路  \[ V_{out} &#x3D; - \frac{R2}{R1} * V_{in} \] 关于R1,R2及R3的选值： 1）、R1,R2及R3应该在K级，不宜达到M级； 2）、R3应该等于或近似于R1与R2的并联，以消除偏置电流的影响。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="运算放大器常用电路">
+<meta property="og:url" content="https://blog.vinkvin.com/electronic-circuit/operational-amplifier-common-circuit.html">
+<meta property="og:site_name" content="唯客微博客">
+<meta property="og:description" content="运算放大器常用电路 1. 反相放大电路  \[ V_{out} &#x3D; - \frac{R2}{R1} * V_{in} \] 关于R1,R2及R3的选值： 1）、R1,R2及R3应该在K级，不宜达到M级； 2）、R3应该等于或近似于R1与R2的并联，以消除偏置电流的影响。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.vinkvin.com/electronic-circuit/%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E5%B8%B8%E7%94%A8%E7%94%B5%E8%B7%AF/assets/1629421838564031586th.png">
+<meta property="og:image" content="https://blog.vinkvin.com/electronic-circuit/%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E5%B8%B8%E7%94%A8%E7%94%B5%E8%B7%AF/assets/1629421880862032443th.png">
+<meta property="og:image" content="https://blog.vinkvin.com/electronic-circuit/%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E5%B8%B8%E7%94%A8%E7%94%B5%E8%B7%AF/assets/1629421951192030885th.png">
+<meta property="og:image" content="https://blog.vinkvin.com/electronic-circuit/%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E5%B8%B8%E7%94%A8%E7%94%B5%E8%B7%AF/assets/1629421981767002970th.png">
+<meta property="og:image" content="https://blog.vinkvin.com/electronic-circuit/%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E5%B8%B8%E7%94%A8%E7%94%B5%E8%B7%AF/assets/1629422007742054153th.png">
+<meta property="og:image" content="https://blog.vinkvin.com/electronic-circuit/%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E5%B8%B8%E7%94%A8%E7%94%B5%E8%B7%AF/assets/1629422035572037213th.png">
+<meta property="article:published_time" content="2023-06-15T06:46:04.064Z">
+<meta property="article:modified_time" content="2023-07-07T01:00:09.636Z">
+<meta property="article:author" content="Vinx">
+<meta property="article:tag" content="电子电路">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.vinkvin.com/electronic-circuit/%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E5%B8%B8%E7%94%A8%E7%94%B5%E8%B7%AF/assets/1629421838564031586th.png">
+
+<link rel="canonical" href="https://blog.vinkvin.com/electronic-circuit/operational-amplifier-common-circuit.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>运算放大器常用电路 | 唯客微博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a target="_blank" rel="noopener" href="https://github.com/Vinx911" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">唯客微博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">专注于计算机，嵌入式领域的技术</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/electronic-circuit/operational-amplifier-common-circuit.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          运算放大器常用电路
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-15 14:46:04" itemprop="dateCreated datePublished" datetime="2023-06-15T14:46:04+08:00">2023-06-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-07 09:00:09" itemprop="dateModified" datetime="2023-07-07T09:00:09+08:00">2023-07-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%94%B5%E5%AD%90%E7%94%B5%E8%B7%AF/" itemprop="url" rel="index"><span itemprop="name">电子电路</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="运算放大器常用电路">运算放大器常用电路</h1>
+<h2 id="反相放大电路">1. 反相放大电路</h2>
+<p><img
+src="./运算放大器常用电路/assets/v2-f63edf4cbe2d26d9f76540c01861ce9d_720w.png"
+alt="img" /> <span class="math display">\[
+V_{out} = - \frac{R2}{R1} * V_{in}
+\]</span> 关于R1,R2及R3的选值：</p>
+<p>1）、R1,R2及R3应该在K级，不宜达到M级；</p>
+<p>2）、R3应该等于或近似于R1与R2的并联，以消除偏置电流的影响。</p>
+<h2 id="同相放大电路">2. 同相放大电路</h2>
+<p><img
+src="./运算放大器常用电路/assets/v2-49cbe3379703399fdc35fa48fba4d024_720w.png"
+alt="img" /> <span class="math display">\[
+V_{out} = (1 + \frac{R2}{R1}) * V_{in}
+\]</span>
+同相放大电路的应用场合具有局限性，一般只用于直流电平的放大，不适合用于交流信号的放大，因为它会将交流信号的直流偏置电压一并放大，从而使其偏置电位发生偏移。带参考电平的反相比例放大电路在信号放大时比较有实用性。</p>
+<h2 id="差分放大电路">3. 差分放大电路</h2>
+<p><img
+src="./运算放大器常用电路/assets/v2-600c89ea21b42afef003b5ba0b4d4fe4_720w.png"
+alt="img" /> <span class="math display">\[
+V_{out} = (\frac{R1+R2}{R3+R4}) * \frac{R4}{R1} * V_2 -  \frac{R2}{R1}
+*V_1
+\]</span> 当R1=R3并且R2=R4时： <span class="math display">\[
+V_{out} = \frac{R2}{R1} * (V_2 - V_2)
+\]</span></p>
+<h2 id="电压跟随电路">4. 电压跟随电路</h2>
+<p><img
+src="./运算放大器常用电路/assets/v2-f444a6b439522a20877911001278aa3d_720w.png"
+alt="img" /> <span class="math display">\[
+V_{out} = V_{in}
+\]</span> 电压跟随电路一般用于信号的隔离。</p>
+<h3 id="可靠的参考电压电路">可靠的参考电压电路</h3>
+<figure>
+<img
+src="./运算放大器常用电路/assets/v2-f8a066ae6f1913399d4950271b267b57_720w.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h3 id="仪器放大电路">仪器放大电路</h3>
+<figure>
+<img
+src="./运算放大器常用电路/assets/v2-a43a8a58daef5e762d9910b3245a9bf8_720w.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>此方法电路使用于小信号的放大，一般用于传感器信号的放大。传感器的输出信号很小，一般只有几毫伏到几十毫伏。</p>
+<p>电路由两级放大电路组成，第一级由A1,A2组成，同相输入，输入阻抗高，电路结构对称，可很好的抑制零点漂移；第二级由A3组成，良好的共模抑制比，输入阻抗高，增益在大范围内可调。</p>
+<p>选值要求：R4=R5,R6=R7,R8=R9（保持电路的对称性），R3为可调电阻，用于调节电路增益。
+<span class="math display">\[
+V_{out} = (1 + \frac{2 * R_4}{R_3}) * \frac{R_8}{R_6} * (V_2 - V_1)
+\]</span></p>
+<h2 id="反相求和电路">5. 反相求和电路</h2>
+<p><img src="./运算放大器常用电路/assets/1629421838564031586th.png"
+alt="img" /> <span class="math display">\[
+V_{out} = -(V_1 + V_2)
+\]</span></p>
+<h2 id="同相求和电路">6. 同相求和电路</h2>
+<p><img src="./运算放大器常用电路/assets/1629421880862032443th.png"
+alt="img" /> <span class="math display">\[
+V_{out} = (V_1 + V_2)
+\]</span></p>
+<h2 id="简单的比较器">7. 简单的比较器</h2>
+<p><img
+src="./运算放大器常用电路/assets/v2-3b1524a5a6fbf59beb6d8b7f7ab9ab2b_720w.png"
+alt="img" /> <span class="math display">\[
+V_{out} = (V_+ - V_-) * A_v
+\]</span>
+Av为运放的开环放大倍数（一般为100dB左右，即十万倍）。当V+大于V-时，输出为正饱和（接近VCC，但是无法达到）；当V-大于V+时，输出为负饱和（接近-VSS，但是无法达到）。连接V+至地，构成过零比较器。</p>
+<h2 id="过零比较器">8. 过零比较器</h2>
+<figure>
+<img
+src="./运算放大器常用电路/assets/v2-912ee678218f0167790e0e3e3618a14a_720w.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>过零比较器虽然简单，但是并不实用，它的问题在于比较器只有一个临界电压，输入信号上的杂波易引起输出误操作，如图所示。</p>
+<figure>
+<img
+src="./运算放大器常用电路/assets/v2-d287bcae440e8a7014de75cf692c1728_720w.webp"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h2 id="迟滞比较器">9. 迟滞比较器</h2>
+<figure>
+<img
+src="./运算放大器常用电路/assets/v2-e78ea56facdac558fa0ddcf64fd64b23_720w.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h2 id="窗口比较器">10. 窗口比较器</h2>
+<figure>
+<img
+src="https://pic1.zhimg.com/80/v2-12909c84ac1737620872540468abc3a4_720w.webp"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>窗口比较的工作原理如图2.15所示。
+1）Uin&gt;URH&gt;URL，A1输出UOH,A2输出UOL，D1导通，D2截止，Uout=UOH;
+2）Uin&lt;URL&lt;URH，A1输出UOL,A2输出UOH，D1截止，D2导通，Uout=UOH;
+3）URL&lt;
+Uin&lt;URH，A1输出UOL,A2输出UOL，D1截止，D2截止，Uout=UOL;</p>
+<h2 id="积分器电路">11. 积分器电路</h2>
+<figure>
+<img src="./运算放大器常用电路/assets/1629421951192030885th.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>积分器电路的输入与输出的关系式为：</p>
+<figure>
+<img src="./运算放大器常用电路/assets/1629421981767002970th.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>输出电压与输入电压对时间的积分成正比,这就是积分器电路了。若V1为恒定电压U，则上式变换为Vout=-U<em>t/(R1</em>C1)t是时间，则Vout输出电压是一条从0至负电源电压，按时间变化的直线。</p>
+<h2 id="微分器电路">12. 微分器电路</h2>
+<figure>
+<img src="./运算放大器常用电路/assets/1629422007742054153th.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>微分器输入输出关系式为：</p>
+<figure>
+<img src="./运算放大器常用电路/assets/1629422035572037213th.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>如果V1是一个突然加入的直流电压，则输出Vout对应一个方向与V1相反的脉冲。</p>
+
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+    </div>
+    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/electronic-circuit/operational-amplifier-common-circuit.html">运算放大器常用电路</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Vinx 的个人博客">Vinx</a></p>
+  <p><span>发布时间:</span>2023年06月15日 - 14:46</p>
+  <p><span>最后更新:</span>2023年07月07日 - 09:00</p>
+  <p><span>原始链接:</span><a href="/electronic-circuit/operational-amplifier-common-circuit.html" title="运算放大器常用电路">https://blog.vinkvin.com/electronic-circuit/operational-amplifier-common-circuit.html</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://blog.vinkvin.com/electronic-circuit/operational-amplifier-common-circuit.html"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fab fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+
+      
+    </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%94%B5%E5%AD%90%E7%94%B5%E8%B7%AF/" rel="tag"># 电子电路</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/build-tools/qt-get-system-default-directory.html" rel="prev" title="QT获取下载、桌面、临时文件....等系统默认目录">
+      <i class="fa fa-chevron-left"></i> QT获取下载、桌面、临时文件....等系统默认目录
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/electronic-circuit/principle-of-high-low-reset-circuit.html" rel="next" title="高低电平复位电路原理">
+      高低电平复位电路原理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E5%B8%B8%E7%94%A8%E7%94%B5%E8%B7%AF"><span class="nav-text">运算放大器常用电路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E7%9B%B8%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF"><span class="nav-text">1. 反相放大电路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E7%9B%B8%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF"><span class="nav-text">2. 同相放大电路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%AE%E5%88%86%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF"><span class="nav-text">3. 差分放大电路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E5%8E%8B%E8%B7%9F%E9%9A%8F%E7%94%B5%E8%B7%AF"><span class="nav-text">4. 电压跟随电路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E7%9A%84%E5%8F%82%E8%80%83%E7%94%B5%E5%8E%8B%E7%94%B5%E8%B7%AF"><span class="nav-text">可靠的参考电压电路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%AA%E5%99%A8%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF"><span class="nav-text">仪器放大电路</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E7%9B%B8%E6%B1%82%E5%92%8C%E7%94%B5%E8%B7%AF"><span class="nav-text">5. 反相求和电路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E7%9B%B8%E6%B1%82%E5%92%8C%E7%94%B5%E8%B7%AF"><span class="nav-text">6. 同相求和电路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E6%AF%94%E8%BE%83%E5%99%A8"><span class="nav-text">7. 简单的比较器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E9%9B%B6%E6%AF%94%E8%BE%83%E5%99%A8"><span class="nav-text">8. 过零比较器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9F%E6%BB%9E%E6%AF%94%E8%BE%83%E5%99%A8"><span class="nav-text">9. 迟滞比较器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AA%97%E5%8F%A3%E6%AF%94%E8%BE%83%E5%99%A8"><span class="nav-text">10. 窗口比较器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%AF%E5%88%86%E5%99%A8%E7%94%B5%E8%B7%AF"><span class="nav-text">11. 积分器电路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AE%E5%88%86%E5%99%A8%E7%94%B5%E8%B7%AF"><span class="nav-text">12. 微分器电路</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Vinx"
+      src="/images/vinx.jpg">
+  <p class="site-author-name" itemprop="name">Vinx</p>
+  <div class="site-description" itemprop="description">本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Vinx911" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Vinx911" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u011471873" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u011471873" rel="noopener" target="_blank"><i class="fa fa-crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:buddyhe911@163.com" title="E-Mail → mailto:buddyhe911@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vinx</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

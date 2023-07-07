@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.vinkvin.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="什么是复位 单片机复位电路的作用是：使单片机恢复到起始状态，让单片机的程序从头开始执行，运行时钟处于稳定状态、各种寄存器、端口处于初始化状态等等。目的是让单片机能够稳定、正确的从头开始执行程序。 为什么要加复位？ 数字电路中寄存器和 RAM 在上电之后默认的状态和数据是不确定的，如果有复位，我们可以把寄存器复位到初始状态，RAM 的数据可以通过复位来触发 RAM 初始化 程序逻辑如果进入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高低电平复位电路原理">
+<meta property="og:url" content="https://blog.vinkvin.com/electronic-circuit/principle-of-high-low-reset-circuit.html">
+<meta property="og:site_name" content="唯客微博客">
+<meta property="og:description" content="什么是复位 单片机复位电路的作用是：使单片机恢复到起始状态，让单片机的程序从头开始执行，运行时钟处于稳定状态、各种寄存器、端口处于初始化状态等等。目的是让单片机能够稳定、正确的从头开始执行程序。 为什么要加复位？ 数字电路中寄存器和 RAM 在上电之后默认的状态和数据是不确定的，如果有复位，我们可以把寄存器复位到初始状态，RAM 的数据可以通过复位来触发 RAM 初始化 程序逻辑如果进入">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.vinkvin.com/electronic-circuit/%E9%AB%98%E4%BD%8E%E7%94%B5%E5%B9%B3%E5%A4%8D%E4%BD%8D%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86/assets/1.png">
+<meta property="og:image" content="https://blog.vinkvin.com/electronic-circuit/%E9%AB%98%E4%BD%8E%E7%94%B5%E5%B9%B3%E5%A4%8D%E4%BD%8D%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86/assets/2.png">
+<meta property="og:image" content="https://blog.vinkvin.com/electronic-circuit/%E9%AB%98%E4%BD%8E%E7%94%B5%E5%B9%B3%E5%A4%8D%E4%BD%8D%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86/assets/3.png">
+<meta property="og:image" content="https://blog.vinkvin.com/electronic-circuit/%E9%AB%98%E4%BD%8E%E7%94%B5%E5%B9%B3%E5%A4%8D%E4%BD%8D%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86/assets/4.png">
+<meta property="article:published_time" content="2023-07-06T05:48:40.506Z">
+<meta property="article:modified_time" content="2023-07-07T01:00:10.892Z">
+<meta property="article:author" content="Vinx">
+<meta property="article:tag" content="电子电路">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.vinkvin.com/electronic-circuit/%E9%AB%98%E4%BD%8E%E7%94%B5%E5%B9%B3%E5%A4%8D%E4%BD%8D%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86/assets/1.png">
+
+<link rel="canonical" href="https://blog.vinkvin.com/electronic-circuit/principle-of-high-low-reset-circuit.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>高低电平复位电路原理 | 唯客微博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a target="_blank" rel="noopener" href="https://github.com/Vinx911" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">唯客微博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">专注于计算机，嵌入式领域的技术</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/electronic-circuit/principle-of-high-low-reset-circuit.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          高低电平复位电路原理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-06 13:48:40" itemprop="dateCreated datePublished" datetime="2023-07-06T13:48:40+08:00">2023-07-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-07 09:00:10" itemprop="dateModified" datetime="2023-07-07T09:00:10+08:00">2023-07-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%94%B5%E5%AD%90%E7%94%B5%E8%B7%AF/" itemprop="url" rel="index"><span itemprop="name">电子电路</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>什么是复位</strong>
+单片机复位电路的作用是：使单片机恢复到起始状态，让单片机的程序从头开始执行，运行时钟处于稳定状态、各种寄存器、端口处于初始化状态等等。目的是让单片机能够稳定、正确的从头开始执行程序。</p>
+<p><strong>为什么要加复位？</strong> 数字电路中寄存器和 RAM
+在上电之后默认的状态和数据是不确定的，如果有复位，我们可以把寄存器复位到初始状态，RAM
+的数据可以通过复位来触发 RAM 初始化
+程序逻辑如果进入了错误的状态，通过复位可以把所有的逻辑状态恢复到初始值，如果没有复位，那么逻辑可能永远运行在错误的状态。(一些简单的IC芯片没有看门狗电路，就需要外部复位)</p>
+<p><strong>正常单片机和IC芯片复位都是有一个Reset引脚，给复位引脚通一定时间的高/低电平就可以实现复位</strong></p>
+<p><strong>典型的51单片机当RST复位脚持续两个机器周期以上高电平就将复位</strong></p>
+<p><strong>像我们常用的STM32F1系列
+，查阅手册得知复位引脚需要持续20us以上的低电平，就可完成复位</strong></p>
+<h3 id="高电平上电复位">1. 高电平上电复位</h3>
+<figure>
+<img src="./高低电平复位电路原理/assets/1.png"
+alt="在这里插入图片描述" />
+<figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+</figure>
+<p><strong>我们来看一下高电平上电复位，本质就是RC串联充电电路，在上电的瞬间，由于电容两端电压不能突变，上电后的一瞬间电容等效为短路，电容C11充电，充电电流在电阻上形成的电压为高电平；单片机复位，几个毫秒之后，电容充电完毕，电路为断路，电流为0，电阻两端电压近似于0V，这时RST就为低电平。单片机将进入正常工作状态。</strong></p>
+<p>电容充电时间T/复位持续时间：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T =（<span class="number">1</span>/<span class="number">9</span>）*R*C</span><br></pre></td></tr></table></figure>
+<h3 id="低电平上电复位">2. 低电平上电复位</h3>
+<figure>
+<img src="./高低电平复位电路原理/assets/2.png"
+alt="在这里插入图片描述" />
+<figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+</figure>
+<p><strong>低电平上电复位，由于电容两端电压不能突变的特性，在上电的瞬间RST端电位近似为GND，通过
+10K电阻对
+C11电容进行充电，此时RST复位引脚电压为低电平；单片机复位，几个毫秒之后，电容器充满，下面为断路，电流为0，电流经过电阻流入RST复位引脚，
+引脚为高电平， 这时，单片机将进入正常工作状态。</strong></p>
+<p>电容充电时间T/复位持续时间：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T = <span class="number">9</span>*R*C</span><br></pre></td></tr></table></figure>
+<h3 id="高电平按键复位">3. 高电平按键复位</h3>
+<figure>
+<img src="./高低电平复位电路原理/assets/3.png"
+alt="在这里插入图片描述" />
+<figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+</figure>
+<p>高电平按键复位，VCC上电时，电容C充电，此时电路导通，在10K电阻上出现电压，<a
+target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=RST&amp;spm=1001.2101.3001.7020">RST</a>引脚为高电平，使得单片机复位;几个毫秒后，C充满，此时电路为断路，10K电阻上电流降为0，电压也为0，RST引脚为低电平，使得单片机进入工作状态。工作期间，按下按键Key，电容两端相当于短路，电容C放电，RST引脚为高电平，使得单片机复位。松开按键Key，电容C又充电，几个毫秒后，充电完成，电路断路，单片机进入工作状态。</p>
+<h3 id="低电平按键复位">4. 低电平按键复位</h3>
+<p><img src="./高低电平复位电路原理/assets/4.png"
+alt="在这里插入图片描述" />
+低电平按键复位，VCC上电时，电容C充电，此时电路导通，RST引脚为低电平，使得单片机复位;几个毫秒后，电容C充满，此时电路为断路，电流由10K电阻流入RST复位引脚，RST引脚为高电平，使得单片机进入工作状态。工作期间，按下按键Key，RST复位引脚直接跟GND导通，为低电平，电容C放电，使得单片机复位。松开按键Key，电容C又充电，几个毫秒后，充电完成，电路断路，单片机进入工作状态。</p>
+
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+    </div>
+    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/electronic-circuit/principle-of-high-low-reset-circuit.html">高低电平复位电路原理</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Vinx 的个人博客">Vinx</a></p>
+  <p><span>发布时间:</span>2023年07月06日 - 13:48</p>
+  <p><span>最后更新:</span>2023年07月07日 - 09:00</p>
+  <p><span>原始链接:</span><a href="/electronic-circuit/principle-of-high-low-reset-circuit.html" title="高低电平复位电路原理">https://blog.vinkvin.com/electronic-circuit/principle-of-high-low-reset-circuit.html</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://blog.vinkvin.com/electronic-circuit/principle-of-high-low-reset-circuit.html"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fab fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+
+      
+    </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%94%B5%E5%AD%90%E7%94%B5%E8%B7%AF/" rel="tag"># 电子电路</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/electronic-circuit/operational-amplifier-common-circuit.html" rel="prev" title="运算放大器常用电路">
+      <i class="fa fa-chevron-left"></i> 运算放大器常用电路
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/electronic-circuit/anti-reverse-circuit.html" rel="next" title="防反接电路">
+      防反接电路 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E7%94%B5%E5%B9%B3%E4%B8%8A%E7%94%B5%E5%A4%8D%E4%BD%8D"><span class="nav-text">1. 高电平上电复位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%8E%E7%94%B5%E5%B9%B3%E4%B8%8A%E7%94%B5%E5%A4%8D%E4%BD%8D"><span class="nav-text">2. 低电平上电复位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E7%94%B5%E5%B9%B3%E6%8C%89%E9%94%AE%E5%A4%8D%E4%BD%8D"><span class="nav-text">3. 高电平按键复位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%8E%E7%94%B5%E5%B9%B3%E6%8C%89%E9%94%AE%E5%A4%8D%E4%BD%8D"><span class="nav-text">4. 低电平按键复位</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Vinx"
+      src="/images/vinx.jpg">
+  <p class="site-author-name" itemprop="name">Vinx</p>
+  <div class="site-description" itemprop="description">本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Vinx911" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Vinx911" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u011471873" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u011471873" rel="noopener" target="_blank"><i class="fa fa-crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:buddyhe911@163.com" title="E-Mail → mailto:buddyhe911@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vinx</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
