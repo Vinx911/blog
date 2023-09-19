@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.vinkvin.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="芯片IC附近放置的电容是多少？1uF、0.1uF、0.01uF如何选？  电容，电容的作用简单来说就是存储电荷。我们都知道在电源中要加电容滤波，在每个芯片的电源脚放置一个0.1uF的电容去耦。但是，有些板子芯片的电源脚旁边的电容是0.1uF的或者0.01uF的，有什么讲究吗？  数字电路要运行稳定可靠，电源一定要“干净”，并且能量补充一定要及时，也就是滤波去耦一定要好。什么是滤波去耦，简单">
+<meta property="og:type" content="article">
+<meta property="og:title" content="芯片IC附近放置的电容是多少？">
+<meta property="og:url" content="https://blog.vinkvin.com/post/93/index.html">
+<meta property="og:site_name" content="唯客微博客">
+<meta property="og:description" content="芯片IC附近放置的电容是多少？1uF、0.1uF、0.01uF如何选？  电容，电容的作用简单来说就是存储电荷。我们都知道在电源中要加电容滤波，在每个芯片的电源脚放置一个0.1uF的电容去耦。但是，有些板子芯片的电源脚旁边的电容是0.1uF的或者0.01uF的，有什么讲究吗？  数字电路要运行稳定可靠，电源一定要“干净”，并且能量补充一定要及时，也就是滤波去耦一定要好。什么是滤波去耦，简单">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.vinkvin.com/post/93/assets/image-20230919085720679.png">
+<meta property="og:image" content="https://blog.vinkvin.com/post/93/assets/image-20230919085730843.png">
+<meta property="og:image" content="https://blog.vinkvin.com/post/93/assets/image-20230919085744996.png">
+<meta property="article:published_time" content="2023-07-07T01:08:25.000Z">
+<meta property="article:modified_time" content="2023-09-19T03:33:11.000Z">
+<meta property="article:author" content="Vinx">
+<meta property="article:tag" content="电子电路">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.vinkvin.com/post/93/assets/image-20230919085720679.png">
+
+<link rel="canonical" href="https://blog.vinkvin.com/post/93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>芯片IC附近放置的电容是多少？ | 唯客微博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a target="_blank" rel="noopener" href="https://github.com/Vinx911" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">唯客微博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">专注于计算机，嵌入式领域的技术</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          芯片IC附近放置的电容是多少？
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-07 09:08:25" itemprop="dateCreated datePublished" datetime="2023-07-07T09:08:25+08:00">2023-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-19 11:33:11" itemprop="dateModified" datetime="2023-09-19T11:33:11+08:00">2023-09-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%94%B5%E5%AD%90%E7%94%B5%E8%B7%AF/" itemprop="url" rel="index"><span itemprop="name">电子电路</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="芯片ic附近放置的电容是多少1uf0.1uf0.01uf如何选">芯片IC附近放置的电容是多少？1uF、0.1uF、0.01uF如何选？</h1>
+<blockquote>
+<p><strong>电容，电容的作用简单来说就是存储电荷。我们都知道在电源中要加电容滤波，在每个芯片的电源脚放置一个0.1uF的电容去耦。但是，有些板子芯片的电源脚旁边的电容是0.1uF的或者0.01uF的，有什么讲究吗？</strong></p>
+</blockquote>
+<p>数字电路要运行稳定可靠，电源一定要“干净”，并且能量补充一定要及时，也就是滤波去耦一定要好。什么是滤波去耦，简单的说就是在芯片不需要电流的时候存储能量，在需要电流的时候又能及时地补充能量。</p>
+<p>有读者看到这里会说，这个职责不是DC/DC、LDO的吗？对，在低频的时候它们可以搞定，但高速的数字系统就不一样了。</p>
+<p>电容的作用简单来说就是存储电荷。我们都知道在电源中要加电容滤波，在每个芯片的电源脚放置一个0.1uF的电容去耦。但是，有些板子芯片的电源脚旁边的电容是0.1uF的或者0.01uF的，有什么讲究吗？</p>
+<p>理想的电容它只是一个电荷的存储器，即C。而实际制造出来的电容却不是那么简单，分析电源完整性的时候我们常用的电容模型如下图所示。</p>
+<p><img src="/post/93/assets/image-20230919085720679.png"></p>
+<p>上图中ESR是电容的串联等效电阻，ESL是电容的串联等效电感，C才是真正的理想电容。ESR和ESL是由电容的制造工艺和材料决定的，没法消除。那这两个东西对电路有什么影响。ESR影响电源的纹波，ESL影响电容的滤波频率特性。</p>
+<p>我们知道：</p>
+<p>电容的容抗</p>
+<p><code>Zc=1/ωC</code></p>
+<p>电感的感抗</p>
+<p><code>Zl=ωL，ω=2πf</code></p>
+<p>实际电容的复阻抗为：</p>
+<p><code>Z=ESR+j(ωL - 1/ωC)</code></p>
+<p><code>=ESR+j2πf L-1/j2πf C</code></p>
+<p>可见，当频率很低的时候是电容起作用，而频率高到一定程度电感的作用就不可忽视了；再高的时候电感就起主导作用了，电容就失去滤波的作用了。所以，高频的时候电容就不是单纯的电容了。</p>
+<p>实际电容的滤波曲线如下图所示：</p>
+<p><img src="/post/93/assets/image-20230919085730843.png"></p>
+<p>上文说了，电容的等效串联电感是由电容的制造工艺和材料决定的。实际的贴片陶瓷电容，ESL从零点几nH到几个nH不等，封装越小ESL就越小。</p>
+<p>从上图中看出，电容的滤波曲线并不是平坦的，它像一个’V’，也就是说有选频特性。有时候我们希望它越平越好（前级的板级滤波），而有时候希望它越尖越好（滤波或陷波）。</p>
+<p>影响这个特性的是电容的品质因素Q：</p>
+<p>Q=1/ωCESR</p>
+<p>ESR越大，Q就越小，曲线就越平坦；反之ESR越小，Q就越大，曲线就越尖。</p>
+<p>通常钽电容和铝电解有比较小的ESL，而ESR大，所以钽电容和铝电解具有很宽的有效频率范围，非常适合前级的板级滤波。也就是说，在DC/DC或者LDO的输入级，常常用较大容量的钽电容来滤波。而在靠近芯片的地方放一些10uF和0.1uF的电容来去耦，陶瓷电容有很低的ESR。</p>
+<p>具体来说，当我们的芯片IC内部的逻辑门在10-50Mhz范围内执行的时候，芯片内部产生的干扰也在10-50Mhz,（比如51单片机），仔细看上图的曲线，0.1uF电容
+（有两种，一种是插件，一种是贴片）的谷底刚好落在了这个范围内，所以能够滤除这个频段的干扰，但是，看清楚，是但是，当频率很高的时候（50-100Mhz），就不是那么回事了，这个时候0.1uF电容个滤波效果就没有0.01uF好了，以此类推，频率再高，选用的滤波电容的量级还要变小，具体怎么参考呢?</p>
+<p>参考如下表：</p>
+<p><img src="/post/93/assets/image-20230919085744996.png"></p>
+<p>所以，以后不要见到什么都放0.1uF的电容，有些高速系统中这些0.1uF的电容根本就起不了作用。</p>
+<p>芯片或者说数字电路开关时候对电源影响大，引起电源波动，就要用电容来退偶。</p>
+<p>容量一般为芯片开关频率的倒数，如果频率是1MHz的，就选用1/1M，也就是1uF的电容。可以取大点的。</p>
+<p><strong>由于实际供电电源，夹杂着高频以及低频干扰杂波，10uf电容对于滤除低频杂波有较好作用，但对于高频杂波，电容呈现感性，阻抗很大，无法有效滤除，因此再并一个0.1uf的电容滤除高频杂波。</strong></p>
+<p>对一个特定电容，当信号频率低于其自谐振频率时呈容性，当信号频率高于其自谐振频率时呈感性。当用0.1uF和0.01uF的两个电容并联时，相当于<strong>拓宽了滤波频率范围</strong>。</p>
+<p><strong>两种方式组合滤波</strong></p>
+<p>实际电路中我们需要去耦的频率范围会比较宽，因此一个电容搞不定，那怎么办呢？我们经常有两种方法来解决，<strong>一种是使用一个大电容和一个小电容并联</strong>，<strong>还有一种是使用多个相同的电容并联</strong>。</p>
+<p><strong>1. 相同容值电容的并联：</strong></p>
+<p>多个相同的电容并联后，阻抗曲线的整体形状不变，仍保持为一个大"V"型，但是各个频率点的阻抗整体下移减小。</p>
+<p><strong>2. 不同容值电容的并联：</strong></p>
+<p>当并联的电容容值不同时，由于每个电容的自谐振频率点不同，不同频段内，两个电容的行为特征存在差异。</p>
+
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+    </div>
+    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/post/93/">芯片IC附近放置的电容是多少？</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Vinx 的个人博客">Vinx</a></p>
+  <p><span>发布时间:</span>2023年07月07日 - 09:08</p>
+  <p><span>最后更新:</span>2023年09月19日 - 11:33</p>
+  <p><span>原始链接:</span><a href="/post/93/" title="芯片IC附近放置的电容是多少？">https://blog.vinkvin.com/post/93/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://blog.vinkvin.com/post/93/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fab fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+
+      
+    </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%94%B5%E5%AD%90%E7%94%B5%E8%B7%AF/" rel="tag"># 电子电路</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/91/" rel="prev" title="电子电路常用元件-电阻">
+      <i class="fa fa-chevron-left"></i> 电子电路常用元件-电阻
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/89/" rel="next" title="高低电平复位电路原理">
+      高低电平复位电路原理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8A%AF%E7%89%87ic%E9%99%84%E8%BF%91%E6%94%BE%E7%BD%AE%E7%9A%84%E7%94%B5%E5%AE%B9%E6%98%AF%E5%A4%9A%E5%B0%911uf0.1uf0.01uf%E5%A6%82%E4%BD%95%E9%80%89"><span class="nav-text">芯片IC附近放置的电容是多少？1uF、0.1uF、0.01uF如何选？</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Vinx"
+      src="/images/vinx.jpg">
+  <p class="site-author-name" itemprop="name">Vinx</p>
+  <div class="site-description" itemprop="description">本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Vinx911" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Vinx911" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u011471873" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u011471873" rel="noopener" target="_blank"><i class="fa fa-crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:buddyhe911@163.com" title="E-Mail → mailto:buddyhe911@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vinx</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.vinkvin.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="操作系统精髓与设计原理(第8版) - 第二章 操作系统概述 2.1 操作系统的目标与功能 操作系统是控制应用程序执行的程序，是应用程序和计算机硬件间的接口。它有三个目标：  方便：操作系统使计算机更易于使用。 有效：操作系统允许以更有效的方式使用计算机系统资源。 扩展能力：在构造操作系统时，应允许在不妨碍服务的前提下，有效地开发、测试和引入新的系统功能。  2.1.1 作为用户">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统精髓与设计原理(第8版) - 第二章 操作系统概述">
+<meta property="og:url" content="https://blog.vinkvin.com/post/29/index.html">
+<meta property="og:site_name" content="唯客微博客">
+<meta property="og:description" content="操作系统精髓与设计原理(第8版) - 第二章 操作系统概述 2.1 操作系统的目标与功能 操作系统是控制应用程序执行的程序，是应用程序和计算机硬件间的接口。它有三个目标：  方便：操作系统使计算机更易于使用。 有效：操作系统允许以更有效的方式使用计算机系统资源。 扩展能力：在构造操作系统时，应允许在不妨碍服务的前提下，有效地开发、测试和引入新的系统功能。  2.1.1 作为用户">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.vinkvin.com/post/29/assets/image-20230918112054077.png">
+<meta property="og:image" content="https://blog.vinkvin.com/post/29/assets/image-20230918112105606.png">
+<meta property="og:image" content="https://blog.vinkvin.com/post/29/assets/image-20230918112114901.png">
+<meta property="og:image" content="https://blog.vinkvin.com/post/29/assets/image-20230918112125021.png">
+<meta property="og:image" content="https://blog.vinkvin.com/post/29/assets/image-20230918112137047.png">
+<meta property="og:image" content="https://blog.vinkvin.com/post/29/assets/image-20230918112146049.png">
+<meta property="article:published_time" content="2019-06-30T08:05:20.000Z">
+<meta property="article:modified_time" content="2023-09-19T03:35:37.545Z">
+<meta property="article:author" content="Vinx">
+<meta property="article:tag" content="操作系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.vinkvin.com/post/29/assets/image-20230918112054077.png">
+
+<link rel="canonical" href="https://blog.vinkvin.com/post/29/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>操作系统精髓与设计原理(第8版) - 第二章 操作系统概述 | 唯客微博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a target="_blank" rel="noopener" href="https://github.com/Vinx911" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">唯客微博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">专注于计算机，嵌入式领域的技术</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/29/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          操作系统精髓与设计原理(第8版) - 第二章 操作系统概述
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-30 16:05:20" itemprop="dateCreated datePublished" datetime="2019-06-30T16:05:20+08:00">2019-06-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-19 11:35:37" itemprop="dateModified" datetime="2023-09-19T11:35:37+08:00">2023-09-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%B2%BE%E9%AB%93%E4%B8%8E%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86-%E7%AC%AC8%E7%89%88/" itemprop="url" rel="index"><span itemprop="name">操作系统精髓与设计原理(第8版)</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="操作系统精髓与设计原理第8版---第二章-操作系统概述">操作系统精髓与设计原理(第8版)
+- 第二章 操作系统概述</h1>
+<h2 id="操作系统的目标与功能">2.1 操作系统的目标与功能</h2>
+<p>操作系统是控制应用程序执行的程序，是应用程序和计算机硬件间的接口。它有三个目标：</p>
+<ul>
+<li><strong>方便</strong>：操作系统使计算机更易于使用。</li>
+<li><strong>有效</strong>：操作系统允许以更有效的方式使用计算机系统资源。</li>
+<li><strong>扩展能力</strong>：在构造操作系统时，应允许在不妨碍服务的前提下，有效地开发、测试和引入新的系统功能。</li>
+</ul>
+<h3 id="作为用户计算机接口的操作系统">2.1.1
+作为用户/计算机接口的操作系统</h3>
+<p><img src="/post/29/assets/image-20230918112054077.png"></p>
+<p>应用程序的用户，即终端用户，把计算机系统视为一组应用程序。为了简化开发任务，系统需要提供一些实用程序或库，实现创建程序、管理文件和控制IO设备时经常使用的功能。</p>
+<p>操作系统通常提供以下几个方面的服务：</p>
+<ul>
+<li><p><strong>程序开发</strong>：操作系统提供用于开发的各种各样的工具和服务，称为应用程序开发工具。</p></li>
+<li><p><strong>程序运行</strong>：把指令和数据加载到内存、初始化IO设备和文件、准备其他一些资源。操作系统为用户处理这些调度问题。</p></li>
+<li><p><strong>IO设备访问</strong>：操作系统隐藏不同IO设备操作的差异，并提供统一的接口。</p></li>
+<li><p><strong>文件访问控制</strong>：操作系统必须了解IO设备的特性，必须详细了解存储介质中文件数据的结构，提供保护机制来控制对文件的访问。</p></li>
+<li><p><strong>系统访问</strong>：提供对资源和数据的保护，避免未授权用户的访问，还必须解决资源竞争时的冲突。</p></li>
+<li><p><strong>错误检测和响应</strong>：操作系统必须提供对运行时可能发生各种各样错误的响应以清除错误条件，使其对正在运行的应用程序影响最小。</p></li>
+<li><p><strong>记账</strong>：操作系统可以收集对各种资源的利用率的统计数据，监控诸如响应时间之类的性能参数。</p></li>
+<li><p>典型计算机系统有三种重要的接口：
+<strong>指令系统体系结构（ISA）</strong>：定义了计算机遵循的机器语言指令系统，该接口是硬件与软件的分界线。</p></li>
+<li><p><strong>应用程序二进制接口（ABI）</strong>：定义了程序间二进制可移植性的标准。</p></li>
+<li><p><strong>应用程序编程接口（API）</strong>：允许应用程序访问系统的硬件资源和服务。</p></li>
+</ul>
+<h3 id="作为资源管理器的操作系统">2.1.2 作为资源管理器的操作系统</h3>
+<p><img src="/post/29/assets/image-20230918112105606.png"></p>
+<p>操作系统控制处理器使用其他系统资源，并控制其他程序的执行机制。处理器要做任何一件这类事情时，都必须听孩子执行操作系统程序，而去执行其他程序。这时操作系统会释放对处理器的控制，让处理器去做其他一些有用的工作，然后用足够长的时间恢复控制权，让处理器准备好做下一件工作。</p>
+<p>操作系统的一部分在内存中，包括内核程序和当前长在使用的其他操作系统程序，内核程序包含操作系统中最常使用的功能。内存的其余部分包含用户程序和数据，它的分配由操作系统和处理器中的存储管理区硬件联合控制完成。操作系统决定在程序运行过程中何时使用IO设备，并控制文件的访问和使用。决定在运行一个特定的用户程序时，可以分配多少处理器时间。</p>
+<h3 id="操作系统的易扩展性">2.1.3 操作系统的易扩展性</h3>
+<p>操作系统应能不断发展，原因如下：</p>
+<ul>
+<li><p>硬件升级和新型硬件的出现</p></li>
+<li><p>新的服务</p></li>
+<li><p>纠正错误</p></li>
+</ul>
+<h2 id="操作系统的发展史">2.2 操作系统的发展史</h2>
+<ul>
+<li>串行处理：20世纪40年代后期到50年代中期</li>
+<li>简单批处理系统：20世纪50年代中期由General Motors开发</li>
+<li>多道批处理系统</li>
+<li>分时系统</li>
+</ul>
+<h2 id="主要成就">2.3 主要成就</h2>
+<h3 id="进程">2.3.1 进程</h3>
+<p>进程的定义：</p>
+<ul>
+<li>一个正在执行的程序</li>
+<li>计算机中正在运行的程序的一个实体</li>
+<li>可分配给处理器并由处理器执行的一个实体</li>
+<li>有一个单一顺序线程、一个当前状态和一组相关的系统资源所表征的活动单元</li>
+</ul>
+<p>要解决的问题：</p>
+<ul>
+<li>不正确的同步</li>
+<li>失败的互斥</li>
+<li>不确定的程序操作</li>
+<li>死锁</li>
+</ul>
+<p>进程由三部分组成：</p>
+<ul>
+<li>一段可执行的程序</li>
+<li>程序所需要的相关数据（变量、工作空间、缓冲区等）</li>
+<li>程序的执行上下文</li>
+</ul>
+<p><img src="/post/29/assets/image-20230918112114901.png"></p>
+<p>执行上下文又称为进程状态，是操作系统用来管理和控制进程所需的内部数据。上下文包括操作系统管理进程及处理器正确执行进程所需的所有信息，包括各种处理器寄存器的内容，包括进程优先级及进程是否在等待特定IO事件的完成。</p>
+<p>每个进程分配了一块存储区域，并且在操作系统建立和维护的进程表中进行了记录。进程表包含记录每个进程的表项，表项的内容包括指向包含进程的存储块地址的指针，还包括该进程的部分或全部执行上下文。</p>
+<p><strong>进程索引寄存器</strong>包含当前正在控制处理器的进程在进程表中的索引。<strong>程序计数器</strong>指向该进程中下一条待执行的指令。<strong>基址寄存器</strong>和<strong>界限寄存器</strong>定义该进程所占据的存储器区域，基址寄存器中保存在存储器区域的开始地址，界限寄存器中保存该区域的大小（以字节或字为单位）。</p>
+<h3 id="内存管理">2.3.2 内存管理</h3>
+<p>操作系统担负着5项存储器管理的职责：</p>
+<ul>
+<li>进程隔离</li>
+<li>自动分配和管理</li>
+<li>支持模块化程序设计</li>
+<li>保护和访问控制</li>
+<li>长期存储</li>
+</ul>
+<p>虚存机制允许程序以逻辑方式访问存储器，而不考虑物理内存上可用的空间数量。在分页系统中，进程有许多固定大小的块组成，这些块称为页。程序通过虚地址访问字，虚地址由页号和页中的偏移量组成。分页系统提供了程序中使用的虚地址和内存中的实地址或物理地址之间的动态映射。若访问的某页不在内存中，存储器管理硬件会在检测到它后，安排载入这个缺页。</p>
+<p>给每个进程唯一的不重叠虚存空间，可以实现进程隔离；使两个虚存空间的一部分重叠，可实现内存共享；文件可用于长期存储，文件或其一部分可以复制到虚存中供程序操作。</p>
+<h3 id="信息保护和安全">2.3.3 信息保护和安全</h3>
+<ul>
+<li><strong>可用性</strong>：保护系统不被中断</li>
+<li><strong>保密性</strong>：保证用户不能读取未访问的数据</li>
+<li><strong>数据完整性</strong>：保护数据不被未授权修改</li>
+<li><strong>认证</strong>：涉及用户身份的正确认证和消息或数据的合法性</li>
+</ul>
+<h3 id="调度和资源管理">2.3.4 调度和资源管理</h3>
+<p>操作系统的一个关键任务是管理各种可用资源（内存空间、IO设备、处理器），并调度各种活动进程来使用这些资源。要考虑3个因素：</p>
+<ul>
+<li><strong>公平性</strong></li>
+<li><strong>有差别的响应性</strong></li>
+<li><strong>有效性</strong></li>
+</ul>
+<h2 id="现代操作系统的特征">2.4 现代操作系统的特征</h2>
+<ul>
+<li>微内核体系结构</li>
+<li>多线程</li>
+<li>对称多处理</li>
+<li>分布式操作系统</li>
+<li>面向对象设计</li>
+</ul>
+<h2 id="容错性">2.5 容错性</h2>
+<h3 id="基本概念">2.5.1 基本概念</h3>
+<p>容错性是指系统或部件在发生软硬件错误时，能够继续正常运行的能力。</p>
+<h3 id="错误">2.5.2 错误</h3>
+<p>错误一般分为以下几类：</p>
+<ul>
+<li>永久性错误</li>
+<li>临时性错误
+<ul>
+<li>瞬时性错误</li>
+<li>间歇性错误</li>
+</ul></li>
+</ul>
+<p>系统容错性是通过增加冗余余度实现的：</p>
+<ul>
+<li>空间（物理）冗余</li>
+<li>时间冗余</li>
+<li>信息冗余</li>
+</ul>
+<h3 id="操作系统机制">2.5.3 操作系统机制</h3>
+<ul>
+<li>操作系统软件中采用了许多技术来提高容错性</li>
+<li>进程隔离</li>
+<li>并发控制</li>
+<li>虚拟机</li>
+<li>检测点和回滚机制</li>
+</ul>
+<h2 id="多处理器和多核操作系统设计考虑因素">2.6
+多处理器和多核操作系统设计考虑因素</h2>
+<h3 id="对称多处理器操作系统设计考虑因素">2.6.1
+对称多处理器操作系统设计考虑因素</h3>
+<ul>
+<li>并发进程或线程</li>
+<li>调度</li>
+<li>同步</li>
+<li>内存管理</li>
+<li>可靠性和容错性</li>
+</ul>
+<h3 id="多核操作系统设计考虑因素">2.6.2 多核操作系统设计考虑因素</h3>
+<ul>
+<li>应用层并行</li>
+<li>虚拟机方式</li>
+</ul>
+<h2 id="微软windows系统简介">2.7 微软Windows系统简介</h2>
+<p>windows分开了面向应用的软件和操作系统核心软件，后者包括在内核模式下运行的执行体、内核、设备驱动、和硬件抽象层。在内核模式下运行的软件可以访问系统数据和硬件，在用户模式下运行的其他软件则不能访问系统数据。</p>
+<p><img src="/post/29/assets/image-20230918112125021.png"></p>
+<p>每个系统函数都正好有一个操作系统部件管理，操作系统的其他部分和所有应用程序通过相应的部件使用标准接口来访问这个函数。关键的系统函数只能通过相应的函数访问。</p>
+<p>Windows的内核模式组件包括以下几个类型：</p>
+<ul>
+<li>执行体</li>
+<li>内核</li>
+<li>硬件抽象层</li>
+<li>设备驱动</li>
+<li>窗口和图形系统</li>
+</ul>
+<p>windows执行体包括一些特殊的系统函数模块：</p>
+<ul>
+<li>IO管理器</li>
+<li>高速缓存管理器</li>
+<li>对象管理器</li>
+<li>即插即用管理器</li>
+<li>电源管理器</li>
+<li>安全访问监控程序</li>
+<li>虚存管理器</li>
+<li>配置管理器</li>
+<li>本地调用过程</li>
+</ul>
+<p>用户模式进程：</p>
+<ul>
+<li>特殊系统进程</li>
+<li>服务进程</li>
+<li>环境子系统</li>
+<li>用户应用程序</li>
+</ul>
+<h2 id="传统的unix系统">2.8 传统的Unix系统</h2>
+<p><img src="/post/29/assets/image-20230918112137047.png"></p>
+<h2 id="现代unix系统">2.9现代Unix系统</h2>
+<p><img src="/post/29/assets/image-20230918112146049.png"></p>
+<ul>
+<li>System V Release 4（SVR4）</li>
+<li>BSD</li>
+<li>Solaris 10</li>
+</ul>
+<h2 id="linux操作系统">2.10 Linux操作系统</h2>
+<p>Linux高度模块化且易于配置，因此很容易在各种不同的硬件平台上显示出最佳的性能。</p>
+<p>尽管Linux未采用微内核的方法，单由于其特殊的模块结构，因而也具有很多为内核方法的优点。Linux是由很多模块组成的，这些模块可由命令自动加载和卸载。这些相对应的块称为<strong>可加载模块</strong>。实质上，模块就是内核在运行时可以链接或断开链接的对象文件。模块可以因为各种目的而创建内核线程，但其自身不作为进程或线程执行。当然模块会代表当前进程在内核模式下执行。</p>
+<p>Linux可加载模块有两个重要特征：</p>
+<ul>
+<li><strong>动态链接</strong>：当内核已在内存中并正在运行时，内核模块可被加载和连接到内核。模块也可在任何时刻被断开连接，并移出内存。</li>
+<li><strong>可堆叠模块</strong>：模块可按层次结构排列。被高层的客户模块访问时，它们是库，被底层的模块访问时，它们是客户。</li>
+</ul>
+<p>在Linux中，用户程序或用户可以使用insmod和rmmod命令显示地加载和卸载内核模块，内核自身监视特定函数的需求，并根据需求加载和卸载模块。可堆叠模块定义的优点如下：</p>
+<ol type="1">
+<li>多个类似模块的相同代码可移入单个模块中，因此降低了重复性。</li>
+<li>内核可确保所需模块存在，避免卸载其它正在运行模块所依赖的模块，并在加载新模块时一同加载所需要的其他模块。</li>
+</ol>
+<p>主要内核组件的简要介绍如下：</p>
+<ul>
+<li><strong>信号</strong>：内核使用信号来向进程提供信息</li>
+<li><strong>系统调用</strong>：进程通过系统调用来请求系统服务。系统调用大致分为6类：文件系统、进程、调度、进程间通信、套节奏（网络）和其他。</li>
+<li><strong>进程和调度器</strong>：创建、管理、调度进程。</li>
+<li><strong>虚存</strong>：为进程分配和管理虚存。</li>
+<li><strong>文件系统</strong>：为文件、目录和其他文件相关对象提供一个全局的分层命名空间，并提供文件系统函数。</li>
+<li><strong>网络协议</strong>：为用户的TCP/IP协议套件提供套接字接口。</li>
+<li><strong>字符设备驱动</strong>：管理向内核一次发送/接收1字节数据的设备。</li>
+<li><strong>块设备驱动</strong>：管理以块为单位向内核发送/接收数据的设备，如各种形式的外存（磁盘、CD-ROM等）。</li>
+<li><strong>网络设备驱动</strong>：管理网卡和通信端口，即管理连接到网桥或路由的网络设备。</li>
+<li><strong>陷阱和错误</strong>：处理CPU产生的陷阱和错误，如内存错误。</li>
+<li><strong>物理内存</strong>：管理实际内存中的内存页池，并为虚存分配内存页。</li>
+<li><strong>中断</strong>：处理来自外设的中断。</li>
+</ul>
+<h2 id="android">2.11 Android</h2>
+<p>Android是一个包括操作系统内核、中间件、关键应用的软件栈。</p>
+<ul>
+<li><p><strong>应用</strong>：与用户直接进行交互的所有应用都是应用层的一部分。</p></li>
+<li><p><strong>应用框架</strong>：应用框架层提供高级构建块，为程序员开发程序提供标准化的访问接口，旨在简化组件的复用。</p>
+<ul>
+<li><strong>活动管理器</strong>：管理应用的生命周期，即负责启动、停止和恢复各个应用。</li>
+<li><strong>窗口管理器</strong>：底层界面管理器的抽象，界面管理其处理帧缓冲区的交互和底层的绘制，而窗口管理器在其上提供了新的一层，允许应用声明客户端区域并使用类似状态栏的特性。</li>
+<li><strong>包管理器</strong>：安装和删除应用。</li>
+<li><strong>电话管理器</strong>：允许与电话、短信和彩信服务交互。</li>
+<li><strong>内容接口</strong>：这些函数将封装应用间需要共享的应用数据，如联系人数据。</li>
+<li><strong>资源管理器</strong>：管理应用程序的资源，如本地化字符串和位图。</li>
+<li><strong>视图系统</strong>：提供用户界面（UI）元素，如按钮、列表框、日期选择器和其他控件，以及UI事件（如触摸和手势）。</li>
+<li><strong>位置管理器</strong>：允许开发人员使用基于位置的服务，可以基于全球定位系统（GPS）、基站ID或本地WIFI数据库等。</li>
+<li><strong>通知管理器</strong>：触发规定事件时提醒用户，如收到信息、到达约会时间。</li>
+<li><strong>XMPP</strong>：管理应用层间的通信。</li>
+</ul></li>
+<li><p>系统库：应用层下面一层由两部分组成：系统库和运行库。系统库组件是用C或C++编写的实用系统函数集，可被Android系统的各个组件使用。应用可通过Java接口来对其进行调用，同时这些功能向开发者开放。</p>
+<ul>
+<li><strong>界面管理器</strong>：Android使用了类似于Vista、Compiz的排版窗口管理器，但与后者相比要简单得多。它不直接写入绘图缓冲区，而是根据绘图命令构建离屏位图文件，然后在合并其他位图文件后，一同展示给用户，因此系统可创建各种有趣的效果，如透明窗口和华丽切换。</li>
+<li><strong>OpenGL</strong>：OpenGL（Open Graphics
+Library）是一种跨语言、跨平台的应用接口，用于-</li>
+</ul></li>
+</ul>
+<p><strong>报警功能</strong>是在Linux内核中实现的，开发者可通过调用运行库中的报警管理器来操作。通过告警管理器，应用可以请求定时叫醒服务。报警管理器是内核服务，目的是让应用即使在系统休眠的情况下也能触发警告提醒。这就使得系统随时可以进入休眠状态以节省电能。</p>
+<p><strong>唤醒锁</strong>可以阻止Android系统进入休眠模式。一个应用程序占有以下唤醒锁中的一个：</p>
+<ul>
+<li><strong>full_wake_lock</strong>：处理器工作，屏幕亮，键盘亮。</li>
+<li><strong>partial_wake_lock</strong>：处理器工作，屏幕关，键盘关。</li>
+<li><strong>screen_dim_wake_lock</strong>：处理器工作，屏幕暗，键盘关。</li>
+<li><strong>screen_bright_wake_lock</strong>：处理器工作，屏幕亮，键盘关。</li>
+</ul>
+<p>当应用要求被管理的外设保持供电时，会通过API请求对应的锁。若无唤醒锁存在，系统就会锁定并关闭设备以节省电能。</p>
+<p>通过访问/sys/power/wavelock文件，用户可在用户空间中访问内核中的电源管理的相应对象。把wake_lock和wake_unlock文件写入响应的文件，用户可以定义和切换锁。</p>
+<h2 id="关键术语复习题和习题">2.13 关键术语、复习题和习题</h2>
+<h3 id="复习题">2.13.2 复习题</h3>
+<p><strong>2.1 操作系统设计的三个目标是什么？</strong></p>
+<ul>
+<li><strong>方便</strong>：操作系统使计算机更易于使用。</li>
+<li><strong>有效</strong>：操作系统允许以更有效的方式使用计算机系统资源。</li>
+<li><strong>扩展能力</strong>：在构造操作系统时，应允许在不妨碍服务的前提下，有效地开发、测试和引入新的系统功能。</li>
+</ul>
+<p><strong>2.2 什么是操作系统的内核？</strong></p>
+<p>内核是操作系统最常使用的部分，它存在于主存中并在特权模式下运行，响应进程调度和设备中断。</p>
+<p><strong>2.3 什么是多道程序设计？</strong></p>
+<p>多道程序设计是一种处理操作，它在两个或多个程序间交错处理每个进程。</p>
+<p><strong>2.4 什么是进程？</strong></p>
+<p>进程是一个正在执行的程序，它被操作系统控制和选择。</p>
+<p><strong>2.5 操作系统时怎样使用进程上下文的？</strong></p>
+<p>执行上下文又称为进程状态，是操作系统用来管理和控制所需的内部数据。这种内部信息和进程是分开的，因为操作系统信息不允许被进程直接访问。上下文包括操作系统管理进程以及处理器正确执行进程所需要的所有信息，包括各种处理器寄存器的内容，如程序计数器和数据寄存器。它还包括操作系统使用的信息，如进程优先级以及进程是否在等待特定I/O事件的完成。</p>
+<p><strong>2.6
+列出并简要介绍操作系统的5中典型存储管理职责。</strong></p>
+<ul>
+<li>进程隔离</li>
+<li>自动分配和管理</li>
+<li>支持模块化程序设计</li>
+<li>保护和访问控制</li>
+<li>长期存储</li>
+</ul>
+<p>P42 <strong>2.3.2 内存管理</strong></p>
+<p><strong>2.7 实地址和虚地址的区别是什么？</strong></p>
+<p>虚地址指的是存在于虚拟内存中的地址，它有时候在磁盘中有时候在主存中。 </p>
+<p>实地址指的是主存中的地址。</p>
+<p><strong>2.8 描述时间片轮转调度技术。</strong></p>
+<p>轮循调度是一种调度算法，所有的进程存放在一个环形队列中并按固定循序依次激活。因为等待一些事件（例如：等待一个子进程或一个I/O操作）的发生而不能被处理的进程将控制权交给调度器。</p>
+<p><strong>2.9 解释单体内核和微内核的区别。</strong></p>
+<p>单体内核是一个提供操作系统应该提供的功能的大内核，包括调度、文件系统、网络、设备驱动程序、存储管理等。内核的所有功能成分都能够访问它的内部数据结构和程序。典型情况下，这个大内核是作为一个进程实现的，所有元素都共享相同的地址空间。 </p>
+<p>微内核是一个小的有特权的操作系统内核，只提供包括进程调度、内存管理、和进程间通信等基本功能，要依靠其他进程担当起和操作系统内核联系作用。</p>
+<p><strong>2.10 什么是多线程？</strong></p>
+<p>多线程技术是指把执行一个应用程序的进程划分成可以同时运行的多个线程。</p>
+<p><strong>2.11
+列出对称多处理操作系统设计时要考虑的关键问题。</strong></p>
+<ul>
+<li>并发进程或线程</li>
+<li>调度</li>
+<li>同步</li>
+<li>内存管理</li>
+<li>可靠性和容错性</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+    </div>
+    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/post/29/">操作系统精髓与设计原理(第8版) - 第二章 操作系统概述</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Vinx 的个人博客">Vinx</a></p>
+  <p><span>发布时间:</span>2019年06月30日 - 16:05</p>
+  <p><span>最后更新:</span>2023年09月19日 - 11:35</p>
+  <p><span>原始链接:</span><a href="/post/29/" title="操作系统精髓与设计原理(第8版) - 第二章 操作系统概述">https://blog.vinkvin.com/post/29/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://blog.vinkvin.com/post/29/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fab fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+
+      
+    </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag"># 操作系统</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/28/" rel="prev" title="操作系统精髓与设计原理(第8版) - 第一章 计算机系统概述">
+      <i class="fa fa-chevron-left"></i> 操作系统精髓与设计原理(第8版) - 第一章 计算机系统概述
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/30/" rel="next" title="Kconfig-language翻译">
+      Kconfig-language翻译 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%B2%BE%E9%AB%93%E4%B8%8E%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86%E7%AC%AC8%E7%89%88---%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="nav-text">操作系统精髓与设计原理(第8版)
+- 第二章 操作系统概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%9B%AE%E6%A0%87%E4%B8%8E%E5%8A%9F%E8%83%BD"><span class="nav-text">2.1 操作系统的目标与功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E4%B8%BA%E7%94%A8%E6%88%B7%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-text">2.1.1
+作为用户&#x2F;计算机接口的操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E4%B8%BA%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E5%99%A8%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-text">2.1.2 作为资源管理器的操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%98%93%E6%89%A9%E5%B1%95%E6%80%A7"><span class="nav-text">2.1.3 操作系统的易扩展性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8F%91%E5%B1%95%E5%8F%B2"><span class="nav-text">2.2 操作系统的发展史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E6%88%90%E5%B0%B1"><span class="nav-text">2.3 主要成就</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B"><span class="nav-text">2.3.1 进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-text">2.3.2 内存管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E4%BF%9D%E6%8A%A4%E5%92%8C%E5%AE%89%E5%85%A8"><span class="nav-text">2.3.3 信息保护和安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E5%BA%A6%E5%92%8C%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86"><span class="nav-text">2.3.4 调度和资源管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%89%B9%E5%BE%81"><span class="nav-text">2.4 现代操作系统的特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E9%94%99%E6%80%A7"><span class="nav-text">2.5 容错性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">2.5.1 基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF"><span class="nav-text">2.5.2 错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%9C%BA%E5%88%B6"><span class="nav-text">2.5.3 操作系统机制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E5%A4%84%E7%90%86%E5%99%A8%E5%92%8C%E5%A4%9A%E6%A0%B8%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E8%80%83%E8%99%91%E5%9B%A0%E7%B4%A0"><span class="nav-text">2.6
+多处理器和多核操作系统设计考虑因素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E5%A4%9A%E5%A4%84%E7%90%86%E5%99%A8%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E8%80%83%E8%99%91%E5%9B%A0%E7%B4%A0"><span class="nav-text">2.6.1
+对称多处理器操作系统设计考虑因素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%A0%B8%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E8%80%83%E8%99%91%E5%9B%A0%E7%B4%A0"><span class="nav-text">2.6.2 多核操作系统设计考虑因素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AE%E8%BD%AFwindows%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B"><span class="nav-text">2.7 微软Windows系统简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E7%9A%84unix%E7%B3%BB%E7%BB%9F"><span class="nav-text">2.8 传统的Unix系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%B0%E4%BB%A3unix%E7%B3%BB%E7%BB%9F"><span class="nav-text">2.9现代Unix系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-text">2.10 Linux操作系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#android"><span class="nav-text">2.11 Android</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E6%9C%AF%E8%AF%AD%E5%A4%8D%E4%B9%A0%E9%A2%98%E5%92%8C%E4%B9%A0%E9%A2%98"><span class="nav-text">2.13 关键术语、复习题和习题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E4%B9%A0%E9%A2%98"><span class="nav-text">2.13.2 复习题</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Vinx"
+      src="/images/vinx.jpg">
+  <p class="site-author-name" itemprop="name">Vinx</p>
+  <div class="site-description" itemprop="description">本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Vinx911" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Vinx911" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u011471873" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u011471873" rel="noopener" target="_blank"><i class="fa fa-crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:buddyhe911@163.com" title="E-Mail → mailto:buddyhe911@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vinx</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

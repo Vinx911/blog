@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.vinkvin.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="为了提高系统的响应能力和并发能力，Linux将中断处理分了上半部和下半部。当一个中断产生，调用该中断对应的处理程序(上半部)，然后告诉系统，对应的后半部可以执行了，中断处理程序立即返回，下半部会在合适的时机由操作系统调用。这样一来就大大的减少了中断处理所需要的时间。 tasklet是中断处理下半部分最常用的一种方法，驱动程序一般先申请中断，在中断处理函数内完成中断上半部分的工作后调用task">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux驱动开发杂记(0x15) - tasklet">
+<meta property="og:url" content="https://blog.vinkvin.com/post/21/index.html">
+<meta property="og:site_name" content="唯客微博客">
+<meta property="og:description" content="为了提高系统的响应能力和并发能力，Linux将中断处理分了上半部和下半部。当一个中断产生，调用该中断对应的处理程序(上半部)，然后告诉系统，对应的后半部可以执行了，中断处理程序立即返回，下半部会在合适的时机由操作系统调用。这样一来就大大的减少了中断处理所需要的时间。 tasklet是中断处理下半部分最常用的一种方法，驱动程序一般先申请中断，在中断处理函数内完成中断上半部分的工作后调用task">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-01-04T03:48:10.000Z">
+<meta property="article:modified_time" content="2023-09-18T03:11:00.803Z">
+<meta property="article:author" content="Vinx">
+<meta property="article:tag" content="Linux驱动">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://blog.vinkvin.com/post/21/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux驱动开发杂记(0x15) - tasklet | 唯客微博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a target="_blank" rel="noopener" href="https://github.com/Vinx911" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">唯客微博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">专注于计算机，嵌入式领域的技术</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/21/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux驱动开发杂记(0x15) - tasklet
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-01-04 11:48:10" itemprop="dateCreated datePublished" datetime="2019-01-04T11:48:10+08:00">2019-01-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-18 11:11:00" itemprop="dateModified" datetime="2023-09-18T11:11:00+08:00">2023-09-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>　　为了提高系统的响应能力和并发能力，Linux将中断处理分了上半部和下半部。当一个中断产生，调用该中断对应的处理程序(上半部)，然后告诉系统，对应的后半部可以执行了，中断处理程序立即返回，下半部会在合适的时机由操作系统调用。这样一来就大大的减少了中断处理所需要的时间。</p>
+<p>tasklet是中断处理下半部分最常用的一种方法，驱动程序一般先申请中断，在中断处理函数内完成中断上半部分的工作后调用tasklet。</p>
+<h2 id="一tasklet的特点">一、tasklet的特点</h2>
+<ol type="1">
+<li>tasklet只可以在一个CPU上同步地执行，不同的tasklet可以在不同地CPU上同步地执行。</li>
+<li>tasklet的实现是建立在两个软件中断的基础之上的，即HI_SOFTIRQ和TASKLET_SOFTIRQ，本质上没有什么区别，只不过HI_SOFTIRQ的优先级更高一些</li>
+<li>由于tasklet是在软中断上实现的，所以像软中断一样不能睡眠、不能阻塞，处理函数内不能含有导致睡眠的动作，如减少信号量、从用户空间拷贝数据或手工分配内存等。</li>
+<li>一个 tasklet 能够被禁止并且之后被重新使能;
+它不会执行直到它被使能的次数与被禁止的次数相同.</li>
+<li>tasklet的串行化使tasklet函数不必是可重入的，因此简化了设备驱动程序开发者的工作。</li>
+<li>每个cpu拥有一个tasklet_vec链表，具体是哪个cpu的tasklet_vec链表，是根据当前线程是运行在哪个cpu来决定的。</li>
+</ol>
+<h2 id="二tasklet结构体">二、tasklet结构体</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tasklet_struct</span> &#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">tasklet_struct</span> 	*<span class="title">next</span>;</span>		<span class="comment">/*指向链表中的下一个结构*/</span></span><br><span class="line">	<span class="type">unsigned</span> <span class="type">long</span> 			state;		<span class="comment">/* 小任务的状态 */</span></span><br><span class="line">	<span class="type">atomic_t</span> 				count;		<span class="comment">/* 引用计数器 */</span></span><br><span class="line">	<span class="type">void</span> (*func) (<span class="type">unsigned</span> <span class="type">long</span>);		<span class="comment">/* 要调用的函数 */</span></span><br><span class="line">	<span class="type">unsigned</span> <span class="type">long</span> 			data;		<span class="comment">/* 传递给函数的参数 */</span></span><br><span class="line">&#125;；</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>State域的取值为TASKLET_STATE_SCHED或TASKLET_STATE_RUN。TASKLET_STATE_SCHED表示小任务已被调度，正准备投入运行，TASKLET_STATE_RUN表示小任务正在运行。</p></li>
+<li><p>Count域是小任务的引用计数器。如果它不为0，则小任务被禁止，不允许执行；只有当它为零，小任务才被激活，并且在被设置为挂起时，小任务才能够执行。</p></li>
+</ul>
+<h2 id="三tasklet的定义">三、tasklet的定义</h2>
+<p>tasklet既可以静态创建也可以动态创建。 ### 1、静态创建
+定义变量名为name的tasklets_struct变量，并初始化调用函数为func，参数为data，使能tasklet。
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DECLARE_TASKLET(name, func, data);</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DECLARE_TASKLET(name, func, data) \</span></span><br><span class="line"><span class="meta">	struct tasklet_struct name = &#123; NULL, 0, ATOMIC_INIT(0), func, data &#125;</span></span><br></pre></td></tr></table></figure>
+定义变量名为name的tasklets_struct变量，并初始化调用函数为func，参数为data，禁止tasklet。
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DECLARE_TASKLET_DISABLED(name, func, data)；</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DECLARE_TASKLET_DISABLED(name, func, data) \</span></span><br><span class="line"><span class="meta">	struct tasklet_struct name = &#123; NULL, 0, ATOMIC_INIT(1), func, data &#125;</span></span><br></pre></td></tr></table></figure> ### 2、动态创建 先定义struct tasklet_struct
+name;然后初始化 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">tasklet_init</span><span class="params">(<span class="keyword">struct</span> tasklet_struct *t,<span class="type">void</span> (*func)(<span class="type">unsigned</span> <span class="type">long</span>), <span class="type">unsigned</span> <span class="type">long</span> data)</span></span><br><span class="line">&#123;</span><br><span class="line">    t-&gt;next = <span class="literal">NULL</span>;              <span class="comment">//</span></span><br><span class="line">    t-&gt;state = <span class="number">0</span>;                <span class="comment">//设置为未调度 未运行  </span></span><br><span class="line">    <span class="type">atomic_set</span>(&amp;t-&gt;count, <span class="number">0</span>);    <span class="comment">//默认使能</span></span><br><span class="line">    t-&gt;func = func;              <span class="comment">//调用函数</span></span><br><span class="line">    t-&gt;data = data;              <span class="comment">//调用函数参数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> ## 四、调度tasklet
+通过调用tasklet_schedule()函数并传递给它相应的tasklt_struct指针，该小任务就会被调度以便适当的时候执行：
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">void</span> <span class="title function_">tasklet_schedule</span><span class="params">(<span class="keyword">struct</span> tasklet_struct *t)</span>；</span><br><span class="line"><span class="title function_">tasklet_schedule</span><span class="params">(&amp;my_tasklet)</span>;  <span class="comment">/*把 my_tasklet 标记为挂起 */</span></span><br></pre></td></tr></table></figure>
+在小任务被调度以后，只要有机会它就会尽可能早的运行。在它还没有得到运行机会之前，如果一个相同的小任务又被调度了，那么它仍然只会运行一次。
+可以调用tasklet_disable()函数来禁止某个指定的小任务。如果该小任务当前正在执行，这个函数会等到它执行完毕再返回。调用tasklet_enable()函数可以激活一个小任务，如果希望把以DECLARE_TASKLET_DISABLED（）创建的小任务激活，也得调用这个函数，如：
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tasklet_disable(&amp;my_tasklet);     <span class="comment">/* 小任务现在被禁止,这个小任务不能运行 */</span></span><br><span class="line">tasklet_enable(&amp;my_tasklet);    <span class="comment">/*  小任务现在被激活 */</span></span><br></pre></td></tr></table></figure>
+也可以调用tasklet_kill()函数从挂起的队列中去掉一个小任务。该函数的参数是一个指向某个小任务的tasklet_struct的长指针。在小任务重新调度它自身的时候，从挂起的队列中移去已调度的小任务会很有用。这个函数首先等待该小任务执行完毕，然后再将它移去。</p>
+<h2 id="五tasklet相关函数">五、tasklet相关函数</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">tasklet_disable</span><span class="params">(<span class="keyword">struct</span> tasklet_struct *t)</span>;</span><br></pre></td></tr></table></figure>
+<p>这个函数禁止给定的 tasklet. tasklet 可能仍然被 tasklet_schedule 调度,
+但是它的执行被延后直到这个 tasklet 被再次使能. 如果这个 tasklet
+当前在运行,这个函数忙等待直到这个 tasklet 退出; 因此, 在调用
+tasklet_disable 后, 你可以确保这个 tasklet 在系统任何地方都不在运行.
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">tasklet_disable_nosync</span><span class="params">(<span class="keyword">struct</span> tasklet_struct *t)</span>;</span><br></pre></td></tr></table></figure> 禁止这个 tasklet, 但是没有等待任何当前运行的函数退出.
+当它返回, 这个tasklt 被禁止并且不会在以后被调度直到重新使能,
+但是它可能仍然运行在另一个 CPU 当这个函数返回时. <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">tasklet_enable</span><span class="params">(<span class="keyword">struct</span> tasklet_struct *t)</span>;</span><br></pre></td></tr></table></figure>
+使能一个之前被禁止的 tasklet. 如果这个 tasklet 已经被调度,
+它会很快运行.一个对 tasklet_enable 的调用必须匹配每个对 tasklet_disable
+的调用, 因为内核跟踪每个 tasklet 的"禁止次数". <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">tasklet_schedule</span><span class="params">(<span class="keyword">struct</span> tasklet_struct *t)</span>;</span><br></pre></td></tr></table></figure> 调度
+tasklet 执行. 如果一个 tasklet 被再次调度在它有机会运行前, 它只运行一次.
+但是, 如果他在运行中被调度, 它在完成后再次运行;
+这保证了在其他事件被处理当中发生的事件收到应有的注意. 这个做法也允许一个
+tasklet 重新调度它自己. <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">tasklet_hi_schedule</span><span class="params">(<span class="keyword">struct</span> tasklet_struct *t)</span>;</span><br></pre></td></tr></table></figure> 调度 tasklet 在更高优先级执行.
+当软中断处理运行时, 它处理高优先级tasklet 在其他软中断之前, 包括"正常的"
+tasklet. 理想地, 只有具有低响应周期要求( 例如填充音频缓冲
+)应当使用这个函数, 为避免其他软件中断处理引入的附加周期. 实际上,
+/proc/jitasklethi 没有显示可见的与 /proc/jitasklet 的区别.
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">tasklet_kill</span><span class="params">(<span class="keyword">struct</span> tasklet_struct *t)</span>;</span><br></pre></td></tr></table></figure> 这个函数确保了这个 tasklet 没被再次调度来运行;
+它常常被调用当一个设备正被关闭或者模块卸载时. 如果这个 tasklet
+被调度来运行, 这个函数等待直到它已执行. 如果这个 tasklet 重新调度它自己,
+你必须阻止在调用 tasklet_kill前它重新调度它自己, 如同使用
+del_timer_sync.</p>
+<h2 id="六tasklet使用模板">六、tasklet使用模板</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 定义tasklet和底半部函数并将它们关联 */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">xxx_do_tasklet</span><span class="params">(<span class="type">unsigned</span> <span class="type">long</span>)</span>;</span><br><span class="line">DECLARE_TASKLET(xxx_tasklet, xxx_do_tasklet, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 中断处理底半部 */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">xxx_do_tasklet</span><span class="params">(<span class="type">unsigned</span> <span class="type">long</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 中断处理顶半部 */</span></span><br><span class="line"><span class="type">irqreturn_t</span> <span class="title function_">xxx_interrupt</span><span class="params">(<span class="type">int</span> irq, <span class="type">void</span> *dev_id)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    tasklet_schedule(&amp;xxx_tasklet);</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 设备驱动模块加载函数 */</span></span><br><span class="line"><span class="type">int</span> __init <span class="title function_">xxx_init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="comment">/* 申请中断 */</span></span><br><span class="line">    result = request_irq(xxx_irq, xxx_interrupt, <span class="number">0</span>, <span class="string">&quot;xxx&quot;</span>, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="keyword">return</span> IRQ_HANDLED;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 设备驱动模块卸载函数 */</span></span><br><span class="line"><span class="type">void</span> __exit <span class="title function_">xxx_exit</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="comment">/* 释放中断 */</span></span><br><span class="line">    free_irq(xxx_irq, xxx_interrupt);</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+    </div>
+    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/post/21/">Linux驱动开发杂记(0x15) - tasklet</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Vinx 的个人博客">Vinx</a></p>
+  <p><span>发布时间:</span>2019年01月04日 - 11:48</p>
+  <p><span>最后更新:</span>2023年09月18日 - 11:11</p>
+  <p><span>原始链接:</span><a href="/post/21/" title="Linux驱动开发杂记(0x15) - tasklet">https://blog.vinkvin.com/post/21/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://blog.vinkvin.com/post/21/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fab fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+
+      
+    </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux%E9%A9%B1%E5%8A%A8/" rel="tag"># Linux驱动</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/20/" rel="prev" title="Linux驱动开发杂记(0x14) - 环形缓冲区circ_buf">
+      <i class="fa fa-chevron-left"></i> Linux驱动开发杂记(0x14) - 环形缓冲区circ_buf
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/22/" rel="next" title="Linux驱动开发杂记(0x16) - 内核定时器接口各版本的变化">
+      Linux驱动开发杂记(0x16) - 内核定时器接口各版本的变化 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80tasklet%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-text">一、tasklet的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8Ctasklet%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-text">二、tasklet结构体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89tasklet%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-text">三、tasklet的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94tasklet%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0"><span class="nav-text">五、tasklet相关函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%ADtasklet%E4%BD%BF%E7%94%A8%E6%A8%A1%E6%9D%BF"><span class="nav-text">六、tasklet使用模板</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Vinx"
+      src="/images/vinx.jpg">
+  <p class="site-author-name" itemprop="name">Vinx</p>
+  <div class="site-description" itemprop="description">本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Vinx911" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Vinx911" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u011471873" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u011471873" rel="noopener" target="_blank"><i class="fa fa-crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:buddyhe911@163.com" title="E-Mail → mailto:buddyhe911@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vinx</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

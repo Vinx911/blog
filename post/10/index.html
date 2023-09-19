@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.vinkvin.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux驱动开发杂记(0x0A) - errno含义">
+<meta property="og:url" content="https://blog.vinkvin.com/post/10/index.html">
+<meta property="og:site_name" content="唯客微博客">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-11-12T06:38:20.000Z">
+<meta property="article:modified_time" content="2023-09-18T03:09:44.455Z">
+<meta property="article:author" content="Vinx">
+<meta property="article:tag" content="Linux驱动">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://blog.vinkvin.com/post/10/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux驱动开发杂记(0x0A) - errno含义 | 唯客微博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a target="_blank" rel="noopener" href="https://github.com/Vinx911" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">唯客微博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">专注于计算机，嵌入式领域的技术</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux驱动开发杂记(0x0A) - errno含义
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-12 14:38:20" itemprop="dateCreated datePublished" datetime="2018-11-12T14:38:20+08:00">2018-11-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-18 11:09:44" itemprop="dateModified" datetime="2023-09-18T11:09:44+08:00">2023-09-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span>	EPERM		 1	<span class="comment">/* Operation not permitted */</span>           操作不允许</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOENT		 2	<span class="comment">/* No such file or directory */</span>         文件或路径不存在</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ESRCH		 3	<span class="comment">/* No such process */</span>                   进程不存在</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EINTR		 4	<span class="comment">/* Interrupted system call */</span>           中断的系统调用</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EIO		 	 5	<span class="comment">/* I/O error */</span>                         I/O错误</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENXIO		 6	<span class="comment">/* No such device or address */</span>         设备或地址不存在</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	E2BIG		 7	<span class="comment">/* Argument list too long */</span>            参数列表过长</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOEXEC		 8	<span class="comment">/* Exec format error */</span>                 执行格式错误</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EBADF		 9	<span class="comment">/* Bad file number */</span>                   错误的文件编码</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ECHILD		10	<span class="comment">/* No child processes */</span>                子进程不存在</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EAGAIN		11	<span class="comment">/* Try again */</span>                         重试，非阻塞socket一般在缓冲区无数据时返回，阻塞socket标识超时</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOMEM		12	<span class="comment">/* Out of memory */</span>                     内存不足</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EACCES		13	<span class="comment">/* Permission denied */</span>                 没有权限</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EFAULT		14	<span class="comment">/* Bad address */</span>                       地址错误</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOTBLK		15	<span class="comment">/* Block device required */</span>             需要块设备</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EBUSY		16	<span class="comment">/* Device or resource busy */</span>           设备或资源忙</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EEXIST		17	<span class="comment">/* File exists */</span>                       文件已经存在</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EXDEV		18	<span class="comment">/* Cross-device link */</span>                 跨设备链路</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENODEV		19	<span class="comment">/* No such device */</span>                    设备不存在</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOTDIR		20	<span class="comment">/* Not a directory */</span>                   文件夹路径不存在</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EISDIR		21	<span class="comment">/* Is a directory */</span>                    是文件夹路径</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EINVAL		22	<span class="comment">/* Invalid argument */</span>                  无效参数</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENFILE		23	<span class="comment">/* File table overflow */</span>               文件表溢出</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EMFILE		24	<span class="comment">/* Too many open files */</span>               打开的文件描过多</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOTTY		25	<span class="comment">/* Not a typewriter */</span>                  非打字机</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ETXTBSY		26	<span class="comment">/* Text file busy */</span>                    文本文件忙，缓冲区被占用</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EFBIG		27	<span class="comment">/* File too large */</span>                    文件过大</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOSPC		28	<span class="comment">/* No space left on device */</span>           设备没有剩余空间</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ESPIPE		29	<span class="comment">/* Illegal seek */</span>                      非法查询</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EROFS		30	<span class="comment">/* Read-only file system */</span>             文件系统只读</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EMLINK		31	<span class="comment">/* Too many links */</span>                    连接过多，超过系统限制</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EPIPE		32	<span class="comment">/* Broken pipe */</span>                       管道破裂</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EDOM		33	<span class="comment">/* Math argument out of domain of func */</span> 参数超出函数域</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ERANGE		34	<span class="comment">/* Math result not representable */</span>     结果无法表示</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EDEADLK		35	<span class="comment">/* Resource deadlock would occur */</span>     资源将发生死锁</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENAMETOOLONG	36	<span class="comment">/* File name too long */</span>                文件名过长</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOLCK		37	<span class="comment">/* No record locks available */</span>         没有可用的记录锁</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOSYS		38	<span class="comment">/* Function not implemented */</span>          函数未实现</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOTEMPTY	39	<span class="comment">/* Directory not empty */</span>               文件夹非空</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ELOOP		40	<span class="comment">/* Too many symbolic links encountered */</span> 遇到太多的符号连接</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EWOULDBLOCK	EAGAIN	<span class="comment">/* Operation would block */</span>             操作将阻塞</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOMSG		42	<span class="comment">/* No message of desired type */</span>        没有符合需求类型的消息</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EIDRM		43	<span class="comment">/* Identifier removed */</span>                标识符已移除</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ECHRNG		44	<span class="comment">/* Channel number out of range */</span>       通道编号超出范围</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EL2NSYNC	45	<span class="comment">/* Level 2 not synchronized */</span>          Level 2 未同步</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EL3HLT		46	<span class="comment">/* Level 3 halted */</span>                    Level 3 停止</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EL3RST		47	<span class="comment">/* Level 3 reset */</span>                     Level 3 重置</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ELNRNG		48	<span class="comment">/* Link number out of range */</span>          连接数量超出范围</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EUNATCH		49	<span class="comment">/* Protocol driver not attached */</span>      协议驱动程序未附加</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOCSI		50	<span class="comment">/* No CSI structure available */</span>        无CSI结构可用</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EL2HLT		51	<span class="comment">/* Level 2 halted */</span>                    Level 2 停止</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EBADE		52	<span class="comment">/* Invalid exchange */</span>                  无效的交换</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EBADR		53	<span class="comment">/* Invalid request descriptor */</span>        无效的请求描述</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EXFULL		54	<span class="comment">/* Exchange full */</span>                     交换完全</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOANO		55	<span class="comment">/* No anode */</span>                          无阳极</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EBADRQC		56	<span class="comment">/* Invalid request code */</span>              无效的请求码</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EBADSLT		57	<span class="comment">/* Invalid slot */</span>                      无效的插槽</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EDEADLOCK	EDEADLK</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EBFONT		59	<span class="comment">/* Bad font file format */</span>              错误的字体文件格式</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOSTR		60	<span class="comment">/* Device not a stream */</span>               设备非流</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENODATA		61	<span class="comment">/* No data available */</span>                 无有效数据</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ETIME		62	<span class="comment">/* Timer expired */</span>                     计时器到期</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOSR		63	<span class="comment">/* Out of streams resources */</span>          超出流资源</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENONET		64	<span class="comment">/* Machine is not on the network */</span>     机器不在网络</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOPKG		65	<span class="comment">/* Package not installed */</span>             未安装包</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EREMOTE		66	<span class="comment">/* Object is remote */</span>                  对象是远程</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOLINK		67	<span class="comment">/* Link has been severed */</span>             链接正在服务中</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EADV		68	<span class="comment">/* Advertise error */</span>                   广告错误</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ESRMNT		69	<span class="comment">/* Srmount error */</span>    这个错误是RFS特定的。 当远程计算机仍在装载资源时尝试停止RFS，或者当资源使用不包含具有当前装入的资源的远程计算机的客户机列表重新进行读取时发生。</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ECOMM		70	<span class="comment">/* Communication error on send */</span>       发送过程中通讯错误</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EPROTO		71	<span class="comment">/* Protocol error */</span>                    协议错误</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EMULTIHOP	72	<span class="comment">/* Multihop attempted */</span>                多跳尝试</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EDOTDOT		73	<span class="comment">/* RFS specific error */</span>                RFS特殊错误</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EBADMSG		74	<span class="comment">/* Not a data message */</span>                不是数据类型的消息</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EOVERFLOW	75	<span class="comment">/* Value too large for defined data type */</span> 对指定的数据类型来说值太大</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOTUNIQ	76	<span class="comment">/* Name not unique on network */</span>        网络上名字不唯一</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EBADFD		77	<span class="comment">/* File descriptor in bad state */</span>      文件描述符状态错误</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EREMCHG		78	<span class="comment">/* Remote address changed */</span>            远程地址改变</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ELIBACC		79	<span class="comment">/* Can not access a needed shared library */</span>  无法访问需要的共享库</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ELIBBAD		80	<span class="comment">/* Accessing a corrupted shared library */</span>    访问损坏的共享库</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ELIBSCN		81	<span class="comment">/* .lib section in a.out corrupted */</span>         库部分a.out损坏</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ELIBMAX		82	<span class="comment">/* Attempting to link in too many shared libraries */</span>   试图连接过多的共享库</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ELIBEXEC	83	<span class="comment">/* Cannot exec a shared library directly */</span>    不能直接运行共享库</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EILSEQ		84	<span class="comment">/* Illegal byte sequence */</span>            非法字节序</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ERESTART	85	<span class="comment">/* Interrupted system call should be restarted */</span>  硬重新启动被中断的的系统调用</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ESTRPIPE	86	<span class="comment">/* Streams pipe error */</span>                流管错误</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EUSERS		87	<span class="comment">/* Too many users */</span>                    用户过多</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOTSOCK	88	<span class="comment">/* Socket operation on non-socket */</span>    在非套接字上进行套接字操作</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EDESTADDRREQ	89	<span class="comment">/* Destination address required */</span>      需要目标地址</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EMSGSIZE	90	<span class="comment">/* Message too long */</span>                  消息过长</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EPROTOTYPE	91	<span class="comment">/* Protocol wrong type for socket */</span>    错误的协议类型</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOPROTOOPT	92	<span class="comment">/* Protocol not available */</span>            无效协议</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EPROTONOSUPPORT	93	<span class="comment">/* Protocol not supported */</span>            协议不支持</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ESOCKTNOSUPPORT	94	<span class="comment">/* Socket type not supported */</span>         socket类型不支持</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EOPNOTSUPP	95	<span class="comment">/* Operation not supported on transport endpoint */</span> 操作不支持传输端点</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EPFNOSUPPORT	96	<span class="comment">/* Protocol family not supported */</span>     不支持的协议族</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EAFNOSUPPORT	97	<span class="comment">/* Address family not supported by protocol */</span> 协议不支持地址群</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EADDRINUSE	98	<span class="comment">/* Address already in use */</span>            地址被占用</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EADDRNOTAVAIL	99	<span class="comment">/* Cannot assign requested address */</span>   无法分配请求的地址</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENETDOWN	100	<span class="comment">/* Network is down */</span>                   网络关闭</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENETUNREACH	101	<span class="comment">/* Network is unreachable */</span>            网络不可达</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENETRESET	102	<span class="comment">/* Network dropped connection because of reset */</span>  网络复位点开链接</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ECONNABORTED	103	<span class="comment">/* Software caused connection abort */</span>  软件导致的连接终止</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ECONNRESET	104	<span class="comment">/* Connection reset by peer */</span>          连接被对端复位</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOBUFS		105	<span class="comment">/* No buffer space available */</span>         没有可用的缓冲空间</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EISCONN		106	<span class="comment">/* Transport endpoint is already connected */</span> 传输端点已连接</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOTCONN	107	<span class="comment">/* Transport endpoint is not connected */</span> 传输端点未连接</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ESHUTDOWN	108	<span class="comment">/* Cannot send after transport endpoint shutdown */</span> 传输端点关闭后不允许再发送</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ETOOMANYREFS	109	<span class="comment">/* Too many references: cannot splice */</span>    引用过多：无法接合</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ETIMEDOUT	110	<span class="comment">/* Connection timed out */</span>              连接超时</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ECONNREFUSED	111	<span class="comment">/* Connection refused */</span>                连接被拒绝</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EHOSTDOWN	112	<span class="comment">/* Host is down */</span>                      host关闭</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EHOSTUNREACH	113	<span class="comment">/* No route to host */</span>                  无法路由到主机</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EALREADY	114	<span class="comment">/* Operation already in progress */</span>     操作已在进程中</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EINPROGRESS	115	<span class="comment">/* Operation now in progress */</span>         操作正在进行</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ESTALE		116	<span class="comment">/* Stale NFS file handle */</span>             </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EUCLEAN		117	<span class="comment">/* Structure needs cleaning */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOTNAM		118	<span class="comment">/* Not a XENIX named type file */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENAVAIL		119	<span class="comment">/* No XENIX semaphores available */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EISNAM		120	<span class="comment">/* Is a named type file */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EREMOTEIO	121	<span class="comment">/* Remote I/O error */</span>                  远程I/O错误</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EDQUOT		122	<span class="comment">/* Quota exceeded */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOMEDIUM	123	<span class="comment">/* No medium found */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EMEDIUMTYPE	124	<span class="comment">/* Wrong medium type */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ECANCELED	125	<span class="comment">/* Operation Canceled */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENOKEY		126	<span class="comment">/* Required key not available */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EKEYEXPIRED	127	<span class="comment">/* Key has expired */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EKEYREVOKED	128	<span class="comment">/* Key has been revoked */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	EKEYREJECTED	129	<span class="comment">/* Key was rejected by service */</span></span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+    </div>
+    
+    <div>
+      
+        
+
+      
+    </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux%E9%A9%B1%E5%8A%A8/" rel="tag"># Linux驱动</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/9/" rel="prev" title="Linux驱动开发杂记(0x09) - likely()与unlikely()">
+      <i class="fa fa-chevron-left"></i> Linux驱动开发杂记(0x09) - likely()与unlikely()
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/11/" rel="next" title="Linux驱动开发杂记(0x0B) - 内核计数">
+      Linux驱动开发杂记(0x0B) - 内核计数 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Vinx"
+      src="/images/vinx.jpg">
+  <p class="site-author-name" itemprop="name">Vinx</p>
+  <div class="site-description" itemprop="description">本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Vinx911" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Vinx911" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u011471873" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u011471873" rel="noopener" target="_blank"><i class="fa fa-crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:buddyhe911@163.com" title="E-Mail → mailto:buddyhe911@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vinx</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

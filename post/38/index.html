@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.vinkvin.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Entity(实体) ‌‌‌　　一个 Entity 对应于数据库中的一张表。Entity 类是 Sqlite 表结构对 Java&#x2F;kotlin 的映射，在 Java 中可以看作一个 Model 类。 Entity(注解实体类) 12‌‌‌　　@Entity(tableName &#x3D; &quot;word_table&quot;)‌‌‌　　class Word(@PrimaryKey @Col">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jetpack架构组件之Room">
+<meta property="og:url" content="https://blog.vinkvin.com/post/38/index.html">
+<meta property="og:site_name" content="唯客微博客">
+<meta property="og:description" content="Entity(实体) ‌‌‌　　一个 Entity 对应于数据库中的一张表。Entity 类是 Sqlite 表结构对 Java&#x2F;kotlin 的映射，在 Java 中可以看作一个 Model 类。 Entity(注解实体类) 12‌‌‌　　@Entity(tableName &#x3D; &quot;word_table&quot;)‌‌‌　　class Word(@PrimaryKey @Col">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-04T10:58:06.000Z">
+<meta property="article:modified_time" content="2023-09-18T03:31:38.316Z">
+<meta property="article:author" content="Vinx">
+<meta property="article:tag" content="Jetpack">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://blog.vinkvin.com/post/38/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Jetpack架构组件之Room | 唯客微博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a target="_blank" rel="noopener" href="https://github.com/Vinx911" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">唯客微博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">专注于计算机，嵌入式领域的技术</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/38/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Jetpack架构组件之Room
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-04 18:58:06" itemprop="dateCreated datePublished" datetime="2022-11-04T18:58:06+08:00">2022-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-18 11:31:38" itemprop="dateModified" datetime="2023-09-18T11:31:38+08:00">2023-09-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jetpack%E6%9E%B6%E6%9E%84%E7%BB%84%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">Jetpack架构组件</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="entity实体">Entity(实体)</h2>
+<p>‌‌‌　　一个 Entity 对应于数据库中的一张表。Entity 类是 Sqlite 表结构对
+Java/kotlin 的映射，在 Java 中可以看作一个 Model 类。</p>
+<h3 id="entity注解实体类">Entity(注解实体类)</h3>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">‌‌‌　　<span class="meta">@Entity(tableName = <span class="string">&quot;word_table&quot;</span>)</span></span><br><span class="line">‌‌‌　　<span class="keyword">class</span> <span class="title class_">Word</span>(<span class="meta">@PrimaryKey</span> <span class="meta">@ColumnInfo(name = <span class="string">&quot;word&quot;</span>)</span> <span class="keyword">val</span> word: String)</span><br></pre></td></tr></table></figure>
+<p>‌‌‌　　每个实体必须至少有 1 个使用 PrimaryKey 注释的字段。您还可以使用
+primaryKeys 属性来定义主键。</p>
+<p>‌‌‌　　每个实体必须要么有一个无参数构造函数，要么有一个参数匹配字段（基于类型和名称）的构造函数。构造函数不必接收所有字段作为参数，但如果字段未传递给构造函数，则它应该是公共的或具有公共设置器。如果匹配的构造函数可用，Room
+将始终使用它。如果您不希望它使用构造函数，则可以使用 <code>Ignore</code>
+对其进行注释。</p>
+<p>‌‌‌　　当一个类被标记为 <code>Entity</code>
+时，它的所有字段都会被持久化。如果您想排除其中的某些字段，可以使用
+<code>Ignore</code> 标记它们。</p>
+<p>‌‌‌　　如果一个字段是
+<code>transient</code>，它会被自动忽略，<strong>除非</strong>它用
+<code>ColumnInfo</code>、<code>Embedded</code> 或 <code>Relation</code>
+注解。</p>
+<table>
+<colgroup>
+<col style="width: 22%">
+<col style="width: 4%">
+<col style="width: 72%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">属性</th>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">tableName</td>
+<td style="text-align: center;"><code>String</code></td>
+<td style="text-align: center;">SQLite 数据库中的表名</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">indices</td>
+<td style="text-align: center;"><code>Array&lt;Index&gt;</code></td>
+<td style="text-align: center;">表上的索引列表</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">inheritSuperIndices</td>
+<td style="text-align: center;"><code>Boolean</code></td>
+<td style="text-align: center;">如果设置为
+<code>true</code>，则在此类的父类中定义的任何索引都将被转移到当前的
+<code>Entity</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">primaryKeys</td>
+<td style="text-align: center;"><code>Array&lt;String&gt;</code></td>
+<td style="text-align: center;">主键列名称列表</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">foreignKeys</td>
+<td style="text-align: center;"><code>Array&lt;ForeignKey&gt;</code></td>
+<td style="text-align: center;">此实体上的外键约束列表</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">ignoredColumns</td>
+<td style="text-align: center;"><code>Array&lt;String&gt;</code></td>
+<td style="text-align: center;">Room 应忽略的列名列表</td>
+</tr>
+</tbody>
+</table>
+<h3 id="primarykey注解主键">PrimaryKey(注解主键)</h3>
+<p>‌‌‌　　将实体中的字段标记为主键。</p>
+<p>‌‌‌　　如果你想定义一个复合主键，你应该使用
+<code>Entity.primaryKeys</code> 方法。</p>
+<p>‌‌‌　　每个实体都必须声明一个主键，除非它的一个超类声明了一个主键。如果
+Entity 及其超类都定义了 <code>PrimaryKey</code>，则子项的
+<code>PrimaryKey</code> 定义将覆盖父项的 <code>PrimaryKey</code>。</p>
+<p>‌‌‌　　如果在 <code>Embedded</code> 字段上使用 <code>PrimaryKey</code>
+注释，则从该嵌入字段继承的所有列都将成为复合主键（包括其大子字段）。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">属性</th>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">autoGenerate</td>
+<td style="text-align: center;"><code>Boolean</code></td>
+<td style="text-align: center;">设置为 true 让 SQLite 自动生成唯一
+ID</td>
+</tr>
+</tbody>
+</table>
+<h3 id="columninfo注解列">ColumnInfo(注解列)</h3>
+<p>‌‌‌　　允许对与此字段关联的列进行特定自定义。例如，您可以为字段指定列名或更改列的类型关联。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">属性</th>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">name</td>
+<td style="text-align: center;"><code>String</code></td>
+<td style="text-align: center;">数据库中列的名称</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">index</td>
+<td style="text-align: center;"><code>Boolean</code></td>
+<td style="text-align: center;">索引字段</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">defaultValue</td>
+<td style="text-align: center;"><code>String</code></td>
+<td style="text-align: center;">此列的默认值</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">collate</td>
+<td style="text-align: center;"><code>Int</code></td>
+<td style="text-align: center;">列的排序规则，将在构建数据库时使用</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">typeAffinity</td>
+<td style="text-align: center;"><code>Int</code></td>
+<td style="text-align: center;">列的类型亲和性，将在构建数据库时使用</td>
+</tr>
+</tbody>
+</table>
+<p>‌‌‌　　<strong>name 可选值：</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">常数</th>
+<th style="text-align: center;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">INHERIT_FIELD_NAME</td>
+<td style="text-align: center;">字段名作为列名的常量</td>
+</tr>
+</tbody>
+</table>
+<p>‌‌‌　　<strong>defaultValue 可选值：</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">常数</th>
+<th style="text-align: center;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">VALUE_UNSPECIFIED</td>
+<td style="text-align: center;">defaultValue
+的常量，使列没有默认值。</td>
+</tr>
+</tbody>
+</table>
+<p>‌‌‌　　<strong>collate 可选值：</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">常数</th>
+<th style="text-align: center;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">BINARY</td>
+<td style="text-align: center;">区分大小写匹配的排序规则</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">LOCALIZED</td>
+<td style="text-align: center;">使用系统当前语言环境的排序规则</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">NOCASE</td>
+<td style="text-align: center;">不区分大小写匹配的排序规则</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">RTRIM</td>
+<td style="text-align: center;">区分大小写匹配的排序规则序列，但忽略尾随空格字符</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">UNICODE</td>
+<td style="text-align: center;">使用 Unicode 排序算法的排序序列</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">UNSPECIFIED</td>
+<td style="text-align: center;">未指定整理顺序</td>
+</tr>
+</tbody>
+</table>
+<p>‌‌‌　　<strong>typeAffinity 可选值：</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">常数</th>
+<th style="text-align: center;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">BLOB</td>
+<td style="text-align: center;">二进制数据</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">INTEGER</td>
+<td style="text-align: center;">整数或布尔值</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">REAL</td>
+<td style="text-align: center;">浮点数或双精度浮点数</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">TEXT</td>
+<td style="text-align: center;">字符串</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">UNDEFINED</td>
+<td style="text-align: center;">未定义的类型</td>
+</tr>
+</tbody>
+</table>
+<h3 id="foreignkey注解外键">ForeignKey(注解外键)</h3>
+<p>‌‌‌　　在另一个 Entity 上声明一个外键。</p>
+<p>‌‌‌　　外键允许您指定跨实体的约束，这样 SQLite
+将确保在您修改数据库时关系有效。</p>
+<p>‌‌‌　　当指定外键约束时，SQLite
+要求引用的列是父表中唯一索引或该表主键的一部分。您必须在包含引用列的父实体中创建一个唯一索引（Room
+将在编译时验证这一点，如果缺失则打印错误）。</p>
+<p>‌‌‌　　还建议在子表上创建索引，以避免在修改父表时进行全表扫描。如果子表上缺少合适的索引，Room
+将打印 RoomWarnings.MISSING_INDEX_ON_FOREIGN_KEY_CHILD 警告。</p>
+<p>‌‌‌　　外键约束可以推迟到事务完成。如果您在单个事务中对数据库进行批量插入，这很有用。默认情况下，外键约束是即时的，但您可以通过将
+deferred 设置为来 更改此值 true。您还可以使用 defer_foreign_keys
+根据您的交易推迟它们。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">属性</th>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">childColumns</td>
+<td style="text-align: center;"><code>Array&lt;String&gt;</code></td>
+<td style="text-align: center;">当前 Entity 中的列名列表</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">entity</td>
+<td style="text-align: center;"><code>KClass&lt;*&gt;</code></td>
+<td style="text-align: center;">要引用的父实体</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">parentColumns</td>
+<td style="text-align: center;"><code>Array&lt;String&gt;</code></td>
+<td style="text-align: center;">父实体中的列名列表</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">deferred</td>
+<td style="text-align: center;"><code>Boolean</code></td>
+<td style="text-align: center;">外键约束可以推迟到事务完成</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">onUpdate</td>
+<td style="text-align: center;"><code>Int</code></td>
+<td style="text-align: center;">在数据库中更新父实体时要执行的操作</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">onDelete</td>
+<td style="text-align: center;"><code>Int</code></td>
+<td style="text-align: center;">从数据库中删除父实体时要执行的操作</td>
+</tr>
+</tbody>
+</table>
+<p>‌‌‌　　<strong>onUpdate/onDelete 可选值：</strong></p>
+<table>
+<colgroup>
+<col style="width: 6%">
+<col style="width: 93%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">常数</th>
+<th style="text-align: center;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">CASCADE</td>
+<td style="text-align: center;">将父键上的删除或更新操作传播到每个从属子键。对于
+onDelete
+操作，<br>这意味着与已删除父行关联的子实体中的每一行也将被删除。对于
+onUpdate
+操作，这意味着存储在每个从属子键中的值被修改以匹配新的父键值。<br></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">NO_ACTION</td>
+<td style="text-align: center;">当父键被修改或从数据库中删除时，不采取任何特殊操作。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">RESTRICT</td>
+<td style="text-align: center;">当存在一个或多个映射到它的子键时，禁止应用程序删除（对于
+onDelete）或修改（对于 onUpdate ）父键。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">SET_DEFAULT</td>
+<td style="text-align: center;">当父键被删除（对于
+onDelete）或修改（对于
+onUpdate）时，子表中映射到父键的所有行的子键列都设置为默认值</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">SET_NULL</td>
+<td style="text-align: center;">当父键被删除（对于
+onDelete）或修改（对于
+onUpdate）时，子表中映射到父键的所有行的子键列都设置为 NULL 值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ignore注解-room-忽略字段">Ignore(注解 Room 忽略字段)</h3>
+<p>‌‌‌　　Room 忽略当前字段，不在数据库表中生成字段。</p>
+<h3 id="embedded注解嵌套字段">Embedded(注解嵌套字段)</h3>
+<p>‌‌‌　　如果子对象和所有者对象的字段名称冲突，可以为子对象的字段指定前缀。请注意，前缀始终应用于子字段，即使它们具有带有特定
+name.</p>
+<p>‌‌‌　　如果嵌入字段的子字段具有 PrimaryKey
+注释，则它们不会被视为所有者实体中的主键。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">属性</th>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">prefix</td>
+<td style="text-align: center;"><code>String</code></td>
+<td style="text-align: center;">指定一个前缀来添加嵌入字段中字段的列名</td>
+</tr>
+</tbody>
+</table>
+<h2 id="daodatabase-access-objects-数据库访问对象">Dao（Database Access
+Objects 数据库访问对象）</h2>
+<p>‌‌‌　　一个 Entity 代表一张表，而每一张表都需要一个 Dao
+对象，用于对表进行增删改查。</p>
+<h3 id="dao注解数据库访问对象">Dao(注解数据库访问对象)</h3>
+<p>‌‌‌　　将类标记为数据访问对象。</p>
+<p>‌‌‌　　数据访问对象是您定义数据库交互的主要类。它们可以包括多种查询方法。</p>
+<p>‌‌‌　　用 标记的类 <span class="citation" data-cites="Dao">@Dao</span>
+应该是接口或抽象类。在编译时，Room 将在被 Database 引用时生成此类的实现
+。</p>
+<p>‌‌‌　　抽象 <span class="citation" data-cites="Dao">@Dao</span>
+类可以选择有一个将数据库 作为其唯一参数的构造函数。</p>
+<h3 id="insert注解插入方法">Insert(注解插入方法)</h3>
+<p>‌‌‌　　该方法的实现会将其参数插入数据库。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">属性</th>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">entity</td>
+<td style="text-align: center;"><code>KClass&lt;*&gt;</code></td>
+<td style="text-align: center;">插入方法的目标实体</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">onConflict</td>
+<td style="text-align: center;"><code>Int</code></td>
+<td style="text-align: center;">如果发生冲突怎么办</td>
+</tr>
+</tbody>
+</table>
+<p>‌‌‌　　<strong>onConflict 可选值：</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">常数</th>
+<th style="text-align: center;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">OnConflictStrategy.ABORT</td>
+<td style="text-align: center;">中止事务</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">OnConflictStrategy.FAIL</td>
+<td style="text-align: center;">使事务失败，已弃用：改用 ABORT</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">OnConflictStrategy.IGNORE</td>
+<td style="text-align: center;">忽略冲突</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">OnConflictStrategy.REPLACE</td>
+<td style="text-align: center;">替换旧数据并继续事务</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">OnConflictStrategy.ROLLBACK</td>
+<td style="text-align: center;">回滚事务，已弃用：改用 ABORT</td>
+</tr>
+</tbody>
+</table>
+<h3 id="update注解更新方法">Update(注解更新方法)</h3>
+<p>‌‌‌　　如果参数已经存在（通过主键检查），该方法的实现将更新其在数据库中的参数。如果它们不存在，则此选项不会更改数据库。</p>
+<p>‌‌‌　　Update 方法的所有参数必须是使用 Entity 注释的类
+或它的集合/数组。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">属性</th>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">entity</td>
+<td style="text-align: center;"><code>KClass&lt;*&gt;</code></td>
+<td style="text-align: center;">插入方法的目标实体</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">onConflict</td>
+<td style="text-align: center;"><code>Int</code></td>
+<td style="text-align: center;">如果发生冲突怎么办</td>
+</tr>
+</tbody>
+</table>
+<p>‌‌‌　　<strong>onConflict 可选值：</strong> 参见 <code>Insert</code></p>
+<h3 id="delete注解删除方法">Delete(注解删除方法)</h3>
+<p>‌‌‌　　该方法的实现将从数据库中删除其参数。</p>
+<p>‌‌‌　　Delete 方法的所有参数必须是使用 Entity 注释的类
+或它的集合/数组。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">属性</th>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">entity</td>
+<td style="text-align: center;"><code>KClass&lt;*&gt;</code></td>
+<td style="text-align: center;">删除方法的目标实体</td>
+</tr>
+</tbody>
+</table>
+<h3 id="query注解查询方法">Query(注解查询方法)</h3>
+<p>‌‌‌　　注释的值包括调用此方法时将运行的查询。此查询在编译时由 Room
+验证，以确保它可以针对数据库进行良好编译。</p>
+<p>‌‌‌　　该方法的参数将绑定到 SQL 语句中的绑定参数。有关 SQLite
+中绑定参数的详细信息，请参阅 SQLite 的绑定文档。</p>
+<p>‌‌‌　　Room
+仅支持命名绑定参数:name，以避免方法参数和查询绑定参数之间的任何混淆。</p>
+<p>‌‌‌　　Room
+会自动将方法的参数绑定到绑定参数中。这是通过将参数的名称与绑定参数的名称相匹配来完成的。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">属性</th>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">value</td>
+<td style="text-align: center;"><code>String</code></td>
+<td style="text-align: center;">要运行的 SQLite 查询</td>
+</tr>
+</tbody>
+</table>
+<p>‌‌‌　　方法中支持 4 种类型的语句
+<code>Query</code>：SELECT、INSERT、UPDATE 和 DELETE。</p>
+<p>‌‌‌　　对于 SELECT 查询，Room
+会根据方法的返回类型推断结果内容，并生成自动将查询结果转换为方法的返回类型的代码。对于单个结果查询，返回类型可以是任何数据对象（也称为
+POJO）。对于返回多个值的查询，您可以使用 java.util.List 或 Array.
+除此之外，任何查询都可能返回 android.database.Cursor
+或者任何查询结果都可以包装在 androidx.lifecycle.LiveData 中。</p>
+<p>‌‌‌　　INSERT 查询可以返回 void 或 Long。如果是 a
+Long，则该值是此查询插入的行的 SQLite
+rowid。请注意，插入多行的查询不能返回一个以上的
+rowid，因此如果返回，请避免使用此类语句 Long。</p>
+<p>‌‌‌　　UPDATE 或 DELETE 查询可以返回 void 或 Int。如果是
+Int，则值为受此查询影响的行数。</p>
+<p>‌‌‌　　如果您使用的是 Kotlin，您还可以 <code>Flow&lt;T&gt;</code>
+从查询方法返回。这将创建一个 <code>Flow&lt;T&gt;</code>
+对象，该对象发出查询结果并在每次查询表中的数据发生更改时重新调度查询。</p>
+<p>‌‌‌　　请注意，查询返回类型为的表 <code>Flow&lt;T&gt;</code>
+总是返回结果集中的第一行，而不是按顺序发出所有行。要观察表中多行的变化，请改用返回类型
+<code>Flow&lt;List&lt;T&gt;&gt;</code>。</p>
+<p>‌‌‌　　选择返回类型时请记住可空性，因为它会影响查询方法处理空表的方式：</p>
+<p>‌‌‌　　* 返回类型为 <code>Flow&lt;T&gt;</code>
+时，查询空表会抛出空指针异常。 ‌‌‌　　* 返回类型为
+<code>Flow&lt;T?&gt;</code> 时，查询空表会发出空值。 ‌‌‌　　* 当返回类型为
+<code>Flow&lt;List&lt;T&gt;&gt;</code>
+时，查询空表会发出一个空列表。</p>
+<h3 id="rawquery注解原始查询">RawQuery(注解原始查询)</h3>
+<h3 id="transaction注解事务方法">Transaction(注解事务方法)</h3>
+<p>‌‌‌　　当用于抽象 Dao
+类的非抽象方法时，该方法的派生实现将执行数据库事务中的超级方法。保留所有参数和返回类型。除非在方法体中抛出异常，否则事务将被标记为成功。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">‌‌‌　　<span class="meta">@Dao</span></span><br><span class="line">‌‌‌　　<span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">SongDao</span> &#123;</span><br><span class="line">    <span class="meta">@Insert</span></span><br><span class="line">    <span class="keyword">abstract</span> <span class="function"><span class="keyword">fun</span> <span class="title">insert</span><span class="params">(song: <span class="type">Song</span>)</span></span></span><br><span class="line">    <span class="meta">@Delete</span></span><br><span class="line">    <span class="keyword">abstract</span> <span class="function"><span class="keyword">fun</span> <span class="title">delete</span><span class="params">(song: <span class="type">Song</span>)</span></span></span><br><span class="line">    <span class="meta">@Transaction</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">insertAndDeleteInTransaction</span><span class="params">(newSong: <span class="type">Song</span>, oldSong: <span class="type">Song</span>)</span></span> &#123;</span><br><span class="line">        <span class="comment">// Anything inside this method runs in a single transaction.</span></span><br><span class="line">        insert(newSong)</span><br><span class="line">        delete(oldSong)</span><br><span class="line">    &#125;</span><br><span class="line">‌‌‌　　&#125;</span><br></pre></td></tr></table></figure>
+<p>‌‌‌　　当用于具有语句的 Query 方法时，为 QuerySELECT
+生成的代码将在事务中运行。在 2 种主要情况下，您可能希望这样做：</p>
+<p>‌‌‌　　*
+如果查询的结果相当大，最好在事务中运行它以获得一致的结果。否则，如果查询结果不适合单个
+android.database.CursorWindow，则查询结果可能会由于光标窗口交换之间的数据库更改而损坏。
+‌‌‌　　* 如果查询结果是带有 {<span class="citation" data-cites="link">@link</span> Relation} 字段的
+POJO，则分别查询这些字段。要在这些查询之间获得一致的结果，您还希望在单个事务中运行它们。</p>
+<h2 id="database数据库">Database(数据库)</h2>
+<h3 id="database注解数据库">Database(注解数据库)</h3>
+<p>‌‌‌　　将类标记为 RoomDatabase。该类应该是一个抽象类并扩展
+<code>androidx.room.RoomDatabase</code>。</p>
+<p>‌‌‌　　数据库会通过每个 <span class="citation" data-cites="Dao">@Dao</span> 的抽象“getter”方法公开 DAO</p>
+<table>
+<colgroup>
+<col style="width: 13%">
+<col style="width: 3%">
+<col style="width: 83%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">属性</th>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">entities</td>
+<td style="text-align: center;"><code>Array&lt;KClass&lt;*&gt;&gt;</code></td>
+<td style="text-align: center;">数据库中包含的实体列表</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">views</td>
+<td style="text-align: center;"><code>Array&lt;KClass&lt;*&gt;&gt;</code></td>
+<td style="text-align: center;">数据库中包含的数据库视图列表</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">exportSchema</td>
+<td style="text-align: center;"><code>Boolean</code></td>
+<td style="text-align: center;">您可以设置注释处理器参数 (
+room.schemaLocation) 来告诉 Room 将数据库模式导出到文件夹中。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">version</td>
+<td style="text-align: center;"><code>Int</code></td>
+<td style="text-align: center;">数据库版本</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">autoMigrations</td>
+<td style="text-align: center;"><code>Array&lt;AutoMigration&gt;</code></td>
+<td style="text-align: center;">可以在此数据库上执行的自动迁移列表</td>
+</tr>
+</tbody>
+</table>
+<h3 id="databaseview注解数据库视图">DatabaseView(注解数据库视图)</h3>
+<p>‌‌‌　　将类标记为 SQLite 视图。</p>
+<p>‌‌‌　　注释的值是创建视图时使用的 <code>SELECT</code> 查询。</p>
+<p>‌‌‌　　当在 Dao 中使用该类时，它的行为类似于普通 POJO 。您可以从 类似于
+<code>Entity</code> 的 <code>DatabaseView</code> 中选择，但您不能
+<code>INSERT</code>、<code>DELETE</code> 或 <code>UPDATE</code> 到
+<code>DatabaseView</code> 中。</p>
+<p>‌‌‌　　与 Entity 类似，您可以使用 <code>ColumnInfo</code> 和
+<code>Embedded inside</code> 来自定义数据类。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">‌‌‌　　<span class="meta">@DatabaseView(</span></span><br><span class="line"><span class="meta">  <span class="string">&quot;SELECT id, name, release_year FROM Song &quot;</span> +</span></span><br><span class="line"><span class="meta">  <span class="string">&quot;WHERE release_year &gt;= 1990 AND release_year &lt;= 1999&quot;</span></span></span><br><span class="line"><span class="meta">‌‌‌　　)</span></span><br><span class="line">‌‌‌　　<span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">SongFrom90s</span> (</span><br><span class="line">  <span class="keyword">val</span> id: <span class="built_in">Long</span>,</span><br><span class="line">  <span class="keyword">val</span> name: String,</span><br><span class="line">  <span class="meta">@ColumnInfo(name = <span class="string">&quot;release_year&quot;</span>)</span></span><br><span class="line">  <span class="keyword">val</span> releaseYear: <span class="built_in">Int</span></span><br><span class="line">‌‌‌　　)</span><br></pre></td></tr></table></figure>
+<p>‌‌‌　　视图必须通过 <code>Database.views</code> 注册到
+<code>RoomDatabase</code> 。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">属性</th>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">value</td>
+<td style="text-align: center;"><code>String</code></td>
+<td style="text-align: center;">SELECT 查询</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">viewName</td>
+<td style="text-align: center;"><code>String</code></td>
+<td style="text-align: center;">SQLite 数据库中的视图名称</td>
+</tr>
+</tbody>
+</table>
+<h2 id="relation注解实体关系">Relation(注解实体关系)</h2>
+<p>‌‌‌　　可以在 POJO 中使用以自动获取关系实体的便捷注释。当 POJO
+从查询返回时，它的所有关系也由 Room 获取。</p>
+<p>‌‌‌　　对于一对多或多对多关系，使用注释的字段类型 Relation 必须是
+java.util.List 或 java.util.Set。</p>
+<p>‌‌‌　　默认情况下，Entity
+类型是从返回类型推断出来的。如果你想返回一个不同的对象，你可以在注解中指定实体属性。</p>
+<p>‌‌‌　　如果关系是由关联表（也称为联结表）定义的，那么您可以使用
+associateBy 来指定它。这对于获取多对多关系很有用。</p>
+<p>‌‌‌　　注意 <span class="citation" data-cites="Relation">@Relation</span> 注解只能在 POJO 类中使用，Entity
+类不能有关系。这是避免实体 设置中常见陷阱的设计决策。您可以在主 Room
+文档中阅读更多相关信息。加载数据时，您可以通过创建扩展 Entity 的 POJO
+类来解决此限制。</p>
+<table>
+<colgroup>
+<col style="width: 17%">
+<col style="width: 5%">
+<col style="width: 76%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">属性</th>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">entity</td>
+<td style="text-align: center;"><code>KClass&lt;*&gt;</code></td>
+<td style="text-align: center;">要从中获取项目的实体或视图</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">parentColumn</td>
+<td style="text-align: center;"><code>String</code></td>
+<td style="text-align: center;">父 POJO 中的引用列</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">entityColumn</td>
+<td style="text-align: center;"><code>String</code></td>
+<td style="text-align: center;">实体中要匹配的列</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">associateBy</td>
+<td style="text-align: center;"><code>Junction</code></td>
+<td style="text-align: center;">获取相关实体时用作关联表（也称为联结表）的实体或视图</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">projection</td>
+<td style="text-align: center;"><code>Array&lt;String&gt;</code></td>
+<td style="text-align: center;">如果应从实体中获取子列，您可以使用此字段指定它们</td>
+</tr>
+</tbody>
+</table>
+<p>‌‌‌　　</p>
+
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+    </div>
+    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/post/38/">Jetpack架构组件之Room</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Vinx 的个人博客">Vinx</a></p>
+  <p><span>发布时间:</span>2022年11月04日 - 18:58</p>
+  <p><span>最后更新:</span>2023年09月18日 - 11:31</p>
+  <p><span>原始链接:</span><a href="/post/38/" title="Jetpack架构组件之Room">https://blog.vinkvin.com/post/38/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://blog.vinkvin.com/post/38/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fab fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+
+      
+    </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Jetpack/" rel="tag"># Jetpack</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/37/" rel="prev" title="Linux Sed命令详解">
+      <i class="fa fa-chevron-left"></i> Linux Sed命令详解
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/39/" rel="next" title="Android代码混淆及ProGuard手册">
+      Android代码混淆及ProGuard手册 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#entity%E5%AE%9E%E4%BD%93"><span class="nav-text">Entity(实体)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#entity%E6%B3%A8%E8%A7%A3%E5%AE%9E%E4%BD%93%E7%B1%BB"><span class="nav-text">Entity(注解实体类)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#primarykey%E6%B3%A8%E8%A7%A3%E4%B8%BB%E9%94%AE"><span class="nav-text">PrimaryKey(注解主键)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#columninfo%E6%B3%A8%E8%A7%A3%E5%88%97"><span class="nav-text">ColumnInfo(注解列)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#foreignkey%E6%B3%A8%E8%A7%A3%E5%A4%96%E9%94%AE"><span class="nav-text">ForeignKey(注解外键)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ignore%E6%B3%A8%E8%A7%A3-room-%E5%BF%BD%E7%95%A5%E5%AD%97%E6%AE%B5"><span class="nav-text">Ignore(注解 Room 忽略字段)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#embedded%E6%B3%A8%E8%A7%A3%E5%B5%8C%E5%A5%97%E5%AD%97%E6%AE%B5"><span class="nav-text">Embedded(注解嵌套字段)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#daodatabase-access-objects-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BF%E9%97%AE%E5%AF%B9%E8%B1%A1"><span class="nav-text">Dao（Database Access
+Objects 数据库访问对象）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dao%E6%B3%A8%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BF%E9%97%AE%E5%AF%B9%E8%B1%A1"><span class="nav-text">Dao(注解数据库访问对象)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#insert%E6%B3%A8%E8%A7%A3%E6%8F%92%E5%85%A5%E6%96%B9%E6%B3%95"><span class="nav-text">Insert(注解插入方法)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#update%E6%B3%A8%E8%A7%A3%E6%9B%B4%E6%96%B0%E6%96%B9%E6%B3%95"><span class="nav-text">Update(注解更新方法)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#delete%E6%B3%A8%E8%A7%A3%E5%88%A0%E9%99%A4%E6%96%B9%E6%B3%95"><span class="nav-text">Delete(注解删除方法)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#query%E6%B3%A8%E8%A7%A3%E6%9F%A5%E8%AF%A2%E6%96%B9%E6%B3%95"><span class="nav-text">Query(注解查询方法)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rawquery%E6%B3%A8%E8%A7%A3%E5%8E%9F%E5%A7%8B%E6%9F%A5%E8%AF%A2"><span class="nav-text">RawQuery(注解原始查询)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transaction%E6%B3%A8%E8%A7%A3%E4%BA%8B%E5%8A%A1%E6%96%B9%E6%B3%95"><span class="nav-text">Transaction(注解事务方法)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#database%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">Database(数据库)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#database%E6%B3%A8%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">Database(注解数据库)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#databaseview%E6%B3%A8%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A7%86%E5%9B%BE"><span class="nav-text">DatabaseView(注解数据库视图)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#relation%E6%B3%A8%E8%A7%A3%E5%AE%9E%E4%BD%93%E5%85%B3%E7%B3%BB"><span class="nav-text">Relation(注解实体关系)</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Vinx"
+      src="/images/vinx.jpg">
+  <p class="site-author-name" itemprop="name">Vinx</p>
+  <div class="site-description" itemprop="description">本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Vinx911" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Vinx911" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u011471873" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u011471873" rel="noopener" target="_blank"><i class="fa fa-crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:buddyhe911@163.com" title="E-Mail → mailto:buddyhe911@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vinx</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

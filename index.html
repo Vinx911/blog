@@ -164,7 +164,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/electronic-circuit/common-components-of-electronic-circuits-resistors.html">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/94/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/vinx.jpg">
@@ -178,7 +178,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/electronic-circuit/common-components-of-electronic-circuits-resistors.html" class="post-title-link" itemprop="url">电子电路常用元件-电阻</a>
+            <a href="/post/94/" class="post-title-link" itemprop="url">C语言类型转换</a>
         </h2>
 
         <div class="post-meta">
@@ -188,14 +188,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-07-06 14:23:11" itemprop="dateCreated datePublished" datetime="2023-07-06T14:23:11+08:00">2023-07-06</time>
+              <time title="创建时间：2023-08-07 09:16:00" itemprop="dateCreated datePublished" datetime="2023-08-07T09:16:00+08:00">2023-08-07</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-07 09:00:55" itemprop="dateModified" datetime="2023-07-07T09:00:55+08:00">2023-07-07</time>
+                <time title="修改时间：2023-09-19 08:53:00" itemprop="dateModified" datetime="2023-09-19T08:53:00+08:00">2023-09-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -203,7 +203,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%94%B5%E5%AD%90%E7%94%B5%E8%B7%AF/" itemprop="url" rel="index"><span itemprop="name">电子电路</span></a>
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" itemprop="url" rel="index"><span itemprop="name">C语言类型转换</span></a>
                 </span>
             </span>
 
@@ -218,21 +218,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="电阻阻值的选择">1. 电阻阻值的选择</h2>
-<ol type="1">
-<li>通过计算取值，比如反馈电路、分压电路以及限流电路、取样电路可计算取值。</li>
-<li>通过手册取值，使用部分IC的时候，IC手册中会有推荐电路取值，直接使用即可。</li>
-<li>通过经验取值，比如上拉电阻，一般为1K、4.7K、10K、100K等等。再比如485匹配电阻，一般为120Ω；</li>
-</ol>
-<h2 id="功耗与封装">2. 功耗与封装</h2>
-<p>选定阻值后，就要确定电路中的电阻满足功耗，比如0603的一般功耗为0.1w，通过公式I2R计算功耗即可；</p>
-<figure>
-<img src="./电子电路常用元件-电阻/assets/a54bf3fe093b41d5ab1344f7b710ee72.png" alt="img">
-<figcaption aria-hidden="true">img</figcaption>
-</figure>
+          <h1 id="c语言类型转换">C语言类型转换</h1>
+<ul>
+<li>无符号数小范围转大范围：不改变数据内容</li>
+<li>无符号数大范围转小范围：先截断，然后解释</li>
+<li>有符号数小范围转大范围：进行符号扩展</li>
+<li>有符号数大范围转小范围：先截断，然后解释</li>
+<li>有符号与无符号互转：不改变数据内容，改变解释方式</li>
+<li>无符号数转有符号大范围：不改变数据内容</li>
+<li>无符号数转有符号小范围：先截断，然后解释</li>
+<li>有符号数转无符号大范围：先进行符号扩展，然后改变解释方式</li>
+<li>有符号数转无符号小范围：先截断，然后解释</li>
+</ul>
+<h2 id="int8_t">int8_t</h2>
+<ul>
+<li>int8_t -&gt; uint8_t: 不改变数据内容，改变解释方式</li>
+<li>int8_t -&gt; int16_t: 进行符号扩展</li>
+<li>int8_t -&gt; uint16_t:
+先进行符号扩展转为int16_t，然后改变解释方式</li>
+<li>int8_t -&gt; int32_t: 进行符号扩展</li>
+<li>int8_t -&gt; uint32_t:
+先进行符号扩展转为int32_t，然后改变解释方式</li>
+</ul>
+<h2 id="uint8_t">uint8_t</h2>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/electronic-circuit/common-components-of-electronic-circuits-resistors.html#more" rel="contents">
+              <a class="btn" href="/post/94/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -264,7 +275,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/electronic-circuit/anti-reverse-circuit.html">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/92/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/vinx.jpg">
@@ -278,7 +289,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/electronic-circuit/anti-reverse-circuit.html" class="post-title-link" itemprop="url">防反接电路</a>
+            <a href="/post/92/" class="post-title-link" itemprop="url">PCB走线宽度和走过的电流对照表</a>
         </h2>
 
         <div class="post-meta">
@@ -288,14 +299,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-07-06 13:56:38" itemprop="dateCreated datePublished" datetime="2023-07-06T13:56:38+08:00">2023-07-06</time>
+              <time title="创建时间：2023-07-07 15:33:25" itemprop="dateCreated datePublished" datetime="2023-07-07T15:33:25+08:00">2023-07-07</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-07 09:01:30" itemprop="dateModified" datetime="2023-07-07T09:01:30+08:00">2023-07-07</time>
+                <time title="修改时间：2023-09-19 10:26:45" itemprop="dateModified" datetime="2023-09-19T10:26:45+08:00">2023-09-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -318,22 +329,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>电源反接，会给电路造成损坏，电源反接是不可避免的。所以我们就需要给电路中加入保护电路，达到即使接反电源，也不会损坏的目的，下面介绍几种常用防反接电路。</p>
-<h2 id="单二极管防反接电路">1. 单二极管防反接电路</h2>
-<figure>
-<img src="./防反接电路/assets/image-20230706135959070.png" alt="image-20230706135959070">
-<figcaption aria-hidden="true">image-20230706135959070</figcaption>
-</figure>
-<p>二极管防反接保护</p>
-<p>通常情况下直流电源输入防反接保护电路是运用二极管的单向导电性来完结防反接保护。这种接法简略可靠，<strong>但当输入大电流的情况下功耗影响是非常大的</strong>。以输入电流额定值达2A,二极管额定管压降为0.7V，那么功耗至少也要达到：Pd＝2A×0.7V＝1.4W，这样功率低，<strong>发热量大，要加散热器，不适合大电流供电电路、电池供电电路和低功耗电路</strong>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/electronic-circuit/anti-reverse-circuit.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h1 id="pcb走线宽度和走过的电流对照表">PCB走线宽度和走过的电流对照表</h1>
+<p><img src="/post/92/assets/image-20230919085323711.png"></p>
+
       
     </div>
 
@@ -360,7 +358,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/electronic-circuit/principle-of-high-low-reset-circuit.html">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/vinx.jpg">
@@ -374,7 +372,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/electronic-circuit/principle-of-high-low-reset-circuit.html" class="post-title-link" itemprop="url">高低电平复位电路原理</a>
+            <a href="/post/89/" class="post-title-link" itemprop="url">高低电平复位电路原理</a>
         </h2>
 
         <div class="post-meta">
@@ -384,14 +382,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-07-06 13:48:40" itemprop="dateCreated datePublished" datetime="2023-07-06T13:48:40+08:00">2023-07-06</time>
+              <time title="创建时间：2023-07-07 13:56:23" itemprop="dateCreated datePublished" datetime="2023-07-07T13:56:23+08:00">2023-07-07</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-07 09:00:10" itemprop="dateModified" datetime="2023-07-07T09:00:10+08:00">2023-07-07</time>
+                <time title="修改时间：2023-09-19 11:33:25" itemprop="dateModified" datetime="2023-09-19T11:33:25+08:00">2023-09-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -426,7 +424,7 @@
 ，查阅手册得知复位引脚需要持续20us以上的低电平，就可完成复位</strong></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/electronic-circuit/principle-of-high-low-reset-circuit.html#more" rel="contents">
+              <a class="btn" href="/post/89/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -458,7 +456,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/electronic-circuit/operational-amplifier-common-circuit.html">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/vinx.jpg">
@@ -472,7 +470,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/electronic-circuit/operational-amplifier-common-circuit.html" class="post-title-link" itemprop="url">运算放大器常用电路</a>
+            <a href="/post/93/" class="post-title-link" itemprop="url">芯片IC附近放置的电容是多少？</a>
         </h2>
 
         <div class="post-meta">
@@ -482,14 +480,299 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-06-15 14:46:04" itemprop="dateCreated datePublished" datetime="2023-06-15T14:46:04+08:00">2023-06-15</time>
+              <time title="创建时间：2023-07-07 09:08:25" itemprop="dateCreated datePublished" datetime="2023-07-07T09:08:25+08:00">2023-07-07</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-07 09:00:09" itemprop="dateModified" datetime="2023-07-07T09:00:09+08:00">2023-07-07</time>
+                <time title="修改时间：2023-09-19 11:33:11" itemprop="dateModified" datetime="2023-09-19T11:33:11+08:00">2023-09-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%94%B5%E5%AD%90%E7%94%B5%E8%B7%AF/" itemprop="url" rel="index"><span itemprop="name">电子电路</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="芯片ic附近放置的电容是多少1uf0.1uf0.01uf如何选">芯片IC附近放置的电容是多少？1uF、0.1uF、0.01uF如何选？</h1>
+<blockquote>
+<p><strong>电容，电容的作用简单来说就是存储电荷。我们都知道在电源中要加电容滤波，在每个芯片的电源脚放置一个0.1uF的电容去耦。但是，有些板子芯片的电源脚旁边的电容是0.1uF的或者0.01uF的，有什么讲究吗？</strong></p>
+</blockquote>
+<p>数字电路要运行稳定可靠，电源一定要“干净”，并且能量补充一定要及时，也就是滤波去耦一定要好。什么是滤波去耦，简单的说就是在芯片不需要电流的时候存储能量，在需要电流的时候又能及时地补充能量。</p>
+<p>有读者看到这里会说，这个职责不是DC/DC、LDO的吗？对，在低频的时候它们可以搞定，但高速的数字系统就不一样了。</p>
+<p>电容的作用简单来说就是存储电荷。我们都知道在电源中要加电容滤波，在每个芯片的电源脚放置一个0.1uF的电容去耦。但是，有些板子芯片的电源脚旁边的电容是0.1uF的或者0.01uF的，有什么讲究吗？</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/post/93/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/91/" class="post-title-link" itemprop="url">电子电路常用元件-电阻</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-06 15:25:12" itemprop="dateCreated datePublished" datetime="2023-07-06T15:25:12+08:00">2023-07-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-19 11:33:41" itemprop="dateModified" datetime="2023-09-19T11:33:41+08:00">2023-09-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%94%B5%E5%AD%90%E7%94%B5%E8%B7%AF/" itemprop="url" rel="index"><span itemprop="name">电子电路</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="电阻阻值的选择">1. 电阻阻值的选择</h2>
+<ol type="1">
+<li>通过计算取值，比如反馈电路、分压电路以及限流电路、取样电路可计算取值。</li>
+<li>通过手册取值，使用部分IC的时候，IC手册中会有推荐电路取值，直接使用即可。</li>
+<li>通过经验取值，比如上拉电阻，一般为1K、4.7K、10K、100K等等。再比如485匹配电阻，一般为120Ω；</li>
+</ol>
+<h2 id="功耗与封装">2. 功耗与封装</h2>
+<p>选定阻值后，就要确定电路中的电阻满足功耗，比如0603的一般功耗为0.1w，通过公式I2R计算功耗即可；</p>
+<p><img src="/post/91/assets/image-20230918101828132.png"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/post/91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/90/" class="post-title-link" itemprop="url">防反接电路</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-06 14:16:19" itemprop="dateCreated datePublished" datetime="2023-07-06T14:16:19+08:00">2023-07-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-19 11:29:13" itemprop="dateModified" datetime="2023-09-19T11:29:13+08:00">2023-09-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%94%B5%E5%AD%90%E7%94%B5%E8%B7%AF/" itemprop="url" rel="index"><span itemprop="name">电子电路</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>电源反接，会给电路造成损坏，电源反接是不可避免的。所以我们就需要给电路中加入保护电路，达到即使接反电源，也不会损坏的目的，下面介绍几种常用防反接电路。</p>
+<h2 id="单二极管防反接电路">1. 单二极管防反接电路</h2>
+<p><img src="/post/90/assets/image-20230706135959070.png"></p>
+<p>二极管防反接保护</p>
+<p>通常情况下直流电源输入防反接保护电路是运用二极管的单向导电性来完结防反接保护。这种接法简略可靠，<strong>但当输入大电流的情况下功耗影响是非常大的</strong>。以输入电流额定值达2A,二极管额定管压降为0.7V，那么功耗至少也要达到：Pd＝2A×0.7V＝1.4W，这样功率低，<strong>发热量大，要加散热器，不适合大电流供电电路、电池供电电路和低功耗电路</strong>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/post/90/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/88/" class="post-title-link" itemprop="url">运算放大器常用电路</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-15 15:20:49" itemprop="dateCreated datePublished" datetime="2023-06-15T15:20:49+08:00">2023-06-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-19 12:47:14" itemprop="dateModified" datetime="2023-09-19T12:47:14+08:00">2023-09-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -514,14 +797,15 @@
       
           <h1 id="运算放大器常用电路">运算放大器常用电路</h1>
 <h2 id="反相放大电路">1. 反相放大电路</h2>
-<p><img src="./运算放大器常用电路/assets/v2-f63edf4cbe2d26d9f76540c01861ce9d_720w.png" alt="img"> <span class="math display">\[
+<p><img src="/post/88/assets/image-20230919085810195.png">
+<span class="math display">\[
 V_{out} = - \frac{R2}{R1} * V_{in}
 \]</span> 关于R1,R2及R3的选值：</p>
 <p>1）、R1,R2及R3应该在K级，不宜达到M级；</p>
 <p>2）、R3应该等于或近似于R1与R2的并联，以消除偏置电流的影响。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/electronic-circuit/operational-amplifier-common-circuit.html#more" rel="contents">
+              <a class="btn" href="/post/88/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -553,7 +837,7 @@ V_{out} = - \frac{R2}{R1} * V_{in}
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/build-tools/qt-get-system-default-directory.html">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/vinx.jpg">
@@ -567,7 +851,7 @@ V_{out} = - \frac{R2}{R1} * V_{in}
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/build-tools/qt-get-system-default-directory.html" class="post-title-link" itemprop="url">QT获取下载、桌面、临时文件....等系统默认目录</a>
+            <a href="/post/87/" class="post-title-link" itemprop="url">QT获取下载、桌面、临时文件....等系统默认目录</a>
         </h2>
 
         <div class="post-meta">
@@ -576,10 +860,16 @@ V_{out} = - \frac{R2}{R1} * V_{in}
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-05-19 11:50:13 / 修改时间：13:41:49" itemprop="dateCreated datePublished" datetime="2023-05-19T11:50:13+08:00">2023-05-19</time>
+              <time title="创建时间：2023-05-19 11:50:13" itemprop="dateCreated datePublished" datetime="2023-05-19T11:50:13+08:00">2023-05-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-19 08:49:35" itemprop="dateModified" datetime="2023-09-19T08:49:35+08:00">2023-09-19</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -608,7 +898,7 @@ V_{out} = - \frac{R2}{R1} * V_{in}
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;系统字体目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::FontsLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;系统桌面目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::DesktopLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;用户文档目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::DocumentsLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;用户音乐目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::MusicLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;用户图片目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::PicturesLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;系统临时文件目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::TempLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;系统缓存目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::CacheLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;系统下载目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::DownloadLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;系统缓存目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::CacheLocation);</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/build-tools/qt-get-system-default-directory.html#more" rel="contents">
+              <a class="btn" href="/post/87/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -640,7 +930,7 @@ V_{out} = - \frac{R2}{R1} * V_{in}
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/build-tools/cmake-note.html">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/vinx.jpg">
@@ -654,7 +944,7 @@ V_{out} = - \frac{R2}{R1} * V_{in}
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/build-tools/cmake-note.html" class="post-title-link" itemprop="url">CMake杂记 - 一些零零散散的使用技巧</a>
+            <a href="/post/86/" class="post-title-link" itemprop="url">CMake杂记 - 一些零零散散的使用技巧</a>
         </h2>
 
         <div class="post-meta">
@@ -663,10 +953,16 @@ V_{out} = - \frac{R2}{R1} * V_{in}
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-05-19 11:47:14 / 修改时间：11:48:52" itemprop="dateCreated datePublished" datetime="2023-05-19T11:47:14+08:00">2023-05-19</time>
+              <time title="创建时间：2023-05-16 13:54:26" itemprop="dateCreated datePublished" datetime="2023-05-16T13:54:26+08:00">2023-05-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-19 13:05:30" itemprop="dateModified" datetime="2023-09-19T13:05:30+08:00">2023-09-19</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -698,7 +994,7 @@ V_{out} = - \frac{R2}{R1} * V_{in}
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">get_cmake_property</span>(_variableNames VARIABLES)</span><br><span class="line"><span class="keyword">foreach</span> (_variableName <span class="variable">$&#123;_variableNames&#125;</span>)</span><br><span class="line">    <span class="keyword">message</span>(STATUS <span class="string">&quot;$&#123;_variableName&#125;=$&#123;$&#123;_variableName&#125;&#125;&quot;</span>)</span><br><span class="line"><span class="keyword">endforeach</span>()</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/build-tools/cmake-note.html#more" rel="contents">
+              <a class="btn" href="/post/86/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -730,7 +1026,7 @@ V_{out} = - \frac{R2}{R1} * V_{in}
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/build-tools/Kconfig-language-zh.html">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/vinx.jpg">
@@ -744,7 +1040,7 @@ V_{out} = - \frac{R2}{R1} * V_{in}
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/build-tools/Kconfig-language-zh.html" class="post-title-link" itemprop="url">平面三角形外接(内切)圆圆心与半径求解算法</a>
+            <a href="/post/85/" class="post-title-link" itemprop="url">平面三角形外接(内切)圆圆心与半径求解算法</a>
         </h2>
 
         <div class="post-meta">
@@ -753,10 +1049,16 @@ V_{out} = - \frac{R2}{R1} * V_{in}
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-05-10 11:03:39 / 修改时间：11:43:22" itemprop="dateCreated datePublished" datetime="2023-05-10T11:03:39+08:00">2023-05-10</time>
+              <time title="创建时间：2023-05-10 11:03:39" itemprop="dateCreated datePublished" datetime="2023-05-10T11:03:39+08:00">2023-05-10</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-19 08:48:30" itemprop="dateModified" datetime="2023-09-19T08:48:30+08:00">2023-09-19</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -797,292 +1099,7 @@ S &amp;= \frac{a * b * c}{4 * R} \\
 \]</span></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/build-tools/Kconfig-language-zh.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/LeetCode%E9%A2%98%E8%A7%A3/208.%20%E5%AE%9E%E7%8E%B0%20Trie%20(%E5%89%8D%E7%BC%80%E6%A0%91).html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/LeetCode%E9%A2%98%E8%A7%A3/208.%20%E5%AE%9E%E7%8E%B0%20Trie%20(%E5%89%8D%E7%BC%80%E6%A0%91).html" class="post-title-link" itemprop="url">208. 实现 Trie (前缀树)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-04-25 09:21:57 / 修改时间：09:22:16" itemprop="dateCreated datePublished" datetime="2023-04-25T09:21:57+08:00">2023-04-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">LeetCode题解</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><code>Trie</code>（发音类似 “try”）或者说 前缀树 是一种树形数据结构，用于高效地存储和检索字符串数据集中的键。这一数据结构有相当多的应用情景，例如自动补完和拼写检查。</p>
-<p>请你实现 Trie 类：</p>
-<ul>
-<li><code>Trie()</code> 初始化前缀树对象。</li>
-<li><code>void insert(String word)</code> 向前缀树中插入字符串 word 。</li>
-<li><code>boolean search(String word) </code>如果字符串 word 在前缀树中，返回 true（即，在检索之前已经插入）；否则，返回 false 。</li>
-<li><code>boolean startsWith(String prefix)</code> 如果之前已经插入的字符串 word 的前缀之一为 prefix ，返回 true ；否则，返回 false 。</li>
-</ul>
-<p>示例：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/LeetCode%E9%A2%98%E8%A7%A3/208.%20%E5%AE%9E%E7%8E%B0%20Trie%20(%E5%89%8D%E7%BC%80%E6%A0%91).html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Archlinux/ArchLinux%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BDU%E7%9B%98.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Archlinux/ArchLinux%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BDU%E7%9B%98.html" class="post-title-link" itemprop="url">ArchLinux自动挂载U盘</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-03-23 10:34:47" itemprop="dateCreated datePublished" datetime="2023-03-23T10:34:47+08:00">2023-03-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-11 09:14:38" itemprop="dateModified" datetime="2023-04-11T09:14:38+08:00">2023-04-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Archlinux/" itemprop="url" rel="index"><span itemprop="name">Archlinux</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="ArchLinux自动挂载U盘"><a href="#ArchLinux自动挂载U盘" class="headerlink" title="ArchLinux自动挂载U盘"></a>ArchLinux自动挂载U盘</h1><p>在Arch Linux中，您可以通过以下步骤来自动挂载USB设备：</p>
-<ol>
-<li><p>确保您的系统上安装了<code>udisks2</code>软件包。您可以使用以下命令来安装该软件包：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S udisks2</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>为了能够自动挂载USB设备，您需要启用<code>udisks2</code>服务。您可以使用以下命令启用该服务：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> udisks2.service</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>然后，您需要将您的用户添加到<code>storage</code>组中，以便您可以访问挂载点。您可以使用以下命令将您的用户添加到<code>storage</code>组中：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gpasswd -<span class="selector-tag">a</span> yourusername storage</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>最后，您可以将以下行添加到<code>/etc/fstab</code>文件中，以便自动挂载USB设备：</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">UUID</span>=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX /mnt/usb auto nosuid,nodev,nofail,x-gvfs-show <span class="number">0</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<p>您需要将<code>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</code>替换为您的USB设备的UUID，并将<code>/mnt/usb</code>替换为您希望将USB设备挂载到的挂载点。</p>
-<p>您可以使用以下命令查找USB设备的UUID：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk -f</span><br></pre></td></tr></table></figure>
-
-<p>找到您的USB设备，然后在<code>UUID</code>列中查找UUID。</p>
-</li>
-</ol>
-<p>这样，每次插入USB设备时，它都会自动挂载到指定的挂载点。请注意，在第一次插入USB设备时，系统可能需要一些时间来创建挂载点。</p>
-
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/Archlinux/ArchLinux%20Gnome%20%E5%AE%89%E8%A3%85%E8%8B%B1%E4%BC%9F%E8%BE%BE%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Archlinux/ArchLinux%20Gnome%20%E5%AE%89%E8%A3%85%E8%8B%B1%E4%BC%9F%E8%BE%BE%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8.html" class="post-title-link" itemprop="url">ArchLinux Gnome 安装英伟达显卡驱动</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-02-03 15:50:06" itemprop="dateCreated datePublished" datetime="2023-02-03T15:50:06+08:00">2023-02-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-29 15:01:47" itemprop="dateModified" datetime="2023-03-29T15:01:47+08:00">2023-03-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Archlinux/" itemprop="url" rel="index"><span itemprop="name">Archlinux</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="ArchLinux-Gnome-安装英伟达显卡驱动"><a href="#ArchLinux-Gnome-安装英伟达显卡驱动" class="headerlink" title="ArchLinux Gnome 安装英伟达显卡驱动"></a>ArchLinux Gnome 安装英伟达显卡驱动</h1><p>我的电脑详细配置信息：</p>
-<p>![](.&#x2F;ArchLinux Gnome 安装英伟达显卡驱动&#x2F;assets&#x2F;Pasted image 20221104185207-1680073272865-2.png)</p>
-<h2 id="0-安装前准备"><a href="#0-安装前准备" class="headerlink" title="0. 安装前准备"></a>0. 安装前准备</h2><p>编辑<code>pacman.conf</code>文件启用32位软件源</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Archlinux/ArchLinux%20Gnome%20%E5%AE%89%E8%A3%85%E8%8B%B1%E4%BC%9F%E8%BE%BE%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8.html#more" rel="contents">
+              <a class="btn" href="/post/85/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1181,20 +1198,20 @@ S &amp;= \frac{a * b * c}{4 * R} \\
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-count">94</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">55</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

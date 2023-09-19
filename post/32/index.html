@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.vinkvin.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="1. Docker 引擎命令 1.1 Docker version 命令 docker version : 显示 Docker 版本信息。 12345Usage:  docker version [flags]Flags:  -f, --format string       格式化输出. Values: [pretty | json]. (Default: pretty) 1.2 Doc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker命令大全">
+<meta property="og:url" content="https://blog.vinkvin.com/post/32/index.html">
+<meta property="og:site_name" content="唯客微博客">
+<meta property="og:description" content="1. Docker 引擎命令 1.1 Docker version 命令 docker version : 显示 Docker 版本信息。 12345Usage:  docker version [flags]Flags:  -f, --format string       格式化输出. Values: [pretty | json]. (Default: pretty) 1.2 Doc">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-04T05:48:06.000Z">
+<meta property="article:modified_time" content="2023-09-18T03:28:07.207Z">
+<meta property="article:author" content="Vinx">
+<meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://blog.vinkvin.com/post/32/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Docker命令大全 | 唯客微博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a target="_blank" rel="noopener" href="https://github.com/Vinx911" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">唯客微博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">专注于计算机，嵌入式领域的技术</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/32/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Docker命令大全
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-04 13:48:06" itemprop="dateCreated datePublished" datetime="2022-11-04T13:48:06+08:00">2022-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-18 11:28:07" itemprop="dateModified" datetime="2023-09-18T11:28:07+08:00">2023-09-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Docker笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="docker-引擎命令">1. Docker 引擎命令</h2>
+<h3 id="docker-version-命令">1.1 Docker version 命令</h3>
+<p><strong>docker version</strong> : 显示 Docker 版本信息。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Usage:</span><br><span class="line">  docker version [flags]</span><br><span class="line"></span><br><span class="line">Flags:</span><br><span class="line">  -f, --format string       格式化输出. Values: [pretty | json]. (Default: pretty)</span><br></pre></td></tr></table></figure>
+<h3 id="docker-info-命令">1.2 Docker info 命令</h3>
+<p><strong>docker info</strong> : 显示 Docker
+系统信息，包括镜像和容器数。</p>
+<p>‍</p>
+<h3 id="docker-help-命令">1.3 Docker help 命令</h3>
+<p><strong>docker help</strong> : 显示指定命令的帮助</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Usage:  docker help [command]</span><br></pre></td></tr></table></figure>
+<h3 id="docker-events-命令">1.4 Docker events 命令</h3>
+<p><strong>docker events</strong> : 从服务器获取实时事件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Usage:  docker events [OPTIONS]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -f, --filter filter   根据条件过滤事件</span><br><span class="line">      --since string    从指定的时间戳后显示所有事件</span><br><span class="line">      --until string    流水时间显示到指定的时间为止</span><br></pre></td></tr></table></figure>
+<h2 id="docker-仓库命令">2. Docker 仓库命令</h2>
+<h3 id="docker-search-命令">2.1 Docker search 命令</h3>
+<p><strong>d</strong>​<strong>ocker search</strong> : 在 Docker Hub
+上搜索镜像</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Usage:  docker search [OPTIONS] TERM</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -f, --filter filter   通过搜索来过滤</span><br><span class="line">      --limit int       搜索结果的最大数量 (默认 25)</span><br><span class="line">      --no-trunc        不截断输出</span><br><span class="line"></span><br><span class="line">--filter=STARS=3000     # 搜索出来的镜像就是stars大于3000的</span><br></pre></td></tr></table></figure>
+<h3 id="docker-login-命令">2.2 Docker login 命令</h3>
+<p><strong>docker login</strong> : 登录镜像服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Usage:</span><br><span class="line">  docker login [OPTIONS] [SERVER] [flags]</span><br><span class="line">  docker login [command]</span><br><span class="line"></span><br><span class="line">Flags:</span><br><span class="line">  -p, --password string   密码</span><br><span class="line">      --password-stdin    从标准输入获取密码</span><br><span class="line">  -u, --username string   用户名</span><br></pre></td></tr></table></figure>
+<h3 id="docker-logout-命令">2.3 Docker logout 命令</h3>
+<p><strong>docker logout</strong> : 退出镜像服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Usage:</span><br><span class="line">  docker logout [SERVER] [flags]</span><br><span class="line">  docker logout [command]</span><br></pre></td></tr></table></figure>
+<h3 id="docker-pull-命令">2.4 Docker pull 命令</h3>
+<p><strong>docker pull</strong> : 下载镜像</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Usage:  docker pull [OPTIONS] NAME[:TAG|@DIGEST]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -a, --all-tags                下载存储库中所有带标签的镜像</span><br><span class="line">      --disable-content-trust   跳过镜像验证(默认为true)</span><br><span class="line">      --platform string         如果服务器是多平台的，则设置平台</span><br><span class="line">  -q, --quiet                   抑制详细输出</span><br></pre></td></tr></table></figure>
+<h3 id="docker-push-命令">2.5 Docker push 命令</h3>
+<p><strong>docker push</strong> : 上传镜像或者容器到远程镜像服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Usage:  docker push [OPTIONS] NAME[:TAG]</span><br><span class="line"></span><br><span class="line">Push an image or a repository to a registry</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -a, --all-tags                上传存储库中所有带标签的镜像</span><br><span class="line">      --disable-content-trust   跳过镜像签名(默认为true)</span><br><span class="line">  -q, --quiet                   抑制详细输出</span><br></pre></td></tr></table></figure>
+<h2 id="docker-镜像命令">3. Docker 镜像命令</h2>
+<h3 id="docker-images-命令">3.1 Docker images 命令</h3>
+<p><strong>docker images</strong> : 查看所有本地主机上的镜像</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Usage:  docker images [OPTIONS] [REPOSITORY[:TAG]]</span><br><span class="line"></span><br><span class="line">List images</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -a, --all             显示所有镜像</span><br><span class="line">      --digests         显示sha256摘要</span><br><span class="line">  -f, --filter filter   根据提供的条件筛选输出</span><br><span class="line">      --no-trunc        不截断输出</span><br><span class="line">  -q, --quiet           仅显示镜像id</span><br></pre></td></tr></table></figure>
+<h3 id="docker-rmi-命令">3.2 Docker rmi 命令</h3>
+<p><strong>docker rmi</strong> : 删除一个或者多个镜像</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -f, --force      强制删除镜像</span><br><span class="line">      --no-prune   不移除该镜像的过程镜像，默认移除</span><br><span class="line"></span><br><span class="line">docker rmi -f 镜像id                 # 删除指定的镜像</span><br><span class="line">docker rmi -f 镜像id 镜像id 镜像id    # 删除多个镜像（空格分隔）</span><br><span class="line">docker rmi -f $(docker images -aq)  # 删除全部的镜像</span><br></pre></td></tr></table></figure>
+<h3 id="docker-tag-命令">3.3 Docker tag 命令</h3>
+<p><strong>docker tag</strong> : 标记本地镜像，将其归入某一仓库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Usage:  docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]</span><br></pre></td></tr></table></figure>
+<h3 id="docker-history-命令">3.4 Docker history 命令</h3>
+<p><strong>docker history</strong> : 查看指定镜像的创建历史。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Usage:  docker history [OPTIONS] IMAGE</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -H, --human           以可读的格式打印镜像大小和日期，默认为true</span><br><span class="line">      --no-trunc        显示完整的提交记录</span><br><span class="line">  -q, --quiet           仅列出提交记录ID</span><br></pre></td></tr></table></figure>
+<h3 id="docker-build-命令">3.5 Docker build 命令</h3>
+<p><strong>docker build</strong> : 使用 Dockerfile 创建镜像。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Usage:  docker build [OPTIONS] PATH | URL | -</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">      --add-host list           添加自定义的主机IP映射 (host:ip)</span><br><span class="line">      --build-arg list          设置镜像创建时的变量</span><br><span class="line">      --cache-from strings      要考虑作为缓存源的镜像</span><br><span class="line">      --disable-content-trust   忽略校验，默认开启</span><br><span class="line">  -f, --file string             指定要使用的Dockerfile路径</span><br><span class="line">      --iidfile string          将镜像ID写入文件</span><br><span class="line">      --isolation string        使用容器隔离技术</span><br><span class="line">      --label list              设置镜像使用的元数据</span><br><span class="line">      --network string          默认 default。在构建期间设置RUN指令的网络模式</span><br><span class="line">      --no-cache                创建镜像的过程不使用缓存</span><br><span class="line">  -o, --output stringArray      输出目的地(format:type=local,dest=path)</span><br><span class="line">      --platform string         如果服务器是多平台的，则设置平台</span><br><span class="line">      --progress string         设置进度输出类型 (auto, plain,</span><br><span class="line">                                tty). Use plain to show container output</span><br><span class="line">                                (default &quot;auto&quot;)</span><br><span class="line">      --pull                    尝试去更新镜像的新版本</span><br><span class="line">  -q, --quiet                   安静模式，成功后只输出镜像 ID</span><br><span class="line">  -t, --tag list                镜像的名字及标签，通常 name:tag 或者 name 格式</span><br><span class="line">      --target string           Set the target build stage to build.</span><br></pre></td></tr></table></figure>
+<h2 id="docker-容器生命周期命令">4. Docker 容器生命周期命令</h2>
+<h3 id="docker-run-命令">4.1 Docker run 命令</h3>
+<p><strong>docker run</strong> : 创建一个新的容器并运行一个命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br></pre></td><td class="code"><pre><span class="line">Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">      --add-host list                  Add a custom host-to-IP mapping</span><br><span class="line">                                       (host:ip)</span><br><span class="line">  -a, --attach list                    指定标准输入输出内容类型，可选 STDIN/STDOUT/STDERR 三项</span><br><span class="line">      --blkio-weight uint16            Block IO (relative weight),</span><br><span class="line">                                       between 10 and 1000, or 0 to</span><br><span class="line">                                       disable (default 0)</span><br><span class="line">      --blkio-weight-device list       Block IO weight (relative device</span><br><span class="line">                                       weight) (default [])</span><br><span class="line">      --cap-add list                   Add Linux capabilities</span><br><span class="line">      --cap-drop list                  Drop Linux capabilities</span><br><span class="line">      --cgroup-parent string           Optional parent cgroup for the</span><br><span class="line">                                       container</span><br><span class="line">      --cgroupns string                Cgroup namespace to use</span><br><span class="line">                                       (host|private)</span><br><span class="line">                                       &#x27;host&#x27;:    Run the container in</span><br><span class="line">                                       the Docker host&#x27;s cgroup namespace</span><br><span class="line">                                       &#x27;private&#x27;: Run the container in</span><br><span class="line">                                       its own private cgroup namespace</span><br><span class="line">                                       &#x27;&#x27;:        Use the cgroup</span><br><span class="line">                                       namespace as configured by the</span><br><span class="line">                                                  default-cgroupns-mode</span><br><span class="line">                                       option on the daemon (default)</span><br><span class="line">      --cidfile string                 Write the container ID to the file</span><br><span class="line">      --cpu-period int                 Limit CPU CFS (Completely Fair</span><br><span class="line">                                       Scheduler) period</span><br><span class="line">      --cpu-quota int                  Limit CPU CFS (Completely Fair</span><br><span class="line">                                       Scheduler) quota</span><br><span class="line">      --cpu-rt-period int              Limit CPU real-time period in</span><br><span class="line">                                       microseconds</span><br><span class="line">      --cpu-rt-runtime int             Limit CPU real-time runtime in</span><br><span class="line">                                       microseconds</span><br><span class="line">  -c, --cpu-shares int                 CPU shares (relative weight)</span><br><span class="line">      --cpus decimal                   Number of CPUs</span><br><span class="line">      --cpuset-cpus string             CPUs in which to allow execution</span><br><span class="line">                                       (0-3, 0,1)</span><br><span class="line">      --cpuset-mems string             MEMs in which to allow execution</span><br><span class="line">                                       (0-3, 0,1)</span><br><span class="line">  -d, --detach                         后台运行容器，并返回容器ID</span><br><span class="line">      --detach-keys string             Override the key sequence for</span><br><span class="line">                                       detaching a container</span><br><span class="line">      --device list                    Add a host device to the container</span><br><span class="line">      --device-cgroup-rule list        Add a rule to the cgroup allowed</span><br><span class="line">                                       devices list</span><br><span class="line">      --device-read-bps list           Limit read rate (bytes per second)</span><br><span class="line">                                       from a device (default [])</span><br><span class="line">      --device-read-iops list          Limit read rate (IO per second)</span><br><span class="line">                                       from a device (default [])</span><br><span class="line">      --device-write-bps list          Limit write rate (bytes per</span><br><span class="line">                                       second) to a device (default [])</span><br><span class="line">      --device-write-iops list         Limit write rate (IO per second)</span><br><span class="line">                                       to a device (default [])</span><br><span class="line">      --disable-content-trust          Skip image verification (default true)</span><br><span class="line">      --dns list                       指定容器使用的DNS服务器，默认和宿主一致</span><br><span class="line">      --dns-option list                Set DNS options</span><br><span class="line">      --dns-search list                指定容器DNS搜索域名，默认和宿主一致</span><br><span class="line">      --domainname string              Container NIS domain name</span><br><span class="line">      --entrypoint string              Overwrite the default ENTRYPOINT</span><br><span class="line">                                       of the image</span><br><span class="line">  -e, --env list                       设置环境变量</span><br><span class="line">      --env-file list                  从指定文件读入环境变量</span><br><span class="line">      --expose list                    开放一个端口或一组端口</span><br><span class="line">      --gpus gpu-request               GPU devices to add to the</span><br><span class="line">                                       container (&#x27;all&#x27; to pass all GPUs)</span><br><span class="line">      --group-add list                 Add additional groups to join</span><br><span class="line">      --health-cmd string              Command to run to check health</span><br><span class="line">      --health-interval duration       Time between running the check</span><br><span class="line">                                       (ms|s|m|h) (default 0s)</span><br><span class="line">      --health-retries int             Consecutive failures needed to</span><br><span class="line">                                       report unhealthy</span><br><span class="line">      --health-start-period duration   Start period for the container to</span><br><span class="line">                                       initialize before starting</span><br><span class="line">                                       health-retries countdown</span><br><span class="line">                                       (ms|s|m|h) (default 0s)</span><br><span class="line">      --health-timeout duration        Maximum time to allow one check to</span><br><span class="line">                                       run (ms|s|m|h) (default 0s)</span><br><span class="line">      --help                           Print usage</span><br><span class="line">  -h, --hostname string                指定容器的hostname</span><br><span class="line">      --init                           Run an init inside the container</span><br><span class="line">                                       that forwards signals and reaps</span><br><span class="line">                                       processes</span><br><span class="line">  -i, --interactive                    以交互模式运行容器，通常与 -t 同时使用</span><br><span class="line">      --ip string                      IPv4 address (e.g., 172.30.100.104)</span><br><span class="line">      --ip6 string                     IPv6 address (e.g., 2001:db8::33)</span><br><span class="line">      --ipc string                     IPC mode to use</span><br><span class="line">      --isolation string               Container isolation technology</span><br><span class="line">      --kernel-memory bytes            Kernel memory limit</span><br><span class="line">  -l, --label list                     Set meta data on a container</span><br><span class="line">      --label-file list                Read in a line delimited file of labels</span><br><span class="line">      --link list                      添加链接到另一个容器</span><br><span class="line">      --link-local-ip list             Container IPv4/IPv6 link-local</span><br><span class="line">                                       addresses</span><br><span class="line">      --log-driver string              Logging driver for the container</span><br><span class="line">      --log-opt list                   Log driver options</span><br><span class="line">      --mac-address string             Container MAC address (e.g.,</span><br><span class="line">                                       92:d0:c6:0a:29:33)</span><br><span class="line">  -m, --memory bytes                   设置容器使用内存最大值</span><br><span class="line">      --memory-reservation bytes       Memory soft limit</span><br><span class="line">      --memory-swap bytes              Swap limit equal to memory plus</span><br><span class="line">                                       swap: &#x27;-1&#x27; to enable unlimited swap</span><br><span class="line">      --memory-swappiness int          Tune container memory swappiness</span><br><span class="line">                                       (0 to 100) (default -1)</span><br><span class="line">      --mount mount                    Attach a filesystem mount to the</span><br><span class="line">                                       container</span><br><span class="line">      --name string                    容器名字：用来区分容器</span><br><span class="line">      --network network                Connect a container to a network</span><br><span class="line">      --network-alias list             Add network-scoped alias for the</span><br><span class="line">                                       container</span><br><span class="line">      --no-healthcheck                 Disable any container-specified</span><br><span class="line">                                       HEALTHCHECK</span><br><span class="line">      --oom-kill-disable               Disable OOM Killer</span><br><span class="line">      --oom-score-adj int              Tune host&#x27;s OOM preferences (-1000</span><br><span class="line">                                       to 1000)</span><br><span class="line">      --pid string                     设置容器的 PID 模式</span><br><span class="line">      --pids-limit int                 Tune container pids limit (set -1</span><br><span class="line">                                       for unlimited)</span><br><span class="line">      --platform string                Set platform if server is</span><br><span class="line">                                       multi-platform capable</span><br><span class="line">      --privileged                     默认情况下container是不能访问任何其他设备的。</span><br><span class="line">				       但是通过&quot;privileged&quot;，container就拥有了访问任何其他设备的权限</span><br><span class="line">  -p, --publish list                   指定端口映射，格式为：主机(宿主)端口:容器端口</span><br><span class="line">  -P, --publish-all                    随机端口映射，容器内部端口随机映射到主机的端口</span><br><span class="line">      --pull string                    Pull image before running</span><br><span class="line">                                       (&quot;always&quot;|&quot;missing&quot;|&quot;never&quot;)</span><br><span class="line">                                       (default &quot;missing&quot;)</span><br><span class="line">      --read-only                      启用后，容器的文件系统将为只读</span><br><span class="line">      --restart string                 在容器退出时重新启动策略应用 (default &quot;no&quot;)</span><br><span class="line">					no，默认策略，在容器退出时不重启容器</span><br><span class="line">					on-failure，在容器非正常退出时（退出状态非 0），才会重启容器</span><br><span class="line">					on-failure:3，在容器非正常退出时重启容器，最多重启 3 次</span><br><span class="line">					always，在容器退出时总是重启容器，当操作系统或 docker 服务重启时，该容器总能随系统启动</span><br><span class="line">					unless-stopped，在容器退出时总是重启容器，但是不考虑在 Docker 守护进程启动时就已经停止了的容器</span><br><span class="line">      --rm                             当容器退出时如果容器关闭，则自动清除所有该容器的信息</span><br><span class="line">      --runtime string                 Runtime to use for this container</span><br><span class="line">      --security-opt list              Security Options</span><br><span class="line">      --shm-size bytes                 Size of /dev/shm</span><br><span class="line">      --sig-proxy                      Proxy received signals to the</span><br><span class="line">                                       process (default true)</span><br><span class="line">      --stop-signal string             Signal to stop a container</span><br><span class="line">                                       (default &quot;15&quot;)</span><br><span class="line">      --stop-timeout int               Timeout (in seconds) to stop a</span><br><span class="line">                                       container</span><br><span class="line">      --storage-opt list               Storage driver options for the</span><br><span class="line">                                       container</span><br><span class="line">      --sysctl map                     Sysctl options (default map[])</span><br><span class="line">      --tmpfs list                     Mount a tmpfs directory</span><br><span class="line">  -t, --tty                            为容器重新分配一个伪输入终端，通常与 -i 同时使用</span><br><span class="line">      --ulimit ulimit                  Ulimit options (default [])</span><br><span class="line">  -u, --user string                    Username or UID (format:</span><br><span class="line">                                       &lt;name|uid&gt;[:&lt;group|gid&gt;])</span><br><span class="line">      --userns string                  User namespace to use</span><br><span class="line">      --uts string                     UTS namespace to use</span><br><span class="line">  -v, --volume list                    绑定一个卷</span><br><span class="line">      --volume-driver string           容器的可选卷驱动程序</span><br><span class="line">      --volumes-from list              从其他容器挂载目录</span><br><span class="line">  -w, --workdir string                 设置容器的工作目录</span><br></pre></td></tr></table></figure>
+<p>‍</p>
+<h3 id="docker-create-命令">4.2 Docker create 命令</h3>
+<p><strong>docker create</strong> : 创建一个新的容器但不启动它，语法同
+docker run</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Usage:  docker create [OPTIONS] IMAGE [COMMAND] [ARG...]</span><br></pre></td></tr></table></figure>
+<h3 id="docker-start-命令">4.3 Docker start 命令</h3>
+<h3 id="docker-stop-命令">4.4 Docker stop 命令</h3>
+<h3 id="docker-restart-命令">4.5 Docker restart 命令</h3>
+<h3 id="docker-pause-命令">4.6 Docker pause 命令</h3>
+<h3 id="docker-unpause-命令">4.7 Docker unpause 命令</h3>
+<h3 id="docker-kill-命令">4.8 Docker kill 命令</h3>
+<h3 id="docker-rm-命令">4.9 Docker rm 命令</h3>
+
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+    </div>
+    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/post/32/">Docker命令大全</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Vinx 的个人博客">Vinx</a></p>
+  <p><span>发布时间:</span>2022年11月04日 - 13:48</p>
+  <p><span>最后更新:</span>2023年09月18日 - 11:28</p>
+  <p><span>原始链接:</span><a href="/post/32/" title="Docker命令大全">https://blog.vinkvin.com/post/32/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://blog.vinkvin.com/post/32/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fab fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+
+      
+    </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/31/" rel="prev" title="Android 控件缩写">
+      <i class="fa fa-chevron-left"></i> Android 控件缩写
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/34/" rel="next" title="TypeScript学习笔记 - 额外的属性检测">
+      TypeScript学习笔记 - 额外的属性检测 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-%E5%BC%95%E6%93%8E%E5%91%BD%E4%BB%A4"><span class="nav-text">1. Docker 引擎命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-version-%E5%91%BD%E4%BB%A4"><span class="nav-text">1.1 Docker version 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-info-%E5%91%BD%E4%BB%A4"><span class="nav-text">1.2 Docker info 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-help-%E5%91%BD%E4%BB%A4"><span class="nav-text">1.3 Docker help 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-events-%E5%91%BD%E4%BB%A4"><span class="nav-text">1.4 Docker events 命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-%E4%BB%93%E5%BA%93%E5%91%BD%E4%BB%A4"><span class="nav-text">2. Docker 仓库命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-search-%E5%91%BD%E4%BB%A4"><span class="nav-text">2.1 Docker search 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-login-%E5%91%BD%E4%BB%A4"><span class="nav-text">2.2 Docker login 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-logout-%E5%91%BD%E4%BB%A4"><span class="nav-text">2.3 Docker logout 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-pull-%E5%91%BD%E4%BB%A4"><span class="nav-text">2.4 Docker pull 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-push-%E5%91%BD%E4%BB%A4"><span class="nav-text">2.5 Docker push 命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-%E9%95%9C%E5%83%8F%E5%91%BD%E4%BB%A4"><span class="nav-text">3. Docker 镜像命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-images-%E5%91%BD%E4%BB%A4"><span class="nav-text">3.1 Docker images 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-rmi-%E5%91%BD%E4%BB%A4"><span class="nav-text">3.2 Docker rmi 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-tag-%E5%91%BD%E4%BB%A4"><span class="nav-text">3.3 Docker tag 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-history-%E5%91%BD%E4%BB%A4"><span class="nav-text">3.4 Docker history 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-build-%E5%91%BD%E4%BB%A4"><span class="nav-text">3.5 Docker build 命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-%E5%AE%B9%E5%99%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%91%BD%E4%BB%A4"><span class="nav-text">4. Docker 容器生命周期命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-run-%E5%91%BD%E4%BB%A4"><span class="nav-text">4.1 Docker run 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-create-%E5%91%BD%E4%BB%A4"><span class="nav-text">4.2 Docker create 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-start-%E5%91%BD%E4%BB%A4"><span class="nav-text">4.3 Docker start 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-stop-%E5%91%BD%E4%BB%A4"><span class="nav-text">4.4 Docker stop 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-restart-%E5%91%BD%E4%BB%A4"><span class="nav-text">4.5 Docker restart 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-pause-%E5%91%BD%E4%BB%A4"><span class="nav-text">4.6 Docker pause 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-unpause-%E5%91%BD%E4%BB%A4"><span class="nav-text">4.7 Docker unpause 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-kill-%E5%91%BD%E4%BB%A4"><span class="nav-text">4.8 Docker kill 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-rm-%E5%91%BD%E4%BB%A4"><span class="nav-text">4.9 Docker rm 命令</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Vinx"
+      src="/images/vinx.jpg">
+  <p class="site-author-name" itemprop="name">Vinx</p>
+  <div class="site-description" itemprop="description">本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Vinx911" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Vinx911" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u011471873" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u011471873" rel="noopener" target="_blank"><i class="fa fa-crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:buddyhe911@163.com" title="E-Mail → mailto:buddyhe911@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vinx</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

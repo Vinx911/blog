@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.vinkvin.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="题目 Trie（发音类似 &quot;try&quot;）或者说 前缀树 是一种树形数据结构，用于高效地存储和检索字符串数据集中的键。这一数据结构有相当多的应用情景，例如自动补完和拼写检查。 请你实现 Trie 类：  Trie() 初始化前缀树对象。 void insert(String word) 向前缀树中插入字符串 word 。 boolean search(String word)如果字符串">
+<meta property="og:type" content="article">
+<meta property="og:title" content="208. 实现 Trie (前缀树)">
+<meta property="og:url" content="https://blog.vinkvin.com/post/84/index.html">
+<meta property="og:site_name" content="唯客微博客">
+<meta property="og:description" content="题目 Trie（发音类似 &quot;try&quot;）或者说 前缀树 是一种树形数据结构，用于高效地存储和检索字符串数据集中的键。这一数据结构有相当多的应用情景，例如自动补完和拼写检查。 请你实现 Trie 类：  Trie() 初始化前缀树对象。 void insert(String word) 向前缀树中插入字符串 word 。 boolean search(String word)如果字符串">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-25T01:21:57.000Z">
+<meta property="article:modified_time" content="2023-09-19T00:48:01.587Z">
+<meta property="article:author" content="Vinx">
+<meta property="article:tag" content="LeetCode">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://blog.vinkvin.com/post/84/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>208. 实现 Trie (前缀树) | 唯客微博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a target="_blank" rel="noopener" href="https://github.com/Vinx911" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">唯客微博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">专注于计算机，嵌入式领域的技术</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          208. 实现 Trie (前缀树)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-04-25 09:21:57" itemprop="dateCreated datePublished" datetime="2023-04-25T09:21:57+08:00">2023-04-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-19 08:48:01" itemprop="dateModified" datetime="2023-09-19T08:48:01+08:00">2023-09-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">LeetCode题解</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="题目">题目</h2>
+<p><code>Trie</code>（发音类似 "try"）或者说 前缀树
+是一种树形数据结构，用于高效地存储和检索字符串数据集中的键。这一数据结构有相当多的应用情景，例如自动补完和拼写检查。</p>
+<p>请你实现 Trie 类：</p>
+<ul>
+<li><code>Trie()</code> 初始化前缀树对象。</li>
+<li><code>void insert(String word)</code> 向前缀树中插入字符串 word
+。</li>
+<li><code>boolean search(String word)</code>如果字符串 word
+在前缀树中，返回 true（即，在检索之前已经插入）；否则，返回 false
+。</li>
+<li><code>boolean startsWith(String prefix)</code>
+如果之前已经插入的字符串 word 的前缀之一为 prefix ，返回 true
+；否则，返回 false 。</li>
+</ul>
+<p>示例：</p>
+<blockquote>
+<p>输入 ["Trie", "insert", "search", "search", "startsWith", "insert",
+"search"] [[], ["apple"], ["apple"], ["app"], ["app"], ["app"], ["app"]]
+输出 [null, null, true, false, true, null, true]</p>
+<p>解释 Trie trie = new Trie(); trie.insert("apple");
+trie.search("apple"); // 返回 True trie.search("app"); // 返回 False
+trie.startsWith("app"); // 返回 True trie.insert("app");
+trie.search("app"); // 返回 True</p>
+</blockquote>
+<p>提示：</p>
+<ul>
+<li><code>1 &lt;= word.length, prefix.length &lt;= 2000</code></li>
+<li><code>word</code> 和 <code>prefix</code> 仅由小写英文字母组成</li>
+<li><code>insert</code>、<code>search</code> 和<code>startsWith</code>
+调用次数 总计 不超过 3 * 10<sup>4</sup> 次</li>
+</ul>
+<h2 id="思路">思路</h2>
+<ul>
+<li>题目要求实现一个Trie，包含插入、查找和查找前缀三个方法。</li>
+<li>Trie树也称字典树，因为其效率很高，所以在在字符串查找、前缀匹配等中应用很广泛，其高效率是以空间为代价的。</li>
+<li>原理：利用串构建一个字典树，这个字典树保存了串的公共前缀信息，因此可以降低查询操作的复杂度。</li>
+<li>定义结点Node里包含一个ch(存储字符)、isEnd(表示这个结点是否是一个词的结尾)和一个next(存储下一个字符结点)。</li>
+</ul>
+<ol type="1">
+<li><p>定义一个根结点root作为整棵树的查找起点。</p></li>
+<li><p>比如插入一个词"中国制造"：</p>
+<p>我们从root开始，依次往下查找'中','国','制','造'：如果在结点n的下一个字符列表里没有找到我们想要的字符ch，我们就增加新结点到结点n的next。</p></li>
+<li><p>查找一个词"中国制造"：</p>
+<p>我们从root开始，依次往下查找'中','国','制','造'：如果在结点n的下一个字符列表里没有找到我们想要的字母ch，那么说明不存在，返回false;如果有，那么继续往下找，直到查找的词"中国制造"找到最后一位，这时候我们判断一下这个位置的isWord是否为true，如果为true说明这是一个完整单词，否则只是部分，返回False。</p></li>
+<li><p>查找一个前缀</p></li>
+</ol>
+<p>查找一个前缀和查找一个单词的区别就是，当我们想要查找的前缀找到最后一位，不需要判断是否是完整的单词，直接返回true即可。如果不能全部找到则返回False。</p>
+<h2 id="复杂度">复杂度</h2>
+<ul>
+<li>空间复杂度:
+字典树每个节点都需要用一个列表存储下一个字符结点，所以空间复杂度较高。</li>
+<li>时间复杂度:
+假设所有插入字符串长度之和为n，构建字典树的时间复杂度为O(n)；假设要查找的所有字符串长度之和为k，查找的时间复杂度为O(k)。因此时间复杂度为O(n+k)</li>
+</ul>
+<h2 id="代码">代码</h2>
+<p>下面代码列出了<code>insert</code>、<code>search</code>、<code>startswith</code>、<code>delete</code>四种操作，题目中只要求<code>insert</code>、<code>search</code>、<code>startsWith</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.LinkedList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Trie</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">char</span> ch;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">boolean</span> isEnd;</span><br><span class="line">        <span class="keyword">public</span> List&lt;Node&gt; next;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">Node</span><span class="params">(<span class="type">char</span> ch)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.ch = ch;</span><br><span class="line">            <span class="built_in">this</span>.isEnd = <span class="literal">false</span>;</span><br><span class="line">            <span class="built_in">this</span>.next = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> Node <span class="title function_">findNode</span><span class="params">(<span class="type">char</span> ch)</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (Node node : next) &#123;</span><br><span class="line">                <span class="keyword">if</span> (node.ch == ch) &#123;</span><br><span class="line">                    <span class="keyword">return</span> node;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Node root;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Trie</span><span class="params">()</span> &#123;</span><br><span class="line">        root = <span class="keyword">new</span> <span class="title class_">Node</span>(<span class="string">&#x27;\0&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">insert</span><span class="params">(String word)</span> &#123;</span><br><span class="line">        <span class="type">Node</span> <span class="variable">current</span> <span class="operator">=</span> root;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> word.length();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="type">char</span> <span class="variable">ch</span> <span class="operator">=</span> word.charAt(i);</span><br><span class="line">            <span class="type">Node</span> <span class="variable">node</span> <span class="operator">=</span> current.findNode(ch);</span><br><span class="line">            <span class="keyword">if</span> (node == <span class="literal">null</span>) &#123;</span><br><span class="line">                node = <span class="keyword">new</span> <span class="title class_">Node</span>(ch);</span><br><span class="line">                current.next.add(node);</span><br><span class="line">            &#125;</span><br><span class="line">            current = node;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        current.isEnd = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">search</span><span class="params">(String word)</span> &#123;</span><br><span class="line">        <span class="type">Node</span> <span class="variable">current</span> <span class="operator">=</span> root;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> word.length();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="type">char</span> <span class="variable">ch</span> <span class="operator">=</span> word.charAt(i);</span><br><span class="line">            <span class="type">Node</span> <span class="variable">node</span> <span class="operator">=</span> current.findNode(ch);</span><br><span class="line">            <span class="keyword">if</span> (node == <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                current = node;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> current.isEnd;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">startWith</span><span class="params">(String prefix)</span> &#123;</span><br><span class="line">        <span class="type">Node</span> <span class="variable">current</span> <span class="operator">=</span> root;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> prefix.length();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="type">char</span> <span class="variable">ch</span> <span class="operator">=</span> prefix.charAt(i);</span><br><span class="line">            <span class="type">Node</span> <span class="variable">node</span> <span class="operator">=</span> current.findNode(ch);</span><br><span class="line">            <span class="keyword">if</span> (node == <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                current = node;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">delete</span><span class="params">(String word)</span> &#123;</span><br><span class="line">        <span class="type">Node</span> <span class="variable">current</span> <span class="operator">=</span> root;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> word.length();</span><br><span class="line">        List&lt;Node&gt; path = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="type">char</span> <span class="variable">ch</span> <span class="operator">=</span> word.charAt(i);</span><br><span class="line">            <span class="type">Node</span> <span class="variable">node</span> <span class="operator">=</span> current.findNode(ch);</span><br><span class="line">            <span class="keyword">if</span> (node == <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                path.add(node);</span><br><span class="line">                current = node;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">isDelete</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="type">Node</span> <span class="variable">child</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> path.size() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="type">Node</span> <span class="variable">node</span> <span class="operator">=</span> path.get(i);</span><br><span class="line">            <span class="keyword">if</span> (isDelete) &#123;</span><br><span class="line">                node.next.remove(child);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (node.next.isEmpty() &amp;&amp; node.isEnd) &#123;</span><br><span class="line">                isDelete = <span class="literal">true</span>;</span><br><span class="line">                child = node;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="demo">Demo</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TrieTreeDemo</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Trie</span> <span class="variable">tree</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Trie</span>();</span><br><span class="line">        tree.insert(<span class="string">&quot;北京&quot;</span>);</span><br><span class="line">        tree.insert(<span class="string">&quot;海淀区&quot;</span>);</span><br><span class="line">        tree.insert(<span class="string">&quot;中国&quot;</span>);</span><br><span class="line">        tree.insert(<span class="string">&quot;中国人民&quot;</span>);</span><br><span class="line">        tree.insert(<span class="string">&quot;中国制造&quot;</span>);</span><br><span class="line">        tree.insert(<span class="string">&quot;中关村&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">word</span> <span class="operator">=</span> <span class="string">&quot;中国&quot;</span>;</span><br><span class="line">        <span class="comment">//查找该词是否存在 Trid Tree 中</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">flag</span> <span class="operator">=</span> tree.search(word);</span><br><span class="line">        <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Trie Tree 中已经存在【&quot;</span> + word + <span class="string">&quot;】&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Trie Tree 不包含【&quot;</span> + word + <span class="string">&quot;】&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        word = <span class="string">&quot;中国人民&quot;</span>;</span><br><span class="line">        <span class="comment">//查找该词是否存在 Trid Tree 中</span></span><br><span class="line">        flag = tree.search(word);</span><br><span class="line">        <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Trie Tree 中已经存在【&quot;</span> + word + <span class="string">&quot;】&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Trie Tree 不包含【&quot;</span> + word + <span class="string">&quot;】&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">prefix</span> <span class="operator">=</span> <span class="string">&quot;中关&quot;</span>;</span><br><span class="line">        flag = tree.startWith(prefix);</span><br><span class="line">        <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Trie Tree 中已经存在【&quot;</span> + prefix + <span class="string">&quot;】&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Trie Tree 不包含【&quot;</span> + prefix + <span class="string">&quot;】&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        word = <span class="string">&quot;中国人民&quot;</span>;</span><br><span class="line">        <span class="comment">//查找该词是否存在 Trid Tree 中</span></span><br><span class="line">        flag = tree.delete(word);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//查找该词是否存在 Trid Tree 中</span></span><br><span class="line">        flag = tree.search(word);</span><br><span class="line">        <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Trie Tree 中已经存在【&quot;</span> + word + <span class="string">&quot;】&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Trie Tree 不包含【&quot;</span> + word + <span class="string">&quot;】&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        word = <span class="string">&quot;中国&quot;</span>;</span><br><span class="line">        <span class="comment">//查找该词是否存在 Trid Tree 中</span></span><br><span class="line">        flag = tree.search(word);</span><br><span class="line">        <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Trie Tree 中已经存在【&quot;</span> + word + <span class="string">&quot;】&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Trie Tree 不包含【&quot;</span> + word + <span class="string">&quot;】&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        word = <span class="string">&quot;中国制造&quot;</span>;</span><br><span class="line">        <span class="comment">//查找该词是否存在 Trid Tree 中</span></span><br><span class="line">        flag = tree.search(word);</span><br><span class="line">        <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Trie Tree 中已经存在【&quot;</span> + word + <span class="string">&quot;】&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Trie Tree 不包含【&quot;</span> + word + <span class="string">&quot;】&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+    </div>
+    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/post/84/">208. 实现 Trie (前缀树)</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Vinx 的个人博客">Vinx</a></p>
+  <p><span>发布时间:</span>2023年04月25日 - 09:21</p>
+  <p><span>最后更新:</span>2023年09月19日 - 08:48</p>
+  <p><span>原始链接:</span><a href="/post/84/" title="208. 实现 Trie (前缀树)">https://blog.vinkvin.com/post/84/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://blog.vinkvin.com/post/84/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fab fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+
+      
+    </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/83/" rel="prev" title="ArchLinux自动挂载U盘">
+      <i class="fa fa-chevron-left"></i> ArchLinux自动挂载U盘
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/85/" rel="next" title="平面三角形外接(内切)圆圆心与半径求解算法">
+      平面三角形外接(内切)圆圆心与半径求解算法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-text">复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#demo"><span class="nav-text">Demo</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Vinx"
+      src="/images/vinx.jpg">
+  <p class="site-author-name" itemprop="name">Vinx</p>
+  <div class="site-description" itemprop="description">本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Vinx911" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Vinx911" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u011471873" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u011471873" rel="noopener" target="_blank"><i class="fa fa-crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:buddyhe911@163.com" title="E-Mail → mailto:buddyhe911@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vinx</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
