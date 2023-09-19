@@ -1,10 +1,10 @@
 ---
 title: Linux驱动开发杂记(0x0E) - vm_area_struct结构体
 date: 2018-11-16 08:52:35
+id: 14
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: false
-permalink: Linux-driver-development-notes/0x0E-vm_area_struct-structure.html
 ---
 
 
@@ -99,7 +99,7 @@ struct vm_area_struct {
 ```
 
 linux内核使用vm_area_struct结构来表示一个独立的虚拟内存区域，由于每个不同质的虚拟内存区域功能和内部机制都不同，因此一个进程使用多个vm_area_struct结构来分别表示不同类型的虚拟内存区域。各个vm_area_struct结构使用链表或者树形结构链接，方便进程快速访问，如下图所示：
-![在这里插入图片描述](0x0E-vm_area_struct结构体/200501434261629.png)
+![](0x0E-vm_area_struct结构体/assets/image-20230918111237077.png)
 
 vm_area_struct结构中包含区域起始和终止地址以及其他相关信息，同时也包含一个vm_ops指针，其内部可引出所有针对这个区域可以使用的系统调用函数。这样，进程对某一虚拟内存区域的任何操作需要用要的信息，都可以从vm_area_struct中获得。mmap函数就是要创建一个新的vm_area_struct结构，并将其与文件的物理磁盘地址相连。
 

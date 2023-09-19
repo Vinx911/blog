@@ -1,6 +1,7 @@
 ---
 title: Jetpack Compose实现滑块式标签tab
 date: 2023-01-14 11:10:13
+id: 75
 tags: tab
 categories: Jetpack Compose
 copyright: true
@@ -8,11 +9,11 @@ copyright: true
 
 # Jetpack Compose实现滑块式标签tab
 
-![screenshot-01](./Jetpack Compose实现滑块式标签tab/assets/screenshot-01.gif)
+![](Jetpack Compose实现滑块式标签tab/assets/screenshot-01.gif)
 
 ## 1. 先完成一个基本的tab
 
-![image-20230114114631769](./Jetpack Compose实现滑块式标签tab/assets/image-20230114114631769.png)
+![](Jetpack Compose实现滑块式标签tab/assets/image-20230114114631769.png)
 
 ```kotlin
 @Composable
@@ -46,7 +47,7 @@ fun SliderTabs() {
 
 ## 2. TabRow改为胶囊样式
 
-![image-20230114114841909](./Jetpack Compose实现滑块式标签tab/assets/image-20230114114841909.png)
+![](Jetpack Compose实现滑块式标签tab/assets/image-20230114114841909.png)
 
 ```kotlin
 Modifier.clip(RoundedCornerShape(50))
@@ -54,7 +55,7 @@ Modifier.clip(RoundedCornerShape(50))
 
 ## 3. 指示器改为胶囊样式
 
-![image-20230114115015908](./Jetpack Compose实现滑块式标签tab/assets/image-20230114115015908.png)
+![](Jetpack Compose实现滑块式标签tab/assets/image-20230114115015908.png)
 
 ```kotlin
 Modifier
@@ -68,7 +69,7 @@ Modifier
 
 指示器尺寸设置为`fillMaxSize`后遮挡了标签文字，需要将文字置于上层。
 
-![image-20230114115521229](./Jetpack Compose实现滑块式标签tab/assets/image-20230114115521229.png)
+![](Jetpack Compose实现滑块式标签tab/assets/image-20230114115521229.png)
 
 ```kotlin
 Modifier.zIndex(2f)

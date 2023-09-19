@@ -1,7 +1,10 @@
 ---
 title: ArchLinux Gnome 安装英伟达显卡驱动
 date: 2023-02-03 15:50:06
-tags: Archlinux,显卡
+id: 82
+tags: 
+  - Archlinux
+  - 显卡
 categories: Archlinux
 copyright: true
 ---
@@ -12,7 +15,7 @@ copyright: true
 
 我的电脑详细配置信息：
 
-![](./ArchLinux Gnome 安装英伟达显卡驱动/assets/Pasted image 20221104185207-1680073272865-2.png)
+![](ArchLinux Gnome 安装英伟达显卡驱动/assets/image-20230919084503243.png)
 
 ## 0. 安装前准备
 
@@ -153,17 +156,17 @@ sudo vim /etc/default/grub
 optimus-manager-qt
 ```
 
-![](./ArchLinux Gnome 安装英伟达显卡驱动/Pasted image 20221104185343.png)
+![](ArchLinux Gnome 安装英伟达显卡驱动/assets/image-20230919084610006.png)
 
 在导航栏的Intel图标上点击右键，在列表中选择设置功能，左侧单击optimus，将右侧窗口中switching method选择为Nouveau（安装了bbswitch的用户选择bbswitch即可)。
 
-![](./ArchLinux Gnome 安装英伟达显卡驱动/Pasted image 20221104185409.png)
+![](ArchLinux Gnome 安装英伟达显卡驱动/assets/image-20230919084615531.png)
 
 安装完成以后可以在导航栏的intel图标上右键切换要使用的显卡类型，切换后需要注销并重新登录才会生效。
 
 然后右击导航栏Intel图标就可以选择自己想要使用的显卡类型，我这里选择英伟达显卡后，需要注销并重新登录才会生效。
 
-![](./ArchLinux Gnome 安装英伟达显卡驱动/Pasted image 20221104185425.png)
+![](ArchLinux Gnome 安装英伟达显卡驱动/assets/image-20230919084630923.png)
 
 也可以在终端使用命令切换显卡
 
@@ -187,4 +190,4 @@ OpenGL renderer string: NVIDIA GeForce GTX 1050 Ti/PCIe/SSE2
 
 设置开启启动后默认使用的显卡：这里选择英伟达显卡就行了
 
-![](./ArchLinux Gnome 安装英伟达显卡驱动/Pasted image 20221104185432.png)
+![](ArchLinux Gnome 安装英伟达显卡驱动/assets/image-20230919084638124.png)

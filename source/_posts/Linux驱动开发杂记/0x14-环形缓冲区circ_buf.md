@@ -1,10 +1,10 @@
 ---
 title: Linux驱动开发杂记(0x14) - 环形缓冲区circ_buf
 date: 2018-12-07 09:37:30
+id: 20
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: true
-permalink: Linux-driver-development-notes/0x14-ring-buffer-circ-buf.html
 ---
 
 ```c

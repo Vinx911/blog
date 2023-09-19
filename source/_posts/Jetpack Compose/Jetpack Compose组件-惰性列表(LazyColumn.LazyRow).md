@@ -1,7 +1,10 @@
 ---
 title: Jetpack Compose组件-惰性列表(LazyColumn.LazyRow)
 date: 2023-01-17 10:27:31
-tags: [LazyColumn,LazyRow]
+id: 81
+tags:
+  - LazyColumn
+  - LazyRow
 categories: Jetpack Compose
 copyright: true
 ---

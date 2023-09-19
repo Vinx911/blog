@@ -1,10 +1,10 @@
 ---
 title: Linux驱动开发杂记(0x0A) - errno含义
 date: 2018-11-12 14:38:20
+id: 10
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: false
-permalink: Linux-driver-development-notes/0x0A-errno.html
 ---
 
 ```c

@@ -1,10 +1,10 @@
 ---
 title: Linux驱动开发杂记(0x12) - uart_ops结构体
 date: 2018-11-22 15:09:30
+id: 18
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: true
-permalink: Linux-driver-development-notes/0x12-uart_ops-structure.html
 ---
 
 ﻿```c

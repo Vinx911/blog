@@ -1,10 +1,10 @@
 ---
 title: Linux驱动开发杂记(0x19) - 内核中的引用计数器kref
 date: 2019-06-27 12:00:32
+id: 25
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: true
-permalink: Linux-driver-development-notes/0x19-Reference-counter-kref-in-the-kernel.html
 ---
 
 # Linux驱动开发杂记(0x19) - 内核中的引用计数器kref

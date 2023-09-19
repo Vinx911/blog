@@ -1,6 +1,7 @@
 ---
 title: Linux Sed命令详解
 date: 2022-11-04 18:58:06
+id: 37
 tags: Linux
 categories: Linux命令
 copyright: true

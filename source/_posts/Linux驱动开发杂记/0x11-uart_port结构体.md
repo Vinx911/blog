@@ -1,10 +1,10 @@
 ---
 title: Linux驱动开发杂记(0x11) - uart_port结构体
 date: 2018-11-22 15:07:57
+id: 17
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: true
-permalink: Linux-driver-development-notes/0x11-uart_port-structure.html
 ---
 
 ﻿```c

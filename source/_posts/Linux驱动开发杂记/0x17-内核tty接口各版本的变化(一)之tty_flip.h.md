@@ -1,10 +1,10 @@
 ---
 title: Linux驱动开发杂记(0x17) - 内核tty接口各版本的变化(一)之tty_flip.h
 date: 2019-02-19 09:10:41
+id: 23
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: true
-permalink: Linux-driver-development-notes/0x17-Changes-in-the-versions-of-the-kernel-tty-interface-(1)-tty_flip.h.html
 ---
 # Linux驱动开发杂记(0x17) - 内核tty接口各版本的变化(一)之tty_flip.h
 ## 2.6.15 - 2.6.16

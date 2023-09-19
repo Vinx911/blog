@@ -1,10 +1,10 @@
 ---
 title: QT获取下载、桌面、临时文件....等系统默认目录
 date: 2023-05-19 11:50:13
+id: 87
 tags: Qt
 categories: Qt
 copyright: true
-permalink: build-tools/qt-get-system-default-directory.html
 ---
 
 # QT获取下载、桌面、临时文件....等系统默认目录

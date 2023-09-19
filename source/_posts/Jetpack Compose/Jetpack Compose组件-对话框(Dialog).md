@@ -1,6 +1,7 @@
 ---
 title: Jetpack Compose组件-对话框(Dialog)
 date: 2023-01-13 10:46:38
+id: 72
 tags: Dialog
 categories: Jetpack Compose
 copyright: true

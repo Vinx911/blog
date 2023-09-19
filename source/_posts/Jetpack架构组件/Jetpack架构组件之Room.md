@@ -1,6 +1,7 @@
 ---
 title: Jetpack架构组件之Room
 date: 2022-11-04 18:58:06
+id: 38
 tags: Jetpack
 categories: Jetpack架构组件
 copyright: true

@@ -1,8 +1,9 @@
 ---
 title: Modifier 拖动(Draggable)
 date: 2022-12-30 12:12:39
+id: 45
 tags: Draggable
-categories:  Jetpack Compose
+categories: Jetpack Compose
 copyright: true
 ---
 

@@ -1,10 +1,10 @@
-﻿---
+---
 title: Linux驱动开发杂记(0x03) - pci_bus结构体
 date: 2018-11-08 16:56:20
+id: 3
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: true
-permalink: Linux-driver-development-notes/0x03-pci_bus-structure.html
 ---
 
 ```c

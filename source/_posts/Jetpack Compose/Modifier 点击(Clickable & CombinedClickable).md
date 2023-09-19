@@ -1,8 +1,9 @@
 ---
 title: Modifier 点击(Clickable & CombinedClickable)
 date: 2022-12-30 11:43:52
+id: 43
 tags: Clickable
-categories:  Jetpack Compose
+categories: Jetpack Compose
 copyright: true
 ---
 

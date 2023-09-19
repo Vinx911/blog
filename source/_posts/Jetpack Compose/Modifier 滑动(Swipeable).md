@@ -1,8 +1,9 @@
 ---
 title: Modifier 滑动(Swipeable)
 date: 2022-12-30 12:12:39
+id: 44
 tags: Swipeable
-categories:  Jetpack Compose
+categories: Jetpack Compose
 copyright: true
 ---
 

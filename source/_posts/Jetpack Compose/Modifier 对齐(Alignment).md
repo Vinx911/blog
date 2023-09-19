@@ -1,8 +1,9 @@
 ---
 title: Modifier 对齐(Alignment)
 date: 2022-12-30 12:12:39
+id: 47
 tags: Alignment
-categories:  Jetpack Compose
+categories: Jetpack Compose
 copyright: true
 ---
 

@@ -1,10 +1,10 @@
 ---
 title: Linux驱动开发杂记(0x01) - 内核中的一些标记宏__init等
 date: 2018-11-08 14:59:12
+id: 1
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: false
-permalink: Linux-driver-development-notes/0x01-Some-markup-macros-in-the-kernel-__init-etc.html
 ---
 
 ﻿> 以下内容摘自[内核初始化优化宏 ,初始化顺序， __init，__devexit等](https://blog.csdn.net/lanmanck/article/details/4718378), 本文仅作为笔记保存。

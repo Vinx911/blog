@@ -1,10 +1,10 @@
-﻿---
+---
 title: Linux驱动开发杂记(0x04) - pci_device_id结构体
 date: 2018-11-08 17:05:18
+id: 4
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: true
-permalink: Linux-driver-development-notes/0x04-pci_device_id-structure.html
 ---
 
 ```c

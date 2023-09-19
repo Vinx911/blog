@@ -1,6 +1,7 @@
 ---
 title: Jetpack Compose组件-左右滑动删除(SwipeToDismiss)
 date: 2023-01-13 17:22:36
+id: 73
 tags: SwipeToDismiss
 categories: Jetpack Compose
 copyright: true

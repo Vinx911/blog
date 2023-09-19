@@ -1,6 +1,7 @@
 ---
 title: Jetpack Compose组件-图形(Canvas)
 date: 2023-01-12 12:52:25
+id: 62
 tags: Canvas
 categories: Jetpack Compose
 copyright: true

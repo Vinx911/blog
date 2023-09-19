@@ -1,8 +1,9 @@
 ---
 title: Modifier 边框(Border)
 date: 2023-01-03 09:29:39
+id: 49
 tags: Border
-categories:  Jetpack Compose
+categories: Jetpack Compose
 copyright: true
 ---
 

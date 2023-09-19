@@ -1,6 +1,7 @@
 ---
 title: TypeScript学习笔记 - 额外的属性检测
 date: 2022-11-04 18:58:06
+id: 34
 tags: TypeScript
 categories: TypeScript学习笔记
 copyright: true

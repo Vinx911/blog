@@ -1,10 +1,10 @@
 ---
 title: CMake杂记 - 一些零零散散的使用技巧
-date: 2023‎-5‎-‎16‎ ‏‎13:54:56
+date: 2023‎-05‎-‎16‎ ‏‎13:54:56
+id: 86
 tags: 构建工具
 categories: 构建工具
 copyright: true
-permalink: build-tools/cmake-note.html
 ---
 
 # CMake杂记

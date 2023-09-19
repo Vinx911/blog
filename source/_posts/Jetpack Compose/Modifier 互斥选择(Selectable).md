@@ -1,8 +1,9 @@
 ---
 title: Modifier 互斥选择(Selectable)
 date: 2022-12-30 12:12:39
+id: 48
 tags: Selectable
-categories:  Jetpack Compose
+categories: Jetpack Compose
 copyright: true
 ---
 

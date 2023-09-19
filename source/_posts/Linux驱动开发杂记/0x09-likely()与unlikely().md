@@ -1,10 +1,10 @@
 ---
 title: Linux驱动开发杂记(0x09) - likely()与unlikely()
 date: 2018-11-12 13:35:12
+id: 9
 tags: Linux驱动
 categories: Linux驱动开发杂记
 copyright: false
-permalink: Linux-driver-development-notes/0x09-likely-and-unlikely.html
 ---
 
 ﻿likely()与unlikely()在2.6内核中，随处可见，那为什么要用它们？它们之间有什么区别呢？
