@@ -164,6 +164,98 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/15/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/15/" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x0F) - Cannot access memory at address</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-17 00:54:15" itemprop="dateCreated datePublished" datetime="2018-11-17T00:54:15+08:00">2018-11-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-18 11:11:30" itemprop="dateModified" datetime="2023-09-18T11:11:30+08:00">2023-09-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>﻿按照教程<a target="_blank" rel="noopener" href="http://www.netfairy.net/?post=242">Linux内核调试环境搭建(基于ubuntu12.04)</a>
+配置kgdb双机调试时，出现一下错误： </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(gdb) set serial baud 115200</span><br><span class="line">(gdb) target remote /dev/ttyS0</span><br><span class="line">Remote debugging using /dev/ttyS0</span><br><span class="line">0xffffffffb753b940 in ?? ()</span><br><span class="line">(gdb) b start_kernel</span><br><span class="line">Breakpoint 1 at 0xffffffff82819ad0: file init/main.c, line 515.</span><br><span class="line">(gdb) c</span><br><span class="line">Continuing.</span><br><span class="line">Warning:</span><br><span class="line">Cannot insert breakpoint 1.</span><br><span class="line">Cannot access memory at address 0xffffffff82819ad0</span><br></pre></td></tr></table></figure><p></p>
+<p>解决方法是：在grub.cfg中添加<code>rodata=off nokaslr</code></p>
+<p>也就是在 </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/post/15/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/14/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1015,89 +1107,6 @@ Tasklet　　　　　　　　　GFP_ATOMIC 　|–
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/post/5/" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x05) - 从pci_dev中获取总线、插槽、功能号</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-11-08 17:10:12" itemprop="dateCreated datePublished" datetime="2018-11-08T17:10:12+08:00">2018-11-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-18 11:10:18" itemprop="dateModified" datetime="2023-09-18T11:10:18+08:00">2023-09-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * The PCI interface treats multi-function devices as independent</span></span><br><span class="line"><span class="comment"> * devices.  The slot/function address of each device is encoded</span></span><br><span class="line"><span class="comment"> * in a single byte as follows:</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *	7:3 = slot</span></span><br><span class="line"><span class="comment"> *	2:0 = function</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="meta">#<span class="keyword">define</span> PCI_DEVFN(slot, func)	((((slot) &amp; 0x1f) &lt;&lt; 3) | ((func) &amp; 0x07))</span></span><br><span class="line"> <span class="meta">#<span class="keyword">define</span> PCI_SLOT(devfn)		(((devfn) &gt;&gt; 3) &amp; 0x1f)</span></span><br><span class="line"> <span class="meta">#<span class="keyword">define</span> PCI_FUNC(devfn)		((devfn) &amp; 0x07)</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pci_dev</span> *<span class="title">dev</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">BusNumber</span>    =</span> dev-&gt;bus-&gt;number;</span><br><span class="line">SlotNumber   = PCI_SLOT(dev-&gt;devfn);</span><br><span class="line">FuncNumber = PCI_FUNC(dev-&gt;devfn);</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1169,7 +1178,7 @@ Tasklet　　　　　　　　　GFP_ATOMIC 　|–
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-count">95</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1182,7 +1191,7 @@ Tasklet　　　　　　　　　GFP_ATOMIC 　|–
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-count">56</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

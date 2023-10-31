@@ -164,6 +164,97 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/95/" class="post-title-link" itemprop="url">浮点数的坑</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-10-17 12:06:47" itemprop="dateCreated datePublished" datetime="2023-10-17T12:06:47+08:00">2023-10-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-31 09:13:26" itemprop="dateModified" datetime="2023-10-31T09:13:26+08:00">2023-10-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C-%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">C_C++杂记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="浮点数的坑"><a href="#浮点数的坑" class="headerlink" title="浮点数的坑"></a>浮点数的坑</h1><h2 id="0-0-与-0-0-不同"><a href="#0-0-与-0-0-不同" class="headerlink" title="0.0 与 -0.0 不同"></a>0.0 与 -0.0 不同</h2><p>在浮点数中，<code>double</code>类型的<code>0.0</code>用<code>0x0000000000000000</code>表示，<code>-0.0</code>用<code>0x8000000000000000</code>表示；<code>float</code>类型的<code>0.0</code>用<code>0x00000000</code>表示，<code>-0.0</code>用<code>0x80000000</code>表示；</p>
+<p>所以<code>printf(&quot;%.1f&quot;, -0.0)</code>会输出<code>-0.0</code>并不是<code>0.0</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> d1 = <span class="number">0.0</span>;</span><br><span class="line"><span class="type">double</span> d2 = <span class="number">-0.0</span>;</span><br><span class="line"><span class="type">float</span> f1 = <span class="number">0.0f</span>;</span><br><span class="line"><span class="type">float</span> f2 = <span class="number">-0.0f</span>;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span>* p1 = &amp;d1;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span>* p2 = &amp;d2;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span>* p3 = &amp;f1;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span>* p4 = &amp;f2;</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;d1 = %f (0x%016llx)\n&quot;</span>, d1, *p1);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;d2 = %f (0x%016llx)\n&quot;</span>, d2, *p2);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;f1 = %f (0x%08x)\n&quot;</span>, f1, *p3);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;f2 = %f (0x%08x)\n&quot;</span>, f2, *p4);</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/post/95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/94/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -195,7 +286,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-19 08:53:00" itemprop="dateModified" datetime="2023-09-19T08:53:00+08:00">2023-09-19</time>
+                <time title="修改时间：2023-10-31 09:13:11" itemprop="dateModified" datetime="2023-10-31T09:13:11+08:00">2023-10-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -203,7 +294,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" itemprop="url" rel="index"><span itemprop="name">C语言类型转换</span></a>
+                  <a href="/categories/C-C-%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">C_C++杂记</span></a>
                 </span>
             </span>
 
@@ -218,8 +309,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="c语言类型转换">C语言类型转换</h1>
-<ul>
+          <h1 id="C语言类型转换"><a href="#C语言类型转换" class="headerlink" title="C语言类型转换"></a>C语言类型转换</h1><ul>
 <li>无符号数小范围转大范围：不改变数据内容</li>
 <li>无符号数大范围转小范围：先截断，然后解释</li>
 <li>有符号数小范围转大范围：进行符号扩展</li>
@@ -230,17 +320,14 @@
 <li>有符号数转无符号大范围：先进行符号扩展，然后改变解释方式</li>
 <li>有符号数转无符号小范围：先截断，然后解释</li>
 </ul>
-<h2 id="int8_t">int8_t</h2>
-<ul>
+<h2 id="int8-t"><a href="#int8-t" class="headerlink" title="int8_t"></a>int8_t</h2><ul>
 <li>int8_t -&gt; uint8_t: 不改变数据内容，改变解释方式</li>
 <li>int8_t -&gt; int16_t: 进行符号扩展</li>
-<li>int8_t -&gt; uint16_t:
-先进行符号扩展转为int16_t，然后改变解释方式</li>
+<li>int8_t -&gt; uint16_t: 先进行符号扩展转为int16_t，然后改变解释方式</li>
 <li>int8_t -&gt; int32_t: 进行符号扩展</li>
-<li>int8_t -&gt; uint32_t:
-先进行符号扩展转为int32_t，然后改变解释方式</li>
+<li>int8_t -&gt; uint32_t: 先进行符号扩展转为int32_t，然后改变解释方式</li>
 </ul>
-<h2 id="uint8_t">uint8_t</h2>
+<h2 id="uint8-t"><a href="#uint8-t" class="headerlink" title="uint8_t"></a>uint8_t</h2>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/post/94/#more" rel="contents">
@@ -1022,111 +1109,6 @@ V_{out} = - \frac{R2}{R1} * V_{in}
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/post/85/" class="post-title-link" itemprop="url">平面三角形外接(内切)圆圆心与半径求解算法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-05-10 11:03:39" itemprop="dateCreated datePublished" datetime="2023-05-10T11:03:39+08:00">2023-05-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-19 08:48:30" itemprop="dateModified" datetime="2023-09-19T08:48:30+08:00">2023-09-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="平面三角形外接内切圆圆心与半径求解算法">平面三角形外接(内切)圆圆心与半径求解算法</h1>
-<h2 id="三角形面积s与外接圆半径r的关系">0.1
-三角形面积S与外接圆半径R的关系</h2>
-<p><span class="math display">\[
-\begin{align*}
-S &amp;= \frac{a * b * c}{4 * R} \\
-外接圆半径R &amp;= \frac{a * b * c}{4 * S}
-\end{align*}
-\]</span></p>
-<h2 id="三角形面积s与内切圆半径r的关系">0.2
-三角形面积S与内切圆半径r的关系</h2>
-<p><span class="math display">\[
-\begin{align*}
-S &amp;= \frac{a * b * c}{4 * R} \\
-内切圆半径 r &amp;= \frac{2 * S}{a + b + c}
-\end{align*}
-\]</span></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/85/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1198,7 +1180,7 @@ S &amp;= \frac{a * b * c}{4 * R} \\
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-count">95</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1211,7 +1193,7 @@ S &amp;= \frac{a * b * c}{4 * R} \\
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-count">56</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1308,59 +1290,6 @@ S &amp;= \frac{a * b * c}{4 * R} \\
   
 
   
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
 
   
 
