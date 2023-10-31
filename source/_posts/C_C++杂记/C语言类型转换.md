@@ -3,7 +3,7 @@ title: C语言类型转换
 date: 2023-08-07 09:16:00
 id: 94
 tags: 类型转换
-categories: C语言类型转换
+categories: C_C++杂记
 copyright: true
 ---
 
