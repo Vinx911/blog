@@ -164,6 +164,99 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/87/" class="post-title-link" itemprop="url">QT获取下载、桌面、临时文件....等系统默认目录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-19 11:50:13" itemprop="dateCreated datePublished" datetime="2023-05-19T11:50:13+08:00">2023-05-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-19 08:49:35" itemprop="dateModified" datetime="2023-09-19T08:49:35+08:00">2023-09-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="qt获取下载桌面临时文件....等系统默认目录">QT获取下载、桌面、临时文件....等系统默认目录</h1>
+<h2 id="头文件"><strong>头文件:</strong></h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QStandardPaths&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="示例代码"><strong>示例代码:</strong></h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;系统字体目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::FontsLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;系统桌面目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::DesktopLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;用户文档目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::DocumentsLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;用户音乐目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::MusicLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;用户图片目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::PicturesLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;系统临时文件目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::TempLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;系统缓存目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::CacheLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;系统下载目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::DownloadLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;系统缓存目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::CacheLocation);</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/post/87/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1038,100 +1131,6 @@ Compose组件-应用栏(AppBar)</h1>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/77/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/post/77/" class="post-title-link" itemprop="url">Jetpack Compose组件-下拉菜单(DropdownMenu)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-01-14 14:30:39" itemprop="dateCreated datePublished" datetime="2023-01-14T14:30:39+08:00">2023-01-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-19 08:41:22" itemprop="dateModified" datetime="2023-09-19T08:41:22+08:00">2023-09-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="jetpack-compose组件-下拉菜单dropdownmenu">Jetpack
-Compose组件-下拉菜单(DropdownMenu)</h1>
-<h2 id="下拉菜单dropdownmenu">下拉菜单(DropdownMenu)</h2>
-<p>2023-01-14 ：DropdownMenu组件目前还存在众多问题，不建议使用。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">DropdownMenu</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 是否展开</span></span></span></span><br><span class="line"><span class="params"><span class="function">    expanded: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 关闭请求回调，点击对话框外部或者按下返回按钮关闭对话框时调用</span></span></span></span><br><span class="line"><span class="params"><span class="function">    onDismissRequest: () -&gt; <span class="type">Unit</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 修饰符</span></span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 对话框位置偏移</span></span></span></span><br><span class="line"><span class="params"><span class="function">    offset: <span class="type">DpOffset</span> = DpOffset(<span class="number">0.</span>dp, <span class="number">0.</span>dp)</span></span>,</span><br><span class="line">    <span class="comment">// 对话框属性</span></span><br><span class="line">    properties: PopupProperties = PopupProperties(focusable = <span class="literal">true</span>),</span><br><span class="line">    content: <span class="meta">@Composable</span> ColumnScope.() -&gt; <span class="built_in">Unit</span></span><br><span class="line">): <span class="built_in">Unit</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">DropdownMenuItem</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 点击回调</span></span></span></span><br><span class="line"><span class="params"><span class="function">    onClick: () -&gt; <span class="type">Unit</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 修饰符</span></span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 菜单项使能</span></span></span></span><br><span class="line"><span class="params"><span class="function">    enabled: <span class="type">Boolean</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 内容边距</span></span></span></span><br><span class="line"><span class="params"><span class="function">    contentPadding: <span class="type">PaddingValues</span> = MenuDefaults.DropdownMenuItemContentPadding,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 点击状态源</span></span></span></span><br><span class="line"><span class="params"><span class="function">    interactionSource: <span class="type">MutableInteractionSource</span> = remember &#123; MutableInteractionSource()</span></span> &#125;,</span><br><span class="line">    content: <span class="meta">@Composable</span> RowScope.() -&gt; <span class="built_in">Unit</span></span><br><span class="line">): <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
-<h2 id="显示下拉菜单的框">显示下拉菜单的框</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/77/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1203,20 +1202,20 @@ Compose组件-下拉菜单(DropdownMenu)</h1>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-count">97</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-count">58</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

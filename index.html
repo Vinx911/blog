@@ -164,6 +164,104 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/97/" class="post-title-link" itemprop="url">ARM GCC生成固件的压缩、减少和优化大小的几个编译链接参数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-11-21 11:02:52" itemprop="dateCreated datePublished" datetime="2023-11-21T11:02:52+08:00">2023-11-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-21 09:29:27" itemprop="dateModified" datetime="2023-12-21T09:29:27+08:00">2023-12-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">嵌入式</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="arm-gcc生成固件的压缩减少和优化大小的几个编译链接参数">ARM
+GCC生成固件的压缩、减少和优化大小的几个编译链接参数</h1>
+<h3 id="c-编译参数--ffunction-sections--fdata-sections-和链接参数---gc-sections">1、C++
+编译参数 <code>-ffunction-sections  -fdata-sections</code> 和链接参数
+<code>--gc-sections</code>。</h3>
+<p>使用<code>-ffunction-sections</code>,
+<code>-fdata-sections</code>会使compiler为每个function和data
+item分配独立的section。</p>
+<p>使用 <code>--gc-sections</code>会使ld删除没有被使用的section。</p>
+<p>就可以压缩固件大小的目的了</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/post/97/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1019,99 +1117,6 @@ V_{out} = - \frac{R2}{R1} * V_{in}
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/post/87/" class="post-title-link" itemprop="url">QT获取下载、桌面、临时文件....等系统默认目录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-05-19 11:50:13" itemprop="dateCreated datePublished" datetime="2023-05-19T11:50:13+08:00">2023-05-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-19 08:49:35" itemprop="dateModified" datetime="2023-09-19T08:49:35+08:00">2023-09-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="qt获取下载桌面临时文件....等系统默认目录">QT获取下载、桌面、临时文件....等系统默认目录</h1>
-<h2 id="头文件"><strong>头文件:</strong></h2>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QStandardPaths&gt;</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="示例代码"><strong>示例代码:</strong></h2>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;系统字体目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::FontsLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;系统桌面目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::DesktopLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;用户文档目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::DocumentsLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;用户音乐目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::MusicLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;用户图片目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::PicturesLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;系统临时文件目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::TempLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;系统缓存目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::CacheLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;系统下载目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::DownloadLocation);</span><br><span class="line"><span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;系统缓存目录路径:&quot;</span>&lt;&lt;QStandardPaths::<span class="built_in">standardLocations</span>(QStandardPaths::CacheLocation);</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/87/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1183,20 +1188,20 @@ V_{out} = - \frac{R2}{R1} * V_{in}
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-count">97</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-count">58</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
