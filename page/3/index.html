@@ -164,6 +164,288 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/80/" class="post-title-link" itemprop="url">Jetpack Compose组件-抽屉(Drawer)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-01-16 14:25:01" itemprop="dateCreated datePublished" datetime="2023-01-16T14:25:01+08:00">2023-01-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-19 08:42:09" itemprop="dateModified" datetime="2023-09-19T08:42:09+08:00">2023-09-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="jetpack-compose组件-抽屉drawer">Jetpack
+Compose组件-抽屉(Drawer)</h1>
+<h2 id="底部抽屉bottomdrawer">底部抽屉(BottomDrawer)</h2>
+<p>BottomDrawer是一个从底部滑出的界面。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="meta">@ExperimentalMaterialApi</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">BottomDrawer</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 底部抽屉内容</span></span></span></span><br><span class="line"><span class="params"><span class="function">    drawerContent: @<span class="type">Composable</span> <span class="type">ColumnScope</span>.() -&gt; <span class="type">Unit</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 修饰符</span></span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 底部抽屉状态源</span></span></span></span><br><span class="line"><span class="params"><span class="function">    drawerState: <span class="type">BottomDrawerState</span> = rememberBottomDrawerState(BottomDrawerValue.Closed)</span></span>,</span><br><span class="line">    <span class="comment">// 启用手势</span></span><br><span class="line">    gesturesEnabled: <span class="built_in">Boolean</span> = <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">// 底部抽屉形状</span></span><br><span class="line">    drawerShape: Shape = MaterialTheme.shapes.large,</span><br><span class="line">    <span class="comment">// 底部高度(阴影)</span></span><br><span class="line">    drawerElevation: Dp = DrawerDefaults.Elevation,</span><br><span class="line">    <span class="comment">// 底部背景颜色</span></span><br><span class="line">    drawerBackgroundColor: Color = MaterialTheme.colors.surface,</span><br><span class="line">    <span class="comment">// 底部抽屉内容颜色</span></span><br><span class="line">    drawerContentColor: Color = contentColorFor(drawerBackgroundColor),</span><br><span class="line">    <span class="comment">// 底部抽屉打开后，遮罩颜色</span></span><br><span class="line">    scrimColor: Color = DrawerDefaults.scrimColor,</span><br><span class="line">    content: <span class="meta">@Composable</span> () -&gt; <span class="built_in">Unit</span></span><br><span class="line">): <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+<h2 id="模态抽屉modaldrawer">模态抽屉(ModalDrawer)</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/post/80/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/79/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/79/" class="post-title-link" itemprop="url">Jetpack Compose组件-导航栏(Navigation)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-01-15 09:48:11" itemprop="dateCreated datePublished" datetime="2023-01-15T09:48:11+08:00">2023-01-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-19 08:41:57" itemprop="dateModified" datetime="2023-09-19T08:41:57+08:00">2023-09-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="jetpack-compose组件-导航栏navigation">Jetpack
+Compose组件-导航栏(Navigation)</h1>
+<h2 id="底部导航栏bottomnavigation">底部导航栏(BottomNavigation )</h2>
+<p>BottomNavigation 为水平方向的导航栏。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">BottomNavigation</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 修饰符</span></span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 背景颜色</span></span></span></span><br><span class="line"><span class="params"><span class="function">    backgroundColor: <span class="type">Color</span> = MaterialTheme.colors.primarySurface,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 内容颜色</span></span></span></span><br><span class="line"><span class="params"><span class="function">    contentColor: <span class="type">Color</span> = contentColorFor(backgroundColor)</span></span>,</span><br><span class="line">    <span class="comment">// 高度(阴影)</span></span><br><span class="line">    elevation: Dp = BottomNavigationDefaults.Elevation,</span><br><span class="line">    content: <span class="meta">@Composable</span> RowScope.() -&gt; <span class="built_in">Unit</span></span><br><span class="line">): <span class="built_in">Unit</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> RowScope.<span class="title">BottomNavigationItem</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 是否选中</span></span></span></span><br><span class="line"><span class="params"><span class="function">    selected: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 点击回调</span></span></span></span><br><span class="line"><span class="params"><span class="function">    onClick: () -&gt; <span class="type">Unit</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 导航按钮图标</span></span></span></span><br><span class="line"><span class="params"><span class="function">    icon: @<span class="type">Composable</span> () -&gt; <span class="type">Unit</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 修饰符</span></span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 导航按钮使能</span></span></span></span><br><span class="line"><span class="params"><span class="function">    enabled: <span class="type">Boolean</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 导航按钮文字</span></span></span></span><br><span class="line"><span class="params"><span class="function">    label: (@<span class="type">Composable</span> () -&gt; <span class="type">Unit</span>)? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 总是显示导航按钮文字</span></span></span></span><br><span class="line"><span class="params"><span class="function">    alwaysShowLabel: <span class="type">Boolean</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 点击状态源</span></span></span></span><br><span class="line"><span class="params"><span class="function">    interactionSource: <span class="type">MutableInteractionSource</span> = remember &#123; MutableInteractionSource()</span></span> &#125;,</span><br><span class="line">    <span class="comment">// 选中颜色</span></span><br><span class="line">    selectedContentColor: Color = LocalContentColor.current,</span><br><span class="line">    <span class="comment">// 未选中颜色</span></span><br><span class="line">    unselectedContentColor: Color = selectedContentColor.copy(alpha = ContentAlpha.medium)</span><br><span class="line">): <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> selectedItem <span class="keyword">by</span> remember &#123; mutableStateOf(<span class="number">0</span>) &#125;</span><br><span class="line"><span class="keyword">val</span> items = listOf(<span class="string">&quot;Songs&quot;</span>, <span class="string">&quot;Artists&quot;</span>, <span class="string">&quot;Playlists&quot;</span>)</span><br><span class="line"></span><br><span class="line">BottomNavigation &#123;</span><br><span class="line">    items.forEachIndexed &#123; index, item -&gt;</span><br><span class="line">        BottomNavigationItem(</span><br><span class="line">            icon = &#123; Icon(Icons.Filled.Favorite, contentDescription = <span class="literal">null</span>) &#125;,</span><br><span class="line">            label = &#123; Text(item) &#125;,</span><br><span class="line">            selected = selectedItem == index,</span><br><span class="line">            onClick = &#123; selectedItem = index &#125;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/post/79/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/78/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/78/" class="post-title-link" itemprop="url">Jetpack Compose组件-应用栏(AppBar)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-01-15 09:21:16" itemprop="dateCreated datePublished" datetime="2023-01-15T09:21:16+08:00">2023-01-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-19 08:41:46" itemprop="dateModified" datetime="2023-09-19T08:41:46+08:00">2023-09-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="jetpack-compose组件-应用栏appbar">Jetpack
+Compose组件-应用栏(AppBar)</h1>
+<h2 id="顶部应用栏topappbar">顶部应用栏(TopAppBar)</h2>
+<p>Chip(小标签)类似于淘宝的历史搜索标签。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">TopAppBar</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 修饰符</span></span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 背景颜色</span></span></span></span><br><span class="line"><span class="params"><span class="function">    backgroundColor: <span class="type">Color</span> = MaterialTheme.colors.primarySurface,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 内容颜色</span></span></span></span><br><span class="line"><span class="params"><span class="function">    contentColor: <span class="type">Color</span> = contentColorFor(backgroundColor)</span></span>,</span><br><span class="line">    <span class="comment">// 高度(阴影)</span></span><br><span class="line">    elevation: Dp = AppBarDefaults.TopAppBarElevation,</span><br><span class="line">    <span class="comment">// 内容边距</span></span><br><span class="line">    contentPadding: PaddingValues = AppBarDefaults.ContentPadding,</span><br><span class="line">    content: <span class="meta">@Composable</span> RowScope.() -&gt; <span class="built_in">Unit</span></span><br><span class="line">): <span class="built_in">Unit</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">TopAppBar</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 标题</span></span></span></span><br><span class="line"><span class="params"><span class="function">    title: @<span class="type">Composable</span> () -&gt; <span class="type">Unit</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 修饰符</span></span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 导航图标</span></span></span></span><br><span class="line"><span class="params"><span class="function">    navigationIcon: (@<span class="type">Composable</span> () -&gt; <span class="type">Unit</span>)? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 右侧动作按钮</span></span></span></span><br><span class="line"><span class="params"><span class="function">    actions: @<span class="type">Composable</span> <span class="type">RowScope</span>.() -&gt; <span class="type">Unit</span> = &#123;&#125;,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 背景颜色</span></span></span></span><br><span class="line"><span class="params"><span class="function">    backgroundColor: <span class="type">Color</span> = MaterialTheme.colors.primarySurface,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 内容颜色</span></span></span></span><br><span class="line"><span class="params"><span class="function">    contentColor: <span class="type">Color</span> = contentColorFor(backgroundColor)</span></span>,</span><br><span class="line">    <span class="comment">// 高度(阴影)</span></span><br><span class="line">    elevation: Dp = AppBarDefaults.TopAppBarElevation</span><br><span class="line">): <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">TopAppBar(</span><br><span class="line">    title = &#123; Text(<span class="string">&quot;Simple TopAppBar&quot;</span>) &#125;,</span><br><span class="line">    navigationIcon = &#123;</span><br><span class="line">        IconButton(onClick = &#123; <span class="comment">/* doSomething() */</span> &#125;) &#123;</span><br><span class="line">            Icon(Icons.Filled.Menu, contentDescription = <span class="literal">null</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    actions = &#123;</span><br><span class="line">        <span class="comment">// RowScope here, so these icons will be placed horizontally</span></span><br><span class="line">        IconButton(onClick = &#123; <span class="comment">/* doSomething() */</span> &#125;) &#123;</span><br><span class="line">            Icon(Icons.Filled.Favorite, contentDescription = <span class="string">&quot;Localized description&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        IconButton(onClick = &#123; <span class="comment">/* doSomething() */</span> &#125;) &#123;</span><br><span class="line">            Icon(Icons.Filled.Favorite, contentDescription = <span class="string">&quot;Localized description&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/post/78/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/77/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -383,7 +665,7 @@ Compose组件-标签页(Tab)</h1>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-19 11:38:39" itemprop="dateModified" datetime="2023-09-19T11:38:39+08:00">2023-09-19</time>
+                <time title="修改时间：2024-01-19 08:41:25" itemprop="dateModified" datetime="2024-01-19T08:41:25+08:00">2024-01-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -819,289 +1101,6 @@ Compose组件-对话框(Dialog)</h1>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/70/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/post/70/" class="post-title-link" itemprop="url">Jetpack Compose组件-平面(Surface)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-01-13 09:53:00" itemprop="dateCreated datePublished" datetime="2023-01-13T09:53:00+08:00">2023-01-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-19 08:39:33" itemprop="dateModified" datetime="2023-09-19T08:39:33+08:00">2023-09-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="jetpack-compose组件-平面surface">Jetpack
-Compose组件-平面(Surface)</h1>
-<h2 id="平面surface">平面(Surface)</h2>
-<p>将很多的组件摆放在这个平面之上，我们可以设置这个平面的边框，圆角，颜色等等。</p>
-<p>Surface实际上是Box的重新包装。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">Surface</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 修饰符</span></span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 形状</span></span></span></span><br><span class="line"><span class="params"><span class="function">    shape: <span class="type">Shape</span> = RectangleShape,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 颜色</span></span></span></span><br><span class="line"><span class="params"><span class="function">    color: <span class="type">Color</span> = MaterialTheme.colors.surface,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 内容颜色</span></span></span></span><br><span class="line"><span class="params"><span class="function">    contentColor: <span class="type">Color</span> = contentColorFor(color)</span></span>,</span><br><span class="line">    <span class="comment">// 边框</span></span><br><span class="line">    border: BorderStroke? = <span class="literal">null</span>,</span><br><span class="line">    <span class="comment">// 高度(阴影)</span></span><br><span class="line">    elevation: Dp = <span class="number">0.</span>dp,</span><br><span class="line">    content: <span class="meta">@Composable</span> () -&gt; <span class="built_in">Unit</span></span><br><span class="line">): <span class="built_in">Unit</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@ExperimentalMaterialApi</span></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">Surface</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 是否选中</span></span></span></span><br><span class="line"><span class="params"><span class="function">    selected: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 点击回调</span></span></span></span><br><span class="line"><span class="params"><span class="function">    onClick: () -&gt; <span class="type">Unit</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 点击使能</span></span></span></span><br><span class="line"><span class="params"><span class="function">    enabled: <span class="type">Boolean</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 点击状态源</span></span></span></span><br><span class="line"><span class="params"><span class="function">    interactionSource: <span class="type">MutableInteractionSource</span> = remember &#123; MutableInteractionSource()</span></span> &#125;,</span><br><span class="line">    <span class="comment">// 其余参数参照上方第一个</span></span><br><span class="line">): <span class="built_in">Unit</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@ExperimentalMaterialApi</span></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">Surface</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    checked: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    onCheckedChange: (<span class="type">Boolean</span>) -&gt; <span class="type">Unit</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 选中使能</span></span></span></span><br><span class="line"><span class="params"><span class="function">    enabled: <span class="type">Boolean</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 选中状态源</span></span></span></span><br><span class="line"><span class="params"><span class="function">    interactionSource: <span class="type">MutableInteractionSource</span> = remember &#123; MutableInteractionSource()</span></span> &#125;,</span><br><span class="line">    <span class="comment">// 其余参数参照上方第一个</span></span><br><span class="line">): <span class="built_in">Unit</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@ExperimentalMaterialApi</span></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">Surface</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 点击回调</span></span></span></span><br><span class="line"><span class="params"><span class="function">    onClick: () -&gt; <span class="type">Unit</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 点击使能</span></span></span></span><br><span class="line"><span class="params"><span class="function">    enabled: <span class="type">Boolean</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 点击状态源</span></span></span></span><br><span class="line"><span class="params"><span class="function">    interactionSource: <span class="type">MutableInteractionSource</span> = remember &#123; MutableInteractionSource()</span></span> &#125;,</span><br><span class="line">    <span class="comment">// 其余参数参照上方第一个</span></span><br><span class="line">): <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/70/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/69/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/post/69/" class="post-title-link" itemprop="url">Jetpack Compose组件-进度指示器(ProgressIndicator)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-01-13 09:37:48" itemprop="dateCreated datePublished" datetime="2023-01-13T09:37:48+08:00">2023-01-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-19 08:39:11" itemprop="dateModified" datetime="2023-09-19T08:39:11+08:00">2023-09-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="jetpack-compose组件-进度指示器progressindicator">Jetpack
-Compose组件-进度指示器(ProgressIndicator)</h1>
-<h2 id="线性进度指示器linearprogressindicator">线性进度指示器(LinearProgressIndicator)</h2>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等待条</span></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">LinearProgressIndicator</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 修饰符</span></span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 进度颜色</span></span></span></span><br><span class="line"><span class="params"><span class="function">    color: <span class="type">Color</span> = MaterialTheme.colors.primary,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 背景颜色</span></span></span></span><br><span class="line"><span class="params"><span class="function">    backgroundColor: <span class="type">Color</span> = color.copy(alpha = IndicatorBackgroundOpacity)</span></span>,</span><br><span class="line">    <span class="comment">// 进度条末端样式</span></span><br><span class="line">    strokeCap: StrokeCap = StrokeCap.Butt</span><br><span class="line">): <span class="built_in">Unit</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">LinearProgressIndicator</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 进度</span></span></span></span><br><span class="line"><span class="params"><span class="function">    progress: <span class="type">Float</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 修饰符</span></span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 进度颜色</span></span></span></span><br><span class="line"><span class="params"><span class="function">    color: <span class="type">Color</span> = MaterialTheme.colors.primary,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 背景颜色</span></span></span></span><br><span class="line"><span class="params"><span class="function">    backgroundColor: <span class="type">Color</span> = color.copy(alpha = IndicatorBackgroundOpacity)</span></span>,</span><br><span class="line">    <span class="comment">// 进度条末端样式</span></span><br><span class="line">    strokeCap: StrokeCap = StrokeCap.Butt</span><br><span class="line">): <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> progress <span class="keyword">by</span> remember &#123; mutableStateOf(<span class="number">0.1f</span>) &#125;</span><br><span class="line"><span class="keyword">val</span> animatedProgress <span class="keyword">by</span> animateFloatAsState(</span><br><span class="line">    targetValue = progress,</span><br><span class="line">    animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">Column(horizontalAlignment = Alignment.CenterHorizontally) &#123;</span><br><span class="line">    LinearProgressIndicator(progress = animatedProgress)</span><br><span class="line">    Spacer(Modifier.requiredHeight(<span class="number">30.</span>dp))</span><br><span class="line">    OutlinedButton(</span><br><span class="line">        onClick = &#123;</span><br><span class="line">            <span class="keyword">if</span> (progress &lt; <span class="number">1f</span>) progress += <span class="number">0.1f</span></span><br><span class="line">        &#125;</span><br><span class="line">    ) &#123;</span><br><span class="line">        Text(<span class="string">&quot;Increase&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="圆形进度指示器circularprogressindicator">圆形进度指示器(CircularProgressIndicator)</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/69/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/68/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/post/68/" class="post-title-link" itemprop="url">Jetpack Compose组件-滑动条(Slider)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-01-13 09:23:18" itemprop="dateCreated datePublished" datetime="2023-01-13T09:23:18+08:00">2023-01-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-18 11:42:44" itemprop="dateModified" datetime="2023-09-18T11:42:44+08:00">2023-09-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="jetpack-compose组件-滑动条slider">Jetpack
-Compose组件-滑动条(Slider)</h1>
-<h2 id="滑动条slider">滑动条(Slider)</h2>
-<p><code>Slider</code> 允许用户从一定范围的数值中进行选择。</p>
-<p><code>Slider</code>
-反映了一个沿条的数值范围，用户可以从中选择一个单一的数值。它们是调整音量、亮度或应用图像过滤器等设置的理想选择。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">Slider</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 滑动条值</span></span></span></span><br><span class="line"><span class="params"><span class="function">    value: <span class="type">Float</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 值改变回调</span></span></span></span><br><span class="line"><span class="params"><span class="function">    onValueChange: (<span class="type">Float</span>) -&gt; <span class="type">Unit</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 修饰符</span></span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 滑动条使能</span></span></span></span><br><span class="line"><span class="params"><span class="function">    enabled: <span class="type">Boolean</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 值的范围</span></span></span></span><br><span class="line"><span class="params"><span class="function">    valueRange: <span class="type">ClosedFloatingPointRange</span>&lt;<span class="type">Float</span>&gt; = <span class="number">0</span>f.<span class="number">.1</span>f,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 将整个范围均匀分割为(steps + 1) 份，并且滑动时自动吸附到对应份的最近边界</span></span></span></span><br><span class="line"><span class="params"><span class="function">    steps: <span class="type">Int</span> = <span class="number">0</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 滑动条值改变完成</span></span></span></span><br><span class="line"><span class="params"><span class="function">    onValueChangeFinished: (() -&gt; <span class="type">Unit</span>)? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="comment">// 滑动条状态源</span></span></span></span><br><span class="line"><span class="params"><span class="function">    interactionSource: <span class="type">MutableInteractionSource</span> = remember &#123; MutableInteractionSource()</span></span> &#125;,</span><br><span class="line">    <span class="comment">// 滑动条的各种颜色</span></span><br><span class="line">    colors: SliderColors = SliderDefaults.colors()</span><br><span class="line">): <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/68/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1173,7 +1172,7 @@ Compose组件-滑动条(Slider)</h1>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">100</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1186,7 +1185,7 @@ Compose组件-滑动条(Slider)</h1>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1224,7 +1223,7 @@ Compose组件-滑动条(Slider)</h1>
 <div class="copyright">
   
   &copy; 2019 – 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="user"></i>
   </span>

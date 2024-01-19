@@ -164,6 +164,285 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/50/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/50/" class="post-title-link" itemprop="url">形状(Shape)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-01-03 09:56:55" itemprop="dateCreated datePublished" datetime="2023-01-03T09:56:55+08:00">2023-01-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-18 11:37:57" itemprop="dateModified" datetime="2023-09-18T11:37:57+08:00">2023-09-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="形状shape">形状(Shape)</h1>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 切角/圆角形状基类</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">CornerBasedShape</span> : <span class="type">Shape</span></span><br><span class="line"><span class="comment">// 绝对切角形状</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AbsoluteCutCornerShape</span> : <span class="type">CornerBasedShape</span></span><br><span class="line"><span class="comment">// 绝对圆角形状</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AbsoluteRoundedCornerShape</span> : <span class="type">CornerBasedShape</span></span><br><span class="line"><span class="comment">// 切角形状</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CutCornerShape</span> : <span class="type">CornerBasedShape</span></span><br><span class="line"><span class="comment">// 圆角形状</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RoundedCornerShape</span> : <span class="type">CornerBasedShape</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 圆形</span></span><br><span class="line"><span class="keyword">val</span> CircleShape: RoundedCornerShape</span><br><span class="line"><span class="comment">// 常规形状, 需要自定义形状路径</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GenericShape</span> : <span class="type">Shape</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>四个角相同大小
+<ul>
+<li>CornerSize：以像素为单位定义角的大小</li>
+<li>size: Dp：dp</li>
+<li>size: Float：像素</li>
+<li>percent: Int：百分比</li>
+</ul></li>
+<li>四个角不同大小：分别指定四个角的dp/像素/百分比</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/49/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/49/" class="post-title-link" itemprop="url">Modifier 边框(Border)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-01-03 09:29:39" itemprop="dateCreated datePublished" datetime="2023-01-03T09:29:39+08:00">2023-01-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-18 11:37:45" itemprop="dateModified" datetime="2023-09-18T11:37:45+08:00">2023-09-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="modifier-边框border">Modifier 边框(Border)</h1>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">border</span><span class="params">(border: <span class="type">BorderStroke</span>, shape: <span class="type">Shape</span>)</span></span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">border</span><span class="params">(width: <span class="type">Dp</span>, color: <span class="type">Color</span>, shape: <span class="type">Shape</span>)</span></span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">border</span><span class="params">(width: <span class="type">Dp</span>, brush: <span class="type">Brush</span>, shape: <span class="type">Shape</span>)</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">Column &#123;</span><br><span class="line">    Text(</span><br><span class="line">        <span class="string">&quot;Text with  square border&quot;</span>,</span><br><span class="line">        modifier = Modifier</span><br><span class="line">        .border(<span class="number">4.</span>dp, Color.Magenta,</span><br><span class="line">                shape = CutCornerShape(<span class="number">8.</span>dp))</span><br><span class="line">        .padding(<span class="number">10.</span>dp)</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    Text(</span><br><span class="line">        <span class="string">&quot;Text with gradient border&quot;</span>,</span><br><span class="line">        modifier = Modifier</span><br><span class="line">        .border(</span><br><span class="line">            border = BorderStroke(<span class="number">2.</span>dp, Color.Blue),</span><br><span class="line">            shape = CutCornerShape(<span class="number">8.</span>dp)</span><br><span class="line">        )</span><br><span class="line">        .padding(<span class="number">10.</span>dp)</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> gradientBrush = Brush.horizontalGradient(</span><br><span class="line">        colors = listOf(Color.Red, Color.Blue, Color.Green),</span><br><span class="line">        startX = <span class="number">0.0f</span>,</span><br><span class="line">        endX = <span class="number">500.0f</span>,</span><br><span class="line">        tileMode = TileMode.Repeated</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    Text(</span><br><span class="line">        <span class="string">&quot;Text with gradient border&quot;</span>,</span><br><span class="line">        modifier = Modifier</span><br><span class="line">        .border(width = <span class="number">2.</span>dp, brush = gradientBrush, shape = CircleShape)</span><br><span class="line">        .padding(<span class="number">10.</span>dp)</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/48/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/48/" class="post-title-link" itemprop="url">Modifier 互斥选择(Selectable)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-12-30 12:12:39" itemprop="dateCreated datePublished" datetime="2022-12-30T12:12:39+08:00">2022-12-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-18 11:37:32" itemprop="dateModified" datetime="2023-09-18T11:37:32+08:00">2023-09-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jetpack-Compose/" itemprop="url" rel="index"><span itemprop="name">Jetpack Compose</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="modifier-互斥选择selectable">Modifier 互斥选择(Selectable)</h1>
+<p><code>selectableGroup</code> 使用此修饰符将Tabs 或 RadioButtons
+等项目列表组合在一起。</p>
+<p><code>selectable</code> 修饰符指示此控件可选中</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">selectableGroup</span><span class="params">()</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">selectable</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    selected: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    enabled: <span class="type">Boolean</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    role: <span class="type">Role</span>? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    onClick: () -&gt; <span class="type">Unit</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">selectable</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    selected: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    interactionSource: <span class="type">MutableInteractionSource</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    indication: <span class="type">Indication</span>?,</span></span></span><br><span class="line"><span class="params"><span class="function">    enabled: <span class="type">Boolean</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    role: <span class="type">Role</span>? = <span class="literal">null</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    onClick: () -&gt; <span class="type">Unit</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>selected: 此项是否在互斥集中被选中</li>
+<li>enabled: 启用选中</li>
+<li>interactionSource: 选中时发出此状态</li>
+<li>indication:
+按下修改后的元素时显示的指示。设置为<code>null</code>不显示任何指示。</li>
+<li>role: 用户界面元素的类型。</li>
+<li>onClick: 单击此项目时调用的回调</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/post/48/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/47/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -869,304 +1148,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/40/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/post/40/" class="post-title-link" itemprop="url">Android Studio混淆模板</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-11-04 18:58:06" itemprop="dateCreated datePublished" datetime="2022-11-04T18:58:06+08:00">2022-11-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-18 11:32:15" itemprop="dateModified" datetime="2023-09-18T11:32:15+08:00">2023-09-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Android杂记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#############################################</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 对于一些基本指令的添加</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#############################################</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 关闭压缩</span></span><br><span class="line"><span class="comment">#-dontshrink </span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 关闭优化</span></span><br><span class="line"><span class="comment">#-dontoptimize  </span></span><br><span class="line"><span class="comment"># 代码混淆压缩比，在0~7之间，默认为5，一般不做修改</span></span><br><span class="line"><span class="attr">-optimizationpasses</span> <span class="string">5</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 关闭混淆</span></span><br><span class="line"><span class="comment">#-dontobfuscate </span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"># 混合时不使用大小写混合，混合后的类名为小写</span></span><br><span class="line"><span class="attr">-dontusemixedcaseclassnames</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"># 指定不去忽略非公共库的类</span></span><br><span class="line"><span class="attr">-dontskipnonpubliclibraryclasses</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"># 这句话能够使我们的项目混淆后产生映射文件</span></span><br><span class="line"><span class="comment"># 包含有类名-&gt;混淆后类名的映射关系</span></span><br><span class="line"><span class="attr">-verbose</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"># 指定不去忽略非公共库的类成员</span></span><br><span class="line"><span class="attr">-dontskipnonpubliclibraryclassmembers</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"># 不做预校验，preverify是proguard的四个步骤之一，Android不需要preverify，去掉这一步能够加快混淆速度。</span></span><br><span class="line"><span class="attr">-dontpreverify</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"># 保留Annotation不混淆</span></span><br><span class="line"><span class="attr">-keepattributes</span> <span class="string">*Annotation*,InnerClasses</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"># 避免混淆泛型</span></span><br><span class="line"><span class="attr">-keepattributes</span> <span class="string">Signature</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"># 抛出异常时保留代码行号</span></span><br><span class="line"><span class="attr">-keepattributes</span> <span class="string">SourceFile,LineNumberTable</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"># 指定混淆是采用的算法，后面的参数是一个过滤器</span></span><br><span class="line"><span class="comment"># 这个过滤器是谷歌推荐的算法，一般不做更改</span></span><br><span class="line"><span class="attr">-optimizations</span> <span class="string">!code/simplification/cast,!field/*,!class/merging/*</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment">#############################################</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Android开发中一些需要保留的公共部分</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#############################################</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 保留我们使用的四大组件，自定义的Application等等这些类不被混淆</span></span><br><span class="line"><span class="comment"># 因为这些子类都有可能被外部调用</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends android.app.Activity</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends android.app.Fragment</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends android.app.Application</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends android.app.Service</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends android.content.BroadcastReceiver</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends android.content.ContentProvider</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends android.app.backup.BackupAgentHelper</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends android.preference.Preference</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends androidx.fragment.app.Fragment</span></span><br><span class="line"><span class="comment"># 这个应该是Google play相关的</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class com.android.vending.licensing.ILicensingService</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># support</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">class android.support.** &#123;*;&#125;</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends android.support.**</span></span><br><span class="line"><span class="attr">-dontwarn</span> <span class="string">android.support.**</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">interface android.support.** &#123; *; &#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># androidx</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">class androidx.** &#123;*;&#125;</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">interface androidx.** &#123;*;&#125;</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends androidx.**</span></span><br><span class="line"><span class="attr">-dontwarn</span> <span class="string">androidx.**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 自定义控件</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">public class * extends android.view.View&#123;</span></span><br><span class="line">    <span class="attr">***</span> <span class="string">get*();</span></span><br><span class="line">    <span class="attr">void</span> <span class="string">set*(***);</span></span><br><span class="line">    <span class="attr">public</span> <span class="string">&lt;init&gt;(android.content.Context);</span></span><br><span class="line">    <span class="attr">public</span> <span class="string">&lt;init&gt;(android.content.Context, android.util.AttributeSet);</span></span><br><span class="line">    <span class="attr">public</span> <span class="string">&lt;init&gt;(android.content.Context, android.util.AttributeSet, int);</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 保留R下面的资源</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">class **.R$* &#123;*;&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 这个主要是在layout 中写的onclick方法android:onclick=&quot;onClick&quot;，不进行混淆</span></span><br><span class="line"><span class="attr">-keepclassmembers</span> <span class="string">class * extends android.app.Activity &#123;</span></span><br><span class="line">    <span class="attr">public</span> <span class="string">void *(android.view.View);</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 对于带有回调函数的onXXEvent、**On*Listener的，不能被混淆</span></span><br><span class="line"><span class="attr">-keepclassmembers</span> <span class="string">class * &#123;</span></span><br><span class="line">    <span class="attr">void</span> <span class="string">*(**On*Event);</span></span><br><span class="line">    <span class="attr">void</span> <span class="string">*(**On*Listener);</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 保持枚举enum类不被混淆</span></span><br><span class="line"><span class="attr">-keepclassmembers</span> <span class="string">enum * &#123;</span></span><br><span class="line">    <span class="attr">public</span> <span class="string">static **[] values();</span></span><br><span class="line">    <span class="attr">public</span> <span class="string">static ** valueOf(java.lang.String);</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 保持 native 方法不被混淆</span></span><br><span class="line"><span class="attr">-keepclasseswithmembernames</span> <span class="string">class * &#123;</span></span><br><span class="line">    <span class="attr">native</span> <span class="string">&lt;methods&gt;;</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 保留Parcelable序列化类不被混淆</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">class * implements android.os.Parcelable &#123;</span></span><br><span class="line">    <span class="attr">public</span> <span class="string">static final android.os.Parcelable$Creator *;</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 保持注解继承类不混淆</span></span><br><span class="line"><span class="attr">-keep</span> <span class="string">class * extends java.lang.annotation.Annotation &#123;*;&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 保持Serializable实现类不被混淆</span></span><br><span class="line"><span class="attr">-keepnames</span> <span class="string">class * implements java.io.Serializable</span></span><br><span class="line"><span class="comment"># 保持Serializable不被混淆并且enum 类也不被混淆</span></span><br><span class="line"><span class="attr">-keepclassmembers</span> <span class="string">class * implements java.io.Serializable &#123;</span></span><br><span class="line">    <span class="attr">static</span> <span class="string">final long serialVersionUID;</span></span><br><span class="line">    <span class="attr">private</span> <span class="string">static final java.io.ObjectStreamField[] serialPersistentFields;</span></span><br><span class="line"><span class="comment">    !static !transient &lt;fields&gt;;</span></span><br><span class="line"><span class="comment">    !private &lt;fields&gt;;</span></span><br><span class="line"><span class="comment">    !private &lt;methods&gt;;</span></span><br><span class="line">    <span class="attr">private</span> <span class="string">void writeObject(java.io.ObjectOutputStream);</span></span><br><span class="line">    <span class="attr">private</span> <span class="string">void readObject(java.io.ObjectInputStream);</span></span><br><span class="line">    <span class="attr">java.lang.Object</span> <span class="string">writeReplace();</span></span><br><span class="line">    <span class="attr">java.lang.Object</span> <span class="string">readResolve();</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># ViewBinding &amp; DataBinding</span></span><br><span class="line"><span class="attr">-keepclassmembers</span> <span class="string">class * implements androidx.viewbinding.ViewBinding &#123;</span></span><br><span class="line">  <span class="attr">public</span> <span class="string">static * inflate(android.view.LayoutInflater);</span></span><br><span class="line">  <span class="attr">public</span> <span class="string">static * inflate(android.view.LayoutInflater, android.view.ViewGroup, boolean);</span></span><br><span class="line">  <span class="attr">public</span> <span class="string">static * bind(android.view.View);</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/39/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/post/39/" class="post-title-link" itemprop="url">Android代码混淆及ProGuard手册</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-11-04 18:58:06" itemprop="dateCreated datePublished" datetime="2022-11-04T18:58:06+08:00">2022-11-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-18 11:32:06" itemprop="dateModified" datetime="2023-09-18T11:32:06+08:00">2023-09-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Android杂记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>为什么把这三个内容放到一起说？因为在 Android Gradle
-中配置方法基本是在一起的。</p>
-<p>官方说明如下：</p>
-<blockquote>
-<p>为了尽可能减小应用的大小，您应在发布 build
-中启用缩减功能来移除不使用的代码和资源。启用缩减功能后，您还会受益于两项功能，一项是混淆处理功能，该功能会缩短应用的类和成员的名称；另一项是优化功能，该功能会采用更积极的策略来进一步减小应用的大小。本页介绍
-R8 如何为项目执行这些编译时任务，以及您如何对这些任务进行自定义。</p>
-<p>当您使用 <a href="https://link.juejin.cn/?target=https%3A%2F%2Fdeveloper.android.google.cn%2Fstudio%2Freleases%2Fgradle-plugin%233-4-0">Android
-Gradle 插件 3.4.0</a> 或更高版本构建项目时，该插件不再使用 ProGuard
-执行编译时代码优化，而是与 R8 编译器协同工作，处理以下编译时任务：</p>
-<ul>
-<li><strong>代码缩减（即摇树优化）</strong>：从应用及其库依赖项中检测并安全地移除不使用的类、字段、方法和属性（这使其成为了一个对于规避
-<a href="https://link.juejin.cn/?target=https%3A%2F%2Fdeveloper.android.google.cn%2Fstudio%2Fbuild%2Fmultidex">64k
-引用限制</a>非常有用的工具）。例如，如果您仅使用某个库依赖项的少数几个
-API，那么缩减功能可以识别应用不使用的库代码并仅从应用中移除这部分代码。如需了解详情，请转到介绍如何<a href="https://link.juejin.cn/?target=https%3A%2F%2Fdeveloper.android.google.cn%2Fstudio%2Fbuild%2Fshrink-code%23shrink-code">缩减代码</a>的部分。</li>
-<li><strong>资源缩减</strong>：从封装应用中移除不使用的资源，包括应用库依赖项中不使用的资源。此功能可与代码缩减功能结合使用，这样一来，移除不使用的代码后，也可以安全地移除不再引用的所有资源。如需了解详情，请转到介绍如何<a href="https://link.juejin.cn/?target=https%3A%2F%2Fdeveloper.android.google.cn%2Fstudio%2Fbuild%2Fshrink-code%23shrink-resources">缩减资源</a>的部分。</li>
-<li><strong>混淆</strong>：缩短类和成员的名称，从而减小 DEX
-文件的大小。如需了解详情，请转到介绍如何<a href="https://link.juejin.cn/?target=https%3A%2F%2Fdeveloper.android.google.cn%2Fstudio%2Fbuild%2Fshrink-code%23obfuscate">对代码进行混淆处理</a>的部分。</li>
-<li><strong>优化</strong>：检查并重写代码，以进一步减小应用的 DEX
-文件的大小。例如，如果 R8 检测到从未采用过给定 if/else 语句的
-<code>else &#123;&#125;</code> 分支，则会移除 <code>else &#123;&#125;</code>
-分支的代码。如需了解详情，请转到介绍<a href="https://link.juejin.cn/?target=https%3A%2F%2Fdeveloper.android.google.cn%2Fstudio%2Fbuild%2Fshrink-code%23optimization">代码优化</a>的部分。</li>
-</ul>
-<p>默认情况下，在构建应用的发布版本时，R8
-会自动执行上述编译时任务。不过，您也可以停用某些任务或通过 ProGuard
-规则文件自定义 R8 的行为。事实上，<strong>R8 支持所有现有 ProGuard
-规则文件</strong>，因此您在更新 Android Gradle 插件以使用 R8
-时，无需更改现有规则。</p>
-</blockquote>
-<h2 id="开启混淆功能">开启混淆功能</h2>
-<p>上面没有提到的一个代码混淆的重要作用：我们知道 apk
-文件是相对容易被反编译的，未加混淆的 apk，反编译后基本裸奔。而混淆的 apk
-即使被反编译，类名与变量名都会处理成无意义的字符，很大程度上降低了源码的可读性。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/39/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/38/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/post/38/" class="post-title-link" itemprop="url">Jetpack架构组件之Room</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-11-04 18:58:06" itemprop="dateCreated datePublished" datetime="2022-11-04T18:58:06+08:00">2022-11-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-18 11:31:38" itemprop="dateModified" datetime="2023-09-18T11:31:38+08:00">2023-09-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Jetpack%E6%9E%B6%E6%9E%84%E7%BB%84%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">Jetpack架构组件</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="entity实体">Entity(实体)</h2>
-<p>‌‌‌　　一个 Entity 对应于数据库中的一张表。Entity 类是 Sqlite 表结构对
-Java/kotlin 的映射，在 Java 中可以看作一个 Model 类。</p>
-<h3 id="entity注解实体类">Entity(注解实体类)</h3>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">‌‌‌　　<span class="meta">@Entity(tableName = <span class="string">&quot;word_table&quot;</span>)</span></span><br><span class="line">‌‌‌　　<span class="keyword">class</span> <span class="title class_">Word</span>(<span class="meta">@PrimaryKey</span> <span class="meta">@ColumnInfo(name = <span class="string">&quot;word&quot;</span>)</span> <span class="keyword">val</span> word: String)</span><br></pre></td></tr></table></figure>
-<p>‌‌‌　　每个实体必须至少有 1 个使用 PrimaryKey 注释的字段。您还可以使用
-primaryKeys 属性来定义主键。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/38/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1238,7 +1219,7 @@ primaryKeys 属性来定义主键。</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">100</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1251,7 +1232,7 @@ primaryKeys 属性来定义主键。</p>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1289,7 +1270,7 @@ primaryKeys 属性来定义主键。</p>
 <div class="copyright">
   
   &copy; 2019 – 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="user"></i>
   </span>

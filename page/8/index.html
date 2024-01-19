@@ -164,6 +164,293 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/30/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/30/" class="post-title-link" itemprop="url">Kconfig-language翻译</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-26 18:58:22" itemprop="dateCreated datePublished" datetime="2021-05-26T18:58:22+08:00">2021-05-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-18 11:27:19" itemprop="dateModified" datetime="2023-09-18T11:27:19+08:00">2023-09-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">构建工具</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="kconfig-language翻译">Kconfig-language翻译</h1>
+<h2 id="介绍">1. 介绍</h2>
+<p>配置数据库是按树结构组织的配置选项的集合：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">+- Code maturity level options</span><br><span class="line">|  +- Prompt for development and/or incomplete code/drivers</span><br><span class="line">+- General setup</span><br><span class="line">|  +- Networking support</span><br><span class="line">|  +- System V IPC</span><br><span class="line">|  +- BSD Process Accounting</span><br><span class="line">|  +- Sysctl support</span><br><span class="line">+- Loadable module support</span><br><span class="line">|  +- Enable loadable module support</span><br><span class="line">|     +- Set version information on all module symbols</span><br><span class="line">|     +- Kernel module loader</span><br><span class="line">+- ...</span><br></pre></td></tr></table></figure>
+<p>每个条目都有自己的依赖性。 这些依赖关系用于确定条目的可见性。
+任何子条目只有在其父条目也可见的情况下才可见。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/post/30/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/29/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/29/" class="post-title-link" itemprop="url">操作系统精髓与设计原理(第8版) - 第二章 操作系统概述</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-30 16:05:20" itemprop="dateCreated datePublished" datetime="2019-06-30T16:05:20+08:00">2019-06-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-19 11:35:37" itemprop="dateModified" datetime="2023-09-19T11:35:37+08:00">2023-09-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%B2%BE%E9%AB%93%E4%B8%8E%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86-%E7%AC%AC8%E7%89%88/" itemprop="url" rel="index"><span itemprop="name">操作系统精髓与设计原理(第8版)</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="操作系统精髓与设计原理第8版---第二章-操作系统概述">操作系统精髓与设计原理(第8版)
+- 第二章 操作系统概述</h1>
+<h2 id="操作系统的目标与功能">2.1 操作系统的目标与功能</h2>
+<p>操作系统是控制应用程序执行的程序，是应用程序和计算机硬件间的接口。它有三个目标：</p>
+<ul>
+<li><strong>方便</strong>：操作系统使计算机更易于使用。</li>
+<li><strong>有效</strong>：操作系统允许以更有效的方式使用计算机系统资源。</li>
+<li><strong>扩展能力</strong>：在构造操作系统时，应允许在不妨碍服务的前提下，有效地开发、测试和引入新的系统功能。</li>
+</ul>
+<h3 id="作为用户计算机接口的操作系统">2.1.1
+作为用户/计算机接口的操作系统</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/post/29/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/28/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/vinx.jpg">
+      <meta itemprop="name" content="Vinx">
+      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯客微博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/28/" class="post-title-link" itemprop="url">操作系统精髓与设计原理(第8版) - 第一章 计算机系统概述</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-29 22:24:05" itemprop="dateCreated datePublished" datetime="2019-06-29T22:24:05+08:00">2019-06-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-19 11:34:47" itemprop="dateModified" datetime="2023-09-19T11:34:47+08:00">2023-09-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%B2%BE%E9%AB%93%E4%B8%8E%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86-%E7%AC%AC8%E7%89%88/" itemprop="url" rel="index"><span itemprop="name">操作系统精髓与设计原理(第8版)</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="操作系统精髓与设计原理第8版---第一章-计算机系统概述">操作系统精髓与设计原理(第8版)
+- 第一章 计算机系统概述</h1>
+<h2 id="基本构成">1.1 基本构成</h2>
+<p>计算机由处理器、存储器和输入/输出部件组成，每类部件都有一个或多个模块。主要是4个结构化部件：</p>
+<p><strong>处理器</strong>：控制计算机的操作，执行数据处理功能。</p>
+<p><strong>内存</strong>：存储数据和程序。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/post/28/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+        
+    </div>
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/27/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -873,274 +1160,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/20/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/post/20/" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x14) - 环形缓冲区circ_buf</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-12-07 09:37:30" itemprop="dateCreated datePublished" datetime="2018-12-07T09:37:30+08:00">2018-12-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-18 11:10:57" itemprop="dateModified" datetime="2023-09-18T11:10:57+08:00">2023-09-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 在内核&lt;linux/circ_buf.h&gt;中定义了关于环形缓冲区的相关变量。</span></span><br><span class="line"><span class="comment"> * 其中缓冲区的大小size必须定义成2的n次方，这样可以将取余运算转换成位与运算，</span></span><br><span class="line"><span class="comment"> * 提高计算机的处理速度。例如：x % size = x &amp; (size - 1)。实际可用的空间为size-1，</span></span><br><span class="line"><span class="comment"> * 这样可以避免缓冲区为满时和为空时都满足head = tail。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">circ_buf</span> &#123;</span></span><br><span class="line">	<span class="type">char</span> *buf;	<span class="comment">// 指向分配缓冲区起始地址的指针</span></span><br><span class="line">	<span class="type">int</span> head;   <span class="comment">// 指向生产者向缓冲区放入数据的位置</span></span><br><span class="line">	<span class="type">int</span> tail;  	<span class="comment">// 指向消费者从缓冲区取走数据的位置</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Return count in buffer.  */</span></span><br><span class="line"><span class="comment">/* 计算缓冲区中有效数据的大小； */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CIRC_CNT(head,tail,size) (((head) - (tail)) &amp; ((size)-1))</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Return space available, 0..size-1.  We always leave one free char</span></span><br><span class="line"><span class="comment">   as a completely full buffer has head == tail, which is the same as</span></span><br><span class="line"><span class="comment">   empty.  */</span></span><br><span class="line"><span class="comment">/* 计算缓冲区剩余空闲空间的大小； */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CIRC_SPACE(head,tail,size) CIRC_CNT((tail),((head)+1),(size))</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Return count up to the end of the buffer.  Carefully avoid</span></span><br><span class="line"><span class="comment">   accessing head and tail more than once, so they can change</span></span><br><span class="line"><span class="comment">   underneath us without returning inconsistent results.  */</span></span><br><span class="line"><span class="comment">/* 计算tail到缓冲区尾部的数据大小，即一次性可以读取的数据大小；*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CIRC_CNT_TO_END(head,tail,size) \</span></span><br><span class="line"><span class="meta">	(&#123;int end = (size) - (tail); \</span></span><br><span class="line"><span class="meta">	  int n = ((head) + end) &amp; ((size)-1); \</span></span><br><span class="line"><span class="meta">	  n &lt; end ? n : end;&#125;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Return space available up to the end of the buffer.  */</span></span><br><span class="line"><span class="comment">/* 计算head到缓冲区尾部的剩余空间，即一次性可以写入的数据大小； */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CIRC_SPACE_TO_END(head,tail,size) \</span></span><br><span class="line"><span class="meta">	(&#123;int end = (size) - 1 - (head); \</span></span><br><span class="line"><span class="meta">	  int n = (end + (tail)) &amp; ((size)-1); \</span></span><br><span class="line"><span class="meta">	  n &lt;= end ? n : end+1;&#125;)</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/19/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/post/19/" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x13) - 串口UART驱动API</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-11-22 15:13:17" itemprop="dateCreated datePublished" datetime="2018-11-22T15:13:17+08:00">2018-11-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-18 11:10:54" itemprop="dateModified" datetime="2023-09-18T11:10:54+08:00">2023-09-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>﻿串口驱动API ## 1、uart_register_driver </p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 功能：    uart_register_driver用于将串口驱动uart_driver注册到内核(串口核心层)中，通常在模块初始化函数调用该函数。</span></span><br><span class="line"><span class="comment"> * 参数 drv：要注册的uart_driver</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> * 返回值：  成功，返回0；否则返回错误码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">uart_register_driver</span><span class="params">(<span class="keyword">struct</span> uart_driver *drv)</span></span><br></pre></td></tr></table></figure> ##
-2、uart_unregister_driver <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 功能：    uart_unregister_driver用于注销我们已注册的uart_driver，通常在模块卸载函数调用该函数</span></span><br><span class="line"><span class="comment"> * 参数 drv：要注销的uart_driver</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> * 返回值：  成功，返回0；否则返回错误码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">uart_unregister_driver</span><span class="params">(<span class="keyword">struct</span> uart_driver *drv)</span></span><br></pre></td></tr></table></figure><p></p>
-<h2 id="uart_add_one_port">3、uart_add_one_port</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/19/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.vinkvin.com/post/18/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/vinx.jpg">
-      <meta itemprop="name" content="Vinx">
-      <meta itemprop="description" content="本博客是Vinx工作中用到计算机，嵌入式等领域技术的笔记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="唯客微博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/post/18/" class="post-title-link" itemprop="url">Linux驱动开发杂记(0x12) - uart_ops结构体</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-11-22 15:09:30" itemprop="dateCreated datePublished" datetime="2018-11-22T15:09:30+08:00">2018-11-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-18 11:10:51" itemprop="dateModified" datetime="2023-09-18T11:10:51+08:00">2023-09-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Linux驱动开发杂记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>﻿</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * This structure describes all the operations that can be</span></span><br><span class="line"><span class="comment"> * done on the physical hardware.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">uart_ops</span> &#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="title function_">int</span> <span class="params">(*tx_empty)</span><span class="params">(<span class="keyword">struct</span> uart_port *)</span>; <span class="comment">/* 串口的Tx FIFO缓存是否为空。如果为空，函数应返回TIOCSER_TEMT，否则返回0。如果端口不支持此操作，返回TIOCSER_TEMT。*/</span></span><br><span class="line">    <span class="type">void</span>         (*set_mctrl)(<span class="keyword">struct</span> uart_port *, <span class="type">unsigned</span> <span class="type">int</span> mctrl); <span class="comment">/* 设置串口modem控制 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="title function_">int</span> <span class="params">(*get_mctrl)</span><span class="params">(<span class="keyword">struct</span> uart_port *)</span>; <span class="comment">/* 获取串口modem控制 */</span></span><br><span class="line">    <span class="type">void</span>         (*stop_tx)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 禁止串口发送数据 */</span></span><br><span class="line">    <span class="type">void</span>         (*start_tx)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 使能串口发送数据 */</span></span><br><span class="line">    <span class="type">void</span>         (*send_xchar)(<span class="keyword">struct</span> uart_port *, <span class="type">char</span> ch);<span class="comment">/* 发送xChar */</span></span><br><span class="line">    <span class="type">void</span>         (*stop_rx)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 禁止串口接收数据 */</span></span><br><span class="line">    <span class="type">void</span>         (*enable_ms)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 使能modem的状态信号 */</span></span><br><span class="line">    <span class="type">void</span>         (*break_ctl)(<span class="keyword">struct</span> uart_port *, <span class="type">int</span> ctl); <span class="comment">/* 设置break信号 */</span></span><br><span class="line">    <span class="type">int</span>          (*startup)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 启动串口,应用程序打开串口设备文件时,该函数会被调用 */</span></span><br><span class="line">    <span class="type">void</span>         (*shutdown)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 关闭串口,应用程序关闭串口设备文件时,该函数会被调用 */</span></span><br><span class="line">    <span class="type">void</span>         (*set_termios)(<span class="keyword">struct</span> uart_port *, <span class="keyword">struct</span> ktermios *new, <span class="keyword">struct</span> ktermios *old); <span class="comment">/* 设置串口参数 */</span></span><br><span class="line">    <span class="type">void</span>         (*pm)(<span class="keyword">struct</span> uart_port *, <span class="type">unsigned</span> <span class="type">int</span> state,</span><br><span class="line">             <span class="type">unsigned</span> <span class="type">int</span> oldstate); <span class="comment">/* 串口电源管理 */</span></span><br><span class="line">    <span class="type">int</span>          (*set_wake)(<span class="keyword">struct</span> uart_port *, <span class="type">unsigned</span> <span class="type">int</span> state); <span class="comment">/*  */</span></span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>  *(*type)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 返回一描述串口类型的字符串 */</span></span><br><span class="line">    <span class="type">void</span>         (*release_port)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 释放串口已申请的IO端口/IO内存资源,必要时还需iounmap */</span></span><br><span class="line">    <span class="type">int</span>          (*request_port)(<span class="keyword">struct</span> uart_port *); <span class="comment">/* 申请必要的IO端口/IO内存资源,必要时还可以重新映射串口端口 */</span></span><br><span class="line">    <span class="type">void</span>         (*config_port)(<span class="keyword">struct</span> uart_port *, <span class="type">int</span>); <span class="comment">/* 执行串口所需的自动配置 */</span></span><br><span class="line">    <span class="type">int</span>          (*verify_port)(<span class="keyword">struct</span> uart_port *, <span class="keyword">struct</span> serial_struct *); <span class="comment">/* 核实新串口的信息 */</span></span><br><span class="line">    <span class="type">int</span>          (*ioctl)(<span class="keyword">struct</span> uart_port *, <span class="type">unsigned</span> <span class="type">int</span>, <span class="type">unsigned</span> <span class="type">long</span>); <span class="comment">/* IO控制 */</span></span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure> ## tx_empty(port)
-此函数检查发送fifo和移位通过“端口”中描述的端口是否为空。如果为空，函数应返回TIOCSER_TEMT，否则返回0。如果端口不支持此操作，返回TIOCSER_TEMT。
-+ 锁：none + 中断：取决于调用者； + 此调用不休眠。<p></p>
-<h2 id="set_mctrlport-mctrl">set_mctrl(port, mctrl)</h2>
-<p>此函数设置串口modem控制模式。mctrl相关的位是： - TIOCM_RTS RTS
-signal. - TIOCM_DTR DTR signal. - TIOCM_OUT1 OUT1 signal. - TIOCM_OUT2
-OUT2 signal. - TIOCM_LOOP 设置端口为回环模式</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/18/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-        
-    </div>
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1212,7 +1231,7 @@ OUT2 signal. - TIOCM_LOOP 设置端口为回环模式</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">100</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1225,7 +1244,7 @@ OUT2 signal. - TIOCM_LOOP 设置端口为回环模式</p>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1263,7 +1282,7 @@ OUT2 signal. - TIOCM_LOOP 设置端口为回环模式</p>
 <div class="copyright">
   
   &copy; 2019 – 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="user"></i>
   </span>
